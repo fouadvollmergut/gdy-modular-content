@@ -306,6 +306,27 @@
 		echo '</div>';
 
 	}
+
+
+	function gdymc_contenttype_buttongroup ( $contentRealID, $contentOption, $contentSubOption ) {
+
+    $content = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
+
+    echo '<div class="gdymc_button-group_container">';
+      echo '<div class="gdymc_button-group" data-id="' . $contentRealID . '">';
+
+        echo $content;
+
+      echo '</div>';
+
+      if( gdymc_logged() && !gdymc_preview()):
+
+        echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Button hinzufügen', 'gdy-modular-content') . '</button>';
+
+      endif;
+
+    echo '</div>';
+  }
 	
 	
 	
@@ -450,6 +471,10 @@
 				// Option is table field size for start e.g. 3x5. Default is 3x1.
 
 				gdymc_contenttype_table( $contentID, $contentOption, $contentSubOption );
+
+			elseif( $contentType == 'buttongroup' ):
+
+				gdymc_contenttype_buttongroup( $contentID, $contentOption, $contentSubOption );
 
 			elseif( $contentType == 'gallery' ):
 

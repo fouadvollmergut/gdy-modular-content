@@ -46,6 +46,126 @@
 		window.location.href = href;
 		return false;
 	});
+
+	// GDYMC Button
+	class ButtonGroup {
+		constructor ( buttonGroupContainer ) {
+			this.buttonGroupContainer = buttonGroupContainer;
+			this.buttonGroup = buttonGroupContainer.querySelector( '.gdymc_button-group' );
+		}
+
+		init () {
+			this.buttonGroupContainer.querySelectorAll( '.gdymc_button_addbutton' ).forEach( (button) => {
+				this.addButtonListener(button);
+			});
+
+			this.buttonGroupContainer.querySelectorAll( '.gdymc_button_removebutton' ).forEach( (button) => {
+				this.removeButtonListener(button);
+			});
+
+			this.buttonGroupContainer.querySelectorAll( '.gdymc_button_editbutton' ).forEach( (button) => {
+				this.editButtonListener(button);
+			});
+
+			jQuery( this.buttonGroup ).sortable({
+				revert: true,
+			});
+
+			jQuery( this.buttonGroup ).disableSelection();
+		}
+
+
+		// Event Listeners
+		addButtonListener (button) {
+			button.addEventListener( 'click', (event) => {
+				this.addButton(event.target);
+			});
+		}
+
+		removeButtonListener (button) {
+			button.addEventListener( 'click', (event) => {
+				this.removeButton(event.target);
+			});
+		}
+
+		editButtonListener (button) {
+			button.addEventListener( 'click', (event) => {
+				this.editButton(event.target.closest( '.gdymc_button_container' ).querySelector( 'a' ));
+			});
+		}
+
+		addButton () {
+			this.buttonGroup.insertAdjacentHTML( 'beforeend', `
+				<div class="gdymc_button_container">
+					<a href="#" class="button button-primary" target="_self">Button Text</a>
+
+					<button class="gdymc_button gdymc_inside_button gdymc_button_editbutton" aria-label="Edit button" style="display: none;">
+						<span class="dashicons dashicons-edit"></span>
+					</button>
+
+					<button class="gdymc_button_delete gdymc_inside_button gdymc_button_removebutton" aria-label="Remove button" style="display: none;">
+						<span class="dashicons dashicons-trash"></span>
+					</button>
+				</div>
+			`);
+
+			this.buttonGroupContainer.querySelectorAll( '.gdymc_button_removebutton' ).forEach( (button) => {
+				this.removeButtonListener(button);
+			});
+
+			this.buttonGroupContainer.querySelectorAll( '.gdymc_button_editbutton' ).forEach( (button) => {
+				this.editButtonListener(button);
+			});
+
+			document.body.classList.add('gdymc_unsaved');
+			gdymc.info.isSaved = false;
+		}
+
+		removeButton (button) {
+			button.closest( '.gdymc_button_container' ).remove();
+
+			document.body.classList.add('gdymc_unsaved');
+			gdymc.info.isSaved = false;
+		}
+
+		editButton (button) {
+			const data = {
+				text: JSON.stringify(button.textContent),
+				url: JSON.stringify(button.getAttribute( 'href' )),
+				target: JSON.stringify(button.getAttribute( 'target' ) === '_blank' ? 'true' : 'false'),
+				type: JSON.stringify(button.classList.contains( 'button-primary' ) ? 'true' : 'false'),
+			};
+
+			gdymc.ajax( 'gdymc_action_editbutton', data, function(response) {
+
+				gdymc.info.overlayOpen = true;
+				gdymc.info.overlayScroll = jQuery(window).scrollTop();
+				jQuery('#gdymc_overlay_shadow').show();
+				jQuery('body').append('<div class="gdymc_overlay_link gdymc_overlay_window gdymc_inside gdymc_tabs_container">' + response + '</div>');
+				jQuery('#gdymc_insertlink_input').focus();
+
+				setTimeout( function() {
+					jQuery('#gdymc_overlay_shadow').addClass( 'gdymc_active' );
+					jQuery('.gdymc_overlay_link').addClass( 'gdymc_active' );
+				}, 1 );
+
+				document.querySelector('#gdymc_saveedit_button').addEventListener( 'click', function () {
+					button.textContent = document.querySelector('#gdymc_editbutton_text').value;
+					button.setAttribute( 'href', document.querySelector('#gdymc_insertlink_input').value );
+					button.setAttribute( 'target', document.querySelector('#gdymc_editbutton_target').checked ? '_blank' : '_self' );
+					button.classList.toggle( 'button-primary', document.querySelector('#gdymc_editbutton_type').checked );
+
+					jQuery('#gdymc_overlay_shadow').hide().removeClass( 'gdymc_active' );
+					// document.querySelector( '#gdymc_overlay_shadow' ).classList.remove( 'gdymc_active' );
+					jQuery( '.gdymc_overlay_link' ).removeClass( 'gdymc_active' ).remove();
+					gdymc.info.overlayOpen = false;
+
+					document.body.classList.add('gdymc_unsaved');
+					gdymc.info.isSaved = false;
+				});
+			});
+		}
+	}
 	
 	jQuery( document ).ready(function() {
 	
@@ -69,6 +189,12 @@
 		wpCookies.remove( 'gdymc_scrollpos', gdymc_dynamic_data.cookie_path, gdymc_dynamic_data.cookie_domain );
 
 
+		// Button groups
+
+		document.querySelectorAll( '.gdymc_button-group_container' ).forEach( (buttonGroupContainer) => {
+			let buttonGroup = new ButtonGroup( buttonGroupContainer );
+			buttonGroup.init();
+		} );
 
 
 		// Tabs
