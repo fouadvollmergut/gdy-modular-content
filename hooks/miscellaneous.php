@@ -278,7 +278,7 @@
 			do_action( 'gdymc_modulefunctions_before', $moduleType );
 
 
-			$functionsPath = gdymc_module_path() . '/' . $moduleType . '/functions.php';
+			$functionsPath = gdymc_module_path($moduleType) . '/' . $moduleType . '/functions.php';
 			
 			if( file_exists( $functionsPath ) ) require_once( $functionsPath );
 

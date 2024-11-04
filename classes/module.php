@@ -101,10 +101,10 @@
 
 				// Paths
 
-				$this->path = gdymc_module_path() . '/' . $this->type;
-				$this->file = gdymc_module_path() . '/' . $this->type . '/index.php';
-				$this->functions = gdymc_module_path() . '/' . $this->type . '/functions.php';
-				$this->thumb = gdymc_module_path() . '/' . $this->type . '/thumb.svg';
+				$this->path = gdymc_module_path($this->type) . '/' . $this->type;
+				$this->file = gdymc_module_path($this->type) . '/' . $this->type . '/index.php';
+				$this->functions = gdymc_module_path($this->type) . '/' . $this->type . '/functions.php';
+				$this->thumb = gdymc_module_path($this->type) . '/' . $this->type . '/thumb.svg';
 
 
 

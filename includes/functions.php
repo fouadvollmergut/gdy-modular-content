@@ -76,13 +76,24 @@
 
 	// Returns the filesystem path to the modules folder
 
-	function gdymc_module_path( $location = null, $file = null ) {
+	function gdymc_module_path( $type = null, $location = null, $file = null ) {
 
-		$module_folder = apply_filters( 'gdymc_modules_folder', WP_CONTENT_DIR . '/modules' );
-		
+		$module_folders = array(
+			get_template_directory() . '/modules',
+			WP_CONTENT_DIR . '/modules'
+		);
+
+		$module_folders = apply_filters( 'gdymc_module_folders', $module_folders );
+
+		if ($type) {
+			foreach ($module_folders as &$module_folder) {
+				if( file_exists( trailingslashit( $module_folder ) . $type ) ):
+					return $module_folder;
+				endif;
+			}
+		}
 
 		$module_name = $location ? gdymc_module_name( $location ) : false;
-
 
 		if( $module_name and !empty( $file ) ):
 
@@ -92,29 +103,29 @@
 
 			return trailingslashit( $module_folder ) . $module_name;
 
-		else:
-
-			return $module_folder;
-
 		endif;
+
+		return $module_folders[0];
 
 	}
 
 
 	// Returns the path to the modules folder relative to the site root
 
-	function gdymc_module_relative( $location = null, $file = null ) {
+	function gdymc_module_relative( $type = null, $location = null, $file = null ) {
 
-		return str_replace( ABSPATH, '', gdymc_module_path( $location, $file ) );
+		preg_match( '/(wp-content\/.*)$/i', gdymc_module_path( $type, $location, $file ), $matches );
+
+		return $matches[0];
 
 	}
 
 
 	// Returns the url to the modules folder
 
-	function gdymc_module_url( $location = null, $file = null ) {
+	function gdymc_module_url( $type = null, $location = null, $file = null ) {
 
-		return get_site_url() . '/' . gdymc_module_relative( $location, $file );
+		return get_site_url() . '/' . gdymc_module_relative( $type, $location, $file );
 
 	}
 
@@ -123,19 +134,9 @@
 
 	function gdymc_module_name( $location ) {
 
-		$path = gdymc_module_path();
+		$result = explode( '/', $location );
 
-		if( strpos( $location, $path ) === 0 ):
-    		
-			$result = explode( '/', str_replace( $path . '/', '', $location ) );
-
-			return $result[ 0 ];
-
-		else:
-
-			return false;
-
-		endif;
+		return $result[count($result) - 2];
 
 	}
 
@@ -264,9 +265,9 @@
 
 				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_type ) ), $module_type );
 				
-				$module->thumbPath = gdymc_module_path() . '/' . $module_type . '/thumb.svg';
+				$module->thumbPath = gdymc_module_path($module_type) . '/' . $module_type . '/thumb.svg';
 				
-				$module->thumbURL = gdymc_module_url() . '/' . $module_type . '/thumb.svg';
+				$module->thumbURL = gdymc_module_url($module_type) . '/' . $module_type . '/thumb.svg';
 
 
 				// Push handler into modules
@@ -342,7 +343,6 @@
 		// Get objects modules
 		
 		$moduleArray = gdymc_module_array( $objectID, $objectType );
-		
 
 
 		// Holder array
