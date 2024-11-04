@@ -1,0 +1,30 @@
+
+
+
+	/******************************** EXIT PREVIEW BUTTON ********************************/
+	
+	#gdymc_exit_hardpreview {
+		background: #272727;
+		border-radius: 0px;
+		border: 0px;
+		color: #fff;
+		font: 400 13px/40px "Open Sans", sans-serif;
+		height: 40px;
+		padding: 0px 20px;
+		position: fixed;
+		top: 0px;
+		right: 50px;
+		cursor: pointer;
+		outline: none;
+		z-index: 999999999999;
+		text-transform: none;
+		text-decoration: none;
+	}
+
+	#gdymc_exit_hardpreview .dashicons {
+		vertical-align: middle;
+		color: rgba(255,255,255,0.5);
+		margin-left: 0.4em;
+		position: relative;
+		top: -0.07em;
+	}

@@ -1,0 +1,1567 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: GDY Modular Content\n"
+"POT-Creation-Date: 2016-10-18 09:54+0200\n"
+"PO-Revision-Date: 2016-01-26 10:32+0100\n"
+"Last-Translator: Fouad Vollmer Werbeagentur <info@fouadvollmer.de>\n"
+"Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.10\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../hooks/adminbar-buttons.php:11
+msgid "Save changes (Cmd+S)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:11 ../includes/area.php:198
+msgid "Save"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:21
+msgid "Bold (Cmd+B)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:31
+msgid "Italic (Cmd+I)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:41
+msgid "Insert link (Cmd+L)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:51
+msgid "Remove link (Cmd+U)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:61
+msgid "Unordered list"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:71
+msgid "Ordered list"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:81
+msgid "Align right (Cmd+Shift+R)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:91
+msgid "Align center (Cmd+Shift+C)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:101
+msgid "Align left (Cmd+Shift+L)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:111
+msgid "Superscript"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:121
+msgid "Subscript"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:131
+msgid "Remove format"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:143
+msgid "Edit selected modules"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:162
+msgid "Modules (Cmd+D)"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:172
+msgid "Preview settings"
+msgstr ""
+
+#: ../hooks/adminbar-buttons.php:184 ../includes/adminbar.php:137
+msgid "Go to backend"
+msgstr ""
+
+#: ../hooks/miscellaneous.php:29 ../hooks/modulebar-buttons.php:88 ../includes/area.php:202
+msgid "Delete this module"
+msgstr ""
+
+#: ../hooks/miscellaneous.php:30
+msgid "Delete all modules of this type"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:43 ../includes/area.php:135
+msgid "Module options"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:53
+msgid "Move module up"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:63
+msgid "Move module down"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:79
+msgid "Select this module"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:102
+msgid "Module type"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:111
+msgid "Module ID"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:120
+msgid "Element ID"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:128
+msgid "Permalink"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:134
+msgid "You can use the permalink to jump directly to that module"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:151
+msgid "Visible"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:152
+msgid "Invisible"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:156
+msgid "Module visibility"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:166
+msgid "Activated"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:167
+msgid "Deactivated"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:171
+msgid "Switch delayed"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:179
+msgid "Date"
+msgstr ""
+
+#: ../hooks/modulebar-buttons.php:184
+msgid "Enter the date in the following format \"yyyy-mm-dd hh:mm\""
+msgstr ""
+
+#: ../hooks/translation.php:13
+msgid "No modules found"
+msgstr ""
+
+#: ../hooks/translation.php:15
+msgid "Ok"
+msgstr ""
+
+#: ../hooks/translation.php:17
+msgid "Error"
+msgstr ""
+
+#: ../hooks/translation.php:19
+msgid "Please select a editable text for this action."
+msgstr ""
+
+#: ../hooks/translation.php:21
+msgid "Nothing selected"
+msgstr ""
+
+#: ../hooks/translation.php:23
+msgid "Discard contents?"
+msgstr ""
+
+#: ../hooks/translation.php:25
+msgid "There are unsaved contents. This content will be lost if you leave the page without saving."
+msgstr ""
+
+#: ../hooks/translation.php:27
+msgid "Delete modules?"
+msgstr ""
+
+#: ../hooks/translation.php:29
+msgid "Are you sure to delete the marked modules irreversible."
+msgstr ""
+
+#: ../hooks/translation.php:31
+msgid "Delete module?"
+msgstr ""
+
+#: ../hooks/translation.php:33
+msgid "Are you sure to delete this module irreversible."
+msgstr ""
+
+#: ../hooks/translation.php:35
+msgid "Delete module type?"
+msgstr ""
+
+#: ../hooks/translation.php:37
+msgid "Are you sure to delete all modules of this type irreversible."
+msgstr ""
+
+#: ../hooks/translation.php:39
+msgid "No"
+msgstr ""
+
+#: ../hooks/translation.php:41
+msgid "Yes"
+msgstr ""
+
+#: ../hooks/translation.php:43
+msgid "You can't remove the last column."
+msgstr ""
+
+#: ../hooks/translation.php:45
+msgid "You can't remove the last row."
+msgstr ""
+
+#: ../hooks/translation.php:47
+msgid "Swap content"
+msgstr ""
+
+#: ../hooks/translation.php:49
+msgid "Action stopped"
+msgstr ""
+
+#: ../hooks/translation.php:51
+msgid "The ID you entered does not belong to an existing target."
+msgstr ""
+
+#: ../hooks/translation.php:53
+msgid "The image is too big."
+msgstr ""
+
+#: ../hooks/translation.php:55
+msgid "The image is too small."
+msgstr ""
+
+#: ../hooks/translation.php:57
+msgid "Preview mode"
+msgstr ""
+
+#: ../hooks/translation.php:59
+msgid "You cant do this action in preview mode. Do you want to switch into edit mode?"
+msgstr ""
+
+#: ../hooks/translation.php:61
+msgid "Switch view"
+msgstr ""
+
+#: ../hooks/translation.php:63
+msgid "Show all formatting options"
+msgstr ""
+
+#: ../hooks/translation.php:65
+msgid "Support GDYMC"
+msgstr ""
+
+#: ../hooks/translation.php:67
+msgid ""
+"GDYMC tries to become a really great plugin ... but that only works with your help. Here are some simple ways to "
+"support us at WordPress.org:"
+msgstr ""
+
+#: ../hooks/translation.php:69
+msgid "Create a Plugin review"
+msgstr ""
+
+#: ../hooks/translation.php:71
+msgid "Help translating the Plugin"
+msgstr ""
+
+#: ../hooks/translation.php:73
+msgid "Contribute to the Forum"
+msgstr ""
+
+#: ../hooks/translation.php:75
+msgid "No, never show this again"
+msgstr ""
+
+#: ../hooks/translation.php:77
+msgid "No modules selected"
+msgstr ""
+
+#: ../hooks/translation.php:79
+msgid "At least one selected module is required for this action."
+msgstr ""
+
+#: ../hooks/translation.php:81
+msgid "No target ID"
+msgstr ""
+
+#: ../hooks/translation.php:83
+msgid "Enter a target ID for this action."
+msgstr ""
+
+#: ../hooks/translation.php:85
+msgid "Wrong target ID"
+msgstr ""
+
+#: ../hooks/translation.php:87
+msgid "The target ID must be a number."
+msgstr ""
+
+#: ../hooks/translation.php:89
+msgid "Invalid server response."
+msgstr ""
+
+#: ../hooks/translation.php:91
+#, php-format
+msgid "This file is too big. Max filesize is %s."
+msgstr ""
+
+#: ../hooks/translation.php:93
+msgid "This file type is not allowed."
+msgstr ""
+
+#: ../hooks/translation.php:95 ../includes/ajax.php:700
+msgid "Use void image and save"
+msgstr ""
+
+#: ../hooks/translation.php:97 ../includes/ajax.php:692
+msgid "Use image and save"
+msgstr ""
+
+#: ../hooks/translation.php:99 ../includes/ajax.php:696
+#, php-format
+msgid "Use %s images and save"
+msgstr ""
+
+#: ../hooks/translation.php:101
+msgid "There are unsaved contents. This contents will be lost when you leave the page."
+msgstr ""
+
+#: ../hooks/translation.php:103
+msgid "There are too long texts. You must shorten these texts before you can continue."
+msgstr ""
+
+#: ../includes/adminbar.php:13
+msgid "Exit preview"
+msgstr ""
+
+#: ../includes/adminbar.php:48
+msgid "Drop files here"
+msgstr ""
+
+#: ../includes/adminbar.php:54
+msgid "Uploader"
+msgstr ""
+
+#: ../includes/adminbar.php:55
+msgid "Open media library"
+msgstr ""
+
+#: ../includes/adminbar.php:56
+msgid "Upload files"
+msgstr ""
+
+#: ../includes/adminbar.php:127
+msgid "Fast preview (Cmd+E)"
+msgstr ""
+
+#: ../includes/adminbar.php:129
+msgid "Preview (Cmd+Shift+E)"
+msgstr ""
+
+#: ../includes/adminbar.php:139 ../includes/ajax.php:1136 ../includes/ajax.php:1197 ../includes/ajax.php:1258
+#: ../includes/ajax.php:1318
+msgid "Edit"
+msgstr ""
+
+#: ../includes/adminbar.php:141
+msgid "Customize"
+msgstr ""
+
+#: ../includes/adminbar.php:143
+msgid "Logout"
+msgstr ""
+
+#: ../includes/adminbar.php:147
+msgid "Support us"
+msgstr ""
+
+#: ../includes/ajax.php:183 ../includes/ajax.php:206
+msgid "Insert Link"
+msgstr ""
+
+#: ../includes/ajax.php:187
+msgid "Link"
+msgstr ""
+
+#: ../includes/ajax.php:188
+msgid "File"
+msgstr ""
+
+#: ../includes/ajax.php:189
+msgid "Page"
+msgstr ""
+
+#: ../includes/ajax.php:190
+msgid "Post"
+msgstr ""
+
+#: ../includes/ajax.php:191
+msgid "Category"
+msgstr ""
+
+#: ../includes/ajax.php:210
+msgid "Open in new tab or window"
+msgstr ""
+
+#: ../includes/ajax.php:223
+msgid "Link adress"
+msgstr ""
+
+#: ../includes/ajax.php:276
+msgid "Batch editing"
+msgstr ""
+
+#: ../includes/ajax.php:280 ../includes/ajax.php:309
+msgid "Selection"
+msgstr ""
+
+#: ../includes/ajax.php:281
+msgid "Actions"
+msgstr ""
+
+#: ../includes/ajax.php:295
+msgid "Done"
+msgstr ""
+
+#: ../includes/ajax.php:311
+msgid "Select all modules"
+msgstr ""
+
+#: ../includes/ajax.php:312
+msgid "Unselect all modules"
+msgstr ""
+
+#: ../includes/ajax.php:313
+msgid "Add visible modules to selection"
+msgstr ""
+
+#: ../includes/ajax.php:314
+msgid "Add invisible modules to selection"
+msgstr ""
+
+#: ../includes/ajax.php:323 ../includes/ajax.php:1137 ../includes/ajax.php:1198 ../includes/ajax.php:1259
+msgid "Delete"
+msgstr ""
+
+#: ../includes/ajax.php:325
+msgid "Delete selected modules"
+msgstr ""
+
+#: ../includes/ajax.php:329
+msgid "Move or copy"
+msgstr ""
+
+#: ../includes/ajax.php:335
+msgid "Target ID"
+msgstr ""
+
+#: ../includes/ajax.php:343
+msgid "Move selected modules"
+msgstr ""
+
+#: ../includes/ajax.php:345
+msgid "Copy selected modules"
+msgstr ""
+
+#: ../includes/ajax.php:639
+msgid "Insert Images"
+msgstr ""
+
+#: ../includes/ajax.php:641
+msgid "Insert Image"
+msgstr ""
+
+#: ../includes/ajax.php:646
+msgid "Matching images"
+msgstr ""
+
+#: ../includes/ajax.php:647
+msgid "Bigger images"
+msgstr ""
+
+#: ../includes/ajax.php:648
+msgid "All images"
+msgstr ""
+
+#: ../includes/ajax.php:667
+msgid "Search"
+msgstr ""
+
+#: ../includes/ajax.php:968
+msgid "Insert image"
+msgstr ""
+
+#: ../includes/ajax.php:1033
+#, php-format
+msgid "More images (%s)"
+msgstr ""
+
+#: ../includes/ajax.php:1042 ../includes/ajax.php:1152 ../includes/ajax.php:1213 ../includes/ajax.php:1274
+msgid "No contents"
+msgstr ""
+
+#: ../includes/ajax.php:1134 ../includes/ajax.php:1195 ../includes/ajax.php:1256 ../includes/ajax.php:1316
+msgid "Use as link"
+msgstr ""
+
+#: ../includes/ajax.php:1135 ../includes/ajax.php:1196 ../includes/ajax.php:1257 ../includes/ajax.php:1317
+msgid "View"
+msgstr ""
+
+#: ../includes/ajax.php:1148 ../includes/ajax.php:1209 ../includes/ajax.php:1270
+msgid "Show more"
+msgstr ""
+
+#: ../includes/ajax.php:1345
+msgid "You must select an image!"
+msgstr ""
+
+#: ../includes/ajax.php:1345
+msgid "Are you sure you want to delete this picture?"
+msgstr ""
+
+#: ../includes/ajax.php:1345
+msgid "Delete Permanently"
+msgstr ""
+
+#: ../includes/ajax.php:1348
+msgid "Title"
+msgstr ""
+
+#: ../includes/ajax.php:1351
+msgid "Caption"
+msgstr ""
+
+#: ../includes/ajax.php:1354
+msgid "Alternative text"
+msgstr ""
+
+#: ../includes/ajax.php:1357
+msgid "Description"
+msgstr ""
+
+#: ../includes/area.php:84
+msgid "There are no modules"
+msgstr ""
+
+#: ../includes/area.php:139
+msgid "Defaults"
+msgstr ""
+
+#: ../includes/area.php:141
+msgid "Visibility"
+msgstr ""
+
+#: ../includes/area.php:145
+msgid "Settings"
+msgstr ""
+
+#: ../includes/area.php:270
+#, php-format
+msgid "The module type \"%s\" seems not to exist"
+msgstr ""
+
+#: ../includes/area.php:284
+#, php-format
+msgid "The module type \"%s\" is incomplete"
+msgstr ""
+
+#: ../includes/functions.php:293
+#, php-format
+msgid "%s year ago"
+msgid_plural "%s years ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:298
+#, php-format
+msgid "%s month ago"
+msgid_plural "%s months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:303
+#, php-format
+msgid "%s week ago"
+msgid_plural "%s weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:308
+#, php-format
+msgid "%s day ago"
+msgid_plural "%s days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:313
+#, php-format
+msgid "%s hour ago"
+msgid_plural "%s hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:318
+#, php-format
+msgid "%s minute ago"
+msgid_plural "%s minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/functions.php:323
+#, php-format
+msgid "%s second ago"
+msgid_plural "%s seconds ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../includes/modulelist.php:32
+msgid "Filter for Modules"
+msgstr ""
+
+#: ../includes/modulelist.php:45
+#, php-format
+msgid "No module folder. Create a folder named \"%s\" in your theme directory."
+msgstr ""
+
+#: ../includes/modulelist.php:55
+msgid "There are no modules in your modules folder in your theme."
+msgstr ""
+
+#: ../includes/modulelist.php:65
+msgid "This page has no module area. Create a module area with the areaCreate() function or the [gdymc_area] shortcode!"
+msgstr ""
+
+#~ msgid "date_after"
+#~ msgstr " ago"
+
+#~ msgid "404-Fehler"
+#~ msgstr "404 Error"
+
+#~ msgid ""
+#~ "Der von Ihnen aufgerufene Inhalt existiert nicht, oder nicht mehr. Sie können Ihre Reise von unserer <a href="
+#~ "\"http://www.panoramahotel-oberjoch.de/\">Startseite</a> aus neu beginnen oder auf einen beliebigen "
+#~ "Navigationspunkt klicken."
+#~ msgstr ""
+#~ "The content you have requested does not exist (no longer exists). Please go to our homepage to start your journey "
+#~ "again. Alternatively you can choose any other navigation point. "
+
+#~ msgid "Weitere Informationen über unser Hotel erhalten Sie auf folgenden Seiten:"
+#~ msgstr "For more information about our hotel, please visit the following pages:"
+
+#~ msgid "FAQ-Bereich"
+#~ msgstr "FAQ area"
+
+#~ msgid "Facebook"
+#~ msgstr "Facebook"
+
+#~ msgid "Twitter"
+#~ msgstr "Twitter"
+
+#~ msgid "Google Plus"
+#~ msgstr "Google Plus"
+
+#~ msgid "Buchen Sie über unseren Sicherheitsserver"
+#~ msgstr "Book via our secure server"
+
+#~ msgid "Buchen"
+#~ msgstr "Book"
+
+#~ msgid "Stellen Sie uns eine unverbindliche Anfrage"
+#~ msgstr "Make an unbinding request"
+
+#~ msgid "Anfragen"
+#~ msgstr "Requests"
+
+#~ msgid "Panorama-Inklusivleistungen"
+#~ msgstr "Panorama inclusive services"
+
+#~ msgid "Inklusivleistungen"
+#~ msgstr "Inclusive services"
+
+#~ msgid "panoInk"
+#~ msgstr ""
+#~ "<li>Schlemmer-Fr&uuml;hst&uuml;cksbuffet</li><li>5-Gang-Wahlmen&uuml; am Abend inkl. Salatbuffet und K&auml;se vom "
+#~ "Brett</li><li>Am Freitagabend: Mottobuffet</li><li>Benutzung des Alpin Spa mit Innen- und Au&szlig;enpool, "
+#~ "Saunaland und Fitness-Studio, Verleih der Wellnesstasche inkl. Badeslipper, Bademantel und Saunat&uuml;cher</"
+#~ "li><li>Begr&uuml;&szlig;ungsgetr&auml;nk bei Anreise</li><li>1 Mineralwasser pro Zimmer</li><li>Aktiv- und "
+#~ "Wanderprogramm</li><li>WLAN und Internet-Anschluss</li><li>Sky Sport HD 1</li>"
+
+#~ msgid "Newsletter"
+#~ msgstr "Newsletter"
+
+#~ msgid "Tragen Sie sich in unseren Newsletter ein <br /> um Neuigkeiten direkt per Mail zu erhalten."
+#~ msgstr "Sign up for our newsletter <br /> to receive news directly via email."
+
+#~ msgid "Fragen?"
+#~ msgstr "Questions?"
+
+#~ msgid ""
+#~ "Gerne beraten wir Sie persönlich zu<br />Ihrem Aufenthalt bei uns. Rufen Sie an:<br /><br /><a style=\"color: #fff; "
+#~ "font-weight: bold;\" href=\"tel:+49832493330\">Tel. +49 (0) 8324 933 30</a>"
+#~ msgstr ""
+#~ "We are happy to advise you <br />personally about your stay with us. <br />Please call us: <br /><br /><a style="
+#~ "\"color: #fff; font-weight: bold;\" href=\"tel:+49832493330\">Tel. +49 (0) 8324 933 30</a>"
+
+#~ msgid "Gutschein?"
+#~ msgstr "Voucher?"
+
+#~ msgid ""
+#~ "Sie brauchen noch eine gute Geschenkidee?<br />Wie wäre es mit einem Gutschein für Ihre Liebsten.<br /><br /><a "
+#~ "style=\"color: #fff; font-weight: bold;\" href=\"\">Jetzt Gutschein erstellen</a>"
+#~ msgstr ""
+#~ "Are you still looking for a nice gift idea? What do you think about a voucher for your loved ones? Create voucher "
+#~ "now."
+
+#~ msgid "Nächte ab"
+#~ msgstr "Nights from"
+
+#~ msgid "Zu den Downloads"
+#~ msgstr "Download area"
+
+#~ msgid "Broschüren"
+#~ msgstr "Brochures"
+
+#~ msgid "Sie können selbstverständlich auch<br />unsere Broschüren herunterladen."
+#~ msgstr "Of course you can also <br /> download our brochures."
+
+#~ msgid "Startseite"
+#~ msgstr "Homepage"
+
+#~ msgid "analyticsUA"
+#~ msgstr "UA-24542034-2"
+
+#~ msgid "Wir beraten Sie bei Buchungen und anderen Anliegen. Rufen Sie uns an! +49 (0) 8324 933 30"
+#~ msgstr "We are happy to advise you<br />about your concerns:<br />tel. +49 (0) 8324 933 30."
+
+#~ msgid "Day Spa"
+#~ msgstr "Day spa"
+
+#~ msgid "Auch als externer Gast können Sie Innen- und Außenpool, Fitnessstudio und Saunalandschaft nutzen."
+#~ msgstr "External guests can also make use of indoor and outdoor pool, fitness studio, and sauna landscape."
+
+#~ msgid "Gut zu Wissen"
+#~ msgstr "Good to know"
+
+#~ msgid "Viele häufig gestellte Fragen werden von uns in unserem FAQ-Bereich beantwortet."
+#~ msgstr "Many frequently asked questions are answered in our interesting facts area."
+
+#~ msgid "Bei einem Aufenthalt  erhalten Sie angenehme Extras, die schon im Preis enthalten sind."
+#~ msgstr "If you stay overnight you will receive many pleasant extras, which are already included in the price."
+
+#~ msgid "Interessiert?"
+#~ msgstr "Interested?"
+
+#~ msgid "Gerne erstellen wir ein individuelles Angebot für Ihre Feier - Rufen Sie uns an!  +49 (0) 8324 9333 420"
+#~ msgstr "We are happy to prepare an individual offer for your party. Please call us:<br />tel. +49 (0) 8324 9333 420."
+
+#~ msgid "Besuchen Sie uns auf Facebook"
+#~ msgstr "Visit us on Facebook"
+
+#~ msgid "Besuchen Sie uns auf Twitter"
+#~ msgstr "Visit us on Twitter"
+
+#~ msgid "Besuchen Sie uns auf Google Plus"
+#~ msgstr "Visit us on Google Plus"
+
+#~ msgid "switchlangtitle"
+#~ msgstr "Go to the German website"
+
+#~ msgid "switchlangurl"
+#~ msgstr "http://www.panoramahotel-oberjoch.de/"
+
+#~ msgid "switchlang"
+#~ msgstr "EN"
+
+#~ msgid "Zur Startseite"
+#~ msgstr "Go to the homepage"
+
+#~ msgid "Leistungen"
+#~ msgstr "Services"
+
+#~ msgid "Wellness"
+#~ msgstr "Wellness"
+
+#~ msgid "Angebot & Termine"
+#~ msgstr "Offer & Dates"
+
+#~ msgid "Preis p. P. im DZ"
+#~ msgstr "Price p. p. in DBL"
+
+#~ msgid "seekdalangcode"
+#~ msgstr "EN"
+
+#~ msgid "Geben Sie Ihre Nachricht ein, oder kontaktieren <br />Sie uns direkt über"
+#~ msgstr "Enter your message or contact us <br />directly via"
+
+#~ msgid "<span class=\"formSuccess\">Ihre Nachricht wurde versandt. Vielen Dank.</span>"
+#~ msgstr "<span class=\"contact-success\">Your message has been sent. Thank your very much.</span>"
+
+#~ msgid "Es gab einen Fehler. Bitte überprüfen Sie Ihre Eingaben."
+#~ msgstr "An error occurred. Please check your inputs."
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Mail-Adresse"
+#~ msgstr "Email address"
+
+#~ msgid "Betreff"
+#~ msgstr "Subject"
+
+#~ msgid "Nachricht"
+#~ msgstr "Message"
+
+#~ msgid "Senden"
+#~ msgstr "Send"
+
+#~ msgid "Geben Sie einen Namen ein!"
+#~ msgstr "Enter your name!"
+
+#~ msgid "Geben Sie eine Adresse ein!"
+#~ msgstr "Enter your email address!"
+
+#~ msgid "Diese Mail ist nicht korrekt!"
+#~ msgstr "This email address is not correct!"
+
+#~ msgid "Geben Sie eine Nachricht ein!"
+#~ msgstr "Enter a message!"
+
+#~ msgid "Kontakt"
+#~ msgstr "Contact"
+
+#~ msgid "Allgemeiner Kontakt"
+#~ msgstr "General contact"
+
+#~ msgid "Frage zum Aufenthalt"
+#~ msgstr "Question concerning your stay"
+
+#~ msgid "Fehler auf der Webseite"
+#~ msgstr "Error on the website"
+
+#~ msgid "Kritik oder Verbesserungsvorschlag"
+#~ msgstr "Criticism or suggestions"
+
+#~ msgid ""
+#~ "<strong>Panoramahotel Oberjoch</strong>Paßstraße 41<br />87541 Bad Hindelang-Oberjoch<br /><br />Telefon: +49 (0) "
+#~ "8324 9333-0<br />Telefax: +49 (0) 8324 9333-499<br />info@panoramahotel-oberjoch.de "
+#~ msgstr ""
+#~ "<strong>Panoramahotel Oberjoch</strong>Paßstraße 41<br />87541 Bad Hindelang-Oberjoch<br /><br />Telephone: +49 (0) "
+#~ "8324 9333-0<br />Telefax: +49 (0) 8324 9333-499<br />info@panoramahotel-oberjoch.de "
+
+#~ msgid "Vielen Dank für Ihre Anfrage"
+#~ msgstr "Thank you for your request"
+
+#~ msgid ""
+#~ "Ihre Mail wurde erfolgreich an uns versandt. Einer unserer Mitarbeiter wird sich schnellstmöglich bei Ihnen melden."
+#~ msgstr "Your email has been send successfully. One of our representatives will get back to you as soon as possible."
+
+#~ msgid "Sehen Sie sich auch folgende Seiten an, um weitere Fragen zu klären:"
+#~ msgstr "Please have a look at the following pages in order to clarify any further questions:"
+
+#~ msgid "'Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'"
+#~ msgstr "'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'"
+
+#~ msgid "'So','Mo','Di','Mi','Do','Fr','Sa'"
+#~ msgstr "'Su','Mo','Tu','We','Th','Fr','Sa'"
+
+#~ msgid "'Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'"
+#~ msgstr "'January','February','March','April','May','June','July','August','September','October','November','December'"
+
+#~ msgid "Kalender öffnen"
+#~ msgstr "Open calendar"
+
+#~ msgid "Zu den Angeboten"
+#~ msgstr "To our offers"
+
+#~ msgid "Anreise"
+#~ msgstr "Arrival"
+
+#~ msgid "Abreise"
+#~ msgstr "Departure"
+
+#~ msgid "Unverbindlich Anfragen"
+#~ msgstr "Non-binding requests"
+
+#~ msgid "Nächste Events"
+#~ msgstr "Upcoming events"
+
+#~ msgid "Heute"
+#~ msgstr "Today"
+
+#~ msgid "Uhr"
+#~ msgstr "Was ist damit gemeint? Uhrzeit? = time"
+
+#~ msgid "Empfohlene Angebote"
+#~ msgstr "Recommended offers"
+
+#~ msgid "Herunterladen"
+#~ msgstr "Download"
+
+#~ msgid "Keine Kinder"
+#~ msgstr "No Children"
+
+#~ msgid "Ein Kind"
+#~ msgstr "One child"
+
+#~ msgid "Kinder"
+#~ msgstr "Children"
+
+#~ msgid "Ein Erwachsener"
+#~ msgstr "One Adult"
+
+#~ msgid "Erwachsene"
+#~ msgstr "Adults"
+
+#~ msgid "Eine Nacht"
+#~ msgstr "One Night"
+
+#~ msgid "Nächte"
+#~ msgstr "Nights"
+
+#~ msgid "Deutschland"
+#~ msgstr "Germany"
+
+#~ msgid "Schweiz"
+#~ msgstr "Switzerland"
+
+#~ msgid "Östereich"
+#~ msgstr "Austria"
+
+#~ msgid "Polen"
+#~ msgstr "Poland"
+
+#~ msgid "Tschechische Republik"
+#~ msgstr "Czech Repuplic"
+
+#~ msgid "Italien"
+#~ msgstr "Italy"
+
+#~ msgid "Frankreich"
+#~ msgstr "France"
+
+#~ msgid "Liechtenstein"
+#~ msgstr "Liechtenstein"
+
+#~ msgid "Belgien"
+#~ msgstr "Belgium"
+
+#~ msgid "Luxemburg"
+#~ msgstr "Luxembourg"
+
+#~ msgid "Niederlande"
+#~ msgstr "The Netherlands"
+
+#~ msgid "Panoramahotel Buchungsanfrage"
+#~ msgstr "Panoramahotel booking request"
+
+#~ msgid "Guten Tag"
+#~ msgstr "Dear"
+
+#~ msgid "vielen Dank für Ihre Anfrage. Nachstehend finden Sie nochmals Ihre Anfragedaten zur Übersicht:"
+#~ msgstr "Thank you very much for your request. Below you find an overview of your request:"
+
+#~ msgid "Angebot:"
+#~ msgstr "Offer:"
+
+#~ msgid "Erwachsene:"
+#~ msgstr "Adults:"
+
+#~ msgid "Kinder:"
+#~ msgstr "Children:"
+
+#~ msgid "Termin:"
+#~ msgstr "Date:"
+
+#~ msgid "Zimmerkategorie:"
+#~ msgstr "Room category:"
+
+#~ msgid ""
+#~ "Es wird sich schnellstmöglich einer unserer Mitarbeiter bei Ihnen melden. Sollten Sie Fragen haben können Sie "
+#~ "direkt auf diese Mail antworten."
+#~ msgstr ""
+#~ "One of our employees will contact you as soon as possible. In case you have any questions, simply reply to this "
+#~ "mail."
+
+#~ msgid "Mit freundlichen Grüßen<br />Das Panoramahotel Oberjoch Team"
+#~ msgstr "Yours sincerely,<br />Panoramahotel Oberjoch Team"
+
+#~ msgid ""
+#~ "Der Anreisetag ist noch unverändert. Sie können diesen in Schritt 2 im Kalender anpassen. Wollen Sie fortfahren?"
+#~ msgstr ""
+#~ "The arrival day is still unchanged. You can adjust this using the calendar in step 2. Do you want to continue?"
+
+#~ msgid "Angebote"
+#~ msgstr "Offers"
+
+#~ msgid "Reisedaten"
+#~ msgstr "Journey dates"
+
+#~ msgid "Zimmer"
+#~ msgstr "Room"
+
+#~ msgid "Hier können Sie ein Angebot für Ihren Aufenthalt auswählen."
+#~ msgstr "Here you can select an offer for your stay."
+
+#~ msgid "Übernachtung"
+#~ msgstr "Overnight stay"
+
+#~ msgid "Wenn Sie eine Übernachtungsanfrage ohne Paket vornehmen wollen klicken Sie hier."
+#~ msgstr "If you like to make a request without choosing one of our package offers, please click here."
+
+#~ msgid "Geben Sie hier Personenzahl, Reisedauer und Anreisetag an."
+#~ msgstr "Please specify the number of persons, duration of stay, and arrival day here. "
+
+#~ msgid "Weiter"
+#~ msgstr "Next"
+
+#~ msgid "Wählen Sie die Zimmerkategorie in der Sie wohnen möchten."
+#~ msgstr "Please select the room category you wish to stay in."
+
+#~ msgid "ab"
+#~ msgstr "from"
+
+#~ msgid "Es gab einen Fehler. Prüfen Sie Ihre Eingaben."
+#~ msgstr "An error has occurred. Please check your inputs."
+
+#~ msgid "Geben Sie Ihre Kontaktdaten ein."
+#~ msgstr "Please enter your contact details."
+
+#~ msgid "Geben Sie Ihren Vornamen ein."
+#~ msgstr "Please enter your first name."
+
+#~ msgid "Anrede & Vorname"
+#~ msgstr "Title & first name"
+
+#~ msgid "Herr"
+#~ msgstr "Mr."
+
+#~ msgid "Frau"
+#~ msgstr "Mrs."
+
+#~ msgid "Geben Sie Ihren Nachnamen ein."
+#~ msgstr "Please enter your last name."
+
+#~ msgid "Nachname"
+#~ msgstr "Last name"
+
+#~ msgid "Geben Sie Ihr Geburtsdatum ein."
+#~ msgstr "Please enter your date of birth."
+
+#~ msgid "Geburtsdatum"
+#~ msgstr "Date of birth"
+
+#~ msgid "Geben Sie ein Land an."
+#~ msgstr "Please enter your country."
+
+#~ msgid "Land"
+#~ msgstr "Country"
+
+#~ msgid "Andere"
+#~ msgstr "Other"
+
+#~ msgid "Tippen Sie das Land ein"
+#~ msgstr "Please enter your country"
+
+#~ msgid "Geben Sie eine Straße ein."
+#~ msgstr "Please enter your street."
+
+#~ msgid "Straße"
+#~ msgstr "Street"
+
+#~ msgid "Geben Sie eine Hausnummer ein."
+#~ msgstr "Please enter your house number."
+
+#~ msgid "Hausnummer"
+#~ msgstr "House number"
+
+#~ msgid "Geben Sie eine PLZ ein."
+#~ msgstr "Please enter your zip code."
+
+#~ msgid "PLZ"
+#~ msgstr "ZIP code"
+
+#~ msgid "Geben Sie einen Ort ein."
+#~ msgstr "Please enter your city."
+
+#~ msgid "Ort"
+#~ msgstr "City"
+
+#~ msgid "Geben Sie eine Mail-Adresse ein."
+#~ msgstr "Please enter your email address."
+
+#~ msgid "Geben Sie eine Telefon-Nummer an."
+#~ msgstr "Please enter your telephone number."
+
+#~ msgid "Telefon-Nummer"
+#~ msgstr "Telephone number"
+
+#~ msgid ""
+#~ "Es wurde eine E-Mail mit einer Zusammenfassung Ihrer Anfrage an Sie versendet. Einer unserer Mitarbeiter wird sich "
+#~ "schnellstmöglich bei Ihnen melden."
+#~ msgstr ""
+#~ "A summary of your request has been sent to your email address. One of our representatives will get back to you as "
+#~ "soon as possible."
+
+#~ msgid ""
+#~ "Sollten Sie Fragen zu Ihrem Aufenthalt haben kontaktieren Sie uns, oder erhalten Sie auf folgenden Seiten weitere "
+#~ "Informationen:"
+#~ msgstr ""
+#~ "If you have any questions about your stay, please contact us or visit the following sites for more information:"
+
+#~ msgid "Ausflugstipps"
+#~ msgstr "Excursion tips"
+
+#~ msgid ""
+#~ "Das Panoramahotel liegt mitten im Allgäu und bietet so einige interessante Orte in dessen Umgebung. Die Zugspitze, "
+#~ "die Königsschlösser Neuschwanstein und Hohenschwangau und viele mehr..."
+#~ msgstr ""
+#~ "The Panoramahotel is located in the Allgäu and offers many interesting places in its surroundings.  The Zugspitze, "
+#~ "the royal castles Neuschwanstein and Hohenschwangau, and lots more ..."
+
+#~ msgid ""
+#~ "Tipp: Im unteren Bereich der Webseite können Sie sich in unseren Newsletter einschreiben. In diesem erscheinen "
+#~ "Regelmäßig neue Ausflugstipps passend zur Saison."
+#~ msgstr " "
+
+#~ msgid "Ausflugstipp anzeigen"
+#~ msgstr "Show excursions tips"
+
+#~ msgid "Geben Sie ein Stichwort ein"
+#~ msgstr "Enter a keyword"
+
+#~ msgid "Als eigene Seite anzeigen:"
+#~ msgstr "Show as own page:"
+
+#~ msgid "Antwort nicht gefunden?"
+#~ msgstr "Answer not found?"
+
+#~ msgid ""
+#~ "Wenn Sie die Antwort auf Ihre Frage nicht gefunden haben, können Sie uns natürlich auch <a href=\"./?"
+#~ "page_id=561&type=question\">Ihre eigene Frage</a> stellen."
+#~ msgstr ""
+#~ "If you have not found the answer to your question, please send us your individual question <a href=\"./?"
+#~ "page_id=561&type=question\"></ a>."
+
+#~ msgid "Rezepte"
+#~ msgstr "Recipes"
+
+#~ msgid ""
+#~ "Kochen wie die Profis ... mit unseren Rezept-Tipps können Sie sich ein Stück Panoramahotel nach Hause holen. "
+#~ "Entweder um die Vorfreude zu steigern, in Erinnerungen zu schwelgen oder einfach zum genießen."
+#~ msgstr " "
+
+#~ msgid ""
+#~ "Tipp: Im unteren Bereich der Webseite können Sie sich in unseren Newsletter einschreiben. In diesem erscheinen "
+#~ "Regelmäßig neue Rezepte zum nachkochen."
+#~ msgstr ""
+#~ "siehe oben!Tip: At the bottom of the page you can subscribe to our newsletter. In our Newsletter appearing "
+#~ "regularly new Recipes for you."
+
+#~ msgid "Rezept anzeigen"
+#~ msgstr "Show recipe"
+
+#~ msgid "Saison A"
+#~ msgstr "Season A"
+
+#~ msgid "Saison C"
+#~ msgstr "Season C"
+
+#~ msgid "Saison E"
+#~ msgstr "Season E"
+
+#~ msgid "Grundriss ansehen"
+#~ msgstr "Show layout"
+
+#~ msgid "Preis p. P."
+#~ msgstr "Price p. p."
+
+#~ msgid ""
+#~ "Neu seit 2014: 15 % Frühbucherrabatt: bei Buchung bis 8 Wochen im Voraus und sofortiger Vorkasse der "
+#~ "Übernachtungskosten. Alle Preise pro Person und Nacht. Einzelzimmerzuschlag € 30,00 pro Nacht. "
+#~ "Mindestaufenthaltsdauer 2 Nächte, über Silvester 7 Nächte. Zuschlag für einen Aufenthalt von einer Nacht € 20,00 "
+#~ "pro Person. Der Kurbeitrag ist in den genannten Preisen nicht enthalten und wird pro Tag und Person separat erhoben."
+#~ msgstr ""
+#~ "15 % early bird discount. If you book at least 8 weeks in advance and prepay your accommodation expenses you "
+#~ "receive an early bird discount of 15%. All prices per person and per night. Surcharge for single occupancy € 30.00 "
+#~ "per night. Minimum number of overnight stays: 2 nights; New Year's: 7 nights. Surcharge if you only stay for one "
+#~ "night € 20.00 per person. All prices are exclusive of visitors’ tax which is charged additionally per person per "
+#~ "day."
+
+#~ msgid "Tschechien"
+#~ msgstr "Czech Republic"
+
+#~ msgid "Gehen Sie zur Englischen Webseite"
+#~ msgstr "Go to the German Website"
+
+#~ msgid "DE"
+#~ msgstr "EN"
+
+#~ msgid "Weihwasser"
+#~ msgstr "Weihwasser"
+
+#~ msgid "Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+#~ msgstr "Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+
+#~ msgid "Impressum"
+#~ msgstr "Imprint"
+
+#~ msgid "AGB"
+#~ msgstr "TOS"
+
+#~ msgid "FAQ"
+#~ msgstr "FAQ"
+
+#~ msgid "Presse"
+#~ msgstr "Press"
+
+#~ msgid "Karriere"
+#~ msgstr "Jobs"
+
+#~ msgid "Händler"
+#~ msgstr "Trade"
+
+#~ msgid "Finde uns"
+#~ msgstr "Find us"
+
+#~ msgid "Besuche uns im Netz"
+#~ msgstr "Visit us in the Web"
+
+#~ msgid "Abonieren Sie unseren Newsletter<br />und erhalten Sie interessante News."
+#~ msgstr "Subscribe to our Newsletter<br />and get interresting News"
+
+#~ msgid "Januar"
+#~ msgstr "January"
+
+#~ msgid "Februar"
+#~ msgstr "February"
+
+#~ msgid "März"
+#~ msgstr "March"
+
+#~ msgid "April"
+#~ msgstr "April"
+
+#~ msgid "Mai"
+#~ msgstr "May"
+
+#~ msgid "Juni"
+#~ msgstr "June"
+
+#~ msgid "Juli"
+#~ msgstr "July"
+
+#~ msgid "August"
+#~ msgstr "August"
+
+#~ msgid "September"
+#~ msgstr "September"
+
+#~ msgid "Oktober"
+#~ msgstr "October"
+
+#~ msgid "November"
+#~ msgstr "November"
+
+#~ msgid "Dezember"
+#~ msgstr "December"
+
+#~ msgid "dateBefore-Future"
+#~ msgstr "(In"
+
+#~ msgid "dateAfter-Future"
+#~ msgstr ")"
+
+#~ msgid "Jahr"
+#~ msgstr "Year"
+
+#~ msgid "Jahren"
+#~ msgstr "Years"
+
+#~ msgid "Monat"
+#~ msgstr "Month"
+
+#~ msgid "Monaten"
+#~ msgstr "Months"
+
+#~ msgid "Woche"
+#~ msgstr "Week"
+
+#~ msgid "Gestern"
+#~ msgstr "(Yesterday)"
+
+#~ msgid "Tag"
+#~ msgstr "Day"
+
+#~ msgid "Morgen"
+#~ msgstr "(Tomorrow)"
+
+#~ msgid "Nach weihwasser suchen (PLZ)"
+#~ msgstr "Search for Weihwasser (ZIP)"
+
+#~ msgid "Aktuelles"
+#~ msgstr "News"
+
+#~ msgid "Produkte"
+#~ msgstr "Products"
+
+#~ msgid "Drinks"
+#~ msgstr "Drinks"
+
+#~ msgid "Geschichte"
+#~ msgstr "History"
+
+#~ msgid "Shop"
+#~ msgstr "Shop"
+
+#~ msgid ""
+#~ "Bitte senden Sie Ihre Bewerbung <br />per Mail an:<br />Bruder Georg<br />karriere@weihwasser.info<br /><br /><br /"
+#~ ">oder per Post an:<br />Bruder Georg<br />Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+#~ msgstr ""
+#~ "Please send your application by mail to <br /> <br /> brother George <br /> karriere@weihwasser.info <br /> <br /> "
+#~ "<br /> or by post to: <br /> brother George <br /> In the old office building <br /> <br /> Schäftlarnstraße 10 "
+#~ "81371 München"
+
+#, fuzzy
+#~ msgid "<strong>Weihwasser GmbH</strong><br />Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+#~ msgstr "Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+
+#~ msgid "Jetzt<br />kaufen"
+#~ msgstr "Buy<br />now"
+
+#, fuzzy
+#~ msgid "Weihwasser Spritz"
+#~ msgstr "Weihwasser"
+
+#~ msgid "Handel"
+#~ msgstr "trade"
+
+#~ msgid "Gastronomie"
+#~ msgstr "catering"
+
+#~ msgid "Zitronen"
+#~ msgstr "Lemons"
+
+#~ msgid "Limetten"
+#~ msgstr "Limes"
+
+#~ msgid "Wacholderbeeren"
+#~ msgstr "Juniper berries"
+
+#, fuzzy
+#~ msgid "Lavendel"
+#~ msgstr "trade"
+
+#~ msgid "Minze"
+#~ msgstr "Mint"
+
+#~ msgid "Holunder"
+#~ msgstr "Elderberry"
+
+#~ msgid "Guarana"
+#~ msgstr "Guarana"
+
+#~ msgid "Coffein"
+#~ msgstr "Coffein"
+
+#~ msgid "catpressto"
+#~ msgstr "Press release"
+
+#~ msgid "catpressfrom"
+#~ msgstr "Press report"
+
+#~ msgid "catnews"
+#~ msgstr "News"
+
+#~ msgid "catevent"
+#~ msgstr "Event"
+
+#~ msgid "Ihre Mail-Adresse"
+#~ msgstr "Your Mail-Adress"
+
+#~ msgid "Bistümer"
+#~ msgstr "Dioceses"
+
+#~ msgid "Inhalte"
+#~ msgstr "Incredients"
+
+#~ msgid "Medien"
+#~ msgstr "Media"
+
+#~ msgid "In"
+#~ msgstr "In"
+
+#~ msgid "Vor"
+#~ msgstr "Ago"
+
+#~ msgid "Stellen"
+#~ msgstr "Jobs"
+
+#~ msgid "Konvent"
+#~ msgstr "Konvent"
+
+#~ msgid "top"
+#~ msgstr "Top"
+
+#~ msgid "imprint"
+#~ msgstr "Imprint"
+
+#~ msgid "vacancies"
+#~ msgstr "Vacancies"
+
+#~ msgid "Website by"
+#~ msgstr "Website by"
+
+#, fuzzy
+#~ msgid "start"
+#~ msgstr ""
+#~ "The good things are what makes STEINBUCK, but we do not understand well at the best but the most correct.Therefore "
+#~ "our little STEINBUCK is exactly as it should be, not too fancy and not too common. It occurs due to the succession "
+#~ "of the vine to receive old and new guests."
+
+#~ msgid "sleep"
+#~ msgstr "stay"
+
+#~ msgid "A difficult decision"
+#~ msgstr "A <span class=\"bigger\">difficult</span> decision"
+
+#~ msgid "Download Menu"
+#~ msgstr "Download Menu"
+
+#~ msgid "card"
+#~ msgstr "menu"
+
+#~ msgid "noentries"
+#~ msgstr "No Entries in this language"
+
+#~ msgid "Find your favorite restaurant"
+#~ msgstr "Find your<br />favorite restaurant"
+
+#~ msgid "Subscribe to our Newsletter"
+#~ msgstr "Subscribe to our Newsletter"
+
+#~ msgid "Contact & Directions"
+#~ msgstr "Contact <span class=\"sprite sprite-greyamp\"></span> Directions"
+
+#~ msgid "contact-done"
+#~ msgstr "Your email has been sent"
+
+#~ msgid "Enter your Contact-Information"
+#~ msgstr "Enter your contact details"
+
+#~ msgid "Message"
+#~ msgstr "Message"
+
+#~ msgid "If eating turn into enjoying"
+#~ msgstr "If eating turn into enjoying"
+
+#~ msgid "Kitchen and Cooks"
+#~ msgstr "Kitchen <span class=\"sprite sprite-sunamp\"></span> Cooks"
+
+#~ msgid "Because it tastes best at home"
+#~ msgstr "Because it tastes <span class=\"bigger\">best</span> at home"
+
+#~ msgid "text-home"
+#~ msgstr ""
+#~ "For most people it goes like this: it simply tastes like home best. Hence, we use mostly carefully selected "
+#~ "ingredients from local producers for our meals, and you can taste it."
+
+#~ msgid "Whats new"
+#~ msgstr "Whats new"
+
+#~ msgid "Attention! The newsletter is published only in German."
+#~ msgstr "Attention! The newsletter is published only in German."
+
+#, fuzzy
+#~ msgid "text-imprint"
+#~ msgstr "Imprint"
+
+#~ msgid "First come, first served …"
+#~ msgstr "First come, first served ..."
+
+#~ msgid "request"
+#~ msgstr "Request"
+
+#~ msgid "request-error"
+#~ msgstr "There was an error, please check your data."
+
+#~ msgid "request-instruction"
+#~ msgstr "You can send us a request for accommodation, please enter your details below."
+
+#~ msgid "Mrs."
+#~ msgstr "Mrs."
+
+#~ msgid "Mr."
+#~ msgstr "Mr."
+
+#~ msgid "star-msg"
+#~ msgstr "Fields marked with an star are not necessarily required."
+
+#~ msgid "first come, first served"
+#~ msgstr "First come, first served"
+
+#~ msgid "In the event that there is times longer"
+#~ msgstr "In the event that there is times longer"
+
+#~ msgid "Just as it should be"
+#~ msgstr "Just as it <span class=\"bigger\">Should</span> be"
+
+#~ msgid "About Values <span class=\"sprite sprite-sunamp\"></span> Wine"
+#~ msgstr "About Values <span class=\"sprite sprite-sunamp\"></span> Wine"
+
+#~ msgid "text-start"
+#~ msgstr ""
+#~ "The good things are what makes STEINBUCK, but we do not understand well at the best but the most correct.Therefore "
+#~ "our little STEINBUCK is exactly as it should be, not too fancy and not too common. It occurs due to the succession "
+#~ "of the vine to receive old and new guests."
+
+#~ msgid "home"
+#~ msgstr "region"
+
+#, fuzzy
+#~ msgid "text-food"
+#~ msgstr ""
+#~ "For most people it goes like this: it simply tastes like home best. Hence, we use mostly carefully selected "
+#~ "ingredients from local producers for our meals, and you can taste it."
+
+#, fuzzy
+#~ msgid "text-sleep"
+#~ msgstr "stay"
+
+#~ msgid "contact-error"
+#~ msgstr "There was an error"
+
+#~ msgid "error-noname"
+#~ msgstr "Enter a Name"
+
+#~ msgid "error-nomail"
+#~ msgstr "Enter a Mail"
+
+#~ msgid "error-wrongmail"
+#~ msgstr "Your Mail seem to be wrong"
+
+#~ msgid "error-nomessage"
+#~ msgstr "Enter a Message"

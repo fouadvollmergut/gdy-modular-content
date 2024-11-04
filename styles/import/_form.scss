@@ -1,0 +1,239 @@
+	
+
+	$color_error: #ffba00;
+	$color_blue: #1e8cbe;
+	$color_brightblue: #2ea2cc;
+
+	
+
+	/********************************* FORM ELEMENTS *********************************/
+
+
+	// Defaults
+
+	.gdymc_inside input,
+	.gdymc_inside select,
+	.gdymc_inside textarea,
+	.gdymc_optioncontainer label {
+		font: inherit;
+		color: inherit;
+
+		padding: 0px 15px !important;
+		height: 50px !important;
+		line-height: 50px !important;
+		border: solid 1px #eaeaea !important;
+		outline: none !important;
+		width: 100% !important;
+		display: block !important;
+		background: #fff !important;
+		border-radius: 0px !important;
+		vertical-align: middle !important;
+		
+		appearance: none !important;
+		-webkit-appearance: none !important;
+		-moz-appearance: none !important;
+		-o-appearance: none !important;
+		-ms-appearance: none !important;
+		
+		box-sizing: border-box !important;
+		-webkit-box-sizing: border-box !important;
+		-moz-box-sizing: border-box !important;
+		-o-box-sizing: border-box !important;
+		-ms-box-sizing: border-box !important;
+	}
+
+	.gdymc_inside input:hover, .gdymc_inside select:hover, .gdymc_inside textarea:hover {
+		border: solid 1px #ccc !important;
+	}
+
+
+	.gdymc_inside input:focus, .gdymc_inside select:focus, .gdymc_inside textarea:focus {
+		border: solid 1px $color_brightblue !important;
+	}
+	
+
+	// Label
+	
+	.gdymc_inside label {
+		color: #999 !important;
+		cursor: pointer;
+		padding-bottom: 5px;
+		vertical-align: middle !important;
+	}
+
+	
+	// Checkbox
+
+	.gdymc_inside input[type="checkbox"] {
+		display: inline-block !important;
+		width: 20px !important;
+		height: 20px !important;
+		padding: 0px !important;
+		cursor: pointer !important;
+		background: #fff url(../images/form-checkbox.svg) no-repeat center center !important;
+		background-size: 18px 18px !important;
+		margin: 0px !important;
+		margin-right: 0.2em !important;
+	}
+
+	.gdymc_inside input[type="checkbox"] + label {
+		display: inline-block !important;
+		color: inherit !important;
+		padding-bottom: 0px;
+	}
+
+	.gdymc_inside input[type="checkbox"]:checked {
+		background: #fff url(../images/form-checkbox-focus.svg) no-repeat center center !important;
+		background-size: 18px 18px !important;
+	}
+
+
+	// Select
+
+	.gdymc_inside select {
+		cursor: pointer !important;
+		background: #fff url(../images/form-select.svg) no-repeat right center !important;
+		line-height: 48px !important;
+	}
+
+	.gdymc_inside select:focus {
+		background: #fff url(../images/form-select-focus.svg) no-repeat right center !important;
+	}
+	
+
+	// Textarea
+
+	.gdymc_inside textarea {
+		width: 100% !important;
+		resize: vertical !important;
+		padding: 15px !important;
+		line-height: 1.5em !important;
+		height: 120px !important;
+		overflow: auto !important;
+	}
+
+
+
+
+
+
+
+
+	/********************************* OPTIONS *********************************/
+	
+
+	// Form parts
+
+	.gdymc_formpart {
+		display: block;
+	}
+
+	.gdymc_formpart ~ .gdymc_formpart {
+		padding-top: 30px;	
+	}
+	
+	.gdymc_formpart::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	
+
+	// Fields in option areas
+
+	.gdymc_optioncontainer label,
+	.gdymc_optioncontainer input,
+	.gdymc_optioncontainer select,
+	.gdymc_optioncontainer textarea {
+		width: 50% !important;
+		float: left !important;
+		margin-left: -1px !important;
+	}
+
+	.gdymc_optioncontainer label {
+		background: #fbfbfb !important;
+	}
+
+	.gdymc_optioncontainer_textarea textarea, .gdymc_optioncontainer_area textarea,
+	.gdymc_optioncontainer_textarea label, .gdymc_optioncontainer_area label {
+		width: 100% !important;
+		margin-top: -1px !important;
+	}
+
+
+
+	// hints
+
+	.gdymc_hint {
+		display: block;
+		font-size: 0.9em;
+		color: #999;
+		text-align: center;
+		padding-top: 10px;
+		padding-bottom: 30px;
+	}
+
+	.gdymc_hint::before {
+		content: "\f348";
+		font-family: 'Dashicons';
+		position: relative;
+		font-size: 1.5em;
+		top: 0.25em;
+		margin-right: 0.2em;
+		color: #ccc;
+	}
+
+
+
+	// Section
+
+	.gdymc_options_section {
+		display: block;
+		position: relative;
+		margin: 40px 0px 15px 0px;
+	}
+
+	.gdymc_options_section:first-child {
+		margin: 0px 0px 15px 0px;
+	}
+
+	.gdymc_options_section::after {
+		content: '';
+		width: 100%;
+		height: 1px;
+		background: #ddd;
+		position: absolute;
+		z-index: 1;
+		top: 50%;
+		left: 0px;
+	}
+
+	.gdymc_options_section span {
+		position: relative;
+		display: inline-block;
+		background: #fff;
+		position: relative;
+		z-index: 2;
+		padding-right: 10px;
+		font-weight: bold;
+		color: #333;
+	}
+
+
+
+	
+
+	@media only screen and (max-width: 630px) {
+		
+		.gdymc_optioncontainer label,
+		.gdymc_optioncontainer input,
+		.gdymc_optioncontainer select,
+		.gdymc_optioncontainer textarea {
+			width: 100% !important;
+			float: none !important;
+			margin-left: 0px !important;
+			margin-top: -1px !important;
+		}
+
+	}

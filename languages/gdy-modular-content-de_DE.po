@@ -1,0 +1,1736 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GDY Modular Content\n"
+"POT-Creation-Date: 2018-01-19 08:56+0100\n"
+"PO-Revision-Date: 2018-01-19 08:56+0100\n"
+"Last-Translator: Johannes Grandy <grandy@fouadvollmer.de>\n"
+"Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_nx:1,2;_nx_noop:1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../hooks/adminbar-buttons.php:11
+msgid "Save changes (Cmd+S)"
+msgstr "Änderungen speichern (Cmd+S)"
+
+#: ../hooks/adminbar-buttons.php:11 ../includes/area.php:225
+msgid "Save"
+msgstr "Speichern"
+
+#: ../hooks/adminbar-buttons.php:21
+msgid "Bold (Cmd+B)"
+msgstr "Bold (Cmd+B)"
+
+#: ../hooks/adminbar-buttons.php:31
+msgid "Italic (Cmd+I)"
+msgstr "Italic (Cmd+I)"
+
+#: ../hooks/adminbar-buttons.php:41
+msgid "Insert link (Cmd+L)"
+msgstr "Link einfügen (Cmd+L)"
+
+#: ../hooks/adminbar-buttons.php:51
+msgid "Remove link (Cmd+U)"
+msgstr "Link entfernen (Cmd+U)"
+
+#: ../hooks/adminbar-buttons.php:61
+msgid "Unordered list"
+msgstr "Ungeordnete Liste"
+
+#: ../hooks/adminbar-buttons.php:71
+msgid "Ordered list"
+msgstr "Geordnete Liste"
+
+#: ../hooks/adminbar-buttons.php:81
+msgid "Align right (Cmd+Shift+R)"
+msgstr "Rechts ausrichten (Cmd+Shift+R)"
+
+#: ../hooks/adminbar-buttons.php:91
+msgid "Align center (Cmd+Shift+C)"
+msgstr "Zentrieren (Cmd+Shift+C)"
+
+#: ../hooks/adminbar-buttons.php:101
+msgid "Align left (Cmd+Shift+L)"
+msgstr "Links ausrichten (Cmd+Shift+L)"
+
+#: ../hooks/adminbar-buttons.php:111
+msgid "Superscript"
+msgstr "Hochstellen"
+
+#: ../hooks/adminbar-buttons.php:121
+msgid "Subscript"
+msgstr "Tiefstellen"
+
+#: ../hooks/adminbar-buttons.php:131
+msgid "Remove format"
+msgstr "Formatierung entfernen"
+
+#: ../hooks/adminbar-buttons.php:148
+msgid "Edit selected modules"
+msgstr "Ausgewählte Module bearbeiten"
+
+#: ../hooks/adminbar-buttons.php:163
+msgid "Modules (Cmd+D)"
+msgstr "Module (Cmd+D)"
+
+#: ../hooks/adminbar-buttons.php:178
+msgid "View modes"
+msgstr "Ansichtsmodi"
+
+#: ../hooks/adminbar-buttons.php:183
+msgid "Fast preview (Cmd+E)"
+msgstr "Schnellvorschau (Cmd+E)"
+
+#: ../hooks/adminbar-buttons.php:185
+msgid "Preview (Cmd+Shift+E)"
+msgstr "Vorschau (Cmd+Shift+E)"
+
+#: ../hooks/adminbar-buttons.php:208
+msgid "Go to backend"
+msgstr "Zum Backend"
+
+#: ../hooks/adminbar-buttons.php:213
+msgid "Backend"
+msgstr "Verwaltung"
+
+#: ../hooks/adminbar-buttons.php:222 ../includes/ajax.php:1288
+#: ../includes/ajax.php:1349 ../includes/ajax.php:1410
+#: ../includes/ajax.php:1470
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: ../hooks/adminbar-buttons.php:228
+msgid "Customizer"
+msgstr "Customizer"
+
+#: ../hooks/adminbar-buttons.php:230
+msgid "Media"
+msgstr "Medien"
+
+#: ../hooks/adminbar-buttons.php:232
+msgid "Logout"
+msgstr "Abmelden"
+
+#: ../hooks/miscellaneous.php:30
+#, php-format
+msgid "The module type \"%s\" seems not to exist."
+msgstr "Der Modultyp \"%s\" scheint nicht zu existieren."
+
+#: ../hooks/miscellaneous.php:44
+#, php-format
+msgid "The module type \"%s\" is incomplete."
+msgstr "Der Modultyp \"%s\" ist unvollständig."
+
+#: ../hooks/miscellaneous.php:62
+msgid "Delete this module type"
+msgstr "Lösche diesen Modultyp"
+
+#: ../hooks/miscellaneous.php:63
+msgid "Change this module type"
+msgstr "Diesen Modultyp ändern"
+
+#: ../hooks/miscellaneous.php:82
+msgid "There are no modules"
+msgstr "Keine Module vorhanden"
+
+#: ../hooks/miscellaneous.php:98
+#, php-format
+msgid ""
+"There is no GDYMC modules folder. <a href=\"%s\" target=\"_blank\">More "
+"Information</a>."
+msgstr ""
+"Es gibt keinen GDYMC Modulordner. <a href=\"%s\" target=\"_blank\">Weitere "
+"Informationen</a>."
+
+#: ../hooks/miscellaneous.php:109
+#, php-format
+msgid ""
+"There are no modules in your GDYMC modules folder. <a href=\"%s\" target="
+"\"_blank\">More Information</a>."
+msgstr ""
+"Es sind keine Module in deinem GDYMC Modulordner. <a href=\"%s\" target="
+"\"_blank\"> Weitere Informationen</a>."
+
+#: ../hooks/miscellaneous.php:120
+#, php-format
+msgid ""
+"Create a GDYMC module area with the areaCreate() function or the "
+"[gdymc_area] shortcode! <a href=\"%s\" target=\"_blank\">More Information</"
+"a>."
+msgstr ""
+"Erstelle ein GDYMC Modulbereich mit der areaCreate()-Funktion oder dem "
+"[gdymc_area]-Shortcode! <a href=\"%s\" target=\"_blank\">Mehr Informationen</"
+"a>."
+
+#: ../hooks/modulebar-buttons.php:13 ../includes/area.php:144
+msgid "Module options"
+msgstr "Moduloptionen"
+
+#: ../hooks/modulebar-buttons.php:23
+msgid "Move module up"
+msgstr "Modul hoch verschieben"
+
+#: ../hooks/modulebar-buttons.php:33
+msgid "Move module down"
+msgstr "Modul runter verschieben"
+
+#: ../hooks/modulebar-buttons.php:49
+msgid "Select this module"
+msgstr "Dieses Modul auswählen"
+
+#: ../hooks/modulebar-buttons.php:58
+msgid "Delete this module"
+msgstr "Dieses Modul löschen"
+
+#: ../hooks/modulebar-buttons.php:77
+msgid "Module type"
+msgstr "Modultyp"
+
+#: ../hooks/modulebar-buttons.php:106
+msgid "Module ID"
+msgstr "Modul-ID"
+
+#: ../hooks/modulebar-buttons.php:115
+msgid "Element ID"
+msgstr "Element-ID"
+
+#: ../hooks/modulebar-buttons.php:123
+msgid "Permalink"
+msgstr "Permalink"
+
+#: ../hooks/modulebar-buttons.php:129
+msgid "You can use the permalink to jump directly to that module"
+msgstr "Du kannst den Permalink nutzen um direkt zu diesem Modul zu springen"
+
+#: ../hooks/modulebar-buttons.php:146
+msgid "Visible"
+msgstr "Sichtbar"
+
+#: ../hooks/modulebar-buttons.php:147
+msgid "Invisible"
+msgstr "Unsichtbar"
+
+#: ../hooks/modulebar-buttons.php:151
+msgid "Module visibility"
+msgstr "Modulsichtbarkeit"
+
+#: ../hooks/modulebar-buttons.php:161
+msgid "Activated"
+msgstr "Aktiviert"
+
+#: ../hooks/modulebar-buttons.php:162
+msgid "Deactivated"
+msgstr "Deaktiviert"
+
+#: ../hooks/modulebar-buttons.php:166
+msgid "Switch delayed"
+msgstr "Zeitversetzt wechseln"
+
+#: ../hooks/modulebar-buttons.php:174
+msgid "Date"
+msgstr "Datum"
+
+#: ../hooks/modulebar-buttons.php:179
+msgid "Enter the date in the following format \"yyyy-mm-dd hh:mm\""
+msgstr "Gib das Datum in folgendem Format an \"yyyy-mm-dd hh:mm\""
+
+#: ../hooks/translation.php:18
+msgid "No modules found"
+msgstr "Keine Module gefunden"
+
+#: ../hooks/translation.php:20
+msgid "Ok"
+msgstr "Ok"
+
+#: ../hooks/translation.php:22
+msgid "Error"
+msgstr "Fehler"
+
+#: ../hooks/translation.php:24
+msgid "Details"
+msgstr "Details"
+
+#: ../hooks/translation.php:26
+msgid "Please select a editable text for this action."
+msgstr "Bitte wähle für diese Aktion einen bearbeitbaren Text aus."
+
+#: ../hooks/translation.php:28
+msgid "Nothing selected"
+msgstr "Nichts ausgewählt"
+
+#: ../hooks/translation.php:30
+msgid "Discard contents?"
+msgstr "Inhalte verwerfen?"
+
+#: ../hooks/translation.php:32
+msgid ""
+"There are unsaved contents. This contents will be lost if you leave the page "
+"without saving. Do you want to proceed?"
+msgstr ""
+"Es gibt ungesicherte Inhalte. Diese Inhalte werden verloren gehen wenn du "
+"die Seite ohne speichern verlässt. Möchtest du fortfahren?"
+
+#: ../hooks/translation.php:34
+msgid "Delete modules?"
+msgstr "Module löschen?"
+
+#: ../hooks/translation.php:36
+msgid "Are you sure to delete the marked modules irreversible."
+msgstr ""
+"Bist du sicher, dass du die markierten Module unwiderruflich löschen willst."
+
+#: ../hooks/translation.php:38
+msgid "Delete module?"
+msgstr "Modul löschen?"
+
+#: ../hooks/translation.php:40
+msgid "Are you sure to delete this module irreversible."
+msgstr "Bist du sicher, dass du dieses Modul unwiderruflich löschen willst."
+
+#: ../hooks/translation.php:42
+msgid "Delete module type?"
+msgstr "Modultyp löschen?"
+
+#: ../hooks/translation.php:44
+msgid ""
+"Are you sure to delete this module type? This means that all modules with "
+"this type are going to be deleted irreversible."
+msgstr ""
+"Bist du sicher diesen Modultyp zu löschen? Dies bedeutet das alle Module mit "
+"diesem Typ unwiderruflich gelöscht werden."
+
+#: ../hooks/translation.php:46 ../hooks/translation.php:50
+msgid "Change module type?"
+msgstr "Modultyp ändern?"
+
+#: ../hooks/translation.php:48
+msgid ""
+"Are you sure to change this module type? Some contents may not be displayed "
+"correctly in the new module type."
+msgstr ""
+"Bist du sicher den Modultyp zu ändern? Manche Inhalte werden im neuen "
+"Modultyp möglicherweise nicht korrekt angezeigt."
+
+#: ../hooks/translation.php:55
+msgid "No Changes"
+msgstr "Keine Änderung"
+
+#: ../hooks/translation.php:61
+#, php-format
+msgid ""
+"Are you sure to change this module type? This means that all modules with "
+"this type are going to be affected.<br /><br />Change module type into: %s"
+msgstr ""
+"Bist du sicher diesen Modultyp zu ändern? Dies bedeutet das alle Module mit "
+"diesem Typ geändert werden.<br /><br />Modultyp ändern in: %s"
+
+#: ../hooks/translation.php:63
+msgid "No"
+msgstr "Nein"
+
+#: ../hooks/translation.php:65
+msgid "Yes"
+msgstr "Ja"
+
+#: ../hooks/translation.php:67 ../includes/ajax.php:841
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: ../hooks/translation.php:69
+msgid "Change"
+msgstr "Ändern"
+
+#: ../hooks/translation.php:71
+msgid "You can't remove the last column."
+msgstr "Du kannst die letzte Spalte nicht löschen."
+
+#: ../hooks/translation.php:73
+msgid "You can't remove the last row."
+msgstr "Du kannst die letzte Zeile nicht löschen."
+
+#: ../hooks/translation.php:75
+msgid "Swap content"
+msgstr "Inhalt tauschen"
+
+#: ../hooks/translation.php:77
+msgid "Action stopped"
+msgstr "Aktion gestoppt"
+
+#: ../hooks/translation.php:79
+msgid "The ID you entered does not belong to an existing target."
+msgstr "Die ID die du eingegeben hast gehört zu keinem existierenden Ziel."
+
+#: ../hooks/translation.php:81
+msgid "The image is too big."
+msgstr "Das Bild ist zu groß."
+
+#: ../hooks/translation.php:83
+msgid "The image is too small."
+msgstr "Das Bild ist zu klein."
+
+#: ../hooks/translation.php:85
+msgid "Preview mode"
+msgstr "Vorschau-Modus"
+
+#: ../hooks/translation.php:87
+msgid ""
+"You cant do this action in preview mode. Do you want to switch into edit "
+"mode?"
+msgstr ""
+"Du kannst diese Aktion nicht im Vorschau-Modus ausführen. Möchtest du in den "
+"Bearbeiten-Modus wechseln?"
+
+#: ../hooks/translation.php:89
+msgid "Switch view"
+msgstr "Ansicht umschalten"
+
+#: ../hooks/translation.php:91
+msgid "Show all formatting options"
+msgstr "Alle Formatierungsmöglichkeiten anzeigen"
+
+#: ../hooks/translation.php:93
+msgid "No modules selected"
+msgstr "Keine Module ausgewählt"
+
+#: ../hooks/translation.php:95
+msgid "At least one selected module is required for this action."
+msgstr "Für diese Aktion muss mindestens ein Modul ausgewählt sein."
+
+#: ../hooks/translation.php:97
+msgid "No target ID"
+msgstr "Keine Ziel ID"
+
+#: ../hooks/translation.php:99
+msgid "Enter a target ID for this action."
+msgstr "Gib für diese Aktion eine Ziel-ID an."
+
+#: ../hooks/translation.php:101
+msgid "Wrong target ID"
+msgstr "Falsche Ziel ID"
+
+#: ../hooks/translation.php:103
+msgid "The target ID must be a number."
+msgstr "Die Ziel-ID muss eine Nummer sein."
+
+#: ../hooks/translation.php:105
+msgid "Invalid server response."
+msgstr "Ungültige Serverantwort."
+
+#: ../hooks/translation.php:107
+#, php-format
+msgid "This file is too big. Max filesize is %s."
+msgstr "Die Datei ist zu groß. Es sind maximal %s erlaubt."
+
+#: ../hooks/translation.php:109
+msgid "This file type is not allowed."
+msgstr "Dieser Dateityp ist nicht erlaubt."
+
+#: ../hooks/translation.php:111 ../includes/ajax.php:741
+msgid "Use void image and save"
+msgstr "Leerbild verwenden und speichern"
+
+#: ../hooks/translation.php:113 ../includes/ajax.php:733
+msgid "Use image and save"
+msgstr "Bild verwenden und speichern"
+
+#: ../hooks/translation.php:115 ../includes/ajax.php:737
+#, php-format
+msgid "Use %s images and save"
+msgstr "%s Bilder verwenden und speichern"
+
+#: ../hooks/translation.php:117
+msgid ""
+"There are unsaved contents. This contents will be lost when you leave the "
+"page."
+msgstr ""
+"Es existieren ungespeicherte Inhalte. Diese Inhalte gehen beim Verlassen der "
+"Seite verloren."
+
+#: ../hooks/translation.php:119
+msgid ""
+"There are too long texts. You must shorten these texts before you can "
+"continue."
+msgstr "Es existieren zu lange Texte. Bitte kürze diese um fortzufahren."
+
+#: ../hooks/translation.php:124
+msgid "There was an error with your action/request."
+msgstr "Es gab einen Fehler mit Ihrer Aktion/Anfrage."
+
+#: ../includes/ajax.php:219 ../includes/ajax.php:243
+msgid "Insert Link"
+msgstr "Link einfügen"
+
+#: ../includes/ajax.php:223
+msgid "Link"
+msgstr "Adresse"
+
+#: ../includes/ajax.php:224
+msgid "File"
+msgstr "Datei"
+
+#: ../includes/ajax.php:225
+msgid "Page"
+msgstr "Seite"
+
+#: ../includes/ajax.php:226
+msgid "Post"
+msgstr "Beitrag"
+
+#: ../includes/ajax.php:227
+msgid "Category"
+msgstr "Kategorie"
+
+#: ../includes/ajax.php:245 ../includes/ajax.php:812
+msgid "Open in new tab or window"
+msgstr "In neuem Tab oder Fenster öffnen"
+
+#: ../includes/ajax.php:260
+msgid "Link adress"
+msgstr "Link-Adresse"
+
+#: ../includes/ajax.php:313
+msgid "Batch editing"
+msgstr "Batch-Bearbeitung"
+
+#: ../includes/ajax.php:317 ../includes/ajax.php:345
+msgid "Selection"
+msgstr "Auswahl"
+
+#: ../includes/ajax.php:318
+msgid "Actions"
+msgstr "Aktionen"
+
+#: ../includes/ajax.php:332
+msgid "Done"
+msgstr "Fertig"
+
+#: ../includes/ajax.php:347
+msgid "Select all modules"
+msgstr "Alle Module auswählen"
+
+#: ../includes/ajax.php:348
+msgid "Unselect all modules"
+msgstr "Auswahl aller Module aufheben"
+
+#: ../includes/ajax.php:349
+msgid "Add visible modules to selection"
+msgstr "Sichtbare Module zur Auswahl hinzufügen"
+
+#: ../includes/ajax.php:350
+msgid "Add invisible modules to selection"
+msgstr "Unsichtbare Module zur Auswahl hinzufügen"
+
+#: ../includes/ajax.php:359
+msgid "Delete"
+msgstr "Löschen"
+
+#: ../includes/ajax.php:361
+msgid "Delete selected modules"
+msgstr "Ausgewählte Module löschen"
+
+#: ../includes/ajax.php:364
+msgid "Move or copy"
+msgstr "Verschieben oder kopieren"
+
+#: ../includes/ajax.php:370
+msgid "Target ID"
+msgstr "Ziel ID"
+
+#: ../includes/ajax.php:378
+msgid "Move selected modules"
+msgstr "Ausgewählte Module verschieben"
+
+#: ../includes/ajax.php:380
+msgid "Copy selected modules"
+msgstr "Ausgewählte Module kopieren"
+
+#: ../includes/ajax.php:677
+msgid "Insert Images"
+msgstr "Bilder einfügen"
+
+#: ../includes/ajax.php:679
+msgid "Insert Image"
+msgstr "Bild einfügen"
+
+#: ../includes/ajax.php:684
+msgid "Matching images"
+msgstr "Passende Bilder"
+
+#: ../includes/ajax.php:685
+msgid "Bigger images"
+msgstr "Größere Bilder"
+
+#: ../includes/ajax.php:686
+msgid "All images"
+msgstr "Alle Bilder"
+
+#: ../includes/ajax.php:705
+msgid "Search"
+msgstr "Suche"
+
+#: ../includes/ajax.php:806
+msgid "Local image settings"
+msgstr "Lokale Bildeinstellungen"
+
+#: ../includes/ajax.php:808
+msgid "Image link"
+msgstr "Bildlink"
+
+#: ../includes/ajax.php:820
+msgid "Global image settings"
+msgstr "Globale Bildeinstellungen"
+
+#: ../includes/ajax.php:822
+msgid "Title"
+msgstr "Title"
+
+#: ../includes/ajax.php:826
+msgid "Caption"
+msgstr "Beschriftung"
+
+#: ../includes/ajax.php:830
+msgid "Alt Text"
+msgstr "Alternativtext"
+
+#: ../includes/ajax.php:834
+msgid "Description"
+msgstr "Beschreibung"
+
+#: ../includes/ajax.php:1117
+msgid "Insert image"
+msgstr "Bild einfügen"
+
+#: ../includes/ajax.php:1185
+#, php-format
+msgid "More images (%s)"
+msgstr "Mehr Bilder (%s)"
+
+#: ../includes/ajax.php:1194 ../includes/ajax.php:1304
+#: ../includes/ajax.php:1365 ../includes/ajax.php:1426
+msgid "No contents"
+msgstr "Keine Inhalte"
+
+#: ../includes/ajax.php:1286 ../includes/ajax.php:1347
+#: ../includes/ajax.php:1408 ../includes/ajax.php:1468
+msgid "Use as link"
+msgstr "Als Link verwenden"
+
+#: ../includes/ajax.php:1287 ../includes/ajax.php:1348
+#: ../includes/ajax.php:1409 ../includes/ajax.php:1469
+msgid "View"
+msgstr "Ansehen"
+
+#: ../includes/ajax.php:1289 ../includes/ajax.php:1350
+msgid "Trash"
+msgstr "Papierkorb"
+
+#: ../includes/ajax.php:1300 ../includes/ajax.php:1361
+#: ../includes/ajax.php:1422
+msgid "Show more"
+msgstr "Mehr anzeigen"
+
+#: ../includes/ajax.php:1411 ../includes/area.php:229
+msgid "Delete Permanently"
+msgstr "Unwiderruflich löschen"
+
+#: ../includes/area.php:153
+msgid "Defaults"
+msgstr "Standards"
+
+#: ../includes/area.php:154
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+#: ../includes/area.php:155
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: ../includes/elements.php:16
+msgid "Exit preview"
+msgstr "Vorschau verlassen"
+
+#: ../includes/elements.php:51
+msgid "Drop files here"
+msgstr "Dateien hier ablegen"
+
+#: ../includes/elements.php:57
+msgid "Uploader"
+msgstr "Uploader"
+
+#: ../includes/elements.php:58
+msgid "Open media library"
+msgstr "Mediathek öffnen"
+
+#: ../includes/elements.php:59
+msgid "Upload files"
+msgstr "Dateien hochladen"
+
+#: ../includes/modulelist.php:29
+msgid "Filter for Modules"
+msgstr "Nach Modulen filtern"
+
+#~ msgid "Support GDYMC"
+#~ msgstr "Unterstütze GDYMC"
+
+#~ msgid "Create a Plugin review"
+#~ msgstr "Erstelle eine Plugin-Bewertung"
+
+#~ msgid "Help translating the Plugin"
+#~ msgstr "Helfe das Plugin zu übersetzen"
+
+#~ msgid "Contribute to the Forum"
+#~ msgstr "Trage im Forum bei"
+
+#~ msgid "No, never show this again"
+#~ msgstr "Nein, zeige dies nicht mehr an"
+
+#~ msgid "Preview settings"
+#~ msgstr "Vorschau-Einstellungen"
+
+#~ msgid ""
+#~ "GDYMC tries to become a really great plugin ... but that only works with "
+#~ "your help. Here are some simple ways to support us at WordPress.org:"
+#~ msgstr ""
+#~ "GDYMC versucht ein wirklich gutes Plugin zu werden ... das funktioniert "
+#~ "allerdings nur mit deiner Hilfe. Hier sind einige einfache Möglichkeiten "
+#~ "uns bei WordPress.org zu unterstützen:"
+
+#~ msgid "Customize"
+#~ msgstr "Anpassen"
+
+#~ msgid "Support us"
+#~ msgstr "Unterstütze uns"
+
+#~ msgid "You must select an image!"
+#~ msgstr "Du musst ein Bild wählen!"
+
+#~ msgid "Are you sure you want to delete this picture?"
+#~ msgstr "Bist du sicher das du dieses Bild löschen willst?"
+
+#~ msgid "Alternative text"
+#~ msgstr "Alternativtext"
+
+#~ msgid "The module type \"%s\" seems not to exist"
+#~ msgstr "Der Modultyp \"%s\" scheint nicht zu existieren"
+
+#~ msgid "The module type \"%s\" is incomplete"
+#~ msgstr "Der Modultyp \"%s\" ist unvollständig"
+
+#~ msgid "%s year ago"
+#~ msgid_plural "%s years ago"
+#~ msgstr[0] "Vor %s Jahr"
+#~ msgstr[1] "Vor %s Jahren"
+
+#~ msgid "%s month ago"
+#~ msgid_plural "%s months ago"
+#~ msgstr[0] "Vor %s Monat"
+#~ msgstr[1] "Vor %s Monaten"
+
+#~ msgid "%s week ago"
+#~ msgid_plural "%s weeks ago"
+#~ msgstr[0] "Vor %s Woche"
+#~ msgstr[1] "Vor %s Wochen"
+
+#~ msgid "%s day ago"
+#~ msgid_plural "%s days ago"
+#~ msgstr[0] "Vor %s Tag"
+#~ msgstr[1] "Vor %s Tagen"
+
+#~ msgid "%s hour ago"
+#~ msgid_plural "%s hours ago"
+#~ msgstr[0] "Vor %s Stunde"
+#~ msgstr[1] "Vor %s Stunden"
+
+#~ msgid "%s minute ago"
+#~ msgid_plural "%s minutes ago"
+#~ msgstr[0] "Vor %s Minute"
+#~ msgstr[1] "Vor %s Minuten"
+
+#~ msgid "%s second ago"
+#~ msgid_plural "%s seconds ago"
+#~ msgstr[0] "Vor %s Minute"
+#~ msgstr[1] "Vor %s Minuten"
+
+#~ msgid ""
+#~ "No module folder. Create a folder named \"%s\" in your theme directory."
+#~ msgstr ""
+#~ "Erstelle einen Modulordner mit dem Namen \"%s\" in deinem Theme-"
+#~ "Verzeichnis"
+
+#~ msgid "There are no modules in your modules folder in your theme."
+#~ msgstr "Es existieren keine Module in dem Modulordner Ihres Themes"
+
+#~ msgid ""
+#~ "This page has no module area. Create a module area with the areaCreate() "
+#~ "function or the [gdymc_area] shortcode!"
+#~ msgstr ""
+#~ "Diese Seite hat keinen Modulbereich. Erstelle ein Modulbereich mit der "
+#~ "areaCreate()-Funktion oder dem [gdymc_area]-Shortcode!"
+
+#~ msgid "Delete all modules of this type"
+#~ msgstr "Alle Module mit diesem Typ löschen"
+
+#~ msgid ""
+#~ "There are unsaved contents. This content will be lost if you leave the "
+#~ "page without saving."
+#~ msgstr ""
+#~ "Es existieren ungespeicherte Inhalte. Diese Inhalte gehen beim Verlassen "
+#~ "der Seite verloren wenn Du nicht speicherst."
+
+#~ msgid "Are you sure to delete all modules of this type irreversible."
+#~ msgstr ""
+#~ "Bist du sicher, dass du alle Module mit diesem Typ unwiderruflich löschen "
+#~ "wollen."
+
+#~ msgid "Load more images"
+#~ msgstr "Mehr Bilder laden"
+
+#~ msgid "Example Text"
+#~ msgstr "Beispiel-Text"
+
+#~ msgid "Example Select"
+#~ msgstr "Beispiel-Select"
+
+#~ msgid "Module settings"
+#~ msgstr "Moduleinstellungen"
+
+#~ msgid "This module is incomplete"
+#~ msgstr "Dieses Modul ist unvollständig"
+
+#~ msgid ""
+#~ "This page has no module area. Create a module area with the areaCreate() "
+#~ "function!"
+#~ msgstr ""
+#~ "Diese Seite hat keinen Modulbereich. Erstelle einen Modulbereich mit der "
+#~ "areaCreate()-Funktion!"
+
+#~ msgid "You can set a link to the permalink to jump directly to that module"
+#~ msgstr "Du kannst "
+
+#~ msgid "You can set a link to the element ID to jump directly to that module"
+#~ msgstr ""
+#~ "Du kannst einen Link auf die Element-ID setzen um direkt zum Modul zu "
+#~ "springen"
+
+#~ msgid "The file is too big"
+#~ msgstr "Die Datei ist zu groß"
+
+#~ msgid "Use void image"
+#~ msgstr "Leerbild verwenden"
+
+#~ msgid "Use image"
+#~ msgstr "Bild verwenden"
+
+#~ msgid "Use %s images"
+#~ msgstr "%s Bilder verwenden und speichern"
+
+#~ msgid "Activate preview"
+#~ msgstr "Vorschau aktivieren"
+
+#~ msgid "Move"
+#~ msgstr "Verschieben"
+
+#~ msgid "Copy"
+#~ msgstr "Kopieren"
+
+#, fuzzy
+#~ msgid "No selected modules"
+#~ msgstr "Ausgewählte Module verschieben"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Marking"
+#~ msgstr "Markierung"
+
+#~ msgid "Mark all modules"
+#~ msgstr "Alle Module markieren"
+
+#~ msgid "Cancel active markings"
+#~ msgstr "Aktive Markierungen aufheben"
+
+#~ msgid "Make marked modules visible"
+#~ msgstr "Markierte Module sichtbar schalten"
+
+#~ msgid "Make marked modules invisible"
+#~ msgstr "Markierte Module unsichtbar schalten"
+
+#~ msgid "Preview"
+#~ msgstr "Vorschau"
+
+#~ msgid "You don't have permissions to edit this page."
+#~ msgstr "Sie sind nicht berechtigt diese Seite zu bearbeiten."
+
+#~ msgid "Choose an image."
+#~ msgstr "Wählen Sie ein Bild."
+
+#~ msgid "year"
+#~ msgstr "Jahr"
+
+#~ msgid "years"
+#~ msgstr "Jahren"
+
+#~ msgid "month"
+#~ msgstr "Monat"
+
+#~ msgid "months"
+#~ msgstr "Monaten"
+
+#~ msgid "week"
+#~ msgstr "Woche"
+
+#~ msgid "weeks"
+#~ msgstr "Wochen"
+
+#~ msgid "day"
+#~ msgstr "Tag"
+
+#~ msgid "days"
+#~ msgstr "Tagen"
+
+#~ msgid "hour"
+#~ msgstr "Stunde"
+
+#~ msgid "hours"
+#~ msgstr "Stunden"
+
+#~ msgid "minutes"
+#~ msgstr "Minuten"
+
+#~ msgid "seconds"
+#~ msgstr "Sekunden"
+
+#~ msgid "date_before"
+#~ msgstr "Vor "
+
+#~ msgid "date_after"
+#~ msgstr " erstellt"
+
+#~ msgid "Mark this module"
+#~ msgstr "Dieses Modul markieren"
+
+#~ msgid "Move module to the top"
+#~ msgstr "Modul ganz nach oben verschieben"
+
+#~ msgid "Move module to the bottom"
+#~ msgstr "Modul ganz nach unten verschieben"
+
+#~ msgid "Crop image"
+#~ msgstr "Bild zuschneiden"
+
+#~ msgid "This image is too big. Do you want to crop it?"
+#~ msgstr "Dieses Bild ist zu groß. Wollen Sie es zuschneiden?"
+
+#~ msgid "Menus"
+#~ msgstr "Menüs"
+
+#~ msgid "Position"
+#~ msgstr "Position"
+
+#~ msgid "You are in preview mode. Switch to edit mode for this action."
+#~ msgstr ""
+#~ "Sie sind im Voschau-Modus. Wechseln Sie für diese Aktion in den "
+#~ "Bearbeiten-Modus."
+
+#~ msgid "Insert empty image"
+#~ msgstr "Leerbild einfügen"
+
+#~ msgid "Image is too big"
+#~ msgstr "Bild ist zu groß"
+
+#~ msgid "Image is too small"
+#~ msgstr "Bild ist zu klein"
+
+#, fuzzy
+#~ msgid "Switch date"
+#~ msgstr "Zeitversetzt wechseln"
+
+#~ msgid "Abort"
+#~ msgstr "Abbrechen"
+
+#~ msgid "Continue"
+#~ msgstr "Fortfahren"
+
+#~ msgid "Database entry is incomplete"
+#~ msgstr "Datenbankeintrag ist unvollständig"
+
+#~ msgid "Discard"
+#~ msgstr "Verwerfen"
+
+#, fuzzy
+#~ msgid ""
+#~ "There are unsaved contents. If you continue with this action your changes "
+#~ "will be lost."
+#~ msgstr ""
+#~ "Es existieren ungespeicherte Inhalte. Diese Inhalte gehen beim Verlassen "
+#~ "der Seite verloren."
+
+#~ msgid "Move down"
+#~ msgstr "Runter verschieben"
+
+#~ msgid "Create Module"
+#~ msgstr "Modul erstellen"
+
+#~ msgid "New Module"
+#~ msgstr "Neues Modul"
+
+#~ msgid "Information"
+#~ msgstr "Informationen"
+
+#~ msgid "Color"
+#~ msgstr "Farbe"
+
+#~ msgid "Image"
+#~ msgstr "Bild"
+
+#~ msgid "Download"
+#~ msgstr "Herunterladen"
+
+#~ msgid "Choose"
+#~ msgstr "Wählen"
+
+#~ msgid "Options"
+#~ msgstr "Optionen"
+
+#~ msgid "Article"
+#~ msgstr "Beitrag"
+
+#~ msgid "Added on"
+#~ msgstr "Hinzugefügt am"
+
+#, fuzzy
+#~ msgid "Facebook"
+#~ msgstr "Buchen"
+
+#, fuzzy
+#~ msgid "Buchen"
+#~ msgstr "Küche"
+
+#~ msgid "panoInk"
+#~ msgstr ""
+#~ "<li>Schlemmer-Fr&uuml;hst&uuml;cksbuffet</li><li>5-Gang-Wahlmen&uuml; am "
+#~ "Abend inkl. Salatbuffet und K&auml;se vom Brett</li><li>Salat und Suppen "
+#~ "tagsüber im SPA Bistro</li><li>Am Freitagabend: Mottobuffet</"
+#~ "li><li>Tagsüber Salat und Suppen im Spa-Bistro</li><li>Benutzung des "
+#~ "Alpin Spa mit Innen- und Au&szlig;enpool, Saunaland und Fitness-Studio, "
+#~ "Verleih der Wellnesstasche inkl. Badeslipper, Bademantel und Saunat&uuml;"
+#~ "cher</li><li>Begr&uuml;&szlig;ungsgetr&auml;nk bei Anreise</li><li>1 "
+#~ "Mineralwasser pro Zimmer</li><li>Aktiv- und Wanderprogramm</li><li>WLAN "
+#~ "und Internet-Anschluss</li><li>Sky Sport HD 1</li>"
+
+#~ msgid "Newsletter"
+#~ msgstr "Botschaften"
+
+#~ msgid "analyticsUA"
+#~ msgstr "UA-24542034-1"
+
+#~ msgid "switchlangtitle"
+#~ msgstr "Gehen Sie zur englischen Webseite"
+
+#~ msgid "switchlangurl"
+#~ msgstr "http://www.panoramahotel-oberjoch.com/"
+
+#~ msgid "switchlang"
+#~ msgstr "DE"
+
+#~ msgid "seekdalangcode"
+#~ msgstr "DE"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#, fuzzy
+#~ msgid "Mail-Adresse"
+#~ msgstr "Mail-Adresse"
+
+#, fuzzy
+#~ msgid "Senden"
+#~ msgstr "Senden"
+
+#, fuzzy
+#~ msgid "Geben Sie eine Adresse ein!"
+#~ msgstr "Mail-Adresse"
+
+#, fuzzy
+#~ msgid "Kontakt"
+#~ msgstr "Kontakt"
+
+#, fuzzy
+#~ msgid "Nächste Events"
+#~ msgstr "Termin"
+
+#~ msgid "Heute"
+#~ msgstr "(Heute)"
+
+#, fuzzy
+#~ msgid "Übernachtung"
+#~ msgstr "Über uns"
+
+#, fuzzy
+#~ msgid "Nachname"
+#~ msgstr "Nachname"
+
+#, fuzzy
+#~ msgid "Geben Sie eine Mail-Adresse ein."
+#~ msgstr "Mail-Adresse"
+
+#~ msgid "Im alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+#~ msgstr "im Alten Kontorhaus<br />Schäftlarnstraße 10<br />81371 München"
+
+#~ msgid ""
+#~ "Abonieren Sie unseren Newsletter<br />und erhalten Sie interessante News."
+#~ msgstr ""
+#~ "Abonniert unsere Botschaften und erhaltet<br /> so zuverlässig "
+#~ "wissenswerte Neuigkeiten."
+
+#, fuzzy
+#~ msgid "Mai"
+#~ msgstr "Mail"
+
+#~ msgid "dateBefore-Future"
+#~ msgstr "(In"
+
+#~ msgid "dateAfter-Future"
+#~ msgstr ")"
+
+#~ msgid "Gestern"
+#~ msgstr "(Gestern)"
+
+#~ msgid "Morgen"
+#~ msgstr "(Morgen)"
+
+#~ msgid "Aktuelles"
+#~ msgstr "Aktuelles"
+
+#~ msgid "Produkte"
+#~ msgstr "Produkte"
+
+#~ msgid "Shop"
+#~ msgstr "Shop"
+
+#~ msgid "Karriere"
+#~ msgstr "Vakanz"
+
+#~ msgid ""
+#~ "<strong>Weihwasser GmbH</strong><br />Im alten Kontorhaus<br /"
+#~ ">Schäftlarnstraße 10<br />81371 München"
+#~ msgstr ""
+#~ "<strong>WEIHWASSER GmbH Generaldirektion</strong><br />Im alten "
+#~ "Kontorhaus<br />Schäftlarnstraße 10<br />81371 München<br />Fernsprecher "
+#~ "+49 (0)89 4161261-0<br />Fernkopie +49 (0)89 4161261-99"
+
+#~ msgid ""
+#~ "6 cl Weihwasser Spiritus, 2 cl weißer Rum, 2 cl Vodka, 2 cl Tequila "
+#~ "silber, 2 cl Cointreau, 2 cl Zitronensaft, 2 cl Zitronensirup"
+#~ msgstr ""
+#~ "6 cl Weihwasser Spiritus<br />Weihwasser Sanctus<br />2 cl weißer Rum<br /"
+#~ ">2 cl Vodka<br />2 cl Tequila silber<br />2 cl Cointreau<br />2 cl "
+#~ "Zitronensaft<br />2 cl Zitronensirup"
+
+#~ msgid ""
+#~ "Eiswürfel in ein großes Cocktailglas geben, dann alle Inhalte hinein und "
+#~ "mit Weihwasser Sanctus auffüllen. Zitronenscheibe ans Glas und fertig!"
+#~ msgstr ""
+#~ "Eiswürfel in ein großes Longdrinkglas geben, dann alle Inhalte hinein, "
+#~ "gut verrühren und mit Weihwasser Sanctus auffüllen.<br />Zitronenscheibe "
+#~ "ans Glas und fertig!"
+
+#~ msgid "5cl weißer Rum, 2 cl Limettensaft, Weihwasser Sanctus"
+#~ msgstr "5cl weißer Rum<br />1/2 Limette<br />Weihwasser Sanctus"
+
+#~ msgid ""
+#~ "Rum und Limettensaft in ein Longdrinkglas auf Eiswürfel gießen, mit "
+#~ "Weihwasser Sanctus auffüllen"
+#~ msgstr ""
+#~ "In ein Longdrinkglas Limette auspressen, Eiswürfel und Rum dazugeben, mit "
+#~ "Weihwasser Sanctus auffüllen."
+
+#~ msgid ""
+#~ "6 cl Prosecco, 4 cl Weihwasser Spiritus, ein Spritzer Soda, eine "
+#~ "Orangenscheibe"
+#~ msgstr ""
+#~ "6 cl Prosecco<br />4 cl Weihwasser Spiritus<br />ein Spritzer Soda<br /"
+#~ ">eine Orangenscheibe"
+
+#~ msgid ""
+#~ "Die Orangenscheibe mit ein paar Eiswürfeln in ein großes Weinglas geben. "
+#~ "Mit Weihwasser Spiritus, Prosecco und Soda auffüllen und mit einem "
+#~ "Strohhalm servieren."
+#~ msgstr ""
+#~ "Die Orangenscheibe mit ein paar Eiswürfeln in ein Glas geben. Mit "
+#~ "Weihwasser Spiritus, Prosecco und Soda auffüllen und mit einem Strohhalm "
+#~ "servieren."
+
+#~ msgid "6cl Weihwasser Spiritus, 10cl Weihwasser Sanctus"
+#~ msgstr "6cl Weihwasser Spiritus<br />10cl Weihwasser Sanctus"
+
+#~ msgid ""
+#~ "Man gebe beide Zutaten in ein Longdrinkglas auf Eiswürfel und beobachte "
+#~ "achtsam den Vorgang der Verwandlung. Bitte das Besondere huldvoll "
+#~ "genießen!"
+#~ msgstr ""
+#~ "Man gebe beide Zutaten in ein Longdrinkglas auf Eiswürfel und beobachte "
+#~ "achtsam den Vorgang der Verwandlung.<br />Bitte das Besondere huldvoll "
+#~ "genießen!"
+
+#~ msgid "4cl Prosecco, Weihwasser Sanctus"
+#~ msgstr "4cl Prosecco<br />Weihwasser Sanctus"
+
+#~ msgid ""
+#~ "Ein Sektglas zu 2/3 mit Weihwasser Sanctus mischen, mit Sekt aufgießen. "
+#~ "Gerne auch mit Sekt oder Champagner, jeder nach seiner Fasson."
+#~ msgstr ""
+#~ "Ein Schaumweinglas zu 2/3 mit Weihwasser Sanctus füllen, mit Prosecco "
+#~ "aufgießen.<br />Gerne auch mit Sekt oder Champagner,<br />jeder nach "
+#~ "seiner Fasson."
+
+#~ msgid "4cl Vodka, Weihwasser Sanctus"
+#~ msgstr "4cl Vodka<br />10cl Weihwasser Sanctus"
+
+#~ msgid ""
+#~ "Vodka in ein Longdrinkglas auf Eiswürfel gießen, mit Weihwasser Sanctus "
+#~ "auffüllen."
+#~ msgstr ""
+#~ "Vodka in ein Longdrinkglas auf Eiswürfel geben, mit Weihwasser Sanctus "
+#~ "auffüllen."
+
+#~ msgid "4cl Gin, Weihwasser Sanctus"
+#~ msgstr "4cl Gin<br />12cl Weihwasser Sanctus"
+
+#~ msgid ""
+#~ "Gin in ein Longdrinkglas auf Eiswürfel geben, mit Weihwasser Sanctus "
+#~ "auffüllen. Das Mischverhältnis variiert je nach Geschmack von 1:1 bis 1:3 "
+#~ "oder höher."
+#~ msgstr ""
+#~ "Gin in ein Longdrinkglas auf Eiswürfel geben, mit Weihwasser Sanctus "
+#~ "auffüllen.<br />Das Mischverhältnis variiert je nach Geschmack<br />von "
+#~ "1:1 bis 1:3 oder höher."
+
+#~ msgid "Sanctus"
+#~ msgstr "Sanctus"
+
+#~ msgid "SanctusSubline"
+#~ msgstr "EINES DER ÄLTESTEN<br />ENERGIEGETRÄNKE DER WELT"
+
+#~ msgid "SanctusTeaser"
+#~ msgstr ""
+#~ "Angelehnt an die Legende eines außergewöhnlichen Mönches werden Körper "
+#~ "und Geist behutsam vitalisiert. <br />Bei Studien, beim Autofahren, bei "
+#~ "der Arbeit, bei Sport und Spiel, beim Feiern - dieser außergewöhnliche "
+#~ "Trank spendet Euch Erfrischung und Lebensfreude.<br />Spüret die "
+#~ "belebende Wirkung!"
+
+#~ msgid "Spiritus"
+#~ msgstr "Spiritus"
+
+#~ msgid "SpiritusSubline"
+#~ msgstr "DESTILLIERT NACH<br />JAHRHUNDERTEALTER REZEPTUR"
+
+#~ msgid "SpiritusTeaser"
+#~ msgstr ""
+#~ "Seit langem wohlgehütet, erfährt die Geschichte um den „Heilgen Geist“ "
+#~ "endlich die Aufmerksamkeit, die ihr gebührt.<br />Feinste Ingredienzen "
+#~ "verführen zu einem geschmacklichen Erlebnis, welches der Legende nach "
+#~ "eine einzigartige<br />Wirksamkeit hat."
+
+#~ msgid "SpiritusSubline2"
+#~ msgstr "DESTILLIERT NACH JAHRHUNDERTEALTER REZEPTUR"
+
+#~ msgid "IncZitronen"
+#~ msgstr ""
+#~ "<strong>Zitronen</strong><br />Die geschmacklich besten kommen aus "
+#~ "Messina oder von der Amalfi-Küste. Dort werden Zitronen angebaut wie vor "
+#~ "Jahrhunderten – von Hand und mit Liebe. Die Ernte ist Schwerstarbeit und "
+#~ "mit viel Schweiß verbunden. Die Zitrone ist ein altes Kulturgut, schon "
+#~ "seit über zweitausend Jahren wachsen die gelben Früchte am Golf von "
+#~ "Salerno."
+
+#~ msgid "GtkZitronen"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Vereinzelt und vermutlich erfolglos "
+#~ "wurde Zitronensaft in der Antike als Verhütungsmittel verwendet."
+
+#~ msgid "IncLimetten"
+#~ msgstr ""
+#~ "<strong>Limetten</strong><br />Ähnlichkeiten sind keineswegs zufällig: "
+#~ "Die Limette ist tatsächlich die kleine Schwester der Zitrone und eng mit "
+#~ "ihr verwandt. Ihre Heimat ist vermutlich Malaysia. Kreuzfahrer haben sie "
+#~ "dann im Mittelalter auf ihren Reisen nach Italien und von dort aus weiter "
+#~ "nach Frankreich und Spanien gebracht."
+
+#~ msgid "GtkLimetten"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Früher nannte man sie auch häufig "
+#~ "„Limone“, doch da man darunter in anderen Ländern Zitronen versteht, hat "
+#~ "sich der Name Limette durchgesetzt."
+
+#~ msgid "IncWacholder"
+#~ msgstr ""
+#~ "<strong>Wacholder</strong><br />„Vor dem Holunder zieh den Hut, vor dem "
+#~ "Wacholder geh in die Knie.“ Der Wacholder gilt als Lebensbaum – er ist "
+#~ "immergrün, also eben immer grün, auch in der dunklen und unwirtlichen "
+#~ "Winterzeit. Er gilt deshalb als Zeichen des ewigen Lebens und als "
+#~ "Jungbrunnen. Man sagt auch, dass man sich, wenn man sich als Wanderer "
+#~ "unter einem Wacholder ausruht, bald wieder frisch gestärkt (verjüngt) "
+#~ "fühlt und die Wanderung alsbald fortsetzen kann. Früher steckte man auf "
+#~ "der norddeutschen Insel Rügen beim Bau eines Hauses einen Wacholderzweig "
+#~ "in das Fundament, wodurch der Teufel ferngehalten werden sollte."
+
+#~ msgid "GtkWacholder"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Ein Trank aus Wacholderbeeren soll "
+#~ "die Gabe verleihen, in die Zukunft sehen zu können."
+
+#~ msgid "IncLavendel"
+#~ msgstr ""
+#~ "<strong>Lavendel</strong><br />Mutter-Gottes-Pflanze – so nannte "
+#~ "Hildegard von Bingen den Lavendel. Kleine Sträußchen aus Lavendel und "
+#~ "Rosmarin sollten die Jungfräulichkeit beschützen. Der Lavendel ist ein "
+#~ "Zeichen für die romantische Liebe. Der Duft soll gegen Liebeskummer "
+#~ "helfen oder, wenn man einen Brief mit Lavendel parfümiert, den Geliebten "
+#~ "heran- oder zurückbringen. Der Anbau von Lavendel war Männern vorbehalten "
+#~ "– Lavendel stand dafür, die Unkeuschheit zu vertreiben, und das hatten "
+#~ "die Männer wohl nötiger als die Frauen. Im Mittelalter, als die Pest "
+#~ "wütete, sollte der reinigende Duft diese fernhalten. Die Heimat des "
+#~ "Lavendels sind ursprünglich die Küstenregionen des Mittelmeerraums. "
+#~ "Benediktinermönche führten ihn nördlich der Alpen ein."
+
+#~ msgid "GtkLavendel"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Parfümiert man seine Wäsche mit "
+#~ "Lavendel, so sollen widerborstige Männer gefügig werden."
+
+#~ msgid "IncMinze"
+#~ msgstr ""
+#~ "<strong>Minze</strong><br />„Wenn aber einer die Kräfte und Arten der "
+#~ "Minze samt und sonders zu nennen vermöchte, so müsste er auch gleich "
+#~ "wissen, wie viele Fische im Roten Meer wohl schwimmen.“ <br /"
+#~ "><em>Walafried Strabo, Mönch auf der Insel Reichenau (842 n. Chr.)</"
+#~ "em><br /><br />Die Pfefferminze wurde wohl schon im alten Ägypten "
+#~ "verwendet, zumindest fand man Reste der Pfefferminze in altägyptischen "
+#~ "Gräbern. Im alten Griechenland empfahl Aristoteles die Minze als "
+#~ "Aphrodisiakum, warnte allerdings davor, zu viel davon zu nehmen. Den "
+#~ "Soldaten der damaligen Zeit wurde geraten, vor einer Schlacht davon "
+#~ "nichts zu essen, da diese gesteigerte Männlichkeit ihrem Mut und ihrer "
+#~ "Kraft im Wege stehen würde."
+
+#~ msgid "GtkMinze"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Die Römer streuten Minze an Orten "
+#~ "aus, an denen gefeiert wurde."
+
+#~ msgid "IncHolunder"
+#~ msgstr ""
+#~ "<strong>Holunder</strong><br />„Birnbaum und Hollerstaun.“ Dieser "
+#~ "Ausdruck geht auf eine Geschichte zurück, in der ein Schmied den Tod auf "
+#~ "einen Birnbaum verbannt. Von da an sitzt der Handwerksmann unter dem "
+#~ "Holunderbusch und wird älter und älter. Irgendwann stellt er verärgert "
+#~ "fest, dass das ewige Leben für ihn nicht nur positiv ist – und beginnt zu "
+#~ "fluchen. Im Volksglauben hausen die guten Hausgeister in Holunderbäumen, "
+#~ "daher überlegt sich der abergläubische Landbewohner ganz genau, ob er "
+#~ "einen Holunder fällen soll oder nicht."
+
+#~ msgid "GtkHolunder"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Früher pflanzte man den Holunder zum "
+#~ "Schutz gegen böse Geister und gegen den Blitzeinschlag um sein Haus."
+
+#~ msgid "Wacholderbeeren"
+#~ msgstr "Wacholderbeeren"
+
+#~ msgid "Guarana"
+#~ msgstr "Guaraná"
+
+#~ msgid "Coffein"
+#~ msgstr "Koffein"
+
+#~ msgid "SanctusSubline2"
+#~ msgstr "EINES DER ÄLTESTEN ENERGIEGETRÄNKE DER WELT"
+
+#~ msgid "IncGuarana"
+#~ msgstr ""
+#~ "<strong> Guaraná</strong><br /> Guaraná gibt, wie kein anderes "
+#~ "natürliches Mittel, lang anhaltende Energie. Das Geheimnis von Guarana "
+#~ "ist sein etwa fünfprozentiger Gehalt an „Guaranin“, dem stärksten "
+#~ "natürlich vorkommenden Koffein der Welt. Schon seit vielen Jahrhunderten "
+#~ "nutzen die Ureinwohner des Regenwaldes, vornehmlich in der "
+#~ "Amazonasregion, die stärkende und konzentrations fördernde Wirkung der "
+#~ "Guaraná-Pflanze. Neben dem Koffein enthält die „Liane aus dem Amazonas“ "
+#~ "auch noch Gerbstoffe, die vor allem für die länger andauernde "
+#~ "Wirkungsweise des Koffeins gepriesen werden und von Menschen auf der "
+#~ "ganzen Welt deshalb geschätzt werden."
+
+#~ msgid "GtkGuarana"
+#~ msgstr ""
+#~ "<strong>Gut zu wissen</strong><br />Die reifen Früchte ähneln, nachdem "
+#~ "sie aufgeplatzt sind, auf verblüffende Art und Weise einem menschlichen "
+#~ "Auge, und es entsteht der Eindruck, dass jede Guaraná-Rispe aus Hunderten "
+#~ "von Augen besteht."
+
+#~ msgid "IncCoffein"
+#~ msgstr ""
+#~ "<strong>Koffein</strong><br />Man schrieb das Jahr 1820, als Johann "
+#~ "Wolfgang von Goethe dem Wissenschaftler und guten Freund Friedlieb "
+#~ "Ferdinand Runge ein paar Kaffeebohnen schenkte. Goethe bat den "
+#~ "friedliebenden Ferdinand, dem anregenden Geheimnis dieser dunklen "
+#~ "„Kugeln“ auf den Grund zu gehen. Deutschlands größter Dichter und Denker "
+#~ "gab damit den Anstoß zu einer historischen Entdeckung. Runge gelang es "
+#~ "nämlich, erstmals reines Koffein aus Kaffeebohnen zu isolieren. Der "
+#~ "Aufstieg von Koffein als Massenstimulanz ist seither nicht mehr "
+#~ "wegzudenken."
+
+#~ msgid "GtkCoffein"
+#~ msgstr ""
+#~ "<strong>Gut zu Wissen</strong><br />Es sollen Hirten aus der äthiopischen "
+#~ "Region Kaffa gewesen sein, denen aufgefallen war, dass ein Teil der "
+#~ "Ziegenherde, der von einem Strauch mit weißen Blüten und roten Früchten "
+#~ "gefressen hatte, bis in die Nacht hinein munter umhersprang, während die "
+#~ "anderen Tiere müde waren."
+
+#~ msgid "catpressto"
+#~ msgstr "Pressemitteilung"
+
+#~ msgid "catpressfrom"
+#~ msgstr "Pressemeldung"
+
+#~ msgid "catnews"
+#~ msgstr "Neuigkeit"
+
+#~ msgid "Konvent"
+#~ msgstr "Konvent"
+
+#~ msgid "top"
+#~ msgstr "Seitenanfang"
+
+#~ msgid "imprint"
+#~ msgstr "Impressum"
+
+#~ msgid "vacancies"
+#~ msgstr "Stellen"
+
+#~ msgid "Website by"
+#~ msgstr "Webseite von"
+
+#~ msgid "sleep"
+#~ msgstr "Übernachten"
+
+#~ msgid "request"
+#~ msgstr "Anfragen"
+
+#~ msgid "A difficult decision"
+#~ msgstr "Eine <span class=\"bigger\">schwierige</span> Entscheidung"
+
+#~ msgid "noentries"
+#~ msgstr "Keine Einträge in dieser Sprache"
+
+#~ msgid "Find your favorite restaurant"
+#~ msgstr "Finden Sie Ihr <br />Lieblingsrestaurant"
+
+#~ msgid "Subscribe to our Newsletter"
+#~ msgstr "Zum Newsletter anmelden"
+
+#~ msgid "Contact & Directions"
+#~ msgstr "Kontakt <span class=\"sprite sprite-greyamp\"></span> Anfahrt"
+
+#~ msgid "contact-done"
+#~ msgstr ""
+#~ "Vielen Dank. Ihre Mail wurde an versandt.<br />Wir werden uns in Kürze "
+#~ "bei Ihnen melden."
+
+#~ msgid "contact-error"
+#~ msgstr "Es ist ein Fehler aufgetreten.<br />Bitte prüfen Sie Ihre Eingaben."
+
+#~ msgid "contact-instructions"
+#~ msgstr ""
+#~ "Sie können uns eine Nachricht senden,<br />bitte geben Sie hier Ihre "
+#~ "Kontaktdaten ein."
+
+#~ msgid "Message"
+#~ msgstr "Nachricht"
+
+#~ msgid "If eating turn into enjoying"
+#~ msgstr "Wenn aus Essen Genießen wird"
+
+#~ msgid "Kitchen and Cooks"
+#~ msgstr "Küche <span class=\"sprite sprite-sunamp\"></span> Köche"
+
+#~ msgid "Opening times"
+#~ msgstr "Öffnungszeiten"
+
+#~ msgid "Because it tastes best at home"
+#~ msgstr "Weil es Zuhause am <span class=\"bigger\">besten</span> schmeckt"
+
+#~ msgid "text-home"
+#~ msgstr ""
+#~ "Den meisten Menschen geht es so: Zuhause schmeckt es einfach am Besten. "
+#~ "Daher verwenden wir weitestgehend sorgfältig ausgewählte Zutaten von "
+#~ "regionalen Herstellern für unsere Gerichte, und das schmeckt man."
+
+#~ msgid "to Card"
+#~ msgstr "zur Speisekarte"
+
+#~ msgid "Whats new"
+#~ msgstr "Was gibt es <span class=\"bigger\">neues</span>"
+
+#~ msgid "Attention! The newsletter is published only in German."
+#~ msgstr ""
+#~ "Erhalten Sie jetzt einfach und bequem Neuigkeiten per Mail. Persönliche "
+#~ "Daten werden mit äußerster Sorgfalt behandelt und sicher gespeichert. Wir "
+#~ "geben keine Daten an Dritte weiter. Eine Abmeldung ist jederzeit möglich."
+
+#~ msgid "text-imprint"
+#~ msgstr ""
+#~ "<strong>Steinbuck GmbH & Co. KG</strong><br />Kreuzkopfsteige 14<br /"
+#~ ">79100 Freiburg im Breisgau<br /><br />Geschäftsführer: Hans-Peter "
+#~ "Männer<br />Telefon: 0761 4534218<br />Registereintrag: HRA702268<br /"
+#~ "><br /><strong>Inhalt des Onlineangebotes</strong> Der Autor übernimmt "
+#~ "keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder "
+#~ "Qualität der bereitgestellten Informationen. Haftungsansprüche gegen den "
+#~ "Autor, welche sich auf Schäden materieller oder ideeller Art beziehen, "
+#~ "die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen "
+#~ "bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen "
+#~ "verursacht wurden sind grundsätzlich ausgeschlossen, sofern seitens des "
+#~ "Autors kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden "
+#~ "vorliegt. Alle Angebote sind freibleibend und unverbindlich. Der Autor "
+#~ "behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte "
+#~ "Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen "
+#~ "oder die Veröffentlichung zeitweise oder endgültig einzustellen."
+#~ "<br><br><strong>Verweise und Links</strong> Bei direkten oder indirekten "
+#~ "Verweisen auf fremde Internetseiten (Links), die außerhalb des "
+#~ "Verantwortungsbereiches des Autors liegen, würde eine "
+#~ "Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem "
+#~ "der Autor von den Inhalten Kenntnis hat und es ihm technisch möglich und "
+#~ "zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. "
+#~ "Der Autor erklärt hiermit ausdrücklich, dass zum Zeitpunkt der "
+#~ "Linksetzung die entsprechenden verlinkten Seiten frei von illegalen "
+#~ "Inhalten waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte "
+#~ "oder die Urheberschaft der gelinkten/verknüpften Seiten hat der Autor "
+#~ "keinerlei Einfluss. Deshalb distanziert er sich hiermit ausdrücklich von "
+#~ "allen Inhalten aller gelinkten /verknüpften Seiten, die nach der "
+#~ "Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb "
+#~ "des eigenen Internetangebotes gesetzten Links und Verweise sowie für "
+#~ "Fremdeinträge in vom Autor eingerichteten Gästebüchern, Diskussionsforen "
+#~ "und Mailinglisten. Für illegale, fehlerhafte oder unvollständige Inhalte "
+#~ "und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung "
+#~ "solcherart dargebotener Informationen entstehen, haftet allein der "
+#~ "Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über "
+#~ "Links auf die jeweilige Veröffentlichung lediglich verweist."
+#~ "<br><br><strong>Urheber- und Kennzeichenrecht</strong> Der Autor ist "
+#~ "bestrebt, in allen Publikationen die Urheberrechte der verwendeten "
+#~ "Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihm "
+#~ "selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu "
+#~ "nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und "
+#~ "Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und "
+#~ "ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen "
+#~ "uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts "
+#~ "und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein "
+#~ "aufgrund der bloßen Nennung ist nicht der Schluß zu ziehen, dass "
+#~ "Markenzeichen nicht durch Rechte Dritter geschützt sind! Das Copyright "
+#~ "für veröffentlichte, vom Autor selbst erstellte Objekte bleibt allein "
+#~ "beim Autor der Seiten. Eine Vervielfältigung oder Verwendung solcher "
+#~ "Grafiken, Tondokumente, Videosequenzen und Texte in anderen "
+#~ "elektronischen oder gedruckten Publikationen ist ohne ausdrückliche "
+#~ "Zustimmung des Autors nicht gestattet.<br><br><strong>Datenschutz</"
+#~ "strong> Sofern innerhalb des Internetangebotes die Möglichkeit zur "
+#~ "Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, "
+#~ "Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des "
+#~ "Nutzers auf ausdrücklich freiwilliger Basis. Die Inanspruchnahme aller "
+#~ "angebotenen Dienste ist - soweit technisch möglich und zumutbar - auch "
+#~ "ohne Angabe solcher Daten bzw. unter Angabe anonymisierter Daten oder "
+#~ "eines Pseudonyms gestattet.<br><br><strong>Rechtswirksamkeit dieses "
+#~ "Haftungsausschlusses</strong> Dieser Haftungsausschluss ist als Teil des "
+#~ "Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen "
+#~ "wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der "
+#~ "geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen "
+#~ "sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und "
+#~ "ihrer Gültigkeit davon unberührt.<br><br><strong>Haftungshinweis</strong> "
+#~ "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung "
+#~ "für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind "
+#~ "ausschließlich deren Betreiber verantwortlich.Sollten wir versehentlich "
+#~ "gegen irgendwelche Copyrights verstoßen haben, benachrichtigen Sie uns "
+#~ "bitte umgehend per E-Mail. <br><br><strong>Eingeschränkte Gewähr für "
+#~ "Informationen</strong> Die Fouad Vollmer Werbeagentur verwendet die im "
+#~ "Verkehr erforderliche Sorgfalt, um die Informationen der Website korrekt "
+#~ "und auf dem neuesten Stand zu halten. Es können jedoch Irrtümer auftreten "
+#~ "oder Informationen fehlen. Sollte daher die Richtigkeit und "
+#~ "Vollständigkeit der Informationen nicht in jedem Falle anzunehmen sein, "
+#~ "treten Sie bitte mit uns in Kontakt und lassen dies prüfen.Die Fouad "
+#~ "Vollmer Werbeagentur hat keine Kontrolle darüber, wie die in seiner "
+#~ "Website dargestellten Informationen vom Anwender verwendet werden. Fouad "
+#~ "Vollmer Werbeagentur kann daher auch nicht für entgangene Vorteile, "
+#~ "Verträge oder sonstige unmittelbare oder mittelbare Schäden, die aus "
+#~ "diesen Informationen oder durch Benutzung seiner Informationen entstehen "
+#~ "könnten, haftbar gemacht werden.Unberührt bleiben in jedem Falle die "
+#~ "gesetzlich manifestierten Verbraucherschutzrechte von Privatpersonen."
+#~ "<br><br><strong>Hypertext-Links</strong> Eine Haftung für die Inhalte der "
+#~ "mit die Fouad Vollmer Werbeagentur verlinkten Websites ist ausgeschlossen "
+#~ "da die Fouad Vollmer Werbeagentur nicht die Möglichkeit hat alle "
+#~ "Verlinkungen stetig zu überprüfen. Anwender nutzen die Links zu anderen "
+#~ "Websites und Homepages daher auf eigene Gefahr und benutzen solche "
+#~ "Websites gemäß den für diese Websites geltenden Nutzungsbedingungen."
+#~ "<br><br><strong>Urheberrechte</strong> Die Fouad Vollmer Werbeagentur "
+#~ "erteilt die Erlaubnis alle auf seiner Website erscheinenden Inhalte zur "
+#~ "Informationsgewinnung des Anwenders über die Fouad Vollmer Werbeagentur "
+#~ "und dessen Produkte zu nutzen und zu kopieren bzw. einen Ausdruck zu "
+#~ "erstellen vorausgesetzt das nachfolgende Copyrightzeichen erscheint in "
+#~ "allen Kopien:<br><br>© Steinbuck<br><br>Sollten auf dieser Website "
+#~ "erscheinende Materialien Dritter zur Informationsgewinnung verwendet oder "
+#~ "kopiert werden, so müssen die Copyrightzeichen dieser dritten Parteien "
+#~ "ebenfalls in allen Kopien erscheinen.<br><br><strong>Google Analytics</"
+#~ "strong> Diese Website benutzt Google Analytics, einen Webanalysedienst "
+#~ "der Google Inc. („Google“). Google Analytics verwendet sog. „Cookies“, "
+#~ "Textdateien, die auf Ihrem Computer gespeichert werden und die eine "
+#~ "Analyse der Benutzung der Website durch Sie ermöglichen. Die durch den "
+#~ "Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden "
+#~ "in der Regel an einen Server von Google in den USA übertragen und dort "
+#~ "gespeichert. Im Falle der Aktivierung der IP-Anonymisierung auf dieser "
+#~ "Webseite, wird Ihre IP-Adresse von Google jedoch innerhalb von "
+#~ "Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten "
+#~ "des Abkommens über den Europäischen Wirtschaftsraum zuvor gekürzt. Nur in "
+#~ "Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in "
+#~ "den USA übertragen und dort gekürzt. Im Auftrag des Betreibers dieser "
+#~ "Website wird Google diese Informationen benutzen, um Ihre Nutzung der "
+#~ "Website auszuwerten, um Reports über die Websiteaktivitäten "
+#~ "zusammenzustellen und um weitere mit der Websitenutzung und der "
+#~ "Internetnutzung verbundene Dienstleistungen gegenüber dem "
+#~ "Websitebetreiber zu erbringen. Die im Rahmen von Google Analytics von "
+#~ "Ihrem Browser übermittelte IP-Adresse wird nicht mit anderen Daten von "
+#~ "Google zusammengeführt. Sie können die Speicherung der Cookies durch eine "
+#~ "entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen "
+#~ "Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht "
+#~ "sämtliche Funktionen dieser Website vollumfänglich werden nutzen können. "
+#~ "Sie können darüber hinaus die Erfassung der durch das Cookie erzeugten "
+#~ "und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) "
+#~ "an Google sowie die Verarbeitung dieser Daten durch Google verhindern, "
+#~ "indem sie das unter dem folgenden Link verfügbare Browser-Plugin "
+#~ "herunterladen und installieren <a href=\"http://tools.google.com/dlpage/"
+#~ "gaoptout?hl=de\" target=\"_blank\">http://tools.google.com/dlpage/"
+#~ "gaoptout?hl=de</a>. <br><br>Nähere Informationen dazu finden Sie <a href="
+#~ "\"http://www.google.com/intl/de/analytics/privacyoverview.html\" target="
+#~ "\"_blank\">Hier</a> (allgemeine Informationen zu Google Analytics und "
+#~ "Datenschutz). Wir weisen Sie darauf hin, dass auf dieser Webseite Google "
+#~ "Analytics um den Code „gat._anonymizeIp();“ erweitert wurde, um die IP-"
+#~ "Adressen zu anonymisieren, wobei das letzte Oktett gelöscht wird."
+
+#~ msgid "text-vacancies"
+#~ msgstr "Momentan sind keine Stellen zu vergeben."
+
+#~ msgid "request-title"
+#~ msgstr "Übernachtungsanfrage"
+
+#~ msgid "request-thanks"
+#~ msgstr "Vielen Dank für Ihre Anfrage. Sie werden in Kürze von uns hören."
+
+#~ msgid "request-error"
+#~ msgstr "Es ist ein Fehler aufgetreten, bitte prüfen Sie Ihre Eingaben."
+
+#~ msgid "request-instruction"
+#~ msgstr ""
+#~ "Sie können uns eine Übernachtungsanfrage senden, bitte geben Sie hier "
+#~ "Ihre Daten ein."
+
+#~ msgid "Mr."
+#~ msgstr "Herr"
+
+#~ msgid "Mrs."
+#~ msgstr "Frau"
+
+#~ msgid "Firstname"
+#~ msgstr "Vorname"
+
+#~ msgid "Phone number*"
+#~ msgstr "Telefonnummer*"
+
+#~ msgid "ZIP"
+#~ msgstr "PLZ"
+
+#~ msgid "Street"
+#~ msgstr "Straße"
+
+#~ msgid "Adult"
+#~ msgstr "Erwachsener"
+
+#~ msgid "Adults"
+#~ msgstr "Erwachsene"
+
+#~ msgid "Child"
+#~ msgstr "Kind"
+
+#~ msgid "Children"
+#~ msgstr "Kinder"
+
+#~ msgid "Night"
+#~ msgstr "Nacht"
+
+#~ msgid "Nights"
+#~ msgstr "Nächte"
+
+#~ msgid "Notes*"
+#~ msgstr "Anmerkungen*"
+
+#~ msgid "star-msg"
+#~ msgstr ""
+#~ "Die mit einem Stern-Zeichen markierten Felder sind nicht zwingend "
+#~ "erforderlich"
+
+#~ msgid "rooms"
+#~ msgstr "Zimmer"
+
+#~ msgid "first come, first served"
+#~ msgstr "Wer zuerst kommt, malt zuerst"
+
+#~ msgid "In the event that there is times longer"
+#~ msgstr "Für den Fall, dass es mal länger geht ..."
+
+#~ msgid "Just as it should be"
+#~ msgstr "So wie es sein <span class=\"bigger\">muss</span>"
+
+#~ msgid "About Values <span class=\"sprite sprite-sunamp\"></span> Wine"
+#~ msgstr "Über Werte <span class=\"sprite sprite-sunamp\"></span> Wein"
+
+#~ msgid "text-start"
+#~ msgstr ""
+#~ "Die guten Dinge sind das was STEINBUCK auszeichnet, aber unter gut "
+#~ "verstehen wir nicht das Beste sondern das Richtigste.<br /><br />Daher "
+#~ "ist unser kleiner STEINBUCK auch genau so wie er sein sollte, nicht zu "
+#~ "schick und auch nicht zu gewöhnlich. So tritt er gebührend die Nachfolge "
+#~ "des Rebstock an, um alte sowie neue Gäste zu empfangen."
+
+#~ msgid "start"
+#~ msgstr "Start"
+
+#~ msgid "First come, first served …"
+#~ msgstr "Wer zuerst kommt, malt zuerst ..."
+
+#~ msgid "Enter your Contact-Information"
+#~ msgstr ""
+#~ "Sie können uns eine Nachricht senden, <br />bitte geben Sie hier Ihre "
+#~ "Kontaktdaten ein."
+
+#~ msgid "text-food"
+#~ msgstr ""
+#~ "Neben hervorragenden regionalen Speisen werden in der Steinbuck Stube "
+#~ "täglich Weinproben, mit einer Auswahl der besten Kaiserstühler Winzer "
+#~ "angeboten."
+
+#~ msgid "home"
+#~ msgstr "Region"
+
+#~ msgid "error-noname"
+#~ msgstr "Geben Sie einen Namen ein"
+
+#~ msgid "error-nomail"
+#~ msgstr "Geben Sie eine Mail ein"
+
+#~ msgid "error-wrongmail"
+#~ msgstr "Ihre Mail ist falsch"
+
+#~ msgid "error-nomessage"
+#~ msgstr "Geben Sie eine Nachricht ein"
