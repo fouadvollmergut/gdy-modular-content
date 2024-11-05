@@ -7,6 +7,46 @@
 
 This plugin allows you to create modular content and to edit it with a intuitive user interface from the frontent of your site. Main philosophy of the plugin is it to make it easy for all of you. That means easy handling for editors, fast and flexible implementation for programmers and good control over your layouts for designers. The plugin should run in most enviroments because it uses pretty much the native WordPress architecture to save contents (postmeta, attachments). So far no lasting problems with any other plugins are reported.
 
+## Usage
+
+#### Install Plugin
+
+Download and install the plugin or install it directly in the Plugins tab in your Wordpress Dashboard via *Add new plugin*.
+
+#### Add modules folder
+
+Create a folder called *modules* in the root directory of your theme and add a module folder within. Alternatively you can get some example modules from this repository: [GDY Modular Content – Example Modules](https://github.com/fouadvollmergut/gdymc-example-modules).
+
+#### Create module area
+
+Now create a *module area*, in the templates you want to contain modules.
+
+```php
+// single.php
+
+<?php if( function_exists( 'areaCreate' ) ) areaCreate(); ?>
+```
+
+To enable modules for pages and posts by default add the snippet to your `index.php` like so:
+
+```php
+// index.php
+
+<?php get_header(); ?>
+  <?php if( have_posts() ): while( have_posts() ): the_post(); ?>
+    <?php if( function_exists( 'areaCreate' ) ) areaCreate(); ?>
+  <?php endwhile; endif; ?>
+<?php get_footer(); ?>
+```
+
+Alternativly you can add a shortcode `[gdymc_area]` to the pages that should contain a *module area*.
+
+#### Add modules
+
+Now navigate to a page containing a module area and add some module from the top right of the *gdymc admin bar*.
+
+---
+
 ## Development Workflow
 
 The repository uses a Webpack build configuration.
