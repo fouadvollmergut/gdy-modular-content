@@ -251,7 +251,7 @@ Version: 0.9.88
 
 			// Styles
 
-			wp_enqueue_style( 'gdymc_style', plugins_url( '/styles/style.css', __FILE__ ), array( 'dashicons' ), GDYMC_PLUGIN_VERSION );
+			wp_enqueue_style( 'gdymc_style', plugins_url( '/_styles/style.css', __FILE__ ), array( 'dashicons' ), GDYMC_PLUGIN_VERSION );
 			
 
 
@@ -305,7 +305,7 @@ Version: 0.9.88
 
 			// Styles
 
-			wp_enqueue_style( 'gdymc_hardpreview', plugins_url( '/styles/visitor/hardpreview.css', __FILE__ ), array(), GDYMC_PLUGIN_VERSION );
+			wp_enqueue_style( 'gdymc_hardpreview', plugins_url( '/_styles/hardpreview.css', __FILE__ ), array(), GDYMC_PLUGIN_VERSION );
 
 
 
