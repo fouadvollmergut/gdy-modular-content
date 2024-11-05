@@ -4,7 +4,7 @@ Plugin Name: GDY Modular Content
 Description: Create and edit modular content from the frontend of your site.
 Text Domain: gdy-modular-content
 Domain Path: /languages/
-Version: 0.9.88
+Version: v0.9.89
 */
 
 
