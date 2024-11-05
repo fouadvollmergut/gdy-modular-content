@@ -15,7 +15,19 @@ Download and install the plugin or install it directly in the Plugins tab in you
 
 #### Add modules folder
 
-Create a folder called *modules* in the root directory of your theme and add a module folder within. Alternatively you can get some example modules from this repository: [GDY Modular Content – Example Modules](https://github.com/fouadvollmergut/gdymc-example-modules).
+Create a folder called *modules* in the root directory of your theme and add your modules there. You can get some example modules from this repository: [GDY Modular Content – Example Modules](https://github.com/fouadvollmergut/gdymc-example-modules).
+
+Place following snippet within your `functions.php`:
+
+```php
+// functions.php
+
+add_filter( 'gdymc_modules_folder', 'gdymc_folder' );
+
+function gdymc_folder() {
+  return get_template_directory() . '/modules';
+}
+```
 
 #### Create module area
 
