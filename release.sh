@@ -23,4 +23,4 @@ git tag -a $1 -m "Release Version $1"
 git push origin --tags
 git push origin release/$1
 
-git co main
+git checkout main
