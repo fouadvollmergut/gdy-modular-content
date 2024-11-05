@@ -18,6 +18,10 @@ The plugin should run in most enviroments because it uses pretty much the native
 
 == Changelog ==
 
+= 0.9.89 =
+* Add PHP 8.2 Support
+* Introduce new content type button group
+
 = 0.9.88 =
 * The custom renderer callback for gallery items now receive the counter variable $i as second parameter
 
