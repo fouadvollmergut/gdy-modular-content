@@ -4,7 +4,7 @@ Tags: gdy modular content, gdymc, frontend editing, modular content, content edi
 Requires at least: 3.6
 Tested up to: 6.6.2
 Requires PHP: 5.6
-Stable tag: 0.9.90
+Stable tag: 0.9.89
 
 Create and edit modular content from the frontend of your site.
 
@@ -18,7 +18,7 @@ The plugin should run in most enviroments because it uses pretty much the native
 
 == Changelog ==
 
-= 0.9.89 =
+= 0.9.90 =
 * Add PHP 8.2 Support
 * Introduce new content type button group
 
