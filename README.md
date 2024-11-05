@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/Stable-v0.9.90-green)
+![Static Badge](https://img.shields.io/badge/Stable-0.9.90-green)
 ![Static Badge](https://img.shields.io/badge/Wordpress-6.6.2-blue)
 
 # GDY Modular Content
@@ -38,7 +38,7 @@ Fork this repository and open a pull request to contribute changes.
 Use the `release.sh` script to trigger a new plugin release. Make sure to include all neccessary changes for the release into the main branch and update package.json description before running the script:
 
 ```sh
-  sh ./release.sh vX.X.X // Specify the current version.
+  sh ./release.sh 0.0.0 // Specify the current version.
 ```
 
 Make sure to push the version changes within the mandatory plugin files to main – the changes should appear automatically after running the release script.
@@ -50,6 +50,6 @@ To publish a release to Wordpress Plugin Store, upload the built file from the G
 Remove the remote and local tag and also delete the release on Github
 
 ```sh
-  git tag --delete vX.X.X
-  git push --delete origin vX.X.X
+  git tag --delete 0.0.0 // Specify the tag to delete
+  git push --delete origin 0.0.0 // Specify the tag to delete
 ```
