@@ -17,10 +17,10 @@ git checkout -b release/$1 origin/main
 sed -i '' -E "s/\"version\": \".*\"/\"version\": \"$1\"/" package.json
 sed -i '' -E "s/Version: .*/Version: $1/" gdy-modular-content.php
 
-git add package.json style.css
+git add package.json gdy-modular-content.php
 git commit -m "Release $1"
 git tag -a $1 -m "Release Version $1"
 git push origin --tags
 git push origin release/$1
 
-git co main
+git checkout main
