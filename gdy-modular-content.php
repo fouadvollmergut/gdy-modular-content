@@ -11,7 +11,7 @@ Version: 0.9.90
 
 	/************************************* VERSION ***********************************/
 
-	define( "GDYMC_PLUGIN_VERSION", "0.9.90" );
+	define( 'GDYMC_PLUGIN_VERSION', '0.9.90' );
 
 
 
@@ -251,7 +251,7 @@ Version: 0.9.90
 
 			// Styles
 
-			wp_enqueue_style( 'gdymc_style', plugins_url( '/_styles/style.css', __FILE__ ), array( 'dashicons' ), GDYMC_PLUGIN_VERSION', '0.9.90' );
+			wp_enqueue_style( 'gdymc_style', plugins_url( '/_styles/style.css', __FILE__ ), array( 'dashicons' ), GDYMC_PLUGIN_VERSION );
 			
 
 
@@ -267,8 +267,8 @@ Version: 0.9.90
 			wp_enqueue_script( 'mousetrap', plugins_url('/scripts/mousetrap.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'dropzone', plugins_url('/scripts/dropzone.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'fastlivefilter', plugins_url('/scripts/filter.js', __FILE__ ), array( 'jquery' ) );
-			wp_enqueue_script( 'gdymc_core', plugins_url('/scripts/gdymc_core.js', __FILE__ ), array( 'jquery' ), GDYMC_PLUGIN_VERSION', '0.9.90' );
-			wp_enqueue_script( 'gdymc_functions', plugins_url('/scripts/gdymc_functions.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'utils', 'gdymc_core', 'jcrop', 'kinetic', 'mousetrap', 'dropzone', 'fastlivefilter', 'rangy_core', 'rangy_selectionsaverestore', 'rangy_classapplier' ), GDYMC_PLUGIN_VERSION', '0.9.90' );
+			wp_enqueue_script( 'gdymc_core', plugins_url('/scripts/gdymc_core.js', __FILE__ ), array( 'jquery' ), GDYMC_PLUGIN_VERSION );
+			wp_enqueue_script( 'gdymc_functions', plugins_url('/scripts/gdymc_functions.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'utils', 'gdymc_core', 'jcrop', 'kinetic', 'mousetrap', 'dropzone', 'fastlivefilter', 'rangy_core', 'rangy_selectionsaverestore', 'rangy_classapplier' ), GDYMC_PLUGIN_VERSION );
 			
 
 			// Javascript data
@@ -305,13 +305,13 @@ Version: 0.9.90
 
 			// Styles
 
-			wp_enqueue_style( 'gdymc_hardpreview', plugins_url( '/_styles/hardpreview.css', __FILE__ ), array(), GDYMC_PLUGIN_VERSION', '0.9.90' );
+			wp_enqueue_style( 'gdymc_hardpreview', plugins_url( '/_styles/hardpreview.css', __FILE__ ), array(), GDYMC_PLUGIN_VERSION );
 
 
 
 			// Scripts
 
-			wp_enqueue_script( 'gdymc_hardpreview', plugins_url( '/scripts/gdymc_hardpreview.js', __FILE__ ), array( 'utils' ), GDYMC_PLUGIN_VERSION', '0.9.90' );
+			wp_enqueue_script( 'gdymc_hardpreview', plugins_url( '/scripts/gdymc_hardpreview.js', __FILE__ ), array( 'utils' ), GDYMC_PLUGIN_VERSION );
 
 
 			// Javascript data
