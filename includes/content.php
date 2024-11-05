@@ -355,7 +355,7 @@
 				// Clean the array
 				$max = max( array_keys( $gdymc_module->content ) );
 				if( $max != 0 ):
-					$gdymc_module->content = $gdymc_module->content + array_fill( 0, $max, '' );
+					$gdymc_module->content = $gdymc_module->content + array_fill( 0, intval($max), '' );
 					ksort( $gdymc_module->content );
 				endif;
 				
@@ -392,7 +392,7 @@
 				// Clean the array
 				$max = max( array_keys( $gdymc_object_contents ) );
 				if( $max != 0 ):
-					$gdymc_object_contents = $gdymc_object_contents + array_fill( 0, $max, '' );
+					$gdymc_object_contents = $gdymc_object_contents + array_fill( 0, intval($max), '' );
 					ksort( $gdymc_object_contents );
 				endif;
 
