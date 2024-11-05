@@ -1,10 +1,10 @@
 === GDY Modular Content ===
 Contributors: fouadvollmer, grandy
-Tags: gdy modular content, gdymc, frontend editing, modular content, html modules, content management, content editable
+Tags: gdy modular content, gdymc, frontend editing, modular content, content editable
 Requires at least: 3.6
-Tested up to: 5.3
+Tested up to: 6.6.2
 Requires PHP: 5.6
-Stable tag: 0.9.88
+Stable tag: 0.9.90
 
 Create and edit modular content from the frontend of your site.
 
