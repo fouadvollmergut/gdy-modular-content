@@ -316,6 +316,102 @@
 	}
 
 
+	// Edit button
+
+	add_action( 'wp_ajax_gdymc_action_editbutton', 'gdymc_action_editbutton' );
+
+	function gdymc_action_editbutton() {
+
+		$button_text = json_decode( stripslashes( $_POST['text'] ) );
+		$button_url = json_decode( stripslashes( $_POST['url'] ) );
+		$button_target = json_decode( stripslashes( $_POST['target'] ) );
+		$button_type = json_decode( stripslashes( $_POST['type'] ) );
+
+		$button_target = $button_target == "true" ? "checked" : "";
+		$button_type = $button_type == "true" ? "checked" : "";
+		
+
+		if( gdymc_logged() ):
+
+			echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
+
+				echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
+				echo '<div class="gdymc_overlay_title">' . __('Edit button', 'gdy-modular-content') . '</div>';
+
+				echo '<div class="gdymc_tabs_navigation">';
+
+					echo '<button class="gdymc_tabs_button gdymc_active" data-tab="link">'.__('Link', 'gdy-modular-content').'</button>';
+					echo '<button class="gdymc_tabs_button" data-tab="file">'.__('File', 'gdy-modular-content').'</button>';
+					echo '<button class="gdymc_tabs_button" data-tab="page">'.__('Page', 'gdy-modular-content').'</button>';
+					echo '<button class="gdymc_tabs_button" data-tab="post">'.__('Post', 'gdy-modular-content').'</button>';
+					echo '<button class="gdymc_tabs_button" data-tab="category">'.__('Category', 'gdy-modular-content').'</button>';
+					
+					do_action( 'gdymc_linktabbuttons' );
+				
+				echo '</div></div>';
+
+			echo '</div>';
+
+			echo '<div class="gdymc_overlay_foot">';
+			echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
+
+			echo '<div class="gdymc_left">';
+				echo '<button id="gdymc_saveedit_button" class="gdymc_button">' . __( 'Done', 'gdy-modular-content' ) . '</button>';
+			echo '</div>';
+
+			echo '</div>';
+			echo '</div>';
+
+			echo '<div class="gdymc_overlay_content">';
+				echo '<div class="gdymc_overlay_content_inner">';
+
+					echo '<div id="gdymc_tabs_content_linkadress" class="gdymc_tabs_content gdymc_active" data-tab="link">';
+						
+						echo '<input id="gdymc_editbutton_text" type="text" placeholder="' . __('Button Text', 'gdy-modular-content') . '" value="' . $button_text . '">';
+
+						echo '<input id="gdymc_insertlink_input" type="text" placeholder="' . __('Button Text', 'gdy-modular-content') . '" value="' . $button_url . '">';
+
+						echo '<input id="gdymc_editbutton_type" type="checkbox" ' . $button_type . '/> <label for="gdymc_insertlink_target">' . __( 'Primary Button', 'gdy-modular-content' ) . '</label>';
+
+						echo '<input id="gdymc_editbutton_target" type="checkbox"  ' . $button_target . ' /> <label for="gdymc_insertlink_target">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
+
+					echo '</div><!-- gdymc_tabs_content -->';
+					
+					echo '<div id="gdymc_tabs_content_files" class="gdymc_tabs_content" data-tab="file">';
+						
+						gdymc_action_filelist();
+					
+					echo '</div><!-- gdymc_tabs_content -->';
+
+					echo '<div id="gdymc_tabs_content_pages" class="gdymc_tabs_content" data-tab="page">';
+						
+						gdymc_action_pagelist();
+					
+					echo '</div><!-- gdymc_tabs_content -->';
+
+					echo '<div id="gdymc_tabs_content_posts" class="gdymc_tabs_content" data-tab="post">';
+						
+						gdymc_action_postlist();
+					
+					echo '</div><!-- gdymc_tabs_content -->';
+
+					echo '<div id="gdymc_tabs_content_categories" class="gdymc_tabs_content" data-tab="category">';
+						
+						gdymc_action_categorylist();
+					
+					echo '</div><!-- gdymc_tabs_content -->';
+
+					
+				echo '</div><!-- .gdymc_overlayInner -->';
+				echo '</div><!-- .gdymc_overlayContent -->';
+			
+			
+			die();
+
+		endif;
+
+	}
+
 
 	// Batch window
 
