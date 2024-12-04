@@ -11,18 +11,23 @@ if [ $remember != 'y' ]; then
     exit 1
 fi
 
-# Set release version
-git checkout -b release/$1 origin/main
-
 sed -i '' -E "s/\"version\": \".*\"/\"version\": \"$1\"/" package.json
 sed -i '' -E "s/Version: .*/Version: $1/" gdy-modular-content.php
 sed -i '' -E "s/'GDYMC_PLUGIN_VERSION', '.*'/'GDYMC_PLUGIN_VERSION', '$1'/" gdy-modular-content.php
 sed -i '' -E "s/Stable tag: .*/Stable tag: $1/" readme.txt
 
+# Commit changes
 git add package.json gdy-modular-content.php readme.txt
-git commit -m "Release $1"
+git commit -m "Prepare for release $1"
+git push origin main
+
+# Set release version
+git checkout -b release/$1 origin/main
+
 git tag -a $1 -m "Release Version $1"
 git push origin --tags
 git push origin release/$1
 
 git checkout main
+
+svn ci -m "Release Version $1"
