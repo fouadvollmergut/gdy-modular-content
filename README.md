@@ -105,3 +105,9 @@ Remove the remote and local tag and also delete the release on Github
   git tag --delete 0.0.0 // Specify the tag to delete
   git push --delete origin 0.0.0 // Specify the tag to delete
 ```
+
+To publish it to Wordpress import the new version in the tags folder and run following command within in the trunk to tell Wordpress which is the stable version.
+
+```sh
+  svn ci -m "Updating code to release X.X.X"
+```
