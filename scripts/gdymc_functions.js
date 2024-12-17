@@ -2292,6 +2292,22 @@
 				contents.push( handler );
 			
 			} );
+
+
+			// Gather buttongroups
+			
+			jQuery( '.gdymc_button-group' ).each( function() {
+			    
+				var handler = new Array();
+				var id = jQuery(this).attr('data-id');
+				var content = jQuery(this).html();
+				
+				handler.push( id );
+				handler.push( content );
+				
+				contents.push( handler );
+			
+			} );
 	
 			
 			

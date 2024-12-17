@@ -29,5 +29,3 @@ git push origin --tags
 git push origin release/$1
 
 git checkout main
-
-svn ci -m "Release Version $1"
