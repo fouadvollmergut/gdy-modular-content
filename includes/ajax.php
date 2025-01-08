@@ -933,19 +933,19 @@
 
 						optionSection( __( 'Global image settings', 'gdy-modular-content' ) );
 
-						echo '<label for="gdymc_imageinfo_title">' . __( 'Title' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_title" type="text" value="' . $post->post_title . '" />';
+						echo '<label for="gdymc_imageinfo_title">' . __( 'Title', 'gdy-modular-content' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_title" type="text" value="' . $post->post_title . '" />';
 
 						echo '<br />';
 
-						echo '<label for="gdymc_imageinfo_caption">' . __( 'Caption' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_caption">' . $post->post_excerpt . '</textarea>';
+						echo '<label for="gdymc_imageinfo_caption">' . __( 'Caption', 'gdy-modular-content' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_caption">' . $post->post_excerpt . '</textarea>';
 
 						echo '<br />';
 
-						echo '<label for="gdymc_imageinfo_alt">' . __( 'Alt Text' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_alt" type="text" value="' . $alt . '" />';
+						echo '<label for="gdymc_imageinfo_alt">' . __( 'Alt Text', 'gdy-modular-content' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_alt" type="text" value="' . $alt . '" />';
 
 						echo '<br />';
 
-						echo '<label for="gdymc_imageinfo_description">' . __( 'Description' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_description">' . $post->post_content . '</textarea>';
+						echo '<label for="gdymc_imageinfo_description">' . __( 'Description', 'gdy-modular-content' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_description">' . $post->post_content . '</textarea>';
 
 					echo '</div>';
 
