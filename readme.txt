@@ -1,8 +1,9 @@
 === GDY Modular Content ===
-Contributors: fouadvollmer, grandy
+Contributors: fouadvollmergut, grandy
 Tags: gdy modular content, gdymc, frontend editing, modular content, content editable
+License: GPLv2
 Requires at least: 3.6
-Tested up to: 6.6.2
+Tested up to: 6.7
 Requires PHP: 5.6
 Stable tag: 0.9.92
 
@@ -17,6 +18,9 @@ Main philosophy of the plugin is it to make it easy for all of you. That means e
 The plugin should run in most enviroments because it uses pretty much the native WordPress architecture to save contents (postmeta, attachments). So far no lasting problems with any other plugins are reported.
 
 == Changelog ==
+
+= 0.9.93 =
+* For a detailed changelog please refer to our github repository: https://github.com/fouadvollmergut/gdy-modular-content
 
 = 0.9.90 =
 * Add PHP 8.2 Support
