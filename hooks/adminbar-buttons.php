@@ -182,7 +182,7 @@
 				
 				echo '<a id="gdymc_togglesoftpreview" href="#"><span class="dashicons dashicons-visibility"></span><span class="dashicons dashicons-hidden"></span>'.__('Fast preview (Cmd+E)', 'gdy-modular-content').'</a>';
 							
-				echo '<a id="gdymc_togglehardpreview" href="' . add_query_arg( 'gdymc_hardpreview', '1', gdymc_current_url() ) . '"><span class="dashicons dashicons-external"></span>'.__('Preview (Cmd+Shift+E)', 'gdy-modular-content').'</a>';
+				echo '<a id="gdymc_togglehardpreview" href="' . esc_url( add_query_arg( 'gdymc_hardpreview', '1', gdymc_current_url() ) ) . '"><span class="dashicons dashicons-external"></span>'.__('Preview (Cmd+Shift+E)', 'gdy-modular-content').'</a>';
 
 			echo '</div>';
 

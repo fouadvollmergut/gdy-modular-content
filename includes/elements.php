@@ -13,7 +13,7 @@
 		
 		if( gdymc_hardpreview() ):
 
-			echo '<a id="gdymc_exit_hardpreview" href="' . add_query_arg( 'gdymc_hardpreview', '0', gdymc_current_url() ) . '">' . __( 'Exit preview', 'gdy-modular-content' ) . '<span class="dashicons dashicons-migrate"></span></a>';
+			echo '<a id="gdymc_exit_hardpreview" href="' . esc_url( add_query_arg( 'gdymc_hardpreview', '0', gdymc_current_url() ) ) . '">' . __( 'Exit preview', 'gdy-modular-content' ) . '<span class="dashicons dashicons-migrate"></span></a>';
 
 		endif;
 
