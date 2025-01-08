@@ -1,26 +1,18 @@
 <?php
-	
-	
 
 	// Returns module object or false if the module doesn't exists
-
 	function gdymc_module( $moduleID, $objectID = null, $objectType = false ) {
 
-		$objectID = $objectID ? $objectID : gdymc_object_id();
+    $objectID = $objectID ? $objectID : gdymc_object_id();
 		$objectType = $objectType ? $objectType : gdymc_object_type();
 
 		$module = new GDYMC_MODULE( $moduleID, $objectID, $objectType );
-		
+
 		return $module->exists ? $module : false;
 
 	}
 
-
-
-
-
 	// Module class
-
 	class GDYMC_MODULE {
 
 
@@ -43,16 +35,11 @@
 		public $content = null;
 
 
-
-
 		/************************* CONSTRUCTOR *************************/
-
 
 		function __construct( $moduleID, $objectID, $objectType ) {
 
-
 			$check = metadata_exists( $objectType, $objectID, '_gdymc_' . $moduleID . '_type' );
-
 
 			if( !$check ):
 
@@ -68,10 +55,8 @@
 				$this->object_type = $objectType;
 				$this->type = get_metadata( $this->object_type, $this->object_id, '_gdymc_' . $moduleID . '_type', true );
 				$this->visibility = optionGet( 'visibility', $this->id );
-
 				$this->timer_status = optionGet( 'visibility_timer', $this->id );
 				$this->timer_switch = strtotime( optionGet( 'visibility_switch', $this->id ) );
-
 
 
 				// Visibility switch
@@ -97,16 +82,12 @@
 				endif;
 
 
-
-
 				// Paths
 
 				$this->path = gdymc_module_path() . '/' . $this->type;
 				$this->file = gdymc_module_path() . '/' . $this->type . '/index.php';
 				$this->functions = gdymc_module_path() . '/' . $this->type . '/functions.php';
 				$this->thumb = gdymc_module_path() . '/' . $this->type . '/thumb.svg';
-
-
 
 
 				// Create module class
@@ -120,27 +101,18 @@
 				$this->classes[] = 'gdymc_module_' . $this->type;
 				$this->classes[] = 'gdymc_module-' . $this->type; // deprecated since 0.8.1
 
-				
 				$this->classes = apply_filters( 'gdymc_module_class', $this->classes, $this );
-
 
 				// Get content
 
 				$this->content = $this->content_get();
-				
-
 
 			endif;
-
-
 
 		}
 
 
-
-
 		/************************* GENERAL FUNCTIONS *************************/
-
 
 		// Show class array as string
 
@@ -150,15 +122,11 @@
 
 		}
 
-
-
 		public function get_attributes() {
-
 
 			// Attribute holder
 
 			$attributes = array();
-
 
 
 			// Assign default attributes
@@ -169,11 +137,9 @@
 			$attributes[ 'data-type' ] = $this->type;
 
 
-
 			// Apply filter
 
 			$attributes = apply_filters( 'gdymc_module_attributes', $attributes, $this );
-
 
 
 			// Render attributes
@@ -187,20 +153,14 @@
 			endforeach;
 
 
-
 			// Return
 
 			return implode( ' ', $output );
 
-
 		}
 
 
-
-
-
 		/************************* VISIBILITY FUNCTIONS *************************/
-
 
 		// Check if current module is visible
 
@@ -229,21 +189,17 @@
 		}
 
 
-
-
-
 		/************************* CONTENT FUNCTIONS *************************/
-
 
 		// Get current module contents out of DB
 
 		public function content_get() {
 
 			$content = get_metadata( $this->object_type, $this->object_id, '_gdymc_' . $this->id . '_content', true );
+
 			return ( $content == '[]' ) ? array() : $this->content_decode( $content );
 
 		}
-
 
 		// Creates a DB string out of an array of content IDs
 
@@ -290,7 +246,6 @@
 
 			global $wpdb;
 
-
 			$dbname = ( $this->object_type == 'post' ) ? $wpdb->postmeta : $wpdb->termmeta;
 			$dbkey = ( $this->object_type == 'post' ) ? 'post_id' : 'term_id';
 
@@ -302,7 +257,7 @@
 				delete_metadata( $this->object_type, $this->object_id, "_gdymc_singlecontent_$contentID" );
 
 			endforeach;
-			
+
 
 			// Delete module meta fields itself
 
@@ -312,25 +267,19 @@
 			// Delete module from post/page
 
 			$moduleArray = gdymc_module_array( $this->object_id, $this->object_type );
-			
+
 			if( ( $key = array_search( $this->id, $moduleArray ) ) !== false ) {
 
 				unset( $moduleArray[ $key ] );
 
 			}
-			
+
 			update_metadata( $this->object_type, $this->object_id, '_gdymc_modulelist', json_encode( array_values( $moduleArray ) ) );
 
 			return true;
 
 		}
 
-
-
-
 	}
-	
-	
-	
-	
+
 ?>
