@@ -214,7 +214,55 @@
 	.gdymc_not_existing_module_actions button:hover {
 		background: rgba(0,0,0,0.1);
 	}
-	
+
+	.gdymc {
+		&_mt {
+			margin-top: 20px;
+
+			&h {
+				margin-top: 10px;
+			}
+		}
+
+		&_mb {
+			margin-bottom: 20px;
+
+			&h {
+				margin-bottom: 10px;
+			}
+		}
+
+		&_ml {
+			margin-left: 20px;
+
+			&h {
+				margin-left: 10px;
+			}
+		}
+
+		&_mr {
+			margin-right: 20px;
+
+			&h {
+				margin-right: 10px;
+			}
+		}
+
+		&_checkbox-group {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			gap: 10px;
+
+			> div.gdymc_checkbox-container {
+				display: flex;
+				flex-direction: row;
+				gap: 5px;
+				align-items: center;
+			}
+		}
+	}
 	
 
 	/******************************** SAVE BUTTON ********************************/

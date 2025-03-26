@@ -369,11 +369,15 @@
 						
 						echo '<input id="gdymc_editbutton_text" type="text" placeholder="' . __('Button Text', 'gdy-modular-content') . '" value="' . $button_text . '">';
 
-						echo '<input id="gdymc_insertlink_input" type="text" placeholder="' . __('Button Text', 'gdy-modular-content') . '" value="' . $button_url . '">';
+						echo '<input id="gdymc_insertlink_input" class="gdymc_mt" type="text" placeholder="' . __('Button Link', 'gdy-modular-content') . '" value="' . $button_url . '">';
 
-						echo '<input id="gdymc_editbutton_type" type="checkbox" ' . $button_type . '/> <label for="gdymc_insertlink_target">' . __( 'Primary Button', 'gdy-modular-content' ) . '</label>';
+						echo '<div class="gdymc_checkbox-group gdymc_mth">';
 
-						echo '<input id="gdymc_editbutton_target" type="checkbox"  ' . $button_target . ' /> <label for="gdymc_insertlink_target">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
+							echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_type" class="gdymc_mth" type="checkbox" ' . $button_type . '/> <label for="gdymc_insertlink_target">' . __( 'Primary Button', 'gdy-modular-content' ) . '</label></div>';
+
+							echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_target" class="gdymc_mth" type="checkbox"  ' . $button_target . ' /> <label for="gdymc_insertlink_target">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label></div>';
+
+						echo '</div>';
 
 					echo '</div><!-- gdymc_tabs_content -->';
 					
