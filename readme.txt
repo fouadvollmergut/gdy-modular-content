@@ -1,5 +1,5 @@
 === GDY Modular Content ===
-Contributors: fouadvollmergut, grandy
+Contributors: fouadvollmer, grandy
 Tags: gdy modular content, gdymc, frontend editing, modular content, content editable
 License: GPLv2
 Requires at least: 3.6
