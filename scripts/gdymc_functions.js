@@ -97,7 +97,7 @@
 		addButton () {
 			this.buttonGroup.insertAdjacentHTML( 'beforeend', `
 				<div class="gdymc_button_container">
-					<a href="#" class="button button-primary" target="_self">Button Text</a>
+					<a href="#" class="button button-primary" target="_self" aria-label="Button Text">Button Text</a>
 
 					<button class="gdymc_button gdymc_inside_button gdymc_button_editbutton" aria-label="Edit button" style="display: none;">
 						<span class="dashicons dashicons-edit"></span>
@@ -151,6 +151,7 @@
 
 				document.querySelector('#gdymc_saveedit_button').addEventListener( 'click', function () {
 					button.textContent = document.querySelector('#gdymc_editbutton_text').value;
+					button.setAttribute( 'aria-label', document.querySelector('#gdymc_editbutton_text').value);
 					button.setAttribute( 'href', document.querySelector('#gdymc_insertlink_input').value );
 					button.setAttribute( 'target', document.querySelector('#gdymc_editbutton_target').checked ? '_blank' : '_self' );
 					button.classList.toggle( 'button-primary', document.querySelector('#gdymc_editbutton_type').checked );
