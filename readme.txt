@@ -3,7 +3,7 @@ Contributors: fouadvollmer, grandy
 Tags: gdy modular content, gdymc, frontend editing, modular content, content editable
 License: GPLv2
 Requires at least: 3.6
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Requires PHP: 5.6
 Stable tag: 0.9.93
 
