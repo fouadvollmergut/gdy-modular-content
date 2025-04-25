@@ -262,36 +262,26 @@
 	*/
 
 	add_action( 'init', 'gdymc_load_module_functions', 10 );
-	
 
 	function gdymc_load_module_functions() {
 
+		global $gdymc_module_types;
 
-		// Get module types (all on ajax)
+		gdymc_register_module_types();
 
-		$modules = gdymc_get_modules();
+		if ( $gdymc_module_types ) {
 
-
-		if( $modules ) foreach( $modules as $moduleType => $module ):
-
-			
 			do_action( 'gdymc_modulefunctions_before', $moduleType );
 
-
-			$functionsPath = gdymc_module_path() . '/' . $moduleType . '/functions.php';
-			
-			if( file_exists( $functionsPath ) ) require_once( $functionsPath );
-
+			foreach( $gdymc_module_types as $module_folder ):
+				$functionsPath = $module_folder . '/functions.php';
+				if( file_exists( $functionsPath ) ) require_once( $functionsPath );
+			endforeach;
 
 			do_action( 'gdymc_modulefunctions_after', $moduleType );
 
-		
-		endforeach;
-
+		}
 
 	}
-
-	
-
 
 ?>

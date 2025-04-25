@@ -84,10 +84,10 @@
 
 				// Paths
 
-				$this->path = gdymc_module_path() . '/' . $this->type;
-				$this->file = gdymc_module_path() . '/' . $this->type . '/index.php';
-				$this->functions = gdymc_module_path() . '/' . $this->type . '/functions.php';
-				$this->thumb = gdymc_module_path() . '/' . $this->type . '/thumb.svg';
+				$this->path = WP_CONTENT_DIR . '/' . $this->type;
+				$this->file = WP_CONTENT_DIR . '/' . $this->type . '/index.php';
+				$this->functions = WP_CONTENT_DIR . '/' . $this->type . '/functions.php';
+				$this->thumb = WP_CONTENT_DIR . '/' . $this->type . '/thumb.svg';
 
 
 				// Create module class
@@ -98,8 +98,8 @@
 				if( $this->is_invisible() ) $this->classes[] = 'gdymc_invisible';
 				if( $this->is_timed() ) $this->classes[] = 'gdymc_timed';
 
-				$this->classes[] = 'gdymc_module_' . $this->type;
-				$this->classes[] = 'gdymc_module-' . $this->type; // deprecated since 0.8.1
+				$this->classes[] = 'gdymc_module_' . end(explode('/', $this->type));
+				$this->classes[] = 'gdymc_module-' . end(explode('/', $this->type)); // deprecated since 0.8.1
 
 				$this->classes = apply_filters( 'gdymc_module_class', $this->classes, $this );
 
