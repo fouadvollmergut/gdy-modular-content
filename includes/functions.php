@@ -81,29 +81,28 @@
 	}
 
 
-	// Extract the module name out of any file system path
+	// Extract the module type
 
-	function gdymc_module_name( $location ) {
+	function gdymc_module_type( $location ) {
 
-		$path = WP_CONTENT_DIR;
+		global $gdymc_module_types;
 
-		if( strpos( $location, $path ) === 0 ):
-    		
-			$result = explode( '/', str_replace( $path . '/', '', $location ) );
-
-			return $result[ 0 ];
-
-		else:
-
-			return false;
-
-		endif;
+		foreach( $gdymc_module_types as $module_path ):
+			if ( str_contains( $location, $module_path ) ):
+				return substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
+			endif;
+		endforeach;
 
 	}
 
 
+	// DEPRECATED: Extract the module name
 
+	function gdymc_module_name( $location ) {
 
+		return gdymc_module_type( $location );
+
+	}
 
 
 	/**************************** RETURN SINGLE MODULE INFORMATION ****************************/
@@ -146,11 +145,12 @@
 
 	function gdymc_register_module_types() {
 
+		global $gdymc_module_folders;
 		global $gdymc_module_types;
 
-		$module_folders = apply_filters( 'gdymc_modules_folder', [ get_template_directory() . '/modules' ] );;
+		$gdymc_module_folders = apply_filters( 'gdymc_modules_folder', [ get_template_directory() . '/modules' ] );;
 
-		foreach ($module_folders as $module_folder):
+		foreach ($gdymc_module_folders as $module_folder):
 
 			if (file_exists( $module_folder )):
 				$modules = array_filter( glob( $module_folder . '/*' ), 'is_dir' );

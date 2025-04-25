@@ -46,6 +46,7 @@ Version: 0.9.94
 
 	/******************************** GLOBAL VARIABLES ********************************/
 	
+	$gdymc_module_folders = array(); // Holds the list of module folders
 	$gdymc_module_types = array(); // Holds the list of modules
 	$gdymc_modules = array(); // Holds the list of modules
 

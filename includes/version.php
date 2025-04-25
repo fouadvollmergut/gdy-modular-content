@@ -190,13 +190,9 @@
 
 		foreach( $contents as $content ):
 
-			error_log( 'Meta value before: ' . $content->meta_value );
-
 			if (!str_contains($content->meta_value, '/')) {
 
-				$updated_meta_value = '/themes/' . end(explode('/', get_template_directory())) . '/modules/' . $content->meta_value;
-
-				error_log( 'Meta value after: ' . $updated_meta_value );
+				$updated_meta_value = 'themes/' . end(explode('/', get_template_directory())) . '/modules/' . $content->meta_value;
 
 				update_metadata( 'post', $content->post_id, $content->meta_key, $updated_meta_value );
 			}

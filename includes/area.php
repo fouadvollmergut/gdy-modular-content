@@ -35,8 +35,6 @@
 
           foreach( $moduleArray as $key => $value ):
 
-            error_log( 'Module: ' . $value );
-
             if( !metadata_exists( $gdymc_object_type, $gdymc_object_id, '_gdymc_' . $value . '_type' ) ):
 
               if( ( $key = array_search( $value, $moduleArray ) ) !== false ):
