@@ -204,33 +204,34 @@
 	
 	
 	
-	function gdymc_contenttype_text( $contentRealID, $contentOption, $contentSubOption ) {
-		
+	function gdymc_contenttype_text( $contentRealID, $contentTag, $contentOption, $contentSubOption ) {
+
 		$length = (is_numeric($contentOption) AND $contentOption > 0) ? $contentOption : 'auto';
-				
+
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ):
-		
-			echo '<div class="gdymc_text mousetrap" data-id="'.$contentRealID.'" data-length="'.$length.'">';
-		
+
+			$classList = 'gdymc_text mousetrap ' . $contentSubOption;
+			echo '<' . $contentTag . ' class="' . trim($classList) . '" data-id="' . $contentRealID . '" data-length="' . $length . '">';
+
 		else:
 
-			echo '<div class="gdymc_text">';
+			$classList = 'gdymc_text ' . $contentSubOption;
+			echo '<' . $contentTag . ' class="' . trim($classList) . '">';
 
 		endif;
 
 
-		$content = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_'.$contentRealID, true);
-
+		$content = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true);
 		echo apply_filters( 'gdymc_contentfilter', $content );
 
 
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ): 
-		
-			echo '</div>';	
-		
+
+			echo '</' . $contentTag . '>';	
+
 		else:
 
-			echo '</div>';
+			echo '</' . $contentTag . '>';
 
 		endif;
 
@@ -446,7 +447,7 @@
 
 	// Options with wp_parse_args
 	
-	function contentCreate( $contentKey, $contentType = 'text', $contentOption = '', $contentSubOption = '' ) {
+	function contentCreate( $contentKey, $contentType = 'div/text', $contentOption = '', $contentSubOption = '' ) {
 
 
 		if( !gdymc_object_type() ):
@@ -484,9 +485,11 @@
 
 			else:
 
-				// Option is maximum character length. Default is auto (infinite).
+				// Option is maximum character length. Default is auto (infinite). Suboption are additional calsses for container
 
-				gdymc_contenttype_text( $contentID, $contentOption, $contentSubOption );
+				$contentTag = explode('/', $contentType);
+
+				gdymc_contenttype_text( $contentID, $contentTag[0] == 'text' ? 'div' : $contentTag[0], $contentOption, $contentSubOption );
 
 			endif;
 
