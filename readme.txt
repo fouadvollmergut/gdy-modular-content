@@ -5,7 +5,7 @@ License: GPLv2
 Requires at least: 3.6
 Tested up to: 6.7.2
 Requires PHP: 5.6
-Stable tag: 0.9.94
+Stable tag: 0.9.95
 
 Create and edit modular content from the frontend of your site.
 
