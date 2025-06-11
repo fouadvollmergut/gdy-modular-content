@@ -180,6 +180,26 @@
 
 	endif;
 
+	/**************************** UPGRADE TO 0.9.95 OR HIGHER ****************************/
+
+	if( gdymc_version_smaller_than( '0.9.95' ) ):
+
+		global $wpdb;
+
+		$contents = $wpdb->get_results( "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE meta_key LIKE '_gdymc_%_type'" );
+
+		foreach( $contents as $content ):
+
+			if (!str_contains($content->meta_value, '/')) {
+
+				$updated_meta_value = 'themes/' . end(explode('/', get_template_directory())) . '/modules/' . $content->meta_value;
+
+				update_metadata( 'post', $content->post_id, $content->meta_key, $updated_meta_value );
+			}
+
+		endforeach;
+	endif;
+
 
 
 

@@ -219,7 +219,7 @@
                 do_action( 'gdymc_error_module_incomplete', $gdymc_module );
 
               else:
-
+                
                 // Include the module file
                 include( $gdymc_module->file );
 
