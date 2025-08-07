@@ -101,7 +101,7 @@
 		
 		$sliderContents = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_'.$contentRealID, true);
 		$sliderArray = explode( ',', $sliderContents );
-		$sliderCount = count( $sliderArray );
+		$sliderCount = isset( $sliderArray ) ? count( $sliderArray ) : 0;
 
 		// This is an array that hold arrays with 3 values: image id, link url, link target
 		$contentString = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
@@ -123,8 +123,8 @@
 		endif;
 
 
-		$sliderCount = count( $imageObject );
-					
+		$sliderCount = isset( $imageObject ) ? count( $imageObject ) : 0;
+
 
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ):
 
