@@ -75,6 +75,9 @@
             // Open module
             $gdymc_module = new GDYMC_MODULE( $id, $gdymc_object_id, $gdymc_object_type );
 
+            // Check if module is active
+            if( !$gdymc_module->active ) continue;
+
             // If module is visible
             if( $gdymc_module->is_visible() OR gdymc_logged() ):
 
