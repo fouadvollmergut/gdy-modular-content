@@ -107,35 +107,35 @@
 		// Settings
 
 		$settingDefaults = array(
-			
-            'type' => null,
+
+			'type' => null,
 			'label' => null,
 			'placeholder' => null,
 			'default' => null,
-            'options' => null,
-            'attributes' => null	
-			
-        );
-        
+			'options' => null,
+			'attributes' => null	
+
+		);
+
 		$settings = wp_parse_args( $optionSettings, $settingDefaults );
 
 
 
 
-        // Attributes
+		// Attributes
 
-        $attributeDefaults = array(
-        	'data-object' => gdymc_object_id(),
-        	'data-module' => $moduleID,
-        	'data-name' => $optionName,
-        	'id' => 'gdymc_module_' . $moduleID . '_option_' . $optionName,
-        	'class' => 'gdymc_option gdymc_option_' . strtolower( $optionSettings['type'] ),
-        	'placeholder' => $settings[ 'placeholder' ],
-        	'type' => $settings[ 'type' ],
-        	'value' => optionGet( $optionName, $moduleID ),
-        );
+		$attributeDefaults = array(
+			'data-object' => gdymc_object_id(),
+			'data-module' => $moduleID,
+			'data-name' => $optionName,
+			'id' => 'gdymc_module_' . $moduleID . '_option_' . $optionName,
+			'class' => 'gdymc_option gdymc_option_' . strtolower( $optionSettings['type'] ),
+			'placeholder' => $settings[ 'placeholder' ],
+			'type' => $settings[ 'type' ],
+			'value' => optionGet( $optionName, $moduleID ),
+		);
 
-        $attributesArray = wp_parse_args( $settings[ 'attributes' ], $attributeDefaults );
+		$attributesArray = wp_parse_args( $settings[ 'attributes' ], $attributeDefaults );
 
 
 
@@ -209,6 +209,27 @@
 				
 				echo '</select>';
 
+			elseif( in_array( $settings[ 'type' ], array( 'sortable' ) ) ):
+
+				$sortableValue = ( !empty( $attributesArray[ 'value' ] ) ) ? explode( ',', $attributesArray[ 'value' ] ) : array();
+
+				echo '<ul class="gdymc_option_sortable_list">';
+
+					foreach( $sortableValue as $key => $value ):
+
+						echo '<li class="gdymc_option_sortable_item">';
+						echo '<span class="gdymc_option_sortable_item_handle dashicons dashicons-editor-code" aria-label="' . __( 'Sort Element', 'gdy-modular-content' ) . '"></span>';
+						echo '<div class="gdymc_option_sortable_item_value" data-uuid="' . esc_html( $value ) . '">' . substr(str_replace('-', '', esc_html( $value ) ), 0, 8) . '</div>';
+						echo '<button class="gdymc_button gdymc_option_sortable_remove" aria-label="' . __( 'Remove Element', 'gdy-modular-content' ) . '"></button>';
+						echo '</li>';
+
+					endforeach;
+
+				echo '</ul>';
+
+				echo '<button class="gdymc_button gdymc_option_sortable_add">' . __( 'Add Element', 'gdy-modular-content' ) . '</button>';
+
+				echo '<input type="hidden" ' .  $attributes . '>';
 
 			else:
 

@@ -145,6 +145,7 @@
 	.gdymc_optioncontainer label,
 	.gdymc_optioncontainer input,
 	.gdymc_optioncontainer select,
+	.gdymc_optioncontainer ul,
 	.gdymc_optioncontainer textarea {
 		width: 50% !important;
 		float: left !important;
@@ -156,9 +157,134 @@
 	}
 
 	.gdymc_optioncontainer_textarea textarea, .gdymc_optioncontainer_area textarea,
+	.gdymc_optioncontainer_sortable ul, .gdymc_optioncontainer_sortable label,
 	.gdymc_optioncontainer_textarea label, .gdymc_optioncontainer_area label {
 		width: 100% !important;
 		margin-top: -1px !important;
+	}
+
+	.gdymc_optioncontainer_sortable ul {
+		width: 100% !important;
+		margin-left: -1px !important;
+		margin-top: -1px !important;
+		padding: 0px !important;
+		list-style: none !important;
+		border: solid 1px #eaeaea !important;
+		background: #fff !important;
+		box-sizing: border-box !important;
+	}
+
+	.gdymc_optioncontainer_sortable button.gdymc_option_sortable_add {
+		margin-top: 10px !important;
+		padding-left: 45px !important;
+    min-width: 0px !important;
+
+		&:before {
+			content: "\f132";
+			font-family: 'Dashicons';
+			border: none;
+			background: rgba(255, 255, 255, 0.4);
+			color: #2ea2cc;
+			width: 18px;
+			height: 18px;
+			border-radius: 30px;
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 8px;
+			font-size: 17px;
+			line-height: 21px;
+			text-align: center;
+			text-indent: 0.5px;;
+			position: absolute;
+			top: 50%;
+			margin-top: -9px;
+			left: 15px;
+			z-index: 1;
+			transition: all 0.05s ease-out;
+		}
+
+		&:hover:before {
+			color: #1e8cbe !important;
+		}
+	}
+
+	.gdymc_optioncontainer_sortable ul li.gdymc_option_sortable_item {
+		position: relative;
+		box-sizing: border-box !important;
+		padding: 10px 15px !important;
+		display: flex !important;
+		align-items: center !important;
+		gap: 10px !important;
+		flex-direction: row !important;
+		border-bottom: solid 1px #eaeaea !important;
+
+		&:last-child {
+			border-bottom: none !important;
+		}
+
+		&:hover {
+			background: #f9f9f9 !important;
+		}
+	}
+
+	.gdymc_optioncontainer_sortable ul li.gdymc_option_sortable_item .gdymc_option_sortable_item_handle {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		margin-right: 10px;
+		cursor: move;
+		color: rgba(0, 0, 0, 0.2);
+		transform: rotate(90deg);
+		font-size: 15px;
+	}
+
+	.gdymc_optioncontainer_sortable ul li.gdymc_option_sortable_item .gdymc_option_sortable_item_value {
+		font-family: monospace;
+	}
+
+	.gdymc_optioncontainer_sortable ul li.gdymc_option_sortable_item button.gdymc_option_sortable_remove {
+		margin-left: auto !important;
+    min-width: 0px !important;
+		padding: 0px 11px !important;
+
+		&:before {
+			content: "\f182";
+			font-family: 'Dashicons';
+			color: rgba(255, 255, 255, 0.4);
+			width: 18px;
+			height: 18px;
+			display: inline-block;
+			font-size: 20px;
+			line-height: 40px;
+			text-align: center;
+			z-index: 1;
+			transition: all 0.05s ease-out;
+		}
+	}
+
+	// Display the UUID in the sortable item in the theme
+	.gdymc_edit .gdymc_sortable_item {
+		position: relative;
+
+		&:after {
+			content: attr(data-name);
+			font-family: monospace;
+			font-size: 0.8rem;
+			color: #fff;
+			background-color: $color_error;
+			padding: 2px 5px !important;
+			border-radius: 3px;
+			opacity: 0.4;
+			transition: opacity 0.3s ease;
+			pointer-events: none;
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+		}
+
+		&:hover:after {
+			opacity: 1;
+		}
 	}
 
 
