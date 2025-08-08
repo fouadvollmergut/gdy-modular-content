@@ -52,6 +52,7 @@
 		constructor ( buttonGroupContainer ) {
 			this.buttonGroupContainer = buttonGroupContainer;
 			this.buttonGroup = buttonGroupContainer.querySelector( '.gdymc_button-group' );
+			this.contextButton = null;
 		}
 
 		init () {
@@ -69,11 +70,18 @@
 
 			jQuery( this.buttonGroup ).sortable({
 				revert: true,
+				update: (event, ui) => {
+					document.body.classList.add('gdymc_unsaved');
+					this.buttonGroup.dataset.buttonsJson = this.gatherButtonJSON();
+					gdymc.info.isSaved = false;
+				}
 			});
+
+			// Update buttons JSON
+			this.buttonGroup.dataset.buttonsJson = this.gatherButtonJSON();
 
 			jQuery( this.buttonGroup ).disableSelection();
 		}
-
 
 		// Event Listeners
 		addButtonListener (button) {
@@ -118,6 +126,7 @@
 			});
 
 			document.body.classList.add('gdymc_unsaved');
+			this.buttonGroup.dataset.buttonsJson = this.gatherButtonJSON();
 			gdymc.info.isSaved = false;
 		}
 
@@ -125,6 +134,7 @@
 			button.closest( '.gdymc_button_container' ).remove();
 
 			document.body.classList.add('gdymc_unsaved');
+			this.buttonGroup.dataset.buttonsJson = this.gatherButtonJSON();
 			gdymc.info.isSaved = false;
 		}
 
@@ -135,6 +145,8 @@
 				target: JSON.stringify(button.getAttribute( 'target' ) === '_blank' ? 'true' : 'false'),
 				type: JSON.stringify(button.classList.contains( 'button-primary' ) ? 'true' : 'false'),
 			};
+
+			this.contextButton = button;
 
 			gdymc.ajax( 'gdymc_action_editbutton', data, function(response) {
 
@@ -150,11 +162,11 @@
 				}, 1 );
 
 				document.querySelector('#gdymc_saveedit_button').addEventListener( 'click', function () {
-					button.textContent = document.querySelector('#gdymc_editbutton_text').value;
-					button.setAttribute( 'aria-label', document.querySelector('#gdymc_editbutton_text').value);
-					button.setAttribute( 'href', document.querySelector('#gdymc_insertlink_input').value );
-					button.setAttribute( 'target', document.querySelector('#gdymc_editbutton_target').checked ? '_blank' : '_self' );
-					button.classList.toggle( 'button-primary', document.querySelector('#gdymc_editbutton_type').checked );
+					this.contextButton.textContent = document.querySelector('#gdymc_editbutton_text').value;
+					this.contextButton.setAttribute( 'aria-label', document.querySelector('#gdymc_editbutton_text').value);
+					this.contextButton.setAttribute( 'href', document.querySelector('#gdymc_insertlink_input').value );
+					this.contextButton.setAttribute( 'target', document.querySelector('#gdymc_editbutton_target').checked ? '_blank' : '_self' );
+					this.contextButton.classList.toggle( 'button-primary', document.querySelector('#gdymc_editbutton_type').checked );
 
 					jQuery('#gdymc_overlay_shadow').hide().removeClass( 'gdymc_active' );
 					// document.querySelector( '#gdymc_overlay_shadow' ).classList.remove( 'gdymc_active' );
@@ -162,9 +174,26 @@
 					gdymc.info.overlayOpen = false;
 
 					document.body.classList.add('gdymc_unsaved');
+					this.buttonGroup.dataset.buttonsJson = this.gatherButtonJSON();
 					gdymc.info.isSaved = false;
+				}.bind( this ) );
+			}.bind( this ) );
+		}
+
+		gatherButtonJSON () {
+			const buttons = this.buttonGroup.querySelectorAll( 'a' );
+			const buttonJSON = [];
+
+			buttons.forEach( (btn) => {
+				buttonJSON.push({
+					text: btn.textContent,
+					url: btn.getAttribute( 'href' ),
+					target: btn.getAttribute( 'target' ) === '_blank' ? true : false,
+					type: btn.classList.contains( 'button-primary' ) ? true : false,
 				});
 			});
+
+			return JSON.stringify(buttonJSON);
 		}
 	}
 	
@@ -213,7 +242,6 @@
 			tabContainer.find('.gdymc_tabs_content[data-tab="'+tabTarget+'"]').addClass('gdymc_active');
 		
 		});
-
 		
 
 
@@ -2301,8 +2329,8 @@
 			    
 				var handler = new Array();
 				var id = jQuery(this).attr('data-id');
-				var content = jQuery(this).html();
-				
+				var content = jQuery(this).attr('data-buttons-json');
+
 				handler.push( id );
 				handler.push( content );
 				
