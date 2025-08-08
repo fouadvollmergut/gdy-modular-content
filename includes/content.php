@@ -324,7 +324,7 @@
 
 				if( gdymc_logged() && !gdymc_preview()):
 
-					echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Button hinzufügen', 'gdy-modular-content') . '</button>';
+        echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Add Button', 'gdy-modular-content') . '</button>';
 
 				endif;
 
