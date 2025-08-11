@@ -19,6 +19,8 @@
 		/************************* PROPERTIES *************************/
 
 		public $exists = 0;
+		public $active = true;
+		public $name = null;
 		public $id = null;
 		public $object_id = null;
 		public $object_type = null;
@@ -27,13 +29,13 @@
 		public $file = null;
 		public $functions = null;
 		public $thumb = null;
+		public $settings = null;
 		public $number = null;
 		public $visibility = null;
 		public $timer_status = null;
 		public $timer_switch = null;
 		public $classes = array();
 		public $content = null;
-
 
 		/************************* CONSTRUCTOR *************************/
 
@@ -88,7 +90,19 @@
 				$this->file = WP_CONTENT_DIR . '/' . $this->type . '/index.php';
 				$this->functions = WP_CONTENT_DIR . '/' . $this->type . '/functions.php';
 				$this->thumb = WP_CONTENT_DIR . '/' . $this->type . '/thumb.svg';
+				$this->settings = WP_CONTENT_DIR . '/' . $this->type . '/settings.json';
 
+				// Module settings
+
+				if ( file_exists( $this->settings ) ):
+
+					$json = file_get_contents( $this->settings );
+					$module_settings = json_decode( $json, true );
+
+					$this->name = isset( $module_settings[ 'name' ] ) ? $module_settings[ 'name' ] : null;
+					$this->active = isset( $module_settings[ 'active' ] ) ? $module_settings[ 'active' ] : true;
+
+				endif;
 
 				// Create module class
 

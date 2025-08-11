@@ -73,13 +73,12 @@
 					// Before modules hook
 
 					do_action( 'gdymc_modulelist_before_modules' );
-					
-
 
 					// Output the modules
 
 					foreach( $gdymc_modules as $module ):
-						
+
+						if ( !$module->active ) continue;
 
 						do_action( 'gdymc_modulelist_before_module', $module->type );
 
@@ -98,7 +97,7 @@
 
 							echo '<div class="gdymc_modules_add_label"><div class="gdymc_modules_add_label_ground">';
 							
-								echo $module->title;
+								echo isset( $module->name ) ? $module->name : $module->title;
 
 							echo '</div></div>';
 
