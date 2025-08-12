@@ -313,9 +313,7 @@
 
     $content = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
 
-		$content = json_decode( $content, true );
-
-		if( !is_array( $content ) ):
+		if( !is_array( json_decode( $content, true ) ) ):
 
 			echo '<div class="gdymc_button-group_container">';
 				echo '<div class="gdymc_button-group" data-id="' . $contentRealID . '">';
@@ -333,6 +331,8 @@
 			echo '</div>';
 
 		else:
+
+			$content = json_decode( $content, true );
 
 			echo '<div class="gdymc_button-group_container">';
 
