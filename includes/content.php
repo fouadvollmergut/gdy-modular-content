@@ -313,24 +313,62 @@
 
     $content = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
 
-    echo '<div class="gdymc_button-group_container">';
-      echo '<div class="gdymc_button-group" data-id="' . $contentRealID . '">';
+		if( !is_array( json_decode( $content, true ) ) ):
 
-        echo $content;
+			echo '<div class="gdymc_button-group_container">';
+				echo '<div class="gdymc_button-group" data-id="' . $contentRealID . '">';
 
-      echo '</div>';
+					echo $content;
 
-      if( gdymc_logged() && !gdymc_preview()):
+				echo '</div>';
 
-        echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Button hinzufügen', 'gdy-modular-content') . '</button>';
+				if( gdymc_logged() && !gdymc_preview()):
 
-      endif;
+					echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Button hinzufügen', 'gdy-modular-content') . '</button>';
 
-    echo '</div>';
-  }
-	
-	
-	
+				endif;
+
+			echo '</div>';
+
+		else:
+
+			$content = json_decode( $content, true );
+
+			echo '<div class="gdymc_button-group_container">';
+
+				echo '<div class="gdymc_button-group" data-id="' . $contentRealID . '" data-buttons-json=\'' . json_encode( $content ) . '\'>';
+
+					foreach( $content as $button ):
+
+						$type = $button['type'] ? 'button-primary' : '';
+						$target = $button['target'] ? '_blank' : '_self';
+
+						echo '<div class="gdymc_button_container">';
+
+						echo '<a href="' . esc_url( $button['url'] ) . '" class="button ' . esc_attr( $type ) . '" target="' . esc_attr( $target ) . '" aria-label="' . esc_attr( $button['text'] ) . '">' . esc_html( $button['text'] ) . '</a>';
+
+							if( gdymc_logged() && !gdymc_preview() ):
+
+								echo '<button class="gdymc_button gdymc_inside_button gdymc_button_editbutton" aria-label="Edit button" style="display: none;" title="' . __('Button bearbeiten', 'gdy-modular-content') . '"><span class="dashicons dashicons-edit"></span></button>';
+								echo '<button class="gdymc_button_delete gdymc_inside_button gdymc_button_removebutton" aria-label="Remove button" style="display: none;" title="' . __('Button entfernen', 'gdy-modular-content') . '"><span class="dashicons dashicons-trash"></span></button>';
+
+							endif;
+
+						echo '</div>';
+
+					endforeach;
+
+				echo '</div>';
+
+				if( gdymc_logged() && !gdymc_preview() ):
+					echo '<button class="gdymc_button gdymc_inside_button gdymc_button_addbutton" style="display: none;">' . __('Button hinzufügen', 'gdy-modular-content') . '</button>';
+				endif;
+
+			echo '</div>';
+		endif;
+	}
+
+
 	function contentID( $contentKey ) {
 		
 		global $gdymc_module;
