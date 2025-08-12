@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GDY Modular Content\n"
-"POT-Creation-Date: 2016-10-18 09:54+0200\n"
+"POT-Creation-Date: 2025-08-08 09:33+0200\n"
 "PO-Revision-Date: 2016-01-26 10:32+0100\n"
 "Last-Translator: Fouad Vollmer Werbeagentur <info@fouadvollmer.de>\n"
 "Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
@@ -10,649 +10,618 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.10\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../hooks/adminbar-buttons.php:11
+#: ../_dist/hooks/adminbar-buttons.php:11 ../hooks/adminbar-buttons.php:11
 msgid "Save changes (Cmd+S)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:11 ../includes/area.php:198
+#: ../_dist/hooks/adminbar-buttons.php:11 ../_dist/includes/area.php:165 ../hooks/adminbar-buttons.php:11
+#: ../includes/area.php:165
 msgid "Save"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:21
+#: ../_dist/hooks/adminbar-buttons.php:21 ../hooks/adminbar-buttons.php:21
 msgid "Bold (Cmd+B)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:31
+#: ../_dist/hooks/adminbar-buttons.php:31 ../hooks/adminbar-buttons.php:31
 msgid "Italic (Cmd+I)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:41
+#: ../_dist/hooks/adminbar-buttons.php:41 ../hooks/adminbar-buttons.php:41
 msgid "Insert link (Cmd+L)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:51
+#: ../_dist/hooks/adminbar-buttons.php:51 ../hooks/adminbar-buttons.php:51
 msgid "Remove link (Cmd+U)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:61
+#: ../_dist/hooks/adminbar-buttons.php:61 ../hooks/adminbar-buttons.php:61
 msgid "Unordered list"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:71
+#: ../_dist/hooks/adminbar-buttons.php:71 ../hooks/adminbar-buttons.php:71
 msgid "Ordered list"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:81
+#: ../_dist/hooks/adminbar-buttons.php:81 ../hooks/adminbar-buttons.php:81
 msgid "Align right (Cmd+Shift+R)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:91
+#: ../_dist/hooks/adminbar-buttons.php:91 ../hooks/adminbar-buttons.php:91
 msgid "Align center (Cmd+Shift+C)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:101
+#: ../_dist/hooks/adminbar-buttons.php:101 ../hooks/adminbar-buttons.php:101
 msgid "Align left (Cmd+Shift+L)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:111
+#: ../_dist/hooks/adminbar-buttons.php:111 ../hooks/adminbar-buttons.php:111
 msgid "Superscript"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:121
+#: ../_dist/hooks/adminbar-buttons.php:121 ../hooks/adminbar-buttons.php:121
 msgid "Subscript"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:131
+#: ../_dist/hooks/adminbar-buttons.php:131 ../hooks/adminbar-buttons.php:131
 msgid "Remove format"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:143
-msgid "Edit selected modules"
-msgstr ""
-
-#: ../hooks/adminbar-buttons.php:162
+#: ../_dist/hooks/adminbar-buttons.php:163 ../hooks/adminbar-buttons.php:163
 msgid "Modules (Cmd+D)"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:172
-msgid "Preview settings"
+#: ../_dist/hooks/adminbar-buttons.php:178 ../hooks/adminbar-buttons.php:178
+msgid "View modes"
 msgstr ""
 
-#: ../hooks/adminbar-buttons.php:184 ../includes/adminbar.php:137
+#: ../_dist/hooks/adminbar-buttons.php:183 ../hooks/adminbar-buttons.php:183
+msgid "Fast preview (Cmd+E)"
+msgstr ""
+
+#: ../_dist/hooks/adminbar-buttons.php:185 ../hooks/adminbar-buttons.php:185
+msgid "Preview (Cmd+Shift+E)"
+msgstr ""
+
+#: ../_dist/hooks/adminbar-buttons.php:208 ../hooks/adminbar-buttons.php:208
 msgid "Go to backend"
 msgstr ""
 
-#: ../hooks/miscellaneous.php:29 ../hooks/modulebar-buttons.php:88 ../includes/area.php:202
-msgid "Delete this module"
+#: ../_dist/hooks/adminbar-buttons.php:213 ../hooks/adminbar-buttons.php:213
+msgid "Backend"
 msgstr ""
 
-#: ../hooks/miscellaneous.php:30
-msgid "Delete all modules of this type"
+#: ../_dist/hooks/adminbar-buttons.php:222 ../_dist/includes/ajax.php:1406 ../_dist/includes/ajax.php:1467
+#: ../_dist/includes/ajax.php:1528 ../_dist/includes/ajax.php:1588 ../hooks/adminbar-buttons.php:222
+#: ../includes/ajax.php:1406 ../includes/ajax.php:1467 ../includes/ajax.php:1528 ../includes/ajax.php:1588
+msgid "Edit"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:43 ../includes/area.php:135
+#: ../_dist/hooks/adminbar-buttons.php:228 ../hooks/adminbar-buttons.php:228
+msgid "Customizer"
+msgstr ""
+
+#: ../_dist/hooks/adminbar-buttons.php:230 ../hooks/adminbar-buttons.php:230
+msgid "Media"
+msgstr ""
+
+#: ../_dist/hooks/adminbar-buttons.php:232 ../hooks/adminbar-buttons.php:232
+msgid "Logout"
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:30 ../hooks/miscellaneous.php:30
+#, php-format
+msgid "The module type \"%s\" seems not to exist."
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:44 ../hooks/miscellaneous.php:44
+#, php-format
+msgid "The module type \"%s\" is incomplete."
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:62 ../hooks/miscellaneous.php:62
+msgid "Delete this module type"
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:63 ../hooks/miscellaneous.php:63
+msgid "Change this module type"
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:82 ../hooks/miscellaneous.php:82
+msgid "There are no modules"
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:98 ../hooks/miscellaneous.php:98
+msgid "There is no GDYMC modules folder."
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:109 ../hooks/miscellaneous.php:109
+msgid "There are no modules in your modules folder."
+msgstr ""
+
+#: ../_dist/hooks/miscellaneous.php:120 ../hooks/miscellaneous.php:120
+msgid "Create a module area with the areaCreate() function or the [gdymc_area] shortcode."
+msgstr ""
+
+#: ../_dist/hooks/modulebar-buttons.php:13 ../_dist/includes/area.php:96 ../hooks/modulebar-buttons.php:13
+#: ../includes/area.php:96
 msgid "Module options"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:53
+#: ../_dist/hooks/modulebar-buttons.php:23 ../hooks/modulebar-buttons.php:23
 msgid "Move module up"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:63
+#: ../_dist/hooks/modulebar-buttons.php:33 ../hooks/modulebar-buttons.php:33
 msgid "Move module down"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:79
-msgid "Select this module"
+#: ../_dist/hooks/modulebar-buttons.php:58 ../hooks/modulebar-buttons.php:58
+msgid "Delete this module"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:102
+#: ../_dist/hooks/modulebar-buttons.php:77 ../hooks/modulebar-buttons.php:77
 msgid "Module type"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:111
+#: ../_dist/hooks/modulebar-buttons.php:106 ../hooks/modulebar-buttons.php:106
 msgid "Module ID"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:120
+#: ../_dist/hooks/modulebar-buttons.php:115 ../hooks/modulebar-buttons.php:115
 msgid "Element ID"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:128
+#: ../_dist/hooks/modulebar-buttons.php:123 ../hooks/modulebar-buttons.php:123
 msgid "Permalink"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:134
+#: ../_dist/hooks/modulebar-buttons.php:129 ../hooks/modulebar-buttons.php:129
 msgid "You can use the permalink to jump directly to that module"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:151
+#: ../_dist/hooks/modulebar-buttons.php:146 ../hooks/modulebar-buttons.php:146
 msgid "Visible"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:152
+#: ../_dist/hooks/modulebar-buttons.php:147 ../hooks/modulebar-buttons.php:147
 msgid "Invisible"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:156
+#: ../_dist/hooks/modulebar-buttons.php:151 ../hooks/modulebar-buttons.php:151
 msgid "Module visibility"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:166
+#: ../_dist/hooks/modulebar-buttons.php:161 ../hooks/modulebar-buttons.php:161
 msgid "Activated"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:167
+#: ../_dist/hooks/modulebar-buttons.php:162 ../hooks/modulebar-buttons.php:162
 msgid "Deactivated"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:171
+#: ../_dist/hooks/modulebar-buttons.php:166 ../hooks/modulebar-buttons.php:166
 msgid "Switch delayed"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:179
+#: ../_dist/hooks/modulebar-buttons.php:174 ../hooks/modulebar-buttons.php:174
 msgid "Date"
 msgstr ""
 
-#: ../hooks/modulebar-buttons.php:184
+#: ../_dist/hooks/modulebar-buttons.php:179 ../hooks/modulebar-buttons.php:179
 msgid "Enter the date in the following format \"yyyy-mm-dd hh:mm\""
 msgstr ""
 
-#: ../hooks/translation.php:13
+#: ../_dist/hooks/translation.php:18 ../hooks/translation.php:18
 msgid "No modules found"
 msgstr ""
 
-#: ../hooks/translation.php:15
+#: ../_dist/hooks/translation.php:20 ../hooks/translation.php:20
 msgid "Ok"
 msgstr ""
 
-#: ../hooks/translation.php:17
+#: ../_dist/hooks/translation.php:22 ../hooks/translation.php:22
 msgid "Error"
 msgstr ""
 
-#: ../hooks/translation.php:19
+#: ../_dist/hooks/translation.php:24 ../hooks/translation.php:24
+msgid "Details"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:26 ../hooks/translation.php:26
 msgid "Please select a editable text for this action."
 msgstr ""
 
-#: ../hooks/translation.php:21
+#: ../_dist/hooks/translation.php:28 ../hooks/translation.php:28
 msgid "Nothing selected"
 msgstr ""
 
-#: ../hooks/translation.php:23
+#: ../_dist/hooks/translation.php:30 ../hooks/translation.php:30
 msgid "Discard contents?"
 msgstr ""
 
-#: ../hooks/translation.php:25
-msgid "There are unsaved contents. This content will be lost if you leave the page without saving."
+#: ../_dist/hooks/translation.php:32 ../hooks/translation.php:32
+msgid ""
+"There are unsaved contents. This contents will be lost if you leave the page without saving. Do you want to proceed?"
 msgstr ""
 
-#: ../hooks/translation.php:27
+#: ../_dist/hooks/translation.php:34 ../hooks/translation.php:34
 msgid "Delete modules?"
 msgstr ""
 
-#: ../hooks/translation.php:29
+#: ../_dist/hooks/translation.php:36 ../hooks/translation.php:36
 msgid "Are you sure to delete the marked modules irreversible."
 msgstr ""
 
-#: ../hooks/translation.php:31
+#: ../_dist/hooks/translation.php:38 ../hooks/translation.php:38
 msgid "Delete module?"
 msgstr ""
 
-#: ../hooks/translation.php:33
+#: ../_dist/hooks/translation.php:40 ../hooks/translation.php:40
 msgid "Are you sure to delete this module irreversible."
 msgstr ""
 
-#: ../hooks/translation.php:35
+#: ../_dist/hooks/translation.php:42 ../hooks/translation.php:42
 msgid "Delete module type?"
 msgstr ""
 
-#: ../hooks/translation.php:37
-msgid "Are you sure to delete all modules of this type irreversible."
+#: ../_dist/hooks/translation.php:44 ../hooks/translation.php:44
+msgid ""
+"Are you sure to delete this module type? This means that all modules with this type are going to be deleted "
+"irreversible."
 msgstr ""
 
-#: ../hooks/translation.php:39
+#: ../_dist/hooks/translation.php:46 ../_dist/hooks/translation.php:50 ../hooks/translation.php:46
+#: ../hooks/translation.php:50
+msgid "Change module type?"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:48 ../hooks/translation.php:48
+msgid "Are you sure to change this module type? Some contents may not be displayed correctly in the new module type."
+msgstr ""
+
+#: ../_dist/hooks/translation.php:55 ../hooks/translation.php:55
+msgid "No Changes"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:61 ../hooks/translation.php:61
+#, php-format
+msgid ""
+"Are you sure to change this module type? This means that all modules with this type are going to be affected.<br /"
+"><br />Change module type into: %s"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:63 ../hooks/translation.php:63
 msgid "No"
 msgstr ""
 
-#: ../hooks/translation.php:41
+#: ../_dist/hooks/translation.php:65 ../hooks/translation.php:65
 msgid "Yes"
 msgstr ""
 
-#: ../hooks/translation.php:43
+#: ../_dist/hooks/translation.php:67 ../_dist/includes/ajax.php:959 ../hooks/translation.php:67 ../includes/ajax.php:959
+msgid "Cancel"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:69 ../hooks/translation.php:69
+msgid "Change"
+msgstr ""
+
+#: ../_dist/hooks/translation.php:71 ../hooks/translation.php:71
 msgid "You can't remove the last column."
 msgstr ""
 
-#: ../hooks/translation.php:45
+#: ../_dist/hooks/translation.php:73 ../hooks/translation.php:73
 msgid "You can't remove the last row."
 msgstr ""
 
-#: ../hooks/translation.php:47
+#: ../_dist/hooks/translation.php:75 ../hooks/translation.php:75
 msgid "Swap content"
 msgstr ""
 
-#: ../hooks/translation.php:49
+#: ../_dist/hooks/translation.php:77 ../hooks/translation.php:77
 msgid "Action stopped"
 msgstr ""
 
-#: ../hooks/translation.php:51
+#: ../_dist/hooks/translation.php:79 ../hooks/translation.php:79
 msgid "The ID you entered does not belong to an existing target."
 msgstr ""
 
-#: ../hooks/translation.php:53
+#: ../_dist/hooks/translation.php:81 ../hooks/translation.php:81
 msgid "The image is too big."
 msgstr ""
 
-#: ../hooks/translation.php:55
+#: ../_dist/hooks/translation.php:83 ../hooks/translation.php:83
 msgid "The image is too small."
 msgstr ""
 
-#: ../hooks/translation.php:57
+#: ../_dist/hooks/translation.php:85 ../hooks/translation.php:85
 msgid "Preview mode"
 msgstr ""
 
-#: ../hooks/translation.php:59
+#: ../_dist/hooks/translation.php:87 ../hooks/translation.php:87
 msgid "You cant do this action in preview mode. Do you want to switch into edit mode?"
 msgstr ""
 
-#: ../hooks/translation.php:61
+#: ../_dist/hooks/translation.php:89 ../hooks/translation.php:89
 msgid "Switch view"
 msgstr ""
 
-#: ../hooks/translation.php:63
+#: ../_dist/hooks/translation.php:91 ../hooks/translation.php:91
 msgid "Show all formatting options"
 msgstr ""
 
-#: ../hooks/translation.php:65
-msgid "Support GDYMC"
-msgstr ""
-
-#: ../hooks/translation.php:67
-msgid ""
-"GDYMC tries to become a really great plugin ... but that only works with your help. Here are some simple ways to "
-"support us at WordPress.org:"
-msgstr ""
-
-#: ../hooks/translation.php:69
-msgid "Create a Plugin review"
-msgstr ""
-
-#: ../hooks/translation.php:71
-msgid "Help translating the Plugin"
-msgstr ""
-
-#: ../hooks/translation.php:73
-msgid "Contribute to the Forum"
-msgstr ""
-
-#: ../hooks/translation.php:75
-msgid "No, never show this again"
-msgstr ""
-
-#: ../hooks/translation.php:77
+#: ../_dist/hooks/translation.php:93 ../hooks/translation.php:93
 msgid "No modules selected"
 msgstr ""
 
-#: ../hooks/translation.php:79
+#: ../_dist/hooks/translation.php:95 ../hooks/translation.php:95
 msgid "At least one selected module is required for this action."
 msgstr ""
 
-#: ../hooks/translation.php:81
+#: ../_dist/hooks/translation.php:97 ../hooks/translation.php:97
 msgid "No target ID"
 msgstr ""
 
-#: ../hooks/translation.php:83
+#: ../_dist/hooks/translation.php:99 ../hooks/translation.php:99
 msgid "Enter a target ID for this action."
 msgstr ""
 
-#: ../hooks/translation.php:85
+#: ../_dist/hooks/translation.php:101 ../hooks/translation.php:101
 msgid "Wrong target ID"
 msgstr ""
 
-#: ../hooks/translation.php:87
+#: ../_dist/hooks/translation.php:103 ../hooks/translation.php:103
 msgid "The target ID must be a number."
 msgstr ""
 
-#: ../hooks/translation.php:89
+#: ../_dist/hooks/translation.php:105 ../hooks/translation.php:105
 msgid "Invalid server response."
 msgstr ""
 
-#: ../hooks/translation.php:91
+#: ../_dist/hooks/translation.php:107 ../hooks/translation.php:107
 #, php-format
 msgid "This file is too big. Max filesize is %s."
 msgstr ""
 
-#: ../hooks/translation.php:93
+#: ../_dist/hooks/translation.php:109 ../hooks/translation.php:109
 msgid "This file type is not allowed."
 msgstr ""
 
-#: ../hooks/translation.php:95 ../includes/ajax.php:700
+#: ../_dist/hooks/translation.php:111 ../_dist/includes/ajax.php:860 ../hooks/translation.php:111
+#: ../includes/ajax.php:860
 msgid "Use void image and save"
 msgstr ""
 
-#: ../hooks/translation.php:97 ../includes/ajax.php:692
+#: ../_dist/hooks/translation.php:113 ../_dist/includes/ajax.php:852 ../hooks/translation.php:113
+#: ../includes/ajax.php:852
 msgid "Use image and save"
 msgstr ""
 
-#: ../hooks/translation.php:99 ../includes/ajax.php:696
+#: ../_dist/hooks/translation.php:115 ../_dist/includes/ajax.php:856 ../hooks/translation.php:115
+#: ../includes/ajax.php:856
 #, php-format
 msgid "Use %s images and save"
 msgstr ""
 
-#: ../hooks/translation.php:101
+#: ../_dist/hooks/translation.php:117 ../hooks/translation.php:117
 msgid "There are unsaved contents. This contents will be lost when you leave the page."
 msgstr ""
 
-#: ../hooks/translation.php:103
+#: ../_dist/hooks/translation.php:119 ../hooks/translation.php:119
 msgid "There are too long texts. You must shorten these texts before you can continue."
 msgstr ""
 
-#: ../includes/adminbar.php:13
-msgid "Exit preview"
+#: ../_dist/hooks/translation.php:124 ../hooks/translation.php:124
+msgid "There was an error with your action/request."
 msgstr ""
 
-#: ../includes/adminbar.php:48
-msgid "Drop files here"
-msgstr ""
-
-#: ../includes/adminbar.php:54
-msgid "Uploader"
-msgstr ""
-
-#: ../includes/adminbar.php:55
-msgid "Open media library"
-msgstr ""
-
-#: ../includes/adminbar.php:56
-msgid "Upload files"
-msgstr ""
-
-#: ../includes/adminbar.php:127
-msgid "Fast preview (Cmd+E)"
-msgstr ""
-
-#: ../includes/adminbar.php:129
-msgid "Preview (Cmd+Shift+E)"
-msgstr ""
-
-#: ../includes/adminbar.php:139 ../includes/ajax.php:1136 ../includes/ajax.php:1197 ../includes/ajax.php:1258
-#: ../includes/ajax.php:1318
-msgid "Edit"
-msgstr ""
-
-#: ../includes/adminbar.php:141
-msgid "Customize"
-msgstr ""
-
-#: ../includes/adminbar.php:143
-msgid "Logout"
-msgstr ""
-
-#: ../includes/adminbar.php:147
-msgid "Support us"
-msgstr ""
-
-#: ../includes/ajax.php:183 ../includes/ajax.php:206
+#: ../_dist/includes/ajax.php:236 ../_dist/includes/ajax.php:260 ../includes/ajax.php:236 ../includes/ajax.php:260
 msgid "Insert Link"
 msgstr ""
 
-#: ../includes/ajax.php:187
+#: ../_dist/includes/ajax.php:240 ../_dist/includes/ajax.php:343 ../includes/ajax.php:240 ../includes/ajax.php:343
 msgid "Link"
 msgstr ""
 
-#: ../includes/ajax.php:188
+#: ../_dist/includes/ajax.php:241 ../_dist/includes/ajax.php:344 ../includes/ajax.php:241 ../includes/ajax.php:344
 msgid "File"
 msgstr ""
 
-#: ../includes/ajax.php:189
+#: ../_dist/includes/ajax.php:242 ../_dist/includes/ajax.php:345 ../includes/ajax.php:242 ../includes/ajax.php:345
 msgid "Page"
 msgstr ""
 
-#: ../includes/ajax.php:190
+#: ../_dist/includes/ajax.php:243 ../_dist/includes/ajax.php:346 ../includes/ajax.php:243 ../includes/ajax.php:346
 msgid "Post"
 msgstr ""
 
-#: ../includes/ajax.php:191
+#: ../_dist/includes/ajax.php:244 ../_dist/includes/ajax.php:347 ../includes/ajax.php:244 ../includes/ajax.php:347
 msgid "Category"
 msgstr ""
 
-#: ../includes/ajax.php:210
+#: ../_dist/includes/ajax.php:262 ../_dist/includes/ajax.php:378 ../_dist/includes/ajax.php:930 ../includes/ajax.php:262
+#: ../includes/ajax.php:378 ../includes/ajax.php:930
 msgid "Open in new tab or window"
 msgstr ""
 
-#: ../includes/ajax.php:223
+#: ../_dist/includes/ajax.php:277 ../includes/ajax.php:277
 msgid "Link adress"
 msgstr ""
 
-#: ../includes/ajax.php:276
-msgid "Batch editing"
+#: ../_dist/includes/ajax.php:279 ../includes/ajax.php:279
+msgid "Additional classes"
 msgstr ""
 
-#: ../includes/ajax.php:280 ../includes/ajax.php:309
-msgid "Selection"
+#: ../_dist/includes/ajax.php:339 ../includes/ajax.php:339
+msgid "Edit button"
 msgstr ""
 
-#: ../includes/ajax.php:281
-msgid "Actions"
-msgstr ""
-
-#: ../includes/ajax.php:295
+#: ../_dist/includes/ajax.php:359 ../includes/ajax.php:359
 msgid "Done"
 msgstr ""
 
-#: ../includes/ajax.php:311
-msgid "Select all modules"
+#: ../_dist/includes/ajax.php:370 ../includes/ajax.php:370
+msgid "Button Text"
 msgstr ""
 
-#: ../includes/ajax.php:312
-msgid "Unselect all modules"
+#: ../_dist/includes/ajax.php:372 ../includes/ajax.php:372
+msgid "Button Link"
 msgstr ""
 
-#: ../includes/ajax.php:313
-msgid "Add visible modules to selection"
+#: ../_dist/includes/ajax.php:376 ../includes/ajax.php:376
+msgid "Primary Button"
 msgstr ""
 
-#: ../includes/ajax.php:314
-msgid "Add invisible modules to selection"
-msgstr ""
-
-#: ../includes/ajax.php:323 ../includes/ajax.php:1137 ../includes/ajax.php:1198 ../includes/ajax.php:1259
-msgid "Delete"
-msgstr ""
-
-#: ../includes/ajax.php:325
-msgid "Delete selected modules"
-msgstr ""
-
-#: ../includes/ajax.php:329
-msgid "Move or copy"
-msgstr ""
-
-#: ../includes/ajax.php:335
-msgid "Target ID"
-msgstr ""
-
-#: ../includes/ajax.php:343
-msgid "Move selected modules"
-msgstr ""
-
-#: ../includes/ajax.php:345
-msgid "Copy selected modules"
-msgstr ""
-
-#: ../includes/ajax.php:639
+#: ../_dist/includes/ajax.php:796 ../includes/ajax.php:796
 msgid "Insert Images"
 msgstr ""
 
-#: ../includes/ajax.php:641
+#: ../_dist/includes/ajax.php:798 ../includes/ajax.php:798
 msgid "Insert Image"
 msgstr ""
 
-#: ../includes/ajax.php:646
+#: ../_dist/includes/ajax.php:803 ../includes/ajax.php:803
 msgid "Matching images"
 msgstr ""
 
-#: ../includes/ajax.php:647
+#: ../_dist/includes/ajax.php:804 ../includes/ajax.php:804
 msgid "Bigger images"
 msgstr ""
 
-#: ../includes/ajax.php:648
+#: ../_dist/includes/ajax.php:805 ../includes/ajax.php:805
 msgid "All images"
 msgstr ""
 
-#: ../includes/ajax.php:667
+#: ../_dist/includes/ajax.php:824 ../includes/ajax.php:824
 msgid "Search"
 msgstr ""
 
-#: ../includes/ajax.php:968
+#: ../_dist/includes/ajax.php:924 ../includes/ajax.php:924
+msgid "Local image settings"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:926 ../includes/ajax.php:926
+msgid "Image link"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:938 ../includes/ajax.php:938
+msgid "Global image settings"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:940 ../includes/ajax.php:940
+msgid "Title"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:944 ../includes/ajax.php:944
+msgid "Caption"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:948 ../includes/ajax.php:948
+msgid "Alt Text"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:952 ../includes/ajax.php:952
+msgid "Description"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:1235 ../includes/ajax.php:1235
 msgid "Insert image"
 msgstr ""
 
-#: ../includes/ajax.php:1033
+#: ../_dist/includes/ajax.php:1303 ../includes/ajax.php:1303
 #, php-format
 msgid "More images (%s)"
 msgstr ""
 
-#: ../includes/ajax.php:1042 ../includes/ajax.php:1152 ../includes/ajax.php:1213 ../includes/ajax.php:1274
+#: ../_dist/includes/ajax.php:1312 ../_dist/includes/ajax.php:1422 ../_dist/includes/ajax.php:1483
+#: ../_dist/includes/ajax.php:1544 ../includes/ajax.php:1312 ../includes/ajax.php:1422 ../includes/ajax.php:1483
+#: ../includes/ajax.php:1544
 msgid "No contents"
 msgstr ""
 
-#: ../includes/ajax.php:1134 ../includes/ajax.php:1195 ../includes/ajax.php:1256 ../includes/ajax.php:1316
+#: ../_dist/includes/ajax.php:1404 ../_dist/includes/ajax.php:1465 ../_dist/includes/ajax.php:1526
+#: ../_dist/includes/ajax.php:1586 ../includes/ajax.php:1404 ../includes/ajax.php:1465 ../includes/ajax.php:1526
+#: ../includes/ajax.php:1586
 msgid "Use as link"
 msgstr ""
 
-#: ../includes/ajax.php:1135 ../includes/ajax.php:1196 ../includes/ajax.php:1257 ../includes/ajax.php:1317
+#: ../_dist/includes/ajax.php:1405 ../_dist/includes/ajax.php:1466 ../_dist/includes/ajax.php:1527
+#: ../_dist/includes/ajax.php:1587 ../includes/ajax.php:1405 ../includes/ajax.php:1466 ../includes/ajax.php:1527
+#: ../includes/ajax.php:1587
 msgid "View"
 msgstr ""
 
-#: ../includes/ajax.php:1148 ../includes/ajax.php:1209 ../includes/ajax.php:1270
+#: ../_dist/includes/ajax.php:1407 ../_dist/includes/ajax.php:1468 ../includes/ajax.php:1407 ../includes/ajax.php:1468
+msgid "Trash"
+msgstr ""
+
+#: ../_dist/includes/ajax.php:1418 ../_dist/includes/ajax.php:1479 ../_dist/includes/ajax.php:1540
+#: ../includes/ajax.php:1418 ../includes/ajax.php:1479 ../includes/ajax.php:1540
 msgid "Show more"
 msgstr ""
 
-#: ../includes/ajax.php:1345
-msgid "You must select an image!"
-msgstr ""
-
-#: ../includes/ajax.php:1345
-msgid "Are you sure you want to delete this picture?"
-msgstr ""
-
-#: ../includes/ajax.php:1345
+#: ../_dist/includes/ajax.php:1529 ../_dist/includes/area.php:169 ../includes/ajax.php:1529 ../includes/area.php:169
 msgid "Delete Permanently"
 msgstr ""
 
-#: ../includes/ajax.php:1348
-msgid "Title"
-msgstr ""
-
-#: ../includes/ajax.php:1351
-msgid "Caption"
-msgstr ""
-
-#: ../includes/ajax.php:1354
-msgid "Alternative text"
-msgstr ""
-
-#: ../includes/ajax.php:1357
-msgid "Description"
-msgstr ""
-
-#: ../includes/area.php:84
-msgid "There are no modules"
-msgstr ""
-
-#: ../includes/area.php:139
+#: ../_dist/includes/area.php:102 ../includes/area.php:102
 msgid "Defaults"
 msgstr ""
 
-#: ../includes/area.php:141
+#: ../_dist/includes/area.php:103 ../includes/area.php:103
 msgid "Visibility"
 msgstr ""
 
-#: ../includes/area.php:145
+#: ../_dist/includes/area.php:104 ../includes/area.php:104
 msgid "Settings"
 msgstr ""
 
-#: ../includes/area.php:270
-#, php-format
-msgid "The module type \"%s\" seems not to exist"
+#: ../_dist/includes/content.php:324 ../includes/content.php:325
+msgid "Button hinzufügen"
 msgstr ""
 
-#: ../includes/area.php:284
-#, php-format
-msgid "The module type \"%s\" is incomplete"
+#: ../_dist/includes/elements.php:16 ../includes/elements.php:16
+msgid "Exit preview"
 msgstr ""
 
-#: ../includes/functions.php:293
-#, php-format
-msgid "%s year ago"
-msgid_plural "%s years ago"
-msgstr[0] ""
-msgstr[1] ""
+#: ../_dist/includes/elements.php:51 ../includes/elements.php:51
+msgid "Drop files here"
+msgstr ""
 
-#: ../includes/functions.php:298
-#, php-format
-msgid "%s month ago"
-msgid_plural "%s months ago"
-msgstr[0] ""
-msgstr[1] ""
+#: ../_dist/includes/elements.php:57 ../includes/elements.php:57
+msgid "Uploader"
+msgstr ""
 
-#: ../includes/functions.php:303
-#, php-format
-msgid "%s week ago"
-msgid_plural "%s weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+#: ../_dist/includes/elements.php:58 ../includes/elements.php:58
+msgid "Open media library"
+msgstr ""
 
-#: ../includes/functions.php:308
-#, php-format
-msgid "%s day ago"
-msgid_plural "%s days ago"
-msgstr[0] ""
-msgstr[1] ""
+#: ../_dist/includes/elements.php:59 ../includes/elements.php:59
+msgid "Upload files"
+msgstr ""
 
-#: ../includes/functions.php:313
-#, php-format
-msgid "%s hour ago"
-msgid_plural "%s hours ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../includes/functions.php:318
-#, php-format
-msgid "%s minute ago"
-msgid_plural "%s minutes ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../includes/functions.php:323
-#, php-format
-msgid "%s second ago"
-msgid_plural "%s seconds ago"
-msgstr[0] ""
-msgstr[1] ""
-
-#: ../includes/modulelist.php:32
+#: ../_dist/includes/modulelist.php:29 ../includes/modulelist.php:29
 msgid "Filter for Modules"
 msgstr ""
 
-#: ../includes/modulelist.php:45
-#, php-format
-msgid "No module folder. Create a folder named \"%s\" in your theme directory."
+#: ../includes/options.php:221
+msgid "Element sortieren"
 msgstr ""
 
-#: ../includes/modulelist.php:55
-msgid "There are no modules in your modules folder in your theme."
+#: ../includes/options.php:223
+msgid "Element entfernen"
 msgstr ""
 
-#: ../includes/modulelist.php:65
-msgid "This page has no module area. Create a module area with the areaCreate() function or the [gdymc_area] shortcode!"
+#: ../includes/options.php:230
+msgid "Element hinzufügen"
 msgstr ""
 
 #~ msgid "date_after"
@@ -662,8 +631,8 @@ msgstr ""
 #~ msgstr "404 Error"
 
 #~ msgid ""
-#~ "Der von Ihnen aufgerufene Inhalt existiert nicht, oder nicht mehr. Sie können Ihre Reise von unserer <a href="
-#~ "\"http://www.panoramahotel-oberjoch.de/\">Startseite</a> aus neu beginnen oder auf einen beliebigen "
+#~ "Der von Ihnen aufgerufene Inhalt existiert nicht, oder nicht mehr. Sie können Ihre Reise von unserer <a "
+#~ "href=\"http://www.panoramahotel-oberjoch.de/\">Startseite</a> aus neu beginnen oder auf einen beliebigen "
 #~ "Navigationspunkt klicken."
 #~ msgstr ""
 #~ "The content you have requested does not exist (no longer exists). Please go to our homepage to start your journey "
@@ -723,8 +692,8 @@ msgstr ""
 #~ "Gerne beraten wir Sie persönlich zu<br />Ihrem Aufenthalt bei uns. Rufen Sie an:<br /><br /><a style=\"color: #fff; "
 #~ "font-weight: bold;\" href=\"tel:+49832493330\">Tel. +49 (0) 8324 933 30</a>"
 #~ msgstr ""
-#~ "We are happy to advise you <br />personally about your stay with us. <br />Please call us: <br /><br /><a style="
-#~ "\"color: #fff; font-weight: bold;\" href=\"tel:+49832493330\">Tel. +49 (0) 8324 933 30</a>"
+#~ "We are happy to advise you <br />personally about your stay with us. <br />Please call us: <br /><br /><a "
+#~ "style=\"color: #fff; font-weight: bold;\" href=\"tel:+49832493330\">Tel. +49 (0) 8324 933 30</a>"
 
 #~ msgid "Gutschein?"
 #~ msgstr "Voucher?"

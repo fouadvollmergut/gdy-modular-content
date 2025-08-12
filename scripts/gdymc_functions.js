@@ -196,9 +196,76 @@
 			return JSON.stringify(buttonJSON);
 		}
 	}
+
+	class OptionSortable {
+		constructor ( sortableContainer ) {
+			this.sortableContainer = sortableContainer;
+			this.sortableList = sortableContainer.querySelector( 'ul.gdymc_option_sortable_list' );
+			this.addButton = sortableContainer.querySelector( 'button.gdymc_option_sortable_add' );
+		}
+
+		init () {
+			this.addButton.addEventListener( 'click', () => {
+				this.addItem();
+			});
+
+			this.sortableList.querySelectorAll( '.gdymc_option_sortable_remove' ).forEach( (button) => {
+				button.addEventListener( 'click', () => {
+					button.closest( 'li' ).remove();
+					this.updateValue();
+				});
+			});
+
+			jQuery( this.sortableList ).sortable({
+				revert: true,
+				handle: '.gdymc_option_sortable_item_handle',
+				update: () => {
+					this.updateValue();
+				}
+			});
+
+			jQuery( this.sortableList ).disableSelection();
+		}
+
+		addItem () {
+			const uuid = self.crypto.randomUUID();
+			const readableUuid = uuid.replace(/-/g, '').slice(0, 8);
+
+			const newItem = document.createElement( 'li' );
+			newItem.classList.add( 'gdymc_option_sortable_item' );
+			newItem.innerHTML = `
+				<span class="gdymc_option_sortable_item_handle dashicons dashicons-editor-code" aria-label="${ gdymc.lang( 'handle-sortable' ) }"></span>
+				<div class="gdymc_option_sortable_item_value" data-uuid="${ uuid }">${ readableUuid }</div>
+				<button class="gdymc_button gdymc_option_sortable_remove" aria-label="${ gdymc.lang( 'remove-element' ) }"></button>
+			`;
+
+			this.sortableList.appendChild( newItem );
+
+			newItem.querySelector( '.gdymc_option_sortable_remove' ).addEventListener( 'click', () => {
+				newItem.remove();
+				this.updateValue();
+			});
+
+			this.updateValue();
+		}
+
+		updateValue () {
+			const items = Array.from( this.sortableList.querySelectorAll( '.gdymc_option_sortable_item_value' ) );
+
+			if ( items.length === 0 ) {
+				this.sortableContainer.querySelector( '.gdymc_option_sortable' ).value = '';
+				return;
+			}
+
+			const values = items.map( item => item.dataset.uuid.trim() ).filter( value => value !== '' );
+			this.sortableContainer.querySelector( '.gdymc_option_sortable' ).value = values.join( ',' );
+
+			document.body.classList.add('gdymc_unsaved');
+			gdymc.info.isSaved = false;
+		}
+	}
 	
 	jQuery( document ).ready(function() {
-	
 
 		// Init rangy
 
@@ -242,7 +309,13 @@
 			tabContainer.find('.gdymc_tabs_content[data-tab="'+tabTarget+'"]').addClass('gdymc_active');
 		
 		});
-		
+
+		// Init options sortable
+		jQuery( '.gdymc_optioncontainer_sortable' ).each( function() {
+			var sortableContainer = this;
+			var sortable = new OptionSortable( sortableContainer );
+			sortable.init();
+		} );
 
 
 		// Warn on leave if unsaved

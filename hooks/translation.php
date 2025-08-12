@@ -64,6 +64,10 @@
 
 		$content[ 'button-yes' ] = __( 'Yes', 'gdy-modular-content' );
 
+		$content[ 'remove-element' ] = __( 'Remove Element', 'gdy-modular-content' );
+
+		$content[ 'handle-sortable' ] = __( 'Sort Element', 'gdy-modular-content' );
+
 		$content[ 'button-cancel' ] = __( 'Cancel', 'gdy-modular-content' );
 
 		$content[ 'button-change' ] = __( 'Change', 'gdy-modular-content' );
