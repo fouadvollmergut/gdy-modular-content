@@ -74,8 +74,12 @@
 
 		endif;
 
+		if ( !empty( $imageObject ) AND is_array( $imageObject ) AND isset( $imageObject[0] ) AND isset( $imageObject[0][0] ) AND is_numeric( $imageObject[0][0] ) ):
 
-		gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2] );
+			// Show image
+			gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2] );
+
+		endif;
 
 		
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ):

@@ -271,14 +271,18 @@
 
 		if ( $gdymc_module_types ) {
 
-			do_action( 'gdymc_modulefunctions_before', $moduleType );
+			foreach( $gdymc_module_types as $moduleType ):
 
-			foreach( $gdymc_module_types as $module_folder ):
-				$functionsPath = $module_folder . '/functions.php';
+				do_action( 'gdymc_modulefunctions_before', $moduleType );
+
+				$functionsPath = $moduleType . '/functions.php';
+
+				error_log($functionsPath);
 				if( file_exists( $functionsPath ) ) require_once( $functionsPath );
-			endforeach;
 
 			do_action( 'gdymc_modulefunctions_after', $moduleType );
+
+			endforeach;
 
 		}
 
