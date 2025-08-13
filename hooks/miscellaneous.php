@@ -277,7 +277,6 @@
 
 				$functionsPath = $moduleType . '/functions.php';
 
-				error_log($functionsPath);
 				if( file_exists( $functionsPath ) ) require_once( $functionsPath );
 
 			do_action( 'gdymc_modulefunctions_after', $moduleType );

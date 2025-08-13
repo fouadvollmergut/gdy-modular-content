@@ -101,9 +101,8 @@
 		global $gdymc_module_types;
 
 		foreach( $gdymc_module_types as $module_path ):
-			if ( str_contains($module_path, $location ) ):
+			if ( str_contains($module_path, $location ) || str_contains($location, $module_path) ):
 				return substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
-				break;
 			endif;
 		endforeach;
 
