@@ -74,10 +74,23 @@
 
 	// Returns the url to the modules folder
 
-	function gdymc_module_url() {
+	function gdymc_module_url($location, $path = '') {
+		try {
+			$location = str_replace( WP_CONTENT_DIR, '', $location );
 
-		return get_site_url() . '/wp-content';
+			global $gdymc_module_types;
 
+			foreach( $gdymc_module_types as $module_path ):
+				$module_path = str_replace( WP_CONTENT_DIR, '', $module_path );
+				if ( str_contains($location, $module_path) ):
+					return get_site_url() . '/wp-content/' .  $module_path . $path;
+					break;
+				endif;
+			endforeach;
+		} catch (Exception $e) {
+			error_log('Error in gdymc_module_url: Could not find matching module');
+			return '';
+		}
 	}
 
 
@@ -88,7 +101,7 @@
 		global $gdymc_module_types;
 
 		foreach( $gdymc_module_types as $module_path ):
-			if ( str_contains( $location, $module_path ) ):
+			if ( str_contains($module_path, $location ) || str_contains($location, $module_path) ):
 				return substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
 			endif;
 		endforeach;
@@ -208,7 +221,7 @@
 
 				$module->thumbPath = $module_path . '/thumb.svg';
 				
-				$module->thumbURL = gdymc_module_url() . '/' . $module_type . '/thumb.svg';
+				$module->thumbURL = gdymc_module_url($module_path, '/thumb.svg');
 
 
 				// Push handler into modules
