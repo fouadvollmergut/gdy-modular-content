@@ -24,8 +24,9 @@ Place following snippet within your `functions.php`:
 
 add_filter( 'gdymc_modules_folder', 'gdymc_folder' );
 
-function gdymc_folder() {
-  return get_template_directory() . '/modules';
+function gdymc_folder($module_folders) {
+  array_push($module_folders, get_template_directory() . '/modules');
+  return $module_folders;
 }
 ```
 

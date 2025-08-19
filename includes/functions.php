@@ -163,6 +163,12 @@
 
 		$gdymc_module_folders = apply_filters( 'gdymc_modules_folder', [ get_template_directory() . '/modules' ] );;
 
+		if ( !is_array( $gdymc_module_folders ) ):
+
+			$gdymc_module_folders = array( $gdymc_module_folders );
+
+		endif;
+
 		foreach ($gdymc_module_folders as $module_folder):
 
 			if (file_exists( $module_folder )):
