@@ -185,6 +185,8 @@
 
 		endif;
 
+		$gdymc_module_folders = array_unique( $gdymc_module_folders );
+
 		foreach ($gdymc_module_folders as $module_folder):
 
 			if (file_exists( $module_folder )):
