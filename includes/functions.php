@@ -82,7 +82,15 @@
 
 			foreach( $gdymc_module_types as $module_path ):
 				$module_path = str_replace( WP_CONTENT_DIR, '', $module_path );
+
 				if ( str_contains($location, $module_path) ):
+
+					// Ensure the file path starts with a slash
+					$file_path = str_replace( $module_path, '', $location );
+					if ( !str_starts_with($file_path, '/') || $file_path === '' ) {
+						continue; 
+					}
+
 					return get_site_url() . '/wp-content/' .  trim($module_path, '/') . $path;
 					break;
 				endif;
