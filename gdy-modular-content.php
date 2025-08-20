@@ -5,14 +5,14 @@ Description: Create and edit modular content from the frontend of your site.
 Text Domain: gdy-modular-content
 Domain Path: /languages/
 License: GPLv2
-Version: 0.9.981
+Version: 0.9.982
 */
 
 
 
 	/************************************* VERSION ***********************************/
 
-	define( 'GDYMC_PLUGIN_VERSION', '0.9.981' );
+	define( 'GDYMC_PLUGIN_VERSION', '0.9.982' );
 
 
 	/************************************* PLUGIN BASE ***********************************/
