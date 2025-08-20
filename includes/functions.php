@@ -85,9 +85,9 @@
 
 				if ( str_contains($location, $module_path) ):
 
-					// Ensure the file path starts with a slash
+					// Ensure the module name is fully matched
 					$file_path = str_replace( $module_path, '', $location );
-					if ( !str_starts_with($file_path, '/') || $file_path === '' ) {
+					if ( !str_starts_with($file_path, '/') AND !empty($file_path) ) {
 						continue; 
 					}
 
@@ -109,7 +109,15 @@
 		global $gdymc_module_types;
 
 		foreach( $gdymc_module_types as $module_path ):
+
 			if ( str_contains($module_path, $location ) || str_contains($location, $module_path) ):
+
+				// Ensure the module name is fully matched
+				$file_path = str_replace( $module_path, '', $location );
+				if ( !str_starts_with($file_path, '/') AND !empty($file_path) ) {
+					continue; 
+				}
+
 				return substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
 			endif;
 		endforeach;
@@ -224,6 +232,8 @@
 				// Extract folder name (type)
 				$module_type = substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
 
+				$module_name = end( explode('/', $module_type) );
+
 
 				// Set info
 
@@ -231,7 +241,7 @@
 
 				$module->type = $module_type;
 
-				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', end( explode('/', $module_type) ) ) ), $module_type );
+				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_name) ), $module_type );
 
 				$module->thumbPath = $module_path . '/thumb.svg';
 				
