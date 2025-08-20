@@ -1,7 +1,7 @@
 {
   "name": "gdy-modular-content",
   "version": "0.9.982",
-  "description": "=== GDY Modular Content === Contributors: fouadvollmer, grandy Tags: gdy modular content, gdymc, frontend editing, modular content, html modules Requires at least: 3.6 Tested up to: 5.3 Requires PHP: 6.6.2 Stable tag: 0.9.982",
+  "description": "=== GDY Modular Content === Contributors: fouadvollmer, grandy Tags: gdy modular content, gdymc, frontend editing, modular content, html modules Requires at least: 3.6 Tested up to: 5.3 Requires PHP: 6.6.2 Stable tag: 0.9.983",
   "main": "index.js",
   "scripts": {
     "start": "webpack --watch --mode=development --progress",
