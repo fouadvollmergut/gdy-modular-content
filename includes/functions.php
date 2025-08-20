@@ -83,7 +83,7 @@
 			foreach( $gdymc_module_types as $module_path ):
 				$module_path = str_replace( WP_CONTENT_DIR, '', $module_path );
 				if ( str_contains($location, $module_path) ):
-					return get_site_url() . '/wp-content/' .  $module_path . $path;
+					return get_site_url() . '/wp-content/' .  trim($module_path, '/') . $path;
 					break;
 				endif;
 			endforeach;
