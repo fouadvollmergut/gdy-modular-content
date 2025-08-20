@@ -213,9 +213,22 @@
 				// Handler
 				$module = new stdClass;
 
+				$module_name = null;
+				$module_active = true;
+
 				// Extract folder name (type)
 				$module_type = substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
 
+				// Extract module settings
+				$module_settings_file = $module_path . '/settings.json';
+
+				if ( file_exists( $module_settings_file ) ):
+					$json = file_get_contents( $module_settings_file );
+					$module_settings = json_decode( $json, true );
+
+					$module_name = isset( $module_settings[ 'name' ] ) ? $module_settings[ 'name' ] : null;
+					$module_active = isset( $module_settings[ 'active' ] ) ? $module_settings[ 'active' ] : true;
+				endif;
 
 				// Set info
 
@@ -224,6 +237,10 @@
 				$module->type = $module_type;
 
 				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', end( explode('/', $module_type) ) ) ), $module_type );
+
+				$module->name = $module_name;
+
+				$module->active = $module_active;
 
 				$module->thumbPath = $module_path . '/thumb.svg';
 				
