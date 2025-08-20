@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/Stable-0.9.983-green)
+![Static Badge](https://img.shields.io/badge/Stable-0.9.984-green)
 ![Static Badge](https://img.shields.io/badge/Wordpress-6.8.2-blue)
 
 # GDY Modular Content
