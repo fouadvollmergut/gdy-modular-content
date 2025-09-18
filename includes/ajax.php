@@ -747,10 +747,12 @@
 			if(isset($_POST['w'])) $targetWidth = $_POST['w'];
 			if(isset($_POST['h'])) $targetHeight = $_POST['h'];
 			$currentImages = ( isset( $_POST['i'] ) AND json_decode( stripcslashes( $_POST['i'] ) ) != NULL ) ? json_decode( stripcslashes( $_POST['i'] ) ) : NULL;
+
+			if(isset($_POST['l'])) $lazyLoad = json_decode($_POST['l']); else $lazyLoad = true;
 			if(isset($_POST['multiple'])) $allowMultiple = $_POST['multiple']; else $allowMultiple = false;
 			if(isset($_POST['m'])) $currentMode = $_POST['m']; else $currentMode = 'exact';
-			
-			
+
+
 			$targetNumericWidth = is_numeric($targetWidth) ? $targetWidth : 0;
 			$targetNumericHeight = is_numeric($targetHeight) ? $targetHeight : 0;
 
@@ -880,6 +882,11 @@
 
 			echo '</div>';
 
+			echo '<div class="gdymc_right">';
+
+				echo '<input type="checkbox" id="gdymc_image_lazy_loading" ' . ( $lazyLoad ? 'checked' : '' ) . ' /> <label for="gdymc_image_lazy_loading">' . __( 'Enable lazy loading', 'gdy-modular-content' ) . '</label>';
+
+			echo '</div>';
 
 			echo '</div></div>';
 			

@@ -4,7 +4,7 @@
 	
 	
 	
-	function gdymc_responsive_image( $imageID, $imageSize = null, $linkURI = null, $linkTarget = 0 ) {
+	function gdymc_responsive_image( $imageID, $imageSize = null, $linkURI = null, $linkTarget = 0, $lazyLoad = true ) {
 
 
 		do_action( 'gdymc_image_before', $imageID, $imageSize );
@@ -18,7 +18,7 @@
 
 			if( is_numeric( $imageID ) AND !empty( $imageID ) ):
 
-				echo wp_get_attachment_image( $imageID, apply_filters( 'gdymc_imagesize', 'full' ) );
+				echo wp_get_attachment_image( $imageID, apply_filters( 'gdymc_imagesize', 'full' ), false, array( 'loading' => ( $lazyLoad ? 'lazy' : 'eager' ) ) );
 
 			else:
 
@@ -54,7 +54,13 @@
 		
 		// This is an array that hold arrays with 3 values: image id, link url, link target
 		$contentString = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
-		$imageObject = json_decode( $contentString );
+		$imageData = json_decode( $contentString );
+
+		if (!is_array($imageData)) {
+			$imageObject = $imageData->images;
+		} else {
+			$imageObject = $imageData;
+		}
 
 		// This converts the pre 0.7.4 system into the new one
 		if( !is_array( $imageObject ) AND !empty( $contentString ) ):
@@ -66,7 +72,7 @@
 
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ):
 		
-			echo '<div class="gdymc_image img" data-multiple="false" data-width="'.$imageSize[0].'" data-height="'.$imageSize[1].'" data-id="'.$contentRealID.'" data-image=\'' . json_encode( $imageObject ) . '\'>';
+			echo '<div class="gdymc_image img" data-multiple="false" data-width="'.$imageSize[0].'" data-height="'.$imageSize[1].'" data-id="'.$contentRealID.'" data-image=\'' . json_encode( $imageData ) . '\'>';
 		
 		else:
 
@@ -77,7 +83,7 @@
 		if ( !empty( $imageObject ) AND is_array( $imageObject ) AND isset( $imageObject[0] ) AND isset( $imageObject[0][0] ) AND is_numeric( $imageObject[0][0] ) ):
 
 			// Show image
-			gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2] );
+			gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2], isset($imageData->lazy) ? $imageData->lazy : true );
 
 		endif;
 
@@ -109,8 +115,13 @@
 
 		// This is an array that hold arrays with 3 values: image id, link url, link target
 		$contentString = get_metadata( gdymc_object_type(), gdymc_object_id(), '_gdymc_singlecontent_' . $contentRealID, true );
-		$imageObject = json_decode( $contentString );
+		$imageData = json_decode( $contentString );
 
+		if (!is_array($imageData)) {
+			$imageObject = $imageData->images;
+		} else {
+			$imageObject = $imageData;
+		}
 
 		// This converts the pre 0.7.4 system into the new one
 		if( !is_array( $imageObject ) AND !empty( $contentString ) ):
@@ -132,7 +143,7 @@
 
 		if( gdymc_logged() AND current_user_can( 'edit_posts', gdymc_object_id() ) ):
 
-			echo '<div class="gdymc_gallery_container img" data-multiple="true" data-width="'.$imageSize[0].'" data-height="'.$imageSize[1].'" data-id="'.$contentRealID.'" data-image=\'' . json_encode( $imageObject ) . '\'>';
+			echo '<div class="gdymc_gallery_container img" data-multiple="true" data-width="'.$imageSize[0].'" data-height="'.$imageSize[1].'" data-id="'.$contentRealID.'" data-image=\'' . json_encode( $imageData ) . '\'>';
 
 		else:
 
@@ -163,7 +174,7 @@
 
 					else:
 
-						gdymc_responsive_image( $image[0], $imageSize, $image[1], $image[2] );		
+						gdymc_responsive_image( $image[0], $imageSize, $image[1], $image[2], isset($imageData->lazy) ? $imageData->lazy : true );
 
 					endif;							
 

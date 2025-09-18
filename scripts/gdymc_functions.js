@@ -1051,7 +1051,7 @@
 				gdymc.info.activeImage = jQuery(this);
 				var width = gdymc.info.activeImage.attr('data-width');
 				var height = gdymc.info.activeImage.attr('data-height');
-				var image =	gdymc.info.activeImage.attr('data-image');
+				var imageData =	JSON.parse(gdymc.info.activeImage.attr('data-image'));
 				var multiple = gdymc.info.activeImage.attr('data-multiple');
 				gdymc.info.activeImage.addClass('gdymc_active');
 				gdymc.info.activeWidth = width;
@@ -1060,9 +1060,10 @@
 				var data = {
 					w: width,
 					h: height,
-					i: image,
+					i: JSON.stringify(imageData.images),
 					m: 'exact',
 					multiple: multiple,
+					l: JSON.stringify(imageData.lazy),
 				};
 				
 				gdymc.ajax( 'gdymc_action_imageoverlay', data, function(response) {
@@ -1524,15 +1525,20 @@
 		
 
 		jQuery('body').on( 'click', '#gdymc_imageinsert', function() {
-			
+
 			var selectedImages = gdymc_get_selected_images();
+			var lazyLoad = jQuery( '#gdymc_image_lazy_loading' ).is( ':checked' );
 
 			if( selectedImages.length == 0 ) selectedImages = null;
 
-			gdymc.info.activeImage.attr( 'data-image', JSON.stringify( selectedImages ) );
+			var data = {
+				images: selectedImages,
+				lazy: lazyLoad,
+			}
+
+			gdymc.info.activeImage.attr( 'data-image', JSON.stringify( data ) );
 
 			jQuery( '.gdymc_save' ).trigger( 'click' );
-
 			
 		});
 
@@ -2367,15 +2373,15 @@
 				var handler = new Array();
 				var id = jQuery(this).attr('data-id');
 				var content = jQuery(this).attr('data-image');
+				var lazyloading = jQuery(this).attr('data-lazy') || 'false';
 
 				if( content == 'null' ) content = '';
 
 				handler.push( id );
 				handler.push( content );
-			
+
 				contents.push( handler );
-				
-			
+
 			} );
 
 
