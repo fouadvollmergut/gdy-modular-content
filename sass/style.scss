@@ -1320,7 +1320,7 @@
 	.gdymc_overlay_foot {
 		display: block;
 		position: absolute;
-		height: 100px;
+		height: auto;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
@@ -1331,9 +1331,14 @@
 	
 	.gdymc_overlay_foot_inner {
 		padding: 30px 40px;
-		display: block;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		row-gap: 10px;
 	}
-	
+
 	.gdymc_overlay_content {
 		position: absolute;
 		top: 136px;
@@ -1643,20 +1648,29 @@
 	}
 
 	.gdymc_overlay_foot .gdymc_left {
-		white-space: nowrap;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		flex-wrap: wrap;
+		row-gap: 10px;
+		column-gap: 20px;
 	}
 
 	.gdymc_image_selection {
-		white-space: nowrap;
-		display: inline-block;
-		vertical-align: top;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		flex-wrap: wrap;
+		row-gap: 10px;
+		column-gap: 20px;
 	}
 
 	.gdymc_image_selection .gdymc_imagethumb {
 		width: 40px;
 		height: 40px;
 		position: relative;
-		margin-left: 20px;
 		cursor: move;
 		float: left;
 		list-style: none;

@@ -847,7 +847,7 @@
 
 
 
-			echo '<div class="gdymc_overlay_foot"><div class="gdymc_overlay_foot_inner gdymc_fix">';
+			echo '<div class="gdymc_overlay_foot"><div class="gdymc_overlay_foot_inner">';
 
 			if( is_array( $currentImages ) AND count( $currentImages ) == 1 ):
 
@@ -867,7 +867,7 @@
 
 				echo '<button id="gdymc_imageinsert" class="gdymc_button">'.$buttonTitle.'</button>';
 
-				echo '<ul class="gdymc_image_selection gdymc_fix">';
+				echo '<ul class="gdymc_image_selection">';
 
 					if( $currentImages ): foreach( $currentImages as $currentImage ):
 
