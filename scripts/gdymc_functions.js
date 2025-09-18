@@ -1057,10 +1057,12 @@
 				gdymc.info.activeWidth = width;
 				gdymc.info.activeHeight = height;
 
+				var images = imageData.images ? imageData.images : imageData;
+
 				var data = {
 					w: width,
 					h: height,
-					i: JSON.stringify(imageData.images),
+					i: JSON.stringify(images),
 					m: 'exact',
 					multiple: multiple,
 					l: JSON.stringify(imageData.lazy),
