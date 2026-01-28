@@ -39,20 +39,18 @@
 				element.id = 'gdymc_text_' + Math.random().toString(36).substr(2, 9);
 			}
 
-			// Initialize TinyMCE
+			// Initialize TinyMCE in inline mode without its own toolbar
 			tinymce.init({
 				target: element,
 				inline: true,
 				menubar: false,
+				toolbar: false,
+				statusbar: false,
 				plugins: 'lists link',
-				toolbar: 'bold italic | bullist numlist | alignleft aligncenter alignright | link unlink | removeformat',
 				skin_url: gdymc_dynamic_data.tinymce_skin_url,
 				theme_url: gdymc_dynamic_data.tinymce_theme_url,
 				content_css: false,
 				contextmenu: false,
-				toolbar_mode: 'floating',
-				quickbars_insert_toolbar: false,
-				quickbars_selection_toolbar: 'bold italic | link',
 				setup: function(editor) {
 					
 					// Mark as initialized
@@ -60,7 +58,7 @@
 						element.classList.add('gdymc_tinymce_initialized');
 						
 						// Trigger change event for gdymc
-						editor.on('change keyup', function() {
+						editor.on('change keyup setcontent', function() {
 							document.body.classList.add('gdymc_unsaved');
 							gdymc.info.isSaved = false;
 						});
