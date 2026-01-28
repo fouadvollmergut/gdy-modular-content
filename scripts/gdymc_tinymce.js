@@ -140,6 +140,33 @@
 		
 	};
 
+	// Override the existing addtag function to work with TinyMCE for link insertion
+	var originalAddTag = gdymc.editor.addtag;
+	
+	gdymc.editor.addtag = function(tag, attributes) {
+		
+		// Check if we're in a TinyMCE editor
+		var activeEditor = tinymce.activeEditor;
+		
+		if (activeEditor && jQuery(activeEditor.getElement()).hasClass('gdymc_text') && tag === 'a') {
+			
+			// Use TinyMCE to insert link
+			var linkAttrs = {
+				href: attributes.href || '',
+				target: attributes.target || '',
+				class: attributes.className || ''
+			};
+			
+			// Insert/update link using TinyMCE
+			activeEditor.execCommand('mceInsertLink', false, linkAttrs);
+			
+		} else {
+			// Use original addtag function
+			originalAddTag(tag, attributes);
+		}
+		
+	};
+
 	// Initialize TinyMCE when DOM is ready
 	jQuery(document).ready(function() {
 		
