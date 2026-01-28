@@ -353,8 +353,8 @@
 
 							if( gdymc_logged() && !gdymc_preview() ):
 
-								echo '<button class="gdymc_button gdymc_inside_button gdymc_button_editbutton" aria-label="Edit button" style="display: none;" title="' . __('Button bearbeiten', 'gdy-modular-content') . '"><span class="dashicons dashicons-edit"></span></button>';
-								echo '<button class="gdymc_button_delete gdymc_inside_button gdymc_button_removebutton" aria-label="Remove button" style="display: none;" title="' . __('Button entfernen', 'gdy-modular-content') . '"><span class="dashicons dashicons-trash"></span></button>';
+								echo '<button class="gdymc_button gdymc_inside_button gdymc_button_editbutton" aria-label="Edit button" style="display: none;" title="' . __('Edit Button', 'gdy-modular-content') . '"><span class="dashicons dashicons-edit"></span></button>';
+								echo '<button class="gdymc_button_delete gdymc_inside_button gdymc_button_removebutton" aria-label="Remove button" style="display: none;" title="' . __('Remove Button', 'gdy-modular-content') . '"><span class="dashicons dashicons-trash"></span></button>';
 
 							endif;
 

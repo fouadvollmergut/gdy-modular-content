@@ -73,13 +73,14 @@
 					// Before modules hook
 
 					do_action( 'gdymc_modulelist_before_modules' );
-					
 
+					$inactive_modules = get_option( 'gdymc_inactive_modules', array() );
 
 					// Output the modules
 
 					foreach( $gdymc_modules as $module ):
-						
+
+						if ( in_array( $module->type, $inactive_modules ) ) continue;
 
 						do_action( 'gdymc_modulelist_before_module', $module->type );
 

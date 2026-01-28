@@ -28,6 +28,7 @@
 
         // Get placed modules for this object
         $moduleArray = gdymc_module_array( $gdymc_object_id, $gdymc_object_type );
+        $inactive_modules = get_option( 'gdymc_inactive_modules', array() );
 
 
         // Check-Loop
@@ -74,6 +75,8 @@
 
             // Open module
             $gdymc_module = new GDYMC_MODULE( $id, $gdymc_object_id, $gdymc_object_type );
+
+            if ( in_array( $gdymc_module->type, $inactive_modules ) ) continue;
 
             // If module is visible
             if( $gdymc_module->is_visible() OR gdymc_logged() ):
