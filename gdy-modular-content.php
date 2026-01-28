@@ -220,8 +220,10 @@ Version: 0.9.984
 			wp_enqueue_script( 'mousetrap', plugins_url('/scripts/mousetrap.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'dropzone', plugins_url('/scripts/dropzone.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'fastlivefilter', plugins_url('/scripts/filter.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'tinymce', plugins_url('/scripts/tinymce.min.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'gdymc_core', plugins_url('/scripts/gdymc_core.js', __FILE__ ), array( 'jquery' ), GDYMC_PLUGIN_VERSION );
 			wp_enqueue_script( 'gdymc_functions', plugins_url('/scripts/gdymc_functions.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'utils', 'gdymc_core', 'jcrop', 'kinetic', 'mousetrap', 'dropzone', 'fastlivefilter', 'rangy_core', 'rangy_selectionsaverestore', 'rangy_classapplier' ), GDYMC_PLUGIN_VERSION );
+			wp_enqueue_script( 'gdymc_tinymce', plugins_url('/scripts/gdymc_tinymce.js', __FILE__ ), array( 'jquery', 'tinymce', 'gdymc_core', 'gdymc_functions' ), GDYMC_PLUGIN_VERSION );
 
 			// Javascript data
 
@@ -234,7 +236,9 @@ Version: 0.9.984
 				'role_uploads' => current_user_can( 'upload_files', gdymc_object_id() ),
 				'cookie_path' => COOKIEPATH,
 				'cookie_domain' => COOKIE_DOMAIN,
-				'current_user' => get_current_user_id()
+				'current_user' => get_current_user_id(),
+				'tinymce_skin_url' => plugins_url('/scripts/tinymce-skins/ui/oxide', __FILE__ ),
+				'tinymce_theme_url' => plugins_url('/scripts/tinymce-themes/silver/theme.min.js', __FILE__ )
 			) );
 
 			// Javascript data language strings
