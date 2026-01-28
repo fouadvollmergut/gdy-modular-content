@@ -58,6 +58,20 @@ Alternativly you can add a shortcode `[gdymc_area]` to the pages that should con
 
 Now navigate to a page containing a module area and add some module from the top right of the *gdymc admin bar*.
 
+## Features
+
+### Text Formatting with TinyMCE
+
+The plugin uses TinyMCE editor for rich text formatting in contenteditable divs. This provides:
+
+- Robust text editing capabilities
+- Support for bold, italic, lists, alignment, and more
+- Seamless integration with the GDYMC toolbar
+- Link insertion and management
+- Compatible with all GDYMC formatting features
+
+The TinyMCE integration works transparently in the background, enhancing the existing editing experience without changing the user interface.
+
 ---
 
 ## Development Workflow
