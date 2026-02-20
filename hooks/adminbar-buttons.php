@@ -193,6 +193,31 @@
 
 
 
+	// Position button
+
+	add_action( 'gdymc_adminbarbuttons_right', 'gdymc_hook_barpositionmenu', 35, 0 );
+
+	function gdymc_hook_barpositionmenu() {
+
+		echo '<li class="gdymc_dropdown_trigger">';
+
+			echo '<button data-gdymc-tip="' . __( 'Admin bar position', 'gdy-modular-content' ) . '" id="gdymc_barposition"><span class="dashicons dashicons-move"></span></button>';
+
+			echo '<div id="gdymc_barpositionmenu" class="gdymc_dropdown">';
+
+				echo '<a href="#" data-position="top"><span class="dashicons dashicons-arrow-up-alt2"></span>' . __( 'Top', 'gdy-modular-content' ) . '</a>';
+				echo '<a href="#" data-position="bottom"><span class="dashicons dashicons-arrow-down-alt2"></span>' . __( 'Bottom', 'gdy-modular-content' ) . '</a>';
+				echo '<a href="#" data-position="left"><span class="dashicons dashicons-arrow-left-alt2"></span>' . __( 'Left', 'gdy-modular-content' ) . '</a>';
+				echo '<a href="#" data-position="right"><span class="dashicons dashicons-arrow-right-alt2"></span>' . __( 'Right', 'gdy-modular-content' ) . '</a>';
+
+			echo '</div>';
+
+		echo '</li>';
+
+	}
+
+
+
 	// Backend button
 
 	add_action( 'gdymc_adminbarbuttons_right', 'gdymc_hook_backendmenu', 40, 0 );

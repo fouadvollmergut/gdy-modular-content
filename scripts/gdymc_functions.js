@@ -3037,6 +3037,25 @@
 			
 		});
 
+
+		// Admin bar position
+
+		jQuery( document.body ).on( 'click', '#gdymc_barpositionmenu a', function( e ) {
+
+			e.preventDefault();
+
+			var position = jQuery( this ).data( 'position' );
+
+			jQuery( document.body ).removeClass( 'gdymc_bar_top gdymc_bar_bottom gdymc_bar_left gdymc_bar_right' );
+			jQuery( document.body ).addClass( 'gdymc_bar_' + position );
+
+			// 3600 * 24 * 365 = one year in seconds
+			wpCookies.set( 'gdymc_barposition', position, 3600 * 24 * 365, gdymc_dynamic_data.cookie_path, gdymc_dynamic_data.cookie_domain );
+
+			return false;
+
+		} );
+
 		
 
 		
