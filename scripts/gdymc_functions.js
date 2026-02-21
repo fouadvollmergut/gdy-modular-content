@@ -1879,10 +1879,12 @@
 		
 		jQuery( '#gdymc_tooltip' ).remove();
 		
+		var adminBarHeight = 40;
+		var tooltipArrowSpacing = 5;
 		var windowWidth = jQuery(window).width();
 		var source = jQuery( this );
 		var message = source.attr( 'data-gdymc-tip' );
-		var sourceTop = source.offset().top + source.height();
+		var sourceTop = source.offset().top + source.height() + adminBarHeight;
 		var sourceLeft = source.offset().left;
 		var sourceWidth = source.width();
 		var sourceRight = windowWidth - sourceLeft - sourceWidth;
@@ -1898,19 +1900,19 @@
 		if ( body.hasClass('gdymc_bar_bottom') ) {
 
 			// Tooltip above the button (downward-pointing arrow)
-			var ttTop = source.offset().top - tooltipHeight - 5;
+			var ttTop = source.offset().top - tooltipHeight - tooltipArrowSpacing + adminBarHeight;
 			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_above' ).css( { 'top': ttTop, 'left': sourceLeft } );
 
 		} else if ( body.hasClass('gdymc_bar_left') ) {
 
 			// Tooltip to the right of the left sidebar bar
-			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2;
+			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2 + adminBarHeight;
 			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_side' ).css( { 'top': ttTop, 'left': sidebarTooltipOffset } );
 
 		} else if ( body.hasClass('gdymc_bar_right') ) {
 
 			// Tooltip to the left of the right sidebar bar
-			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2;
+			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2 + adminBarHeight;
 			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_side' ).css( { 'top': ttTop, 'right': sidebarTooltipOffset } );
 
 		} else {

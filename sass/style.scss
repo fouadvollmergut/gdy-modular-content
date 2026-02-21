@@ -16,6 +16,7 @@
 	$color_error: #ffba00;
 	$color_blue: #1e8cbe;
 	$color_brightblue: #2ea2cc;
+	$vertical_panel_width: 200px;
 	
 
 
@@ -540,8 +541,12 @@
 
 	.gdymc_bar_left #gdymc_modules {
 		top: 0px;
+		bottom: 0px;
 		left: 50px;
-		width: calc(100% - 50px);
+		right: auto;
+		width: $vertical_panel_width;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 	.gdymc_bar_left .gdymc_dropdown {
@@ -559,15 +564,49 @@
 
 	.gdymc_bar_right #gdymc_modules {
 		top: 0px;
+		bottom: 0px;
+		left: auto;
 		right: 50px;
-		left: 0px;
-		width: calc(100% - 50px);
+		width: $vertical_panel_width;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 	.gdymc_bar_right .gdymc_dropdown {
 		top: 0px;
 		right: 50px;
 		left: auto;
+	}
+
+	/* Vertical module panel layout for left/right bar */
+
+	.gdymc_bar_left #gdymc_modules_inner,
+	.gdymc_bar_right #gdymc_modules_inner {
+		white-space: normal;
+		width: 100%;
+	}
+
+	.gdymc_bar_left #gdymc_modules_list::before,
+	.gdymc_bar_left #gdymc_modules_list::after,
+	.gdymc_bar_right #gdymc_modules_list::before,
+	.gdymc_bar_right #gdymc_modules_list::after {
+		display: none;
+	}
+
+	.gdymc_bar_left .gdymc_modules_add_container,
+	.gdymc_bar_right .gdymc_modules_add_container {
+		display: block;
+		width: auto;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	.gdymc_bar_left .gdymc_modules_add_label,
+	.gdymc_bar_right .gdymc_modules_add_label {
+		left: 0;
+		right: 0;
+		margin-left: 0;
+		width: auto;
 	}
 
 	/* Save button: hide text in left/right sidebar mode */
@@ -974,8 +1013,9 @@
 		background: #363636;
 		position: fixed;
 		top: 50px;
-		left: 0px;
-		width: 100%;
+		left: 50px;
+		right: 50px;
+		width: auto;
 		z-index: 9999999;
 		opacity: 0.0;
 		overflow: hidden;
