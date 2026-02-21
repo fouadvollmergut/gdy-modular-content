@@ -463,22 +463,25 @@
 
 	#gdymc_adminbar {
 		position: fixed;
-		top: 0px;
-		left: 0px;
-		width: 100%;
+		top: 10px;
+		left: 10px;
+		right: 10px;
+		width: auto;
 		z-index: 9999999;
+		box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+		border-radius: 4px;
 	}
 
 	/* Admin bar position: Bottom */
 
 	.gdymc_bar_bottom #gdymc_adminbar {
 		top: auto;
-		bottom: 0px;
+		bottom: 10px;
 	}
 
 	.gdymc_bar_bottom #gdymc_modules {
 		top: auto;
-		bottom: 40px;
+		bottom: 50px;
 	}
 
 	.gdymc_bar_bottom .gdymc_dropdown {
@@ -491,7 +494,9 @@
 	.gdymc_bar_left #gdymc_adminbar,
 	.gdymc_bar_right #gdymc_adminbar {
 		width: 40px;
-		height: 100%;
+		height: auto;
+		top: 10px;
+		bottom: 10px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -518,43 +523,50 @@
 		width: 40px;
 	}
 
+	.gdymc_bar_left #gdymc_adminbar button,
+	.gdymc_bar_right #gdymc_adminbar button {
+		min-width: 40px;
+		width: 40px;
+		overflow: hidden;
+		padding: 0;
+	}
+
 	/* Admin bar position: Left */
 
 	.gdymc_bar_left #gdymc_adminbar {
-		top: 0px;
-		left: 0px;
+		left: 10px;
+		right: auto;
 	}
 
 	.gdymc_bar_left #gdymc_modules {
 		top: 0px;
-		left: 40px;
-		width: calc(100% - 40px);
+		left: 50px;
+		width: calc(100% - 50px);
 	}
 
 	.gdymc_bar_left .gdymc_dropdown {
 		top: 0px;
-		left: 40px;
+		left: 50px;
 		right: auto;
 	}
 
 	/* Admin bar position: Right */
 
 	.gdymc_bar_right #gdymc_adminbar {
-		top: 0px;
 		left: auto;
-		right: 0px;
+		right: 10px;
 	}
 
 	.gdymc_bar_right #gdymc_modules {
 		top: 0px;
-		right: 40px;
+		right: 50px;
 		left: 0px;
-		width: calc(100% - 40px);
+		width: calc(100% - 50px);
 	}
 
 	.gdymc_bar_right .gdymc_dropdown {
 		top: 0px;
-		right: 40px;
+		right: 50px;
 		left: auto;
 	}
 	
@@ -925,7 +937,7 @@
 	#gdymc_modules {
 		background: #363636;
 		position: fixed;
-		top: 40px;
+		top: 50px;
 		left: 0px;
 		width: 100%;
 		z-index: 9999999;
