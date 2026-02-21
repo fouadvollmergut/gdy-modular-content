@@ -464,8 +464,8 @@
 	#gdymc_adminbar {
 		position: fixed;
 		top: 10px;
-		left: 10px;
-		right: 10px;
+		left: 50px;
+		right: 50px;
 		width: auto;
 		z-index: 9999999;
 		box-shadow: 0 3px 15px rgba(0,0,0,0.3);
@@ -568,6 +568,16 @@
 		top: 0px;
 		right: 50px;
 		left: auto;
+	}
+
+	/* Save button: hide text in left/right sidebar mode */
+	/* !important needed to override .gdymc_save { padding-left: 45px !important } */
+
+	.gdymc_bar_left #gdymc_adminbar #gdymc_save,
+	.gdymc_bar_right #gdymc_adminbar #gdymc_save {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		font-size: 0;
 	}
 	
 	.gdymc_softpreview .gdymc_modulebar {
@@ -912,6 +922,32 @@
 		-o-transform: rotate(45deg);
 		-webkit-transform: rotate(45deg);
 		transform: rotate(45deg);
+	}
+
+	/* Tooltip pointing downward (for bottom bar position) */
+
+	.gdymc_tooltip_above {
+		margin-top: 0;
+	}
+
+	.gdymc_tooltip_above #gdymc_tooltip_arrow {
+		top: auto;
+		bottom: -10px;
+		left: 10px;
+	}
+
+	.gdymc_tooltip_above #gdymc_tooltip_arrow::after {
+		top: -30px;
+	}
+
+	/* Tooltip to the side (for left/right bar position) */
+
+	.gdymc_tooltip_side {
+		margin-top: 0;
+	}
+
+	.gdymc_tooltip_side #gdymc_tooltip_arrow {
+		display: none;
 	}
 	
 	
