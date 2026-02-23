@@ -407,6 +407,41 @@
 
 
 
+		// Mobile: collapse format buttons into the "show all" overlay on small screens
+
+		var gdymc_mobile_breakpoint = 600;
+		var gdymc_check_mobile_timer;
+
+		function gdymc_check_mobile() {
+
+			var isMobile = jQuery( window ).width() <= gdymc_mobile_breakpoint;
+
+			if ( isMobile && !jQuery( document.body ).hasClass( 'gdymc_mobile' ) ) {
+
+				jQuery( document.body ).addClass( 'gdymc_mobile' );
+				jQuery( '#gdymc_formatbuttons button:visible' ).hide();
+				gdymc_formatbuttons_resize();
+
+			} else if ( !isMobile && jQuery( document.body ).hasClass( 'gdymc_mobile' ) ) {
+
+				jQuery( document.body ).removeClass( 'gdymc_mobile' );
+				jQuery( '#gdymc_formatbuttons button' ).show();
+				gdymc_formatbuttons_resize();
+
+			}
+
+		}
+
+		jQuery( window ).on( 'resize', function() {
+
+			clearTimeout( gdymc_check_mobile_timer );
+			gdymc_check_mobile_timer = setTimeout( gdymc_check_mobile, 150 );
+
+		} );
+		gdymc_check_mobile();
+
+
+
 
 		// Show all format buttons button
 

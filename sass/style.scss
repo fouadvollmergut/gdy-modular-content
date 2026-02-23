@@ -618,6 +618,26 @@
 		padding-right: 0 !important;
 		font-size: 0;
 	}
+
+	/* Mobile: compact bar, hide desktop-only buttons, let format buttons collapse */
+
+	@media only screen and (max-width: 600px) {
+
+		#gdymc_adminbar {
+			left: 10px;
+			right: 10px;
+		}
+
+		#gdymc_modules {
+			left: 0;
+			right: 0;
+		}
+
+		.gdymc_desktop_only {
+			display: none !important;
+		}
+
+	}
 	
 	.gdymc_softpreview .gdymc_modulebar {
 		display: none;

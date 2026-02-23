@@ -172,7 +172,7 @@
 
 	function gdymc_hook_previewmenu() {
 
-		echo '<li class="gdymc_dropdown_trigger">';
+		echo '<li class="gdymc_dropdown_trigger gdymc_desktop_only">';
 
 
 			echo '<button data-gdymc-tip="' . __( 'View modes', 'gdy-modular-content' ) . '" id="gdymc_preview"><span class="dashicons dashicons-visibility"></span><span class="dashicons dashicons-hidden"></span></button>';
@@ -199,7 +199,7 @@
 
 	function gdymc_hook_barpositionmenu() {
 
-		echo '<li class="gdymc_dropdown_trigger">';
+		echo '<li class="gdymc_dropdown_trigger gdymc_desktop_only">';
 
 			echo '<button data-gdymc-tip="' . __( 'Admin bar position', 'gdy-modular-content' ) . '" id="gdymc_barposition"><span class="dashicons dashicons-move"></span></button>';
 

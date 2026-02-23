@@ -172,8 +172,8 @@ Version: 0.9.984
 			$classes[] = 'gdymc_bar';
 			$classes[] = 'gdymc_logged';
 
-			$position = isset( $_COOKIE['gdymc_barposition'] ) ? sanitize_text_field( $_COOKIE['gdymc_barposition'] ) : 'top';
-			$classes[] = in_array( $position, array( 'top', 'bottom', 'left', 'right' ) ) ? 'gdymc_bar_' . $position : 'gdymc_bar_top';
+			$position = isset( $_COOKIE['gdymc_barposition'] ) ? sanitize_text_field( $_COOKIE['gdymc_barposition'] ) : 'bottom';
+			$classes[] = in_array( $position, array( 'top', 'bottom', 'left', 'right' ) ) ? 'gdymc_bar_' . $position : 'gdymc_bar_bottom';
 		endif;
 
 		if( !gdymc_preview() AND gdymc_logged() ) $classes[] = 'gdymc_edit';
