@@ -407,6 +407,41 @@
 
 
 
+		// Mobile: collapse format buttons into the "show all" overlay on small screens
+
+		var gdymc_mobile_breakpoint = 600;
+		var gdymc_check_mobile_timer;
+
+		function gdymc_check_mobile() {
+
+			var isMobile = jQuery( window ).width() <= gdymc_mobile_breakpoint;
+
+			if ( isMobile && !jQuery( document.body ).hasClass( 'gdymc_mobile' ) ) {
+
+				jQuery( document.body ).addClass( 'gdymc_mobile' );
+				jQuery( '#gdymc_formatbuttons button:visible' ).hide();
+				gdymc_formatbuttons_resize();
+
+			} else if ( !isMobile && jQuery( document.body ).hasClass( 'gdymc_mobile' ) ) {
+
+				jQuery( document.body ).removeClass( 'gdymc_mobile' );
+				jQuery( '#gdymc_formatbuttons button' ).show();
+				gdymc_formatbuttons_resize();
+
+			}
+
+		}
+
+		jQuery( window ).on( 'resize', function() {
+
+			clearTimeout( gdymc_check_mobile_timer );
+			gdymc_check_mobile_timer = setTimeout( gdymc_check_mobile, 150 );
+
+		} );
+		gdymc_check_mobile();
+
+
+
 
 		// Show all format buttons button
 
@@ -1879,22 +1914,51 @@
 		
 		jQuery( '#gdymc_tooltip' ).remove();
 		
+		var adminBarHeight = 40;
+		var tooltipArrowSpacing = 5;
 		var windowWidth = jQuery(window).width();
 		var source = jQuery( this );
 		var message = source.attr( 'data-gdymc-tip' );
-		var sourceTop = source.offset().top+source.height();
+		var sourceTop = source.offset().top + source.height() + adminBarHeight;
 		var sourceLeft = source.offset().left;
 		var sourceWidth = source.width();
 		var sourceRight = windowWidth - sourceLeft - sourceWidth;
+		var body = jQuery( document.body );
+		// sidebar bar is 10px from edge + 40px wide = 50px; add 10px gap for tooltip
+		var sidebarTooltipOffset = 60;
 
 		jQuery( '<div id="gdymc_tooltip" class="gdymc_inside"><div id="gdymc_tooltip_arrow"></div>' + message + '</div>' ).appendTo( 'body' );
 
 		var tooltipWidth = jQuery('#gdymc_tooltip').outerWidth();
+		var tooltipHeight = jQuery('#gdymc_tooltip').outerHeight();
 
-		if( ( tooltipWidth + sourceLeft ) > windowWidth ) {
-			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_right' ).css( { 'top': sourceTop, 'right': sourceRight } );
+		if ( body.hasClass('gdymc_bar_bottom') ) {
+
+			// Tooltip above the button (downward-pointing arrow)
+			var ttTop = source.offset().top - tooltipHeight - tooltipArrowSpacing + adminBarHeight;
+			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_above' ).css( { 'top': ttTop, 'left': sourceLeft } );
+
+		} else if ( body.hasClass('gdymc_bar_left') ) {
+
+			// Tooltip to the right of the left sidebar bar
+			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2 + adminBarHeight;
+			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_side' ).css( { 'top': ttTop, 'left': sidebarTooltipOffset } );
+
+		} else if ( body.hasClass('gdymc_bar_right') ) {
+
+			// Tooltip to the left of the right sidebar bar
+			var ttTop = source.offset().top + ( source.height() - tooltipHeight ) / 2 + adminBarHeight;
+			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_side' ).css( { 'top': ttTop, 'right': sidebarTooltipOffset } );
+
 		} else {
-			jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_left' ).css( { 'top': sourceTop, 'left': sourceLeft } );
+
+			// Default: tooltip below (top bar)
+			if( ( tooltipWidth + sourceLeft ) > windowWidth ) {
+				jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_right' ).css( { 'top': sourceTop, 'right': sourceRight } );
+			} else {
+				jQuery( '#gdymc_tooltip' ).addClass( 'gdymc_tooltip_left' ).css( { 'top': sourceTop, 'left': sourceLeft } );
+			}
+
 		}
 
 	});
@@ -3036,6 +3100,25 @@
 			return false;
 			
 		});
+
+
+		// Admin bar position
+
+		jQuery( document.body ).on( 'click', '#gdymc_barpositionmenu a', function( e ) {
+
+			e.preventDefault();
+
+			var position = jQuery( this ).data( 'position' );
+
+			jQuery( document.body ).removeClass( 'gdymc_bar_top gdymc_bar_bottom gdymc_bar_left gdymc_bar_right' );
+			jQuery( document.body ).addClass( 'gdymc_bar_' + position );
+
+			// 3600 * 24 * 365 = one year in seconds
+			wpCookies.set( 'gdymc_barposition', position, 3600 * 24 * 365, gdymc_dynamic_data.cookie_path, gdymc_dynamic_data.cookie_domain );
+
+			return false;
+
+		} );
 
 		
 
