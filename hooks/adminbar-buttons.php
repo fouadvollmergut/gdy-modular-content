@@ -193,9 +193,49 @@
 
 
 
-	// Backend button
+	// Translate button
 
-	add_action( 'gdymc_adminbarbuttons_right', 'gdymc_hook_backendmenu', 40, 0 );
+	add_action( 'gdymc_adminbarbuttons_right', 'gdymc_hook_translatebutton', 15, 0 );
+
+	function gdymc_hook_translatebutton() {
+
+		if ( empty( get_option( 'gdymc_openai_api_key', '' ) ) ) return;
+
+		$languages = apply_filters( 'gdymc_translate_languages', array(
+			'en' => __( 'English', 'gdy-modular-content' ),
+			'de' => __( 'German', 'gdy-modular-content' ),
+			'fr' => __( 'French', 'gdy-modular-content' ),
+			'es' => __( 'Spanish', 'gdy-modular-content' ),
+			'it' => __( 'Italian', 'gdy-modular-content' ),
+			'pt' => __( 'Portuguese', 'gdy-modular-content' ),
+			'nl' => __( 'Dutch', 'gdy-modular-content' ),
+			'pl' => __( 'Polish', 'gdy-modular-content' ),
+			'ru' => __( 'Russian', 'gdy-modular-content' ),
+			'zh' => __( 'Chinese', 'gdy-modular-content' ),
+			'ja' => __( 'Japanese', 'gdy-modular-content' ),
+			'ar' => __( 'Arabic', 'gdy-modular-content' ),
+		) );
+
+		echo '<li class="gdymc_dropdown_trigger">';
+
+			echo '<button data-gdymc-tip="' . esc_attr__( 'Translate content', 'gdy-modular-content' ) . '" id="gdymc_translate"><span class="dashicons dashicons-translation"></span></button>';
+
+			echo '<div id="gdymc_translatemenu" class="gdymc_dropdown">';
+
+				foreach ( $languages as $code => $label ):
+
+					echo '<a class="gdymc_translate_language" data-lang="' . esc_attr( $code ) . '" href="#">' . esc_html( $label ) . '</a>';
+
+				endforeach;
+
+			echo '</div>';
+
+		echo '</li>';
+
+	}
+
+
+
 	add_action( 'gdymc_noarea_right', 'gdymc_hook_backendmenu', 40, 0 );
 	add_action( 'gdymc_roledeny_right', 'gdymc_hook_backendmenu', 40, 0 );
 

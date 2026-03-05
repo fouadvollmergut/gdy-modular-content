@@ -255,6 +255,7 @@
 			foreach( $this->content_get() as $contentID ):
 
 				delete_metadata( $this->object_type, $this->object_id, "_gdymc_singlecontent_$contentID" );
+				delete_metadata( $this->object_type, $this->object_id, "_gdymc_singlecontent_{$contentID}_translation" );
 
 			endforeach;
 
