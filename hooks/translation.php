@@ -123,6 +123,19 @@
 		$content[ 'maxtext-error' ] = __( 'There are too long texts. You must shorten these texts before you can continue.', 'gdy-modular-content' );
 
 
+		// Translation feature
+
+		$content[ 'translate-title' ] = __( 'Translate content', 'gdy-modular-content' );
+
+		$content[ 'translate-running' ] = __( 'Translating...', 'gdy-modular-content' );
+
+		$content[ 'translate-success' ] = __( 'Translation saved successfully.', 'gdy-modular-content' );
+
+		$content[ 'translate-error' ] = __( 'Translation failed.', 'gdy-modular-content' );
+
+		$content[ 'translate-nocontents' ] = __( 'No translatable content found on this page.', 'gdy-modular-content' );
+
+
 		// AJAX
 
 		$content[ 'ajaxerror-text' ] = __( 'There was an error with your action/request.', 'gdy-modular-content' );
