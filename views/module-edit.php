@@ -1,7 +1,6 @@
 <?php 
   $module_type = isset($_GET['gdymc_module_type']) ? urldecode($_GET['gdymc_module_type']) : '';
   $module = gdymc_get_module( $module_type );
-  $inactive_modules = get_option( 'gdymc_inactive_modules', array() );
 ?>
 
 <hr>
@@ -35,7 +34,7 @@
                   <div id="misc-publishing-actions">
                     <div id="visibility" class="misc-pub-section misc-pub-visibility">
                       <span id="post-visibility-display">
-                        <?php if ( in_array( $module->type, $inactive_modules ) ) : ?>
+                        <?php if ( $module->status === 'INACTIVE' ) : ?>
                           <?php echo __( 'Inactive', 'gdy-modular-content' ); ?> | 
                           <a href="<?php echo esc_url( admin_url( 'admin-post.php?action=gdymc_activate_module&redirect=' . urlencode( admin_url( 'themes.php?page=gdymc-plugin-settings&gdymc_module_type=' . $module->type ) ) . '&gdymc_module_type=' . urlencode( $module->type ) ) ); ?>">
                             <?php echo __( 'Activate', 'gdy-modular-content' ); ?>

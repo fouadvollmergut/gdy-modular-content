@@ -20,7 +20,6 @@
   <tbody id="the-list">
     <?php 
       $gdymc_modules = gdymc_get_modules();
-      $inactive_modules = get_option( 'gdymc_inactive_modules', array() );
     ?>
 
     <?php if ( empty( $gdymc_modules ) ) : ?>
@@ -39,7 +38,7 @@
             <strong><?php echo strtoupper( esc_html( $module->name ) ); ?></strong>
             <div class="row-actions visible">
               <span class="status">
-                <?php if ( in_array( $module->type, $inactive_modules ) ) : ?>
+                <?php if ( $module->status === 'INACTIVE' ) : ?>
                   <a href="<?php echo esc_url( admin_url( 'admin-post.php?action=gdymc_activate_module&gdymc_module_type=' . urlencode( $module->type ) ) ); ?>">
                     <?php echo __( 'Activate', 'gdy-modular-content' ); ?>
                   </a>
@@ -59,7 +58,7 @@
             <?php echo esc_html( $module->type ); ?>
           </td>
           <td class="author column-author" data-colname="Author">
-            <?php if ( in_array( $module->type, $inactive_modules ) ) : ?>
+            <?php if ( $module->status === 'INACTIVE' ) : ?>
               <span style="height: .8em; aspect-ratio: 1; display: inline-block; background: #a00; border-radius: 50%; vertical-align: baseline;"></span>&nbsp;<span><?php echo __( 'Inactive', 'gdy-modular-content' ); ?></span>
             <?php else : ?>
               <span style="height: .8em; aspect-ratio: 1; display: inline-block; background: #0a0; border-radius: 50%; vertical-align: baseline;"></span>&nbsp;<span><?php echo __( 'Active', 'gdy-modular-content' ); ?></span>

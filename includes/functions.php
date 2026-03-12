@@ -243,6 +243,8 @@
 
 				$module->type = $module_type;
 
+				$module->status = get_option( 'gdymc_module_'. $module_type . '_status', 'ACTIVE' );
+
 				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_title) ), $module_type );
 
 				$module->name = get_option( 'gdymc_module_' . $module_type . '_name', $module->title );
