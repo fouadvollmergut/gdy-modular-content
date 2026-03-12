@@ -8,8 +8,8 @@
       <th scope="col" id="module" class="manage-column column-module column-primary sorted desc" abbr="Module">
         <a href="#"><span><?php echo __( 'Module', 'gdy-modular-content' ); ?></span></a>
       </th>
-      <th scope="col" id="moduletype" class="manage-column column-moduletype column-primary sorted desc" abbr="Moduletype">
-        <a href="#"><span><?php echo __( 'Moduletype', 'gdy-modular-content' ); ?></span></a>
+      <th scope="col" id="moduletitle" class="manage-column column-moduletitle column-primary sorted desc" abbr="Moduletitle">
+        <a href="#"><span><?php echo __( 'Title/Type', 'gdy-modular-content' ); ?></span></a>
       </th>
       <th scope="col" id="status" class="manage-column column-status sortable asc" abbr="Status" style="width: 10em;">
         <a href="#"><span><?php echo __( 'Status', 'gdy-modular-content' ); ?></span></a>
@@ -41,11 +41,11 @@
                 <?php if ( $module->status === 'INACTIVE' ) : ?>
                   <a href="<?php echo esc_url( admin_url( 'admin-post.php?action=gdymc_activate_module&gdymc_module_type=' . urlencode( $module->type ) ) ); ?>">
                     <?php echo __( 'Activate', 'gdy-modular-content' ); ?>
-                  </a>
+                  </a>&nbsp;|&nbsp;
                 <?php else : ?>
                   <a href="<?php echo esc_url( admin_url( 'admin-post.php?action=gdymc_deactivate_module&gdymc_module_type=' . urlencode( $module->type ) ) ); ?>">
                     <?php echo __( 'Deactivate', 'gdy-modular-content' ); ?>
-                  </a>
+                  </a>&nbsp;|&nbsp;
                 <?php endif; ?>
               </span>
               <span class="edit">
@@ -54,8 +54,9 @@
                 </a>
             </div>
           </td>
-          <td class="moduletype column-moduletype" data-colname="Moduletype">
-            <?php echo esc_html( $module->type ); ?>
+          <td class="moduletitle column-moduletitle" data-colname="Moduletitle">
+            <strong><?php echo esc_html( $module->title ); ?></strong>
+            <div class="row-actions visible"><?php echo esc_html( $module->type ); ?></div>
           </td>
           <td class="author column-author" data-colname="Author">
             <?php if ( $module->status === 'INACTIVE' ) : ?>
