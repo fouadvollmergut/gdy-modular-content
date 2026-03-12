@@ -52,7 +52,9 @@ module.exports = (env, argv) => {
           { from: "images", to: path.resolve(__dirname, "./_dist/images") },
           { from: "includes", to: path.resolve(__dirname, "./_dist/includes") },
           { from: "languages", to: path.resolve(__dirname, "./_dist/languages") },
-          { from: "scripts", to: path.resolve(__dirname, "./_dist/scripts") }
+          { from: "scripts", to: path.resolve(__dirname, "./_dist/scripts") },
+          { from: "views", to: path.resolve(__dirname, "./_dist/views") },
+          { from: "actions", to: path.resolve(__dirname, "./_dist/actions") },
         ],
       })
     );
