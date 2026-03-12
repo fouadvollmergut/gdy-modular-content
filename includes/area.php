@@ -75,6 +75,9 @@
             // Open module
             $gdymc_module = new GDYMC_MODULE( $id, $gdymc_object_id, $gdymc_object_type );
 
+            // If module blueprint ist inactive, skip it
+            if ( gdymc_get_module($gdymc_module->type) === 'INACTIVE' ) continue;
+
             // If module is visible
             if( $gdymc_module->is_visible() OR gdymc_logged() ):
 

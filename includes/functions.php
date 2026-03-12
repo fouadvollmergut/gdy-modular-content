@@ -234,7 +234,7 @@
 				// Extract folder name (type)
 				$module_type = substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
 
-				$module_name = end( explode('/', $module_type) );
+				$module_title = end( explode('/', $module_type) );
 
 
 				// Set info
@@ -243,7 +243,11 @@
 
 				$module->type = $module_type;
 
-				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_name) ), $module_type );
+				$module->status = get_option( 'gdymc_module_'. $module_type . '_status', 'ACTIVE' );
+
+				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_title) ), $module_type );
+
+				$module->name = get_option( 'gdymc_module_' . $module_type . '_name', $module->title );
 
 				$module->thumbPath = $module_path . '/thumb.svg';
 				
@@ -260,6 +264,14 @@
 			return $gdymc_modules;
 
 		endif;
+
+	}
+
+	function gdymc_get_module( $module_type ) {
+
+		$gdymc_modules = gdymc_get_modules();
+
+		return array_key_exists( $module_type, $gdymc_modules ) ? $gdymc_modules[ $module_type ] : false;
 
 	}
 

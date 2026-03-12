@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GDY Modular Content\n"
-"POT-Creation-Date: 2025-08-08 09:39+0200\n"
-"PO-Revision-Date: 2025-08-08 09:40+0200\n"
+"POT-Creation-Date: 2026-03-12 13:58+0000\n"
+"PO-Revision-Date: 2026-03-12 14:00+0000\n"
 "Last-Translator: Johannes Grandy <grandy@fouadvollmer.de>\n"
 "Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
 "Language: de_DE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_nx:1,2;_nx_noop:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -21,7 +21,8 @@ msgid "Save changes (Cmd+S)"
 msgstr "Änderungen speichern (Cmd+S)"
 
 #: ../_dist/hooks/adminbar-buttons.php:11 ../_dist/includes/area.php:165
-#: ../hooks/adminbar-buttons.php:11 ../includes/area.php:165
+#: ../hooks/adminbar-buttons.php:11 ../includes/area.php:168
+#: ../views/module-edit.php:28
 msgid "Save"
 msgstr "Speichern"
 
@@ -102,6 +103,7 @@ msgstr "Verwaltung"
 #: ../_dist/includes/ajax.php:1588 ../hooks/adminbar-buttons.php:222
 #: ../includes/ajax.php:1406 ../includes/ajax.php:1467
 #: ../includes/ajax.php:1528 ../includes/ajax.php:1588
+#: ../views/tab-modules.php:54
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -156,7 +158,7 @@ msgstr ""
 "areaCreate()-Funktion oder dem [gdymc_area]-Shortcode."
 
 #: ../_dist/hooks/modulebar-buttons.php:13 ../_dist/includes/area.php:96
-#: ../hooks/modulebar-buttons.php:13 ../includes/area.php:96
+#: ../hooks/modulebar-buttons.php:13 ../includes/area.php:99
 msgid "Module options"
 msgstr "Moduloptionen"
 
@@ -323,48 +325,58 @@ msgstr "Nein"
 msgid "Yes"
 msgstr "Ja"
 
-#: ../_dist/hooks/translation.php:67 ../_dist/includes/ajax.php:959
-#: ../hooks/translation.php:67 ../includes/ajax.php:959
+#: ../_dist/hooks/translation.php:67 ../_dist/includes/options.php:223
+#: ../hooks/translation.php:67 ../includes/options.php:223
+msgid "Remove Element"
+msgstr "Element entfernen"
+
+#: ../_dist/hooks/translation.php:69 ../_dist/includes/options.php:221
+#: ../hooks/translation.php:69 ../includes/options.php:221
+msgid "Sort Element"
+msgstr "Element sortieren"
+
+#: ../_dist/hooks/translation.php:71 ../_dist/includes/ajax.php:959
+#: ../hooks/translation.php:71 ../includes/ajax.php:959
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../_dist/hooks/translation.php:69 ../hooks/translation.php:69
+#: ../_dist/hooks/translation.php:73 ../hooks/translation.php:73
 msgid "Change"
 msgstr "Ändern"
 
-#: ../_dist/hooks/translation.php:71 ../hooks/translation.php:71
+#: ../_dist/hooks/translation.php:75 ../hooks/translation.php:75
 msgid "You can't remove the last column."
 msgstr "Du kannst die letzte Spalte nicht löschen."
 
-#: ../_dist/hooks/translation.php:73 ../hooks/translation.php:73
+#: ../_dist/hooks/translation.php:77 ../hooks/translation.php:77
 msgid "You can't remove the last row."
 msgstr "Du kannst die letzte Zeile nicht löschen."
 
-#: ../_dist/hooks/translation.php:75 ../hooks/translation.php:75
+#: ../_dist/hooks/translation.php:79 ../hooks/translation.php:79
 msgid "Swap content"
 msgstr "Inhalt tauschen"
 
-#: ../_dist/hooks/translation.php:77 ../hooks/translation.php:77
+#: ../_dist/hooks/translation.php:81 ../hooks/translation.php:81
 msgid "Action stopped"
 msgstr "Aktion gestoppt"
 
-#: ../_dist/hooks/translation.php:79 ../hooks/translation.php:79
+#: ../_dist/hooks/translation.php:83 ../hooks/translation.php:83
 msgid "The ID you entered does not belong to an existing target."
 msgstr "Die ID die du eingegeben hast gehört zu keinem existierenden Ziel."
 
-#: ../_dist/hooks/translation.php:81 ../hooks/translation.php:81
+#: ../_dist/hooks/translation.php:85 ../hooks/translation.php:85
 msgid "The image is too big."
 msgstr "Das Bild ist zu groß."
 
-#: ../_dist/hooks/translation.php:83 ../hooks/translation.php:83
+#: ../_dist/hooks/translation.php:87 ../hooks/translation.php:87
 msgid "The image is too small."
 msgstr "Das Bild ist zu klein."
 
-#: ../_dist/hooks/translation.php:85 ../hooks/translation.php:85
+#: ../_dist/hooks/translation.php:89 ../hooks/translation.php:89
 msgid "Preview mode"
 msgstr "Vorschau-Modus"
 
-#: ../_dist/hooks/translation.php:87 ../hooks/translation.php:87
+#: ../_dist/hooks/translation.php:91 ../hooks/translation.php:91
 msgid ""
 "You cant do this action in preview mode. Do you want to switch into edit "
 "mode?"
@@ -372,68 +384,68 @@ msgstr ""
 "Du kannst diese Aktion nicht im Vorschau-Modus ausführen. Möchtest du in den "
 "Bearbeiten-Modus wechseln?"
 
-#: ../_dist/hooks/translation.php:89 ../hooks/translation.php:89
+#: ../_dist/hooks/translation.php:93 ../hooks/translation.php:93
 msgid "Switch view"
 msgstr "Ansicht umschalten"
 
-#: ../_dist/hooks/translation.php:91 ../hooks/translation.php:91
+#: ../_dist/hooks/translation.php:95 ../hooks/translation.php:95
 msgid "Show all formatting options"
 msgstr "Alle Formatierungsmöglichkeiten anzeigen"
 
-#: ../_dist/hooks/translation.php:93 ../hooks/translation.php:93
+#: ../_dist/hooks/translation.php:97 ../hooks/translation.php:97
 msgid "No modules selected"
 msgstr "Keine Module ausgewählt"
 
-#: ../_dist/hooks/translation.php:95 ../hooks/translation.php:95
+#: ../_dist/hooks/translation.php:99 ../hooks/translation.php:99
 msgid "At least one selected module is required for this action."
 msgstr "Für diese Aktion muss mindestens ein Modul ausgewählt sein."
 
-#: ../_dist/hooks/translation.php:97 ../hooks/translation.php:97
+#: ../_dist/hooks/translation.php:101 ../hooks/translation.php:101
 msgid "No target ID"
 msgstr "Keine Ziel ID"
 
-#: ../_dist/hooks/translation.php:99 ../hooks/translation.php:99
+#: ../_dist/hooks/translation.php:103 ../hooks/translation.php:103
 msgid "Enter a target ID for this action."
 msgstr "Gib für diese Aktion eine Ziel-ID an."
 
-#: ../_dist/hooks/translation.php:101 ../hooks/translation.php:101
+#: ../_dist/hooks/translation.php:105 ../hooks/translation.php:105
 msgid "Wrong target ID"
 msgstr "Falsche Ziel ID"
 
-#: ../_dist/hooks/translation.php:103 ../hooks/translation.php:103
+#: ../_dist/hooks/translation.php:107 ../hooks/translation.php:107
 msgid "The target ID must be a number."
 msgstr "Die Ziel-ID muss eine Nummer sein."
 
-#: ../_dist/hooks/translation.php:105 ../hooks/translation.php:105
+#: ../_dist/hooks/translation.php:109 ../hooks/translation.php:109
 msgid "Invalid server response."
 msgstr "Ungültige Serverantwort."
 
-#: ../_dist/hooks/translation.php:107 ../hooks/translation.php:107
+#: ../_dist/hooks/translation.php:111 ../hooks/translation.php:111
 #, php-format
 msgid "This file is too big. Max filesize is %s."
 msgstr "Die Datei ist zu groß. Es sind maximal %s erlaubt."
 
-#: ../_dist/hooks/translation.php:109 ../hooks/translation.php:109
+#: ../_dist/hooks/translation.php:113 ../hooks/translation.php:113
 msgid "This file type is not allowed."
 msgstr "Dieser Dateityp ist nicht erlaubt."
 
-#: ../_dist/hooks/translation.php:111 ../_dist/includes/ajax.php:860
-#: ../hooks/translation.php:111 ../includes/ajax.php:860
+#: ../_dist/hooks/translation.php:115 ../_dist/includes/ajax.php:860
+#: ../hooks/translation.php:115 ../includes/ajax.php:860
 msgid "Use void image and save"
 msgstr "Leerbild verwenden und speichern"
 
-#: ../_dist/hooks/translation.php:113 ../_dist/includes/ajax.php:852
-#: ../hooks/translation.php:113 ../includes/ajax.php:852
+#: ../_dist/hooks/translation.php:117 ../_dist/includes/ajax.php:852
+#: ../hooks/translation.php:117 ../includes/ajax.php:852
 msgid "Use image and save"
 msgstr "Bild verwenden und speichern"
 
-#: ../_dist/hooks/translation.php:115 ../_dist/includes/ajax.php:856
-#: ../hooks/translation.php:115 ../includes/ajax.php:856
+#: ../_dist/hooks/translation.php:119 ../_dist/includes/ajax.php:856
+#: ../hooks/translation.php:119 ../includes/ajax.php:856
 #, php-format
 msgid "Use %s images and save"
 msgstr "%s Bilder verwenden und speichern"
 
-#: ../_dist/hooks/translation.php:117 ../hooks/translation.php:117
+#: ../_dist/hooks/translation.php:121 ../hooks/translation.php:121
 msgid ""
 "There are unsaved contents. This contents will be lost when you leave the "
 "page."
@@ -441,13 +453,13 @@ msgstr ""
 "Es existieren ungespeicherte Inhalte. Diese Inhalte gehen beim Verlassen der "
 "Seite verloren."
 
-#: ../_dist/hooks/translation.php:119 ../hooks/translation.php:119
+#: ../_dist/hooks/translation.php:123 ../hooks/translation.php:123
 msgid ""
 "There are too long texts. You must shorten these texts before you can "
 "continue."
 msgstr "Es existieren zu lange Texte. Bitte kürze diese um fortzufahren."
 
-#: ../_dist/hooks/translation.php:124 ../hooks/translation.php:124
+#: ../_dist/hooks/translation.php:128 ../hooks/translation.php:128
 msgid "There was an error with your action/request."
 msgstr "Es gab einen Fehler mit Ihrer Aktion/Anfrage."
 
@@ -609,23 +621,39 @@ msgid "Show more"
 msgstr "Mehr anzeigen"
 
 #: ../_dist/includes/ajax.php:1529 ../_dist/includes/area.php:169
-#: ../includes/ajax.php:1529 ../includes/area.php:169
+#: ../includes/ajax.php:1529 ../includes/area.php:172
 msgid "Delete Permanently"
 msgstr "Unwiderruflich löschen"
 
-#: ../_dist/includes/area.php:102 ../includes/area.php:102
+#: ../_dist/includes/area.php:102 ../includes/area.php:105
 msgid "Defaults"
 msgstr "Standards"
 
-#: ../_dist/includes/area.php:103 ../includes/area.php:103
+#: ../_dist/includes/area.php:103 ../includes/area.php:106
 msgid "Visibility"
 msgstr "Sichtbarkeit"
 
-#: ../_dist/includes/area.php:104 ../includes/area.php:104
+#: ../_dist/includes/area.php:104 ../includes/area.php:107
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../_dist/includes/content.php:324
+#: ../_dist/includes/content.php:331 ../includes/content.php:331
+msgid "Add Button"
+msgstr "Button hinzufügen"
+
+#: ../_dist/includes/content.php:356
+#, fuzzy
+#| msgid "Button Text"
+msgid "Button bearbeiten"
+msgstr "Button Text"
+
+#: ../_dist/includes/content.php:357
+#, fuzzy
+#| msgid "Button Text"
+msgid "Button entfernen"
+msgstr "Button Text"
+
+#: ../_dist/includes/content.php:368 ../includes/content.php:368
 msgid "Button hinzufügen"
 msgstr "Button hinzufügen"
 
@@ -653,21 +681,69 @@ msgstr "Dateien hochladen"
 msgid "Filter for Modules"
 msgstr "Nach Modulen filtern"
 
-#: ../includes/content.php:325
-msgid "Add Button"
-msgstr "Button hinzufügen"
-
-#: ../includes/options.php:221
-msgid "Sort Element"
-msgstr "Element sortieren"
-
-#: ../includes/options.php:223
-msgid "Remove Element"
-msgstr "Element entfernen"
-
-#: ../includes/options.php:230
+#: ../_dist/includes/options.php:230 ../includes/options.php:230
 msgid "Add Element"
 msgstr "Element hinzufügen"
+
+#: ../hooks/admin-menu.php:8
+msgid "GDY Modular Content Settings"
+msgstr "GDY Modular Content Einstellungen"
+
+#: ../hooks/admin-menu.php:9 ../views/tab-modules.php:1
+msgid "Modules"
+msgstr "Module"
+
+#: ../includes/content.php:356
+msgid "Edit Button"
+msgstr "Button bearbeiten"
+
+#: ../includes/content.php:357
+msgid "Remove Button"
+msgstr "Button entfernen"
+
+#: ../views/module-edit.php:16
+msgid "Module Type: "
+msgstr "Modultyp:"
+
+#: ../views/module-edit.php:39 ../views/tab-modules.php:63
+msgid "Inactive"
+msgstr "Deaktiviert"
+
+#: ../views/module-edit.php:41 ../views/tab-modules.php:44
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: ../views/module-edit.php:44 ../views/tab-modules.php:65
+msgid "Active"
+msgstr "Aktiviert"
+
+#: ../views/module-edit.php:46 ../views/tab-modules.php:48
+msgid "Deactivate"
+msgstr "Deaktivieren"
+
+#: ../views/module-edit.php:55
+msgid "Save Module"
+msgstr "Modul speichern"
+
+#: ../views/tab-modules.php:2
+msgid ""
+"Here you can see all available modules. You can activate them to make them "
+"available in the module area."
+msgstr ""
+"Hier können Sie alle verfügbaren Module sehen. Sie können sie aktivieren, um "
+"sie im Modulbereich verfügbar zu machen."
+
+#: ../views/tab-modules.php:9
+msgid "Module"
+msgstr "Modul"
+
+#: ../views/tab-modules.php:12
+msgid "Moduletype"
+msgstr "Modultyp"
+
+#: ../views/tab-modules.php:15
+msgid "Status"
+msgstr "Status"
 
 #~ msgid "Edit selected modules"
 #~ msgstr "Ausgewählte Module bearbeiten"
@@ -852,9 +928,6 @@ msgstr "Element hinzufügen"
 #~ msgid "Example Select"
 #~ msgstr "Beispiel-Select"
 
-#~ msgid "Module settings"
-#~ msgstr "Moduleinstellungen"
-
 #~ msgid "This module is incomplete"
 #~ msgstr "Dieses Modul ist unvollständig"
 
@@ -1031,9 +1104,6 @@ msgstr "Element hinzufügen"
 
 #~ msgid "Create Module"
 #~ msgstr "Modul erstellen"
-
-#~ msgid "New Module"
-#~ msgstr "Neues Modul"
 
 #~ msgid "Information"
 #~ msgstr "Informationen"

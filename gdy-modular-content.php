@@ -78,6 +78,13 @@ Version: 0.9.984
 	require_once( GDYMC_BASE_PATH . 'hooks/modulebar-buttons.php' );
 	require_once( GDYMC_BASE_PATH . 'hooks/adminbar-buttons.php' );
 	require_once( GDYMC_BASE_PATH . 'hooks/miscellaneous.php' );
+	require_once( GDYMC_BASE_PATH . 'hooks/admin-menu.php' );
+
+
+	/************************************ ACTIONS ***************************************/
+
+	require_once( GDYMC_BASE_PATH . 'actions/setup.php' );
+	require_once( GDYMC_BASE_PATH . 'actions/module.php' );
 
 
 	/************************************ PLUGIN ACTIVATION / DEACTIVATION / UNINSTALL ***************************************/
