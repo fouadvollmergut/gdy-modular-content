@@ -14,6 +14,8 @@
     </nav>
 
     <?php include GDYMC_BASE_PATH . '/views/tab-setup.php'; ?>
+  <?php elseif (isset($_GET['gdymc_module_type'])) : ?>
+    <?php include GDYMC_BASE_PATH . '/views/module-edit.php'; ?>
   <?php else : ?>
     <nav class="nav-tab-wrapper wp-clearfix" aria-label="Secondary menu">
       <a href="/wp-admin/themes.php?page=gdymc-plugin-settings&tab=modules" class="nav-tab nav-tab-active" aria-current="page">

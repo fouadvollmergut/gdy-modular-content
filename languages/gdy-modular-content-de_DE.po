@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GDY Modular Content\n"
-"POT-Creation-Date: 2025-09-19 17:33+0200\n"
-"PO-Revision-Date: 2025-09-19 17:34+0200\n"
+"POT-Creation-Date: 2026-03-12 13:58+0000\n"
+"PO-Revision-Date: 2026-03-12 14:00+0000\n"
 "Last-Translator: Johannes Grandy <grandy@fouadvollmer.de>\n"
 "Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
 "Language: de_DE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_nx:1,2;_nx_noop:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -22,6 +22,7 @@ msgstr "Änderungen speichern (Cmd+S)"
 
 #: ../_dist/hooks/adminbar-buttons.php:11 ../_dist/includes/area.php:165
 #: ../hooks/adminbar-buttons.php:11 ../includes/area.php:168
+#: ../views/module-edit.php:28
 msgid "Save"
 msgstr "Speichern"
 
@@ -102,6 +103,7 @@ msgstr "Verwaltung"
 #: ../_dist/includes/ajax.php:1588 ../hooks/adminbar-buttons.php:222
 #: ../includes/ajax.php:1406 ../includes/ajax.php:1467
 #: ../includes/ajax.php:1528 ../includes/ajax.php:1588
+#: ../views/tab-modules.php:54
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -688,7 +690,6 @@ msgid "GDY Modular Content Settings"
 msgstr "GDY Modular Content Einstellungen"
 
 #: ../hooks/admin-menu.php:9 ../views/tab-modules.php:1
-#: ../views/tab-modules.php:8
 msgid "Modules"
 msgstr "Module"
 
@@ -700,6 +701,30 @@ msgstr "Button bearbeiten"
 msgid "Remove Button"
 msgstr "Button entfernen"
 
+#: ../views/module-edit.php:16
+msgid "Module Type: "
+msgstr "Modultyp:"
+
+#: ../views/module-edit.php:39 ../views/tab-modules.php:63
+msgid "Inactive"
+msgstr "Deaktiviert"
+
+#: ../views/module-edit.php:41 ../views/tab-modules.php:44
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: ../views/module-edit.php:44 ../views/tab-modules.php:65
+msgid "Active"
+msgstr "Aktiviert"
+
+#: ../views/module-edit.php:46 ../views/tab-modules.php:48
+msgid "Deactivate"
+msgstr "Deaktivieren"
+
+#: ../views/module-edit.php:55
+msgid "Save Module"
+msgstr "Modul speichern"
+
 #: ../views/tab-modules.php:2
 msgid ""
 "Here you can see all available modules. You can activate them to make them "
@@ -708,25 +733,17 @@ msgstr ""
 "Hier können Sie alle verfügbaren Module sehen. Sie können sie aktivieren, um "
 "sie im Modulbereich verfügbar zu machen."
 
-#: ../views/tab-modules.php:11
+#: ../views/tab-modules.php:9
+msgid "Module"
+msgstr "Modul"
+
+#: ../views/tab-modules.php:12
+msgid "Moduletype"
+msgstr "Modultyp"
+
+#: ../views/tab-modules.php:15
 msgid "Status"
-msgstr ""
-
-#: ../views/tab-modules.php:37
-msgid "Activate"
-msgstr "Aktivieren"
-
-#: ../views/tab-modules.php:41
-msgid "Deactivate"
-msgstr "Deaktivieren"
-
-#: ../views/tab-modules.php:49
-msgid "Inactive"
-msgstr "Deaktiviert"
-
-#: ../views/tab-modules.php:51
-msgid "Active"
-msgstr "Aktiviert"
+msgstr "Status"
 
 #~ msgid "Edit selected modules"
 #~ msgstr "Ausgewählte Module bearbeiten"
@@ -1087,9 +1104,6 @@ msgstr "Aktiviert"
 
 #~ msgid "Create Module"
 #~ msgstr "Modul erstellen"
-
-#~ msgid "New Module"
-#~ msgstr "Neues Modul"
 
 #~ msgid "Information"
 #~ msgstr "Informationen"

@@ -99,7 +99,7 @@
 
 							echo '<div class="gdymc_modules_add_label"><div class="gdymc_modules_add_label_ground">';
 							
-								echo $module->title;
+								echo esc_html( $module->name );
 
 							echo '</div></div>';
 

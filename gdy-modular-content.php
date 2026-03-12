@@ -84,7 +84,7 @@ Version: 0.9.984
 	/************************************ ACTIONS ***************************************/
 
 	require_once( GDYMC_BASE_PATH . 'actions/setup.php' );
-	require_once( GDYMC_BASE_PATH . 'actions/module-status.php' );
+	require_once( GDYMC_BASE_PATH . 'actions/module.php' );
 
 
 	/************************************ PLUGIN ACTIVATION / DEACTIVATION / UNINSTALL ***************************************/

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GDY Modular Content\n"
-"POT-Creation-Date: 2025-09-19 17:29+0200\n"
+"POT-Creation-Date: 2026-03-12 13:58+0000\n"
 "PO-Revision-Date: 2016-01-26 10:32+0100\n"
 "Last-Translator: Fouad Vollmer Werbeagentur <info@fouadvollmer.de>\n"
 "Language-Team: Johannes Grandy <info@johannesgrandy.com>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -22,7 +22,7 @@ msgid "Save changes (Cmd+S)"
 msgstr ""
 
 #: ../_dist/hooks/adminbar-buttons.php:11 ../_dist/includes/area.php:165 ../hooks/adminbar-buttons.php:11
-#: ../includes/area.php:168
+#: ../includes/area.php:168 ../views/module-edit.php:28
 msgid "Save"
 msgstr ""
 
@@ -101,6 +101,7 @@ msgstr ""
 #: ../_dist/hooks/adminbar-buttons.php:222 ../_dist/includes/ajax.php:1406 ../_dist/includes/ajax.php:1467
 #: ../_dist/includes/ajax.php:1528 ../_dist/includes/ajax.php:1588 ../hooks/adminbar-buttons.php:222
 #: ../includes/ajax.php:1406 ../includes/ajax.php:1467 ../includes/ajax.php:1528 ../includes/ajax.php:1588
+#: ../views/tab-modules.php:54
 msgid "Edit"
 msgstr ""
 
@@ -642,7 +643,7 @@ msgstr ""
 msgid "GDY Modular Content Settings"
 msgstr ""
 
-#: ../hooks/admin-menu.php:9
+#: ../hooks/admin-menu.php:9 ../views/tab-modules.php:1
 msgid "Modules"
 msgstr ""
 
@@ -652,6 +653,46 @@ msgstr ""
 
 #: ../includes/content.php:357
 msgid "Remove Button"
+msgstr ""
+
+#: ../views/module-edit.php:16
+msgid "Module Type: "
+msgstr ""
+
+#: ../views/module-edit.php:39 ../views/tab-modules.php:63
+msgid "Inactive"
+msgstr ""
+
+#: ../views/module-edit.php:41 ../views/tab-modules.php:44
+msgid "Activate"
+msgstr ""
+
+#: ../views/module-edit.php:44 ../views/tab-modules.php:65
+msgid "Active"
+msgstr ""
+
+#: ../views/module-edit.php:46 ../views/tab-modules.php:48
+msgid "Deactivate"
+msgstr ""
+
+#: ../views/module-edit.php:55
+msgid "Save Module"
+msgstr ""
+
+#: ../views/tab-modules.php:2
+msgid "Here you can see all available modules. You can activate them to make them available in the module area."
+msgstr ""
+
+#: ../views/tab-modules.php:9
+msgid "Module"
+msgstr ""
+
+#: ../views/tab-modules.php:12
+msgid "Moduletype"
+msgstr ""
+
+#: ../views/tab-modules.php:15
+msgid "Status"
 msgstr ""
 
 #~ msgid "date_after"
