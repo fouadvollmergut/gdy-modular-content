@@ -202,9 +202,21 @@
 			this.sortableContainer = sortableContainer;
 			this.sortableList = sortableContainer.querySelector( 'ul.gdymc_option_sortable_list' );
 			this.addButton = sortableContainer.querySelector( 'button.gdymc_option_sortable_add' );
+			this.itemCounter = sortableContainer.querySelector( '.gdymc_option_sortable_item_counter' );
 		}
 
 		init () {
+			const limit = parseInt( this.sortableList.dataset.limit, 10 );
+			const currentItems = this.sortableList.querySelectorAll( 'li' ).length;
+
+			if ( currentItems >= limit ) {
+				this.addButton.disabled = true;
+			}
+
+			if ( this.itemCounter ) {
+				this.itemCounter.textContent = currentItems + ' / ' + limit;
+			}
+
 			this.addButton.addEventListener( 'click', () => {
 				this.addItem();
 			});
@@ -250,7 +262,18 @@
 		}
 
 		updateValue () {
+			const limit = parseInt( this.sortableList.dataset.limit, 10 );
 			const items = Array.from( this.sortableList.querySelectorAll( '.gdymc_option_sortable_item_value' ) );
+
+			if ( items.length < limit ) {
+				this.addButton.disabled = false;
+			} else {
+				this.addButton.disabled = true;
+			}
+
+			if ( this.itemCounter ) {
+				this.itemCounter.textContent = items.length + ' / ' + limit;
+			}
 
 			if ( items.length === 0 ) {
 				this.sortableContainer.querySelector( '.gdymc_option_sortable' ).value = '';

@@ -175,7 +175,6 @@
 	}
 
 	.gdymc_optioncontainer_sortable button.gdymc_option_sortable_add {
-		margin-top: 10px !important;
 		padding-left: 45px !important;
     min-width: 0px !important;
 
@@ -260,6 +259,21 @@
 			z-index: 1;
 			transition: all 0.05s ease-out;
 		}
+	}
+
+	.gdymc_optioncontainer_sortable div.gdymc_optioncontainer_sortable_footer {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 10px;
+		padding-top: 10px;
+		clear: both;
+	}
+
+	.gdymc_optioncontainer_sortable div.gdymc_optioncontainer_sortable_footer span.gdymc_option_sortable_item_counter {
+		font-size: 0.9em;
+		color: #999;
 	}
 
 	// Display the UUID in the sortable item in the theme

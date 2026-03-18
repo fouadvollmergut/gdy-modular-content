@@ -211,9 +211,10 @@
 
 			elseif( in_array( $settings[ 'type' ], array( 'sortable' ) ) ):
 
+				$limit = ( isset( $settings['limit'] ) ) ? $settings['limit'] : -1;
 				$sortableValue = ( !empty( $attributesArray[ 'value' ] ) ) ? explode( ',', $attributesArray[ 'value' ] ) : array();
 
-				echo '<ul class="gdymc_option_sortable_list">';
+				echo '<ul class="gdymc_option_sortable_list" data-limit="' . esc_attr( $limit ) . '">';
 
 					foreach( $sortableValue as $key => $value ):
 
@@ -227,7 +228,13 @@
 
 				echo '</ul>';
 
+				echo '<div class="gdymc_optioncontainer_sortable_footer">';
+
 				echo '<button class="gdymc_button gdymc_option_sortable_add">' . __( 'Add Element', 'gdy-modular-content' ) . '</button>';
+
+				echo '<span class="gdymc_option_sortable_item_counter"></span>';
+
+				echo '</div>';
 
 				echo '<input type="hidden" ' .  $attributes . '>';
 
