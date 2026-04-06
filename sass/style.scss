@@ -16,6 +16,7 @@
 	$color_error: #ffba00;
 	$color_blue: #1e8cbe;
 	$color_brightblue: #2ea2cc;
+	$vertical_panel_width: 200px;
 	
 
 
@@ -463,10 +464,179 @@
 
 	#gdymc_adminbar {
 		position: fixed;
-		top: 0px;
-		left: 0px;
-		width: 100%;
+		top: 10px;
+		left: 50px;
+		right: 50px;
+		width: auto;
 		z-index: 9999999;
+		box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+		border-radius: 4px;
+	}
+
+	/* Admin bar position: Bottom */
+
+	.gdymc_bar_bottom #gdymc_adminbar {
+		top: auto;
+		bottom: 10px;
+	}
+
+	.gdymc_bar_bottom #gdymc_modules {
+		top: auto;
+		bottom: 50px;
+	}
+
+	.gdymc_bar_bottom .gdymc_dropdown {
+		top: auto;
+		bottom: 40px;
+	}
+
+	/* Admin bar position: Left and Right (shared vertical layout) */
+
+	.gdymc_bar_left #gdymc_adminbar,
+	.gdymc_bar_right #gdymc_adminbar {
+		width: 40px;
+		height: auto;
+		top: 10px;
+		bottom: 10px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.gdymc_bar_left #gdymc_adminbarbuttons_left,
+	.gdymc_bar_left #gdymc_adminbarbuttons_right,
+	.gdymc_bar_right #gdymc_adminbarbuttons_left,
+	.gdymc_bar_right #gdymc_adminbarbuttons_right {
+		float: none;
+		display: block;
+		width: 40px;
+	}
+
+	.gdymc_bar_left #gdymc_adminbarbuttons_right,
+	.gdymc_bar_right #gdymc_adminbarbuttons_right {
+		margin-top: auto;
+	}
+
+	.gdymc_bar_left #gdymc_adminbar ul li,
+	.gdymc_bar_right #gdymc_adminbar ul li {
+		float: none;
+		display: block;
+		width: 40px;
+	}
+
+	.gdymc_bar_left #gdymc_adminbar button,
+	.gdymc_bar_right #gdymc_adminbar button {
+		min-width: 40px;
+		width: 40px;
+		overflow: hidden;
+		padding: 0;
+	}
+
+	/* Admin bar position: Left */
+
+	.gdymc_bar_left #gdymc_adminbar {
+		left: 10px;
+		right: auto;
+	}
+
+	.gdymc_bar_left #gdymc_modules {
+		top: 0px;
+		bottom: 0px;
+		left: 50px;
+		right: auto;
+		width: $vertical_panel_width;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	.gdymc_bar_left .gdymc_dropdown {
+		top: 0px;
+		left: 50px;
+		right: auto;
+	}
+
+	/* Admin bar position: Right */
+
+	.gdymc_bar_right #gdymc_adminbar {
+		left: auto;
+		right: 10px;
+	}
+
+	.gdymc_bar_right #gdymc_modules {
+		top: 0px;
+		bottom: 0px;
+		left: auto;
+		right: 50px;
+		width: $vertical_panel_width;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	.gdymc_bar_right .gdymc_dropdown {
+		top: 0px;
+		right: 50px;
+		left: auto;
+	}
+
+	/* Vertical module panel layout for left/right bar */
+
+	.gdymc_bar_left #gdymc_modules_inner,
+	.gdymc_bar_right #gdymc_modules_inner {
+		white-space: normal;
+		width: 100%;
+	}
+
+	.gdymc_bar_left #gdymc_modules_list::before,
+	.gdymc_bar_left #gdymc_modules_list::after,
+	.gdymc_bar_right #gdymc_modules_list::before,
+	.gdymc_bar_right #gdymc_modules_list::after {
+		display: none;
+	}
+
+	.gdymc_bar_left .gdymc_modules_add_container,
+	.gdymc_bar_right .gdymc_modules_add_container {
+		display: block;
+		width: auto;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+
+	.gdymc_bar_left .gdymc_modules_add_label,
+	.gdymc_bar_right .gdymc_modules_add_label {
+		left: 0;
+		right: 0;
+		margin-left: 0;
+		width: auto;
+	}
+
+	/* Save button: hide text in left/right sidebar mode */
+	/* !important needed to override .gdymc_save { padding-left: 45px !important } */
+
+	.gdymc_bar_left #gdymc_adminbar #gdymc_save,
+	.gdymc_bar_right #gdymc_adminbar #gdymc_save {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		font-size: 0;
+	}
+
+	/* Mobile: compact bar, hide desktop-only buttons, let format buttons collapse */
+
+	@media only screen and (max-width: 600px) {
+
+		#gdymc_adminbar {
+			left: 10px;
+			right: 10px;
+		}
+
+		#gdymc_modules {
+			left: 0;
+			right: 0;
+		}
+
+		.gdymc_desktop_only {
+			display: none !important;
+		}
+
 	}
 	
 	.gdymc_softpreview .gdymc_modulebar {
@@ -812,6 +982,32 @@
 		-webkit-transform: rotate(45deg);
 		transform: rotate(45deg);
 	}
+
+	/* Tooltip pointing downward (for bottom bar position) */
+
+	.gdymc_tooltip_above {
+		margin-top: 0;
+	}
+
+	.gdymc_tooltip_above #gdymc_tooltip_arrow {
+		top: auto;
+		bottom: -10px;
+		left: 10px;
+	}
+
+	.gdymc_tooltip_above #gdymc_tooltip_arrow::after {
+		top: -30px;
+	}
+
+	/* Tooltip to the side (for left/right bar position) */
+
+	.gdymc_tooltip_side {
+		margin-top: 0;
+	}
+
+	.gdymc_tooltip_side #gdymc_tooltip_arrow {
+		display: none;
+	}
 	
 	
 
@@ -836,9 +1032,10 @@
 	#gdymc_modules {
 		background: #363636;
 		position: fixed;
-		top: 40px;
-		left: 0px;
-		width: 100%;
+		top: 50px;
+		left: 50px;
+		right: 50px;
+		width: auto;
 		z-index: 9999999;
 		opacity: 0.0;
 		overflow: hidden;
