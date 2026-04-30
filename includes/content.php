@@ -4,7 +4,7 @@
 	
 	
 	
-	function gdymc_responsive_image( $imageID, $imageSize = null, $linkURI = null, $linkTarget = 0 ) {
+	function gdymc_responsive_image( $imageID, $imageSize = null, $linkURI = null, $linkTarget = 0, $videoOptions = null ) {
 
 
 		do_action( 'gdymc_image_before', $imageID, $imageSize );
@@ -18,7 +18,32 @@
 
 			if( is_numeric( $imageID ) AND !empty( $imageID ) ):
 
-				echo wp_get_attachment_image( $imageID, apply_filters( 'gdymc_imagesize', 'full' ) );
+				$mimeType = get_post_mime_type( $imageID );
+
+				if( $mimeType && strpos( $mimeType, 'video/' ) === 0 ):
+
+					// Render video instead of image. Goal: keep layout (object-fit: cover).
+					$videoURL = wp_get_attachment_url( $imageID );
+					$showControls = ( !is_array( $videoOptions ) || !isset( $videoOptions[ 'controls' ] ) || !empty( $videoOptions[ 'controls' ] ) );
+					$autoplay = ( is_array( $videoOptions ) && !empty( $videoOptions[ 'autoplay' ] ) );
+					$muted = ( is_array( $videoOptions ) && !empty( $videoOptions[ 'muted' ] ) );
+
+					$videoAttrs = 'class="gdymc_video"';
+					if( $showControls ) $videoAttrs .= ' controls';
+					if( $autoplay ) $videoAttrs .= ' autoplay';
+					if( $muted ) $videoAttrs .= ' muted';
+					// Autoplay typically requires muted and playsinline
+					if( $autoplay ) $videoAttrs .= ' playsinline';
+					// Loop when no controls, so the video keeps playing in the background
+					if( !$showControls ) $videoAttrs .= ' loop';
+
+					echo '<video ' . $videoAttrs . ' preload="metadata"><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $mimeType ) . '" /></video>';
+
+				else:
+
+					echo wp_get_attachment_image( $imageID, apply_filters( 'gdymc_imagesize', 'full' ) );
+
+				endif;
 
 			else:
 
@@ -76,8 +101,9 @@
 
 		if ( !empty( $imageObject ) AND is_array( $imageObject ) AND isset( $imageObject[0] ) AND isset( $imageObject[0][0] ) AND is_numeric( $imageObject[0][0] ) ):
 
-			// Show image
-			gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2] );
+			// Show image (or video) - the 4th element optionally carries video options
+			$videoOptions = isset( $imageObject[0][3] ) ? (array) $imageObject[0][3] : null;
+			gdymc_responsive_image( $imageObject[0][0], $imageSize, $imageObject[0][1], $imageObject[0][2], $videoOptions );
 
 		endif;
 

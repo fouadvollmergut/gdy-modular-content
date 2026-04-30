@@ -2335,6 +2335,38 @@
 		text-shadow: 0px 0px 3px #000;
 	}
 
+	/* Video support inside the Image content type */
+
+	.gdymc_image > video,
+	.gdymc_image .gdymc_video {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.gdymc_videothumb_preview {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 2px;
+		background: #000;
+	}
+
+	.gdymc_image_selection .gdymc_imagethumb video {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 2px;
+	}
+
+	#gdymc_overlay_content_imageinfothumb .gdymc_videoinfo_preview {
+		display: block;
+		width: 100%;
+		height: auto;
+		background: #000;
+	}
+
 	.gdymc_imagethumb_edit {
 		position: absolute;
 		width: 26px;

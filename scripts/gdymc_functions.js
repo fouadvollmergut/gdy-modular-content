@@ -1222,7 +1222,7 @@
 		}
 
 
-		function gdymc_add_to_selection( imageID ) {
+		function gdymc_add_to_selection( imageID, isVideo ) {
 
 			imageID = parseInt( imageID );
 
@@ -1238,7 +1238,12 @@
 
 			if( results.length == 0 ) {
 
-				selectedImages.push( [ imageID, null, null ] );
+				if( isVideo ) {
+					// Default video options: full controls on, no autoplay, no muted
+					selectedImages.push( [ imageID, null, null, { controls: true, autoplay: false, muted: false } ] );
+				} else {
+					selectedImages.push( [ imageID, null, null ] );
+				}
 				gdymc_set_selected_images( selectedImages );
 				gdymc_refresh_image_selection();
 
@@ -1264,6 +1269,7 @@
 
 			var selectedImages = gdymc_get_selected_images();
 			var editing = jQuery( '#gdymc_overlay_content_imageinfoinner' ).attr( 'data-id' );
+			var isVideo = jQuery( '#gdymc_overlay_content_imageinfoinner' ).attr( 'data-mime' ) == 'video';
 
 
 			jQuery( '#gdymc_overlay_content_imageinfo_local' ).hide();
@@ -1275,9 +1281,21 @@
 
 					jQuery( '#gdymc_overlay_content_imageinfo_local' ).show();
 
-					jQuery( '#gdymc_imageinfo_linkurl' ).val( value[1] );
+					if( isVideo ) {
 
-					jQuery( '#gdymc_imageinfo_linktarget' ).prop( 'checked', value[2] );
+						var videoOptions = ( value[3] && typeof value[3] === 'object' ) ? value[3] : { controls: true, autoplay: false, muted: false };
+
+						jQuery( '#gdymc_videoinfo_controls' ).prop( 'checked', !!videoOptions.controls );
+						jQuery( '#gdymc_videoinfo_autoplay' ).prop( 'checked', !!videoOptions.autoplay );
+						jQuery( '#gdymc_videoinfo_muted' ).prop( 'checked', !!videoOptions.muted );
+
+					} else {
+
+						jQuery( '#gdymc_imageinfo_linkurl' ).val( value[1] );
+
+						jQuery( '#gdymc_imageinfo_linktarget' ).prop( 'checked', value[2] );
+
+					}
 
 				}
 
@@ -1302,8 +1320,8 @@
 
 				if( currentImageType == 'exact' ) {			
 
-					// Add to selection
-					gdymc_add_to_selection( currentImageID )
+					// Add to selection (pass true if this is a video so default options are stored)
+					gdymc_add_to_selection( currentImageID, current.attr( 'data-mime' ) == 'video' )
 
 
 				} else if( currentImageType == 'smaller' ) {
@@ -1447,8 +1465,7 @@
 			current.parents( '#gdymc_overlay_content_imageinfo_local' ).addClass( 'gdymc_active' );
 
 			var id = parseInt( jQuery( '#gdymc_overlay_content_imageinfoinner' ).attr( 'data-id' ) );
-			var url = jQuery( '#gdymc_imageinfo_linkurl' ).val();
-			var target = jQuery( '#gdymc_imageinfo_linktarget' ).prop( 'checked' );
+			var isVideo = jQuery( '#gdymc_overlay_content_imageinfoinner' ).attr( 'data-mime' ) == 'video';
 
 			var selectedImages = gdymc_get_selected_images();
 
@@ -1456,7 +1473,24 @@
 
 				if( value[0] == id ) {
 
-					selectedImages[ key ] = [ id, url, target ];
+					if( isVideo ) {
+
+						var videoOptions = {
+							controls: jQuery( '#gdymc_videoinfo_controls' ).prop( 'checked' ),
+							autoplay: jQuery( '#gdymc_videoinfo_autoplay' ).prop( 'checked' ),
+							muted: jQuery( '#gdymc_videoinfo_muted' ).prop( 'checked' )
+						};
+
+						selectedImages[ key ] = [ id, value[1] || null, value[2] || null, videoOptions ];
+
+					} else {
+
+						var url = jQuery( '#gdymc_imageinfo_linkurl' ).val();
+						var target = jQuery( '#gdymc_imageinfo_linktarget' ).prop( 'checked' );
+
+						selectedImages[ key ] = [ id, url, target ];
+
+					}
 
 				}
 
