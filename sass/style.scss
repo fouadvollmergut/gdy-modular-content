@@ -2266,6 +2266,8 @@
 	.gdymc_inside .gdymc_imagethumb {
 		position: relative;
 		cursor: pointer;
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
 	}
 
 	.gdymc_inside .gdymc_imagethumb.gdymc_selected {
@@ -2277,11 +2279,16 @@
 		background: url(../images/transparent.png);
 		background-size: 20px;
 		position: relative;
+		width: 100%;
+		height: 100%;
 	}
 
-	.gdymc_imagethumb img {
+	.gdymc_inside .gdymc_imagethumb img,
+	.gdymc_inside .gdymc_imagethumb video {
+		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		border-radius: 2px;
 	}
 
@@ -2350,22 +2357,26 @@
 	.gdymc_videothumb_preview {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		border-radius: 2px;
 		background: #000;
 	}
 
-	.gdymc_image_selection .gdymc_imagethumb video {
+	.gdymc_image_selection .gdymc_imagethumb video,
+	.gdymc_image_selection .gdymc_imagethumb img {
 		display: block;
-		width: 100%;
-		height: auto;
-		border-radius: 2px;
+		width: 40px !important;
+		height: 40px !important;
+		object-fit: cover;
+		border-radius: 3px;
 	}
 
 	#gdymc_overlay_content_imageinfothumb .gdymc_videoinfo_preview {
 		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: contain;
 		background: #000;
 	}
 
