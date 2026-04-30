@@ -943,15 +943,15 @@
 
 							optionSection( __( 'Local video settings', 'gdy-modular-content' ) );
 
-							echo '<input type="checkbox" id="gdymc_videoinfo_controls" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_controls">' . __( 'Show full video controls', 'gdy-modular-content' ) . '</label>';
+							echo '<input type="checkbox" id="gdymc_videoinfo_controls" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_controls">' . __( 'Show full video controls', 'gdy-modular-content' ) . '</label>';
 
 							echo '<br />';
 
-							echo '<input type="checkbox" id="gdymc_videoinfo_autoplay" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_autoplay">' . __( 'Autoplay', 'gdy-modular-content' ) . '</label>';
+							echo '<input type="checkbox" id="gdymc_videoinfo_autoplay" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_autoplay">' . __( 'Autoplay', 'gdy-modular-content' ) . '</label>';
 
 							echo '<br />';
 
-							echo '<input type="checkbox" id="gdymc_videoinfo_muted" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_muted">' . __( 'Muted', 'gdy-modular-content' ) . '</label>';
+							echo '<input type="checkbox" id="gdymc_videoinfo_muted" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_muted">' . __( 'Muted', 'gdy-modular-content' ) . '</label>';
 
 						else:
 

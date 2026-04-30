@@ -2335,10 +2335,12 @@
 		text-shadow: 0px 0px 3px #000;
 	}
 
-	/* Video support inside the Image content type */
+	/* Video support inside the Image and Gallery content types */
 
 	.gdymc_image > video,
-	.gdymc_image .gdymc_video {
+	.gdymc_image .gdymc_video,
+	.gdymc_gallery_item > video,
+	.gdymc_gallery_item .gdymc_video {
 		display: block;
 		width: 100%;
 		height: 100%;

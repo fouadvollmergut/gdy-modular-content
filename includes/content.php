@@ -24,9 +24,10 @@
 
 					// Render video instead of image. Goal: keep layout (object-fit: cover).
 					$videoURL = wp_get_attachment_url( $imageID );
-					$showControls = ( !is_array( $videoOptions ) || !isset( $videoOptions[ 'controls' ] ) || !empty( $videoOptions[ 'controls' ] ) );
-					$autoplay = ( is_array( $videoOptions ) && !empty( $videoOptions[ 'autoplay' ] ) );
-					$muted = ( is_array( $videoOptions ) && !empty( $videoOptions[ 'muted' ] ) );
+					// Defaults when nothing is stored: no controls, autoplay, muted (loop is implied)
+					$showControls = is_array( $videoOptions ) ? !empty( $videoOptions[ 'controls' ] ) : false;
+					$autoplay = is_array( $videoOptions ) ? !empty( $videoOptions[ 'autoplay' ] ) : true;
+					$muted = is_array( $videoOptions ) ? !empty( $videoOptions[ 'muted' ] ) : true;
 
 					$videoAttrs = 'class="gdymc_video"';
 					if( $showControls ) $videoAttrs .= ' controls';
@@ -189,7 +190,8 @@
 
 					else:
 
-						gdymc_responsive_image( $image[0], $imageSize, $image[1], $image[2] );		
+						$videoOptions = isset( $image[3] ) ? (array) $image[3] : null;
+						gdymc_responsive_image( $image[0], $imageSize, $image[1], $image[2], $videoOptions );		
 
 					endif;							
 

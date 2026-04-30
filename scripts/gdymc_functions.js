@@ -1239,8 +1239,8 @@
 			if( results.length == 0 ) {
 
 				if( isVideo ) {
-					// Default video options: full controls on, no autoplay, no muted
-					selectedImages.push( [ imageID, null, null, { controls: true, autoplay: false, muted: false } ] );
+					// Default video options: no controls, autoplay on, muted on
+					selectedImages.push( [ imageID, null, null, { controls: false, autoplay: true, muted: true } ] );
 				} else {
 					selectedImages.push( [ imageID, null, null ] );
 				}
@@ -1283,7 +1283,7 @@
 
 					if( isVideo ) {
 
-						var videoOptions = ( value[3] && typeof value[3] === 'object' ) ? value[3] : { controls: true, autoplay: false, muted: false };
+						var videoOptions = ( value[3] && typeof value[3] === 'object' ) ? value[3] : { controls: false, autoplay: true, muted: true };
 
 						jQuery( '#gdymc_videoinfo_controls' ).prop( 'checked', !!videoOptions.controls );
 						jQuery( '#gdymc_videoinfo_autoplay' ).prop( 'checked', !!videoOptions.autoplay );
