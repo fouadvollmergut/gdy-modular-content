@@ -1182,7 +1182,7 @@
 			jQuery.each( selectedImages, function( index, value ) {
 
 
-				var thumbElement = jQuery( '<li class="gdymc_imagethumb" data-image=\'' + JSON.stringify( value ) + '\' data-id="' + value[0] + '"><div class="gdymc_imagethumb_edit"></div></li>' ).append( jQuery( '.gdymc_mediathumb_' + value[0] ).first().clone() );
+				var thumbElement = jQuery( '<li class="gdymc_imagethumb" data-image=\'' + JSON.stringify( value ) + '\' data-id="' + value[0] + '"></li>' ).append( jQuery( '.gdymc_mediathumb_' + value[0] ).first().clone() );
 
 				newThumbs.push( thumbElement );
 

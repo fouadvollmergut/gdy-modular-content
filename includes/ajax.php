@@ -870,9 +870,20 @@
 
 					if( $currentImages ): foreach( $currentImages as $currentImage ):
 
+						$currentMime = get_post_mime_type( $currentImage[0] );
+						$isVideo = ( strpos( (string) $currentMime, 'video/' ) === 0 );
+
 						echo '<li class="gdymc_imagethumb" data-image=\'' . json_encode( $currentImage ) . '\' data-id="' . $currentImage[0] . '">';
-						echo '<div class="gdymc_imagethumb_edit"></div>';
-						echo '<div class="gdymc_imagethumb_holder">' . wp_get_attachment_image( $currentImage[0], 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentImage[0] ) ) . '</div>';
+						echo '<div class="gdymc_imagethumb_holder">';
+
+						if( $isVideo ):
+							$videoURL = wp_get_attachment_url( $currentImage[0] );
+							echo '<video class="gdymc_mediathumb_' . $currentImage[0] . ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $currentMime ) . '" /></video>';
+						else:
+							echo wp_get_attachment_image( $currentImage[0], 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentImage[0] ) );
+						endif;
+
+						echo '</div>';
 						echo '</li>';
 
 					endforeach; endif;
