@@ -13,7 +13,7 @@ function optionSection($label)
 // Shows an error message if the user is logged
 
 /**
- * Shows an error message if the user is logged.
+ * Shows an error message if the user is logged in.
  *
  * @param mixed $errorMessage Error message value.
  */
@@ -66,7 +66,7 @@ function optionExists(
 // Returns a gdymc-option if its exists
 
 /**
- * Returns a gdymc-option if its exists.
+ * Returns a gdymc-option if it exists.
  *
  * @param mixed $optionName Option name value.
  *

@@ -224,7 +224,7 @@ class GDYMC_MODULE
     // Check if current module has a active visibility timer
 
     /**
-     * Check if current module has a active visibility timer.
+     * Check if current module has an active visibility timer.
      */
     public function is_timed()
     {
