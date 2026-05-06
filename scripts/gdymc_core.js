@@ -42,7 +42,7 @@ gdymc.lang = function (id) {
 /******************************* FUNCTIONS *******************************/
 
 /**
- * Error notification.
+ * Displays a GDYMC error notification with configurable options.
  *
  * @param {*} options Options value.
  */
@@ -258,7 +258,7 @@ gdymc.ajax = function (action, data, callback) {
 /******************************* ACTIONS *******************************/
 
 /**
- * delete module.
+ * Deletes a GDYMC module and optionally reloads or runs a callback.
  *
  * @param {*} moduleID Module id value.
  *
@@ -297,7 +297,7 @@ gdymc.actions.deletemodule = function (moduleID, reload, callback) {
 };
 
 /**
- * delete module type.
+ * Deletes a GDYMC module type and optionally reloads or runs a callback.
  *
  * @param {*} moduleType Module type value.
  *
@@ -334,7 +334,7 @@ gdymc.actions.deletemoduletype = function (moduleType, reload, callback) {
 };
 
 /**
- * change module type.
+ * Changes all modules from one GDYMC module type to another.
  *
  * @param {*} oldModule Old module value.
  *
@@ -379,7 +379,7 @@ gdymc.actions.changemoduletype = function (
 };
 
 /**
- * change single module type.
+ * Changes a single GDYMC module to another module type.
  *
  * @param {*} moduleid Moduleid value.
  *
@@ -426,7 +426,7 @@ gdymc.actions.changesinglemoduletype = function (
 /******************************* EDITOR *******************************/
 
 /**
- * Link window.
+ * Opens and configures the editor link window.
  *
  * @param {*} options Options value.
  */
@@ -446,7 +446,7 @@ gdymc.editor.link = function (options) {
 };
 
 /**
- * Format.
+ * Applies a formatting command to the current editor selection.
  *
  * @param {*} command Command value.
  *
@@ -539,7 +539,7 @@ gdymc.editor.addclass = function (classname, attributes) {
 };
 
 /**
- * Selection.
+ * Saves the current editor selection.
  */
 gdymc.selection.save = function () {
   if (gdymc.info.selectionRange) {

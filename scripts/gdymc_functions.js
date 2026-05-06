@@ -96,7 +96,7 @@ class ButtonGroup {
   }
 
   /**
-   * Event Listeners.
+   * Adds the click event listener for creating a GDYMC button.
    *
    * @param {*} button Button value.
    */
@@ -471,7 +471,7 @@ jQuery(document).ready(function () {
   };
 
   /**
-   * Window resize.
+   * Resizes the GDYMC format button bar for the current window width.
    */
   function gdymc_formatbuttons_resize() {
     var windowWidth = jQuery(document.body).width();
@@ -1130,7 +1130,7 @@ jQuery(document).ready(function () {
   });
 
   /**
-   * Image overlay.
+   * Returns the images currently selected in the image overlay.
    */
   function gdymc_get_selected_images() {
     var ci = jQuery.parseJSON(
@@ -1616,7 +1616,7 @@ jQuery(document).ready(function () {
   });
 
   /**
-   * Image search.
+   * Refreshes the image search result list in the image overlay.
    *
    * @param {*} responsemode Responsemode value.
    *
