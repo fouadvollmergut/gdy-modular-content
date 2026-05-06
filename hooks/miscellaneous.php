@@ -1,133 +1,208 @@
 <?php
 
+/************************************* IMAGE GALLERY CAPTION ***********************************/
 
+add_action("gdymc_galleryimage_after", "gdymc_galleryimage_caption", 10, 2);
 
-	/************************************* IMAGE GALLERY CAPTION ***********************************/
+/**
+ * Handles GDYMC galleryimage caption behavior.
+ *
+ * @param mixed $imageID Image id value.
+ *
+ * @param mixed $imageObject Image object value.
+ */
+function gdymc_galleryimage_caption($imageID, $imageObject)
+{
+    if (!empty($imageObject->post_excerpt)):
+        echo '<div class="gdymc_gallery_item_caption">' .
+            $imageObject->post_excerpt .
+            "</div>";
+    endif;
+}
 
-	add_action( 'gdymc_galleryimage_after', 'gdymc_galleryimage_caption', 10, 2 );
+/************************************* MODULE: MODULE INTEGRITY ERRORS ***********************************/
 
-	function gdymc_galleryimage_caption( $imageID, $imageObject ) {
+add_action("gdymc_error_module_missing", "gdymc_error_module_missing", 10, 1);
 
-		if( !empty( $imageObject->post_excerpt ) ):
+/**
+ * Renders the GDYMC error module missing error message.
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_error_module_missing($module)
+{
+    if (gdymc_logged()):
+        $error = apply_filters(
+            "gdymc_error_module_missing_message",
+            str_replace(
+                "%s",
+                $module->type,
+                __(
+                    'The module type "%s" seems not to exist.',
+                    "gdy-modular-content"
+                )
+            ),
+            $module
+        );
 
-			echo '<div class="gdymc_gallery_item_caption">' . $imageObject->post_excerpt . '</div>';
+        optionError($error);
+    endif;
+}
 
-		endif;
-	
-	}
+add_action(
+    "gdymc_error_module_incomplete",
+    "gdymc_error_module_incomplete",
+    10,
+    1
+);
 
+/**
+ * Renders the GDYMC error module incomplete error message.
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_error_module_incomplete($module)
+{
+    if (gdymc_logged()):
+        $error = apply_filters(
+            "gdymc_error_module_incomplete_message",
+            str_replace(
+                "%s",
+                $module->type,
+                __('The module type "%s" is incomplete.', "gdy-modular-content")
+            ),
+            $module
+        );
 
+        optionError($error);
+    endif;
+}
 
+add_action(
+    "gdymc_error_module_missing",
+    "gdymc_module_error_folder_actions",
+    10,
+    1
+);
+add_action(
+    "gdymc_error_module_incomplete",
+    "gdymc_module_error_folder_actions",
+    10,
+    1
+);
 
-	/************************************* MODULE: MODULE INTEGRITY ERRORS ***********************************/
+/**
+ * Handles GDYMC module error folder actions behavior.
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_module_error_folder_actions($module)
+{
+    if (gdymc_logged()):
+        echo '<div class="gdymc_not_existing_module_actions gdymc_inside">';
 
-	add_action( 'gdymc_error_module_missing', 'gdymc_error_module_missing', 10, 1 );
+        echo '<button class="gdymc_delete_moduletype">' .
+            __("Delete this module type", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_change_moduletype">' .
+            __("Change this module type", "gdy-modular-content") .
+            "</button>";
 
-	function gdymc_error_module_missing( $module ) {
+        echo "</div>";
+    endif;
+}
 
-		if( gdymc_logged() ):
+/************************************* MODULE AREA ERRORS ***********************************/
 
-			$error = apply_filters( 'gdymc_error_module_missing_message', str_replace( '%s', $module->type, __( 'The module type "%s" seems not to exist.', 'gdy-modular-content' ) ), $module );
+add_action("gdymc_error_area_nomodules", "gdymc_error_area_nomodules", 10, 1);
 
-			optionError( $error );
+/**
+ * Renders the GDYMC error area nomodules error message.
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_error_area_nomodules($module)
+{
+    if (gdymc_logged()):
+        $error = apply_filters(
+            "gdymc_errormessage_area_nomodules",
+            __("There are no modules", "gdy-modular-content")
+        );
 
-		endif;
-	
-	}
+        optionError($error);
+    endif;
+}
 
-	add_action( 'gdymc_error_module_incomplete', 'gdymc_error_module_incomplete', 10, 1 );
+/************************************* ADMINBAR MODULE LIST: SETUP ERRORS ***********************************/
 
-	function gdymc_error_module_incomplete( $module ) {
+add_action(
+    "gdymc_error_adminbar_nomodulefolder",
+    "gdymc_error_adminbar_nomodulefolder",
+    10
+);
 
-		if( gdymc_logged() ):
+/**
+ * Renders the GDYMC error adminbar nomodulefolder error message.
+ */
+function gdymc_error_adminbar_nomodulefolder()
+{
+    $error = apply_filters(
+        "gdymc_errormessage_adminbar_nomodulefolder",
+        __("There is no GDYMC modules folder.", "gdy-modular-content")
+    );
 
-			$error = apply_filters( 'gdymc_error_module_incomplete_message', str_replace( '%s', $module->type, __( 'The module type "%s" is incomplete.', 'gdy-modular-content' ) ), $module );
+    echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' .
+        $error .
+        "</div>";
+}
 
-			optionError( $error );
+add_action(
+    "gdymc_error_adminbar_nomodules",
+    "gdymc_error_adminbar_nomodules",
+    10
+);
 
-		endif;
-	
-	}
+/**
+ * Renders the GDYMC error adminbar nomodules error message.
+ */
+function gdymc_error_adminbar_nomodules()
+{
+    $error = apply_filters(
+        "gdymc_errormessage_adminbar_nomodules",
+        __(
+            "There are no modules in your modules folder.",
+            "gdy-modular-content"
+        )
+    );
 
+    echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' .
+        $error .
+        "</div>";
+}
 
-	add_action( 'gdymc_error_module_missing', 'gdymc_module_error_folder_actions', 10, 1 );
-	add_action( 'gdymc_error_module_incomplete', 'gdymc_module_error_folder_actions', 10, 1 );
+add_action("gdymc_error_adminbar_noarea", "gdymc_error_adminbar_noarea", 10);
 
-	function gdymc_module_error_folder_actions( $module ) {
+/**
+ * Renders the GDYMC error adminbar noarea error message.
+ */
+function gdymc_error_adminbar_noarea()
+{
+    $error = apply_filters(
+        "gdymc_errormessage_adminbar_noarea",
+        __(
+            "Create a module area with the areaCreate() function or the [gdymc_area] shortcode.",
+            "gdy-modular-content"
+        )
+    );
 
-		if( gdymc_logged() ):
+    echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' .
+        $error .
+        "</div>";
+}
 
-			echo '<div class="gdymc_not_existing_module_actions gdymc_inside">';
+/************************************* AUTOMATIC MODULE AREA ***********************************/
 
-			echo '<button class="gdymc_delete_moduletype">' . __( 'Delete this module type', 'gdy-modular-content' ) . '</button>';
-			echo '<button class="gdymc_change_moduletype">' . __( 'Change this module type', 'gdy-modular-content' ) . '</button>';
-
-			echo '</div>';
-
-		endif;
-	
-	}
-
-
-
-	/************************************* MODULE AREA ERRORS ***********************************/
-
-
-	add_action( 'gdymc_error_area_nomodules', 'gdymc_error_area_nomodules', 10, 1 );
-
-	function gdymc_error_area_nomodules( $module ) {
-
-		if( gdymc_logged() ):
-
-			$error = apply_filters( 'gdymc_errormessage_area_nomodules', __( 'There are no modules', 'gdy-modular-content' ) );
-
-			optionError( $error );
-
-		endif;
-	
-	}
-
-
-
-	/************************************* ADMINBAR MODULE LIST: SETUP ERRORS ***********************************/
-
-	add_action( 'gdymc_error_adminbar_nomodulefolder', 'gdymc_error_adminbar_nomodulefolder', 10 );
-
-	function gdymc_error_adminbar_nomodulefolder() {
-
-		$error = apply_filters( 'gdymc_errormessage_adminbar_nomodulefolder', __( 'There is no GDYMC modules folder.', 'gdy-modular-content' ) );
-
-		echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' . $error . '</div>';
-	
-	}
-
-
-	add_action( 'gdymc_error_adminbar_nomodules', 'gdymc_error_adminbar_nomodules', 10 );
-
-	function gdymc_error_adminbar_nomodules() {
-
-		$error = apply_filters( 'gdymc_errormessage_adminbar_nomodules', __( 'There are no modules in your modules folder.', 'gdy-modular-content' ) );
-
-		echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' . $error . '</div>';
-	
-	}
-
-
-	add_action( 'gdymc_error_adminbar_noarea', 'gdymc_error_adminbar_noarea', 10 );
-
-	function gdymc_error_adminbar_noarea() {
-
-		$error = apply_filters( 'gdymc_errormessage_adminbar_noarea', __( 'Create a module area with the areaCreate() function or the [gdymc_area] shortcode.', 'gdy-modular-content' ) );
-
-		echo '<div id="gdymc_nomodules"><span class="dashicons dashicons-info"></span>' . $error . '</div>';
-	
-	}
-
-
-
-	/************************************* AUTOMATIC MODULE AREA ***********************************/
-
-	/*
+/*
 
 	Removed since 0.9.2. Experiment for future integrations
 
@@ -141,80 +216,89 @@
 
 	*/
 
+/************************************* MODULE AREA SHORTCODE ***********************************/
 
+add_shortcode("gdymc_area", "gdymc_area_create_shortcode");
 
-	/************************************* MODULE AREA SHORTCODE ***********************************/
+/**
+ * Handles GDYMC area create shortcode behavior.
+ */
+function gdymc_area_create_shortcode()
+{
+    ob_start();
 
-	add_shortcode( 'gdymc_area', 'gdymc_area_create_shortcode' );
+    areaCreate();
 
-	function gdymc_area_create_shortcode() {
+    $ob_content = ob_get_contents();
 
-		ob_start();
-		
-		areaCreate();
+    ob_end_clean();
 
-		$ob_content = ob_get_contents();
+    return $ob_content;
+}
 
-		ob_end_clean();
+/************************************* MAKE ATTACHMENT WIDTH AND HEIGHT ACCESSIBLE AS POST META ***********************************/
 
-		return $ob_content;
+add_action(
+    "gdymc_transfer_attachment_image_size",
+    "gdymc_transfer_attachment_image_sizes",
+    10,
+    2
+);
 
-	}
+/**
+ * Handles GDYMC transfer attachment image sizes behavior.
+ */
+function gdymc_transfer_attachment_image_sizes()
+{
+    $query = new WP_Query([
+        "posts_per_page" => -1,
+        "post_type" => "attachment",
+        "post_status" => "any",
+        "meta_query" => [
+            "relation" => "OR",
+            [
+                "key" => "_gdymc_image_width",
+                "compare" => "NOT EXISTS",
+            ],
+            [
+                "key" => "_gdymc_image_height",
+                "compare" => "NOT EXISTS",
+            ],
+        ],
+    ]);
 
+    if ($query->have_posts()):
+        while ($query->have_posts()):
+            $query->the_post();
 
+            $meta = wp_get_attachment_metadata();
 
-	/************************************* MAKE ATTACHMENT WIDTH AND HEIGHT ACCESSIBLE AS POST META ***********************************/
+            if (isset($meta["width"])) {
+                update_metadata(
+                    "post",
+                    get_the_ID(),
+                    "_gdymc_image_width",
+                    (int) $meta["width"]
+                );
+            }
 
-	add_action( 'gdymc_transfer_attachment_image_size', 'gdymc_transfer_attachment_image_sizes', 10, 2 );
+            if (isset($meta["height"])) {
+                update_metadata(
+                    "post",
+                    get_the_ID(),
+                    "_gdymc_image_height",
+                    (int) $meta["height"]
+                );
+            }
+        endwhile;
+    endif;
 
-	function gdymc_transfer_attachment_image_sizes() {
+    wp_reset_query();
+}
 
+/**************************** ADD MODULE LIST POSTMETA ****************************/
 
-		$query = new WP_Query( array(
-
-			'posts_per_page' => -1,
-		    'post_type'      => 'attachment',
-		    'post_status'    => 'any',
-		    'meta_query' => array(
-
-		    	'relation' => 'OR',
-			    array(
-					'key' => '_gdymc_image_width',
-					'compare' => 'NOT EXISTS'
-			    ),
-			    array(
-					'key' => '_gdymc_image_height',
-					'compare' => 'NOT EXISTS'
-			    ),
-
-			)
-
-		) );
-
-
-
-
-		if( $query->have_posts() ): while( $query->have_posts() ): $query->the_post();
-
-			$meta = wp_get_attachment_metadata();
-
-			if( isset( $meta[ 'width' ] ) ) update_metadata( 'post', get_the_ID(), '_gdymc_image_width', (int) $meta[ 'width' ] );
-
-			if( isset( $meta[ 'height' ] ) ) update_metadata( 'post', get_the_ID(), '_gdymc_image_height', (int) $meta[ 'height' ] );
-
-		endwhile; endif;
-
-
-		wp_reset_query(); 
-
-
-	}
-
-
-
-	/**************************** ADD MODULE LIST POSTMETA ****************************/
-	
-	/*
+/*
 
 	Deprecated since version 0.9.0. There is no longer a existing meta necesary for gdymc_module_array()
 
@@ -243,10 +327,9 @@
 
 	*/
 
+/**************************** LOAD MODULE FUNCTIONS ****************************/
 
-	/**************************** LOAD MODULE FUNCTIONS ****************************/
-
-	/*
+/*
 
 	Deprecated since version 0.8.6. These function are now always loaded.
 
@@ -261,30 +344,30 @@
 	endif;
 	*/
 
-	add_action( 'init', 'gdymc_load_module_functions', 10 );
+add_action("init", "gdymc_load_module_functions", 10);
 
-	function gdymc_load_module_functions() {
+/**
+ * Handles GDYMC load module functions behavior.
+ */
+function gdymc_load_module_functions()
+{
+    global $gdymc_module_types;
 
-		global $gdymc_module_types;
+    gdymc_register_module_types();
 
-		gdymc_register_module_types();
+    if ($gdymc_module_types) {
+        foreach ($gdymc_module_types as $moduleType):
+            do_action("gdymc_modulefunctions_before", $moduleType);
 
-		if ( $gdymc_module_types ) {
+            $functionsPath = $moduleType . "/functions.php";
 
-			foreach( $gdymc_module_types as $moduleType ):
+            if (file_exists($functionsPath)) {
+                require_once $functionsPath;
+            }
 
-				do_action( 'gdymc_modulefunctions_before', $moduleType );
-
-				$functionsPath = $moduleType . '/functions.php';
-
-				if( file_exists( $functionsPath ) ) require_once( $functionsPath );
-
-			do_action( 'gdymc_modulefunctions_after', $moduleType );
-
-			endforeach;
-
-		}
-
-	}
+            do_action("gdymc_modulefunctions_after", $moduleType);
+        endforeach;
+    }
+}
 
 ?>

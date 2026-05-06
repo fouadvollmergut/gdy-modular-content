@@ -1,760 +1,829 @@
 <?php
 
+// Delete Module
+
+add_action("wp_ajax_gdymc_action_deletemodule", "gdymc_action_deletemodule");
+
+/**
+ * Handles the GDYMC action deletemodule action request.
+ *
+ * @param mixed $moduleIDs Module ids value.
+ *
+ * @param mixed $objectID Object id value.
+ *
+ * @param mixed $objectType Object type value.
+ */
+function gdymc_action_deletemodule(
+    $moduleIDs = null,
+    $objectID = null,
+    $objectType = null
+) {
+    if (gdymc_logged()):
+        // Get info
+
+        $moduleIDs = isset($_POST["id"]) ? $_POST["id"] : $moduleIDs;
+        $objectID = isset($_POST["object_id"])
+            ? $_POST["object_id"]
+            : $objectID;
+        $objectType = isset($_POST["object_type"])
+            ? $_POST["object_type"]
+            : $objectType;
+
+        // Delete modules
+
+        $moduleIDs = explode(",", $moduleIDs);
+
+        foreach ($moduleIDs as $moduleID):
+            $module = gdymc_module($moduleID, $objectID, $objectType);
+
+            if ($module) {
+                $module->delete();
+            }
+        endforeach;
+    endif;
+}
+
+// DELETES ALL MODULES OF AN TYPE
+
+add_action(
+    "wp_ajax_gdymc_action_deletemoduletype",
+    "gdymc_action_deletemoduletype"
+);
+
+/**
+ * Handles the GDYMC action deletemoduletype action request.
+ *
+ * @param mixed $moduleType Module type value.
+ */
+function gdymc_action_deletemoduletype($moduleType = "")
+{
+    if (gdymc_logged()):
+        $moduleType = isset($_POST["type"]) ? $_POST["type"] : $moduleType;
+
+        global $wpdb;
+
+        $modules = $wpdb->get_results(
+            "SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$moduleType'"
+        );
+
+        foreach ($modules as $module):
+            $moduleKey = $module->meta_key;
+            $moduleID = str_replace("_gdymc_", "", $moduleKey);
+            $moduleID = str_replace("_type", "", $moduleID);
+
+            $module = gdymc_module($moduleID, $module->post_id, "post");
+
+            if ($module) {
+                $module->delete();
+            }
+        endforeach;
+
+        $modules = $wpdb->get_results(
+            "SELECT term_id, meta_key FROM $wpdb->termmeta WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$moduleType'"
+        );
+
+        foreach ($modules as $module):
+            $moduleKey = $module->meta_key;
+            $moduleID = str_replace("_gdymc_", "", $moduleKey);
+            $moduleID = str_replace("_type", "", $moduleID);
+
+            $module = gdymc_module($moduleID, $module->term_id, "term");
+
+            if ($module) {
+                $module->delete();
+            }
+        endforeach;
+    endif;
+}
+
+// Change Module Type
+
+add_action(
+    "wp_ajax_gdymc_action_changemoduletype",
+    "gdymc_action_changemoduletype"
+);
+
+/**
+ * Handles the GDYMC action changemoduletype action request.
+ *
+ * @param mixed $oldModule Old module value.
+ *
+ * @param mixed $newModule New module value.
+ *
+ * @param mixed $objectID Object id value.
+ */
+function gdymc_action_changemoduletype(
+    $oldModule = "",
+    $newModule = "",
+    $objectID = ""
+) {
+    if (gdymc_logged()):
+        // Get IDs
+
+        $oldModule = isset($_POST["oldModule"])
+            ? $_POST["oldModule"]
+            : $oldModule;
+        $newModule = isset($_POST["newModule"])
+            ? $_POST["newModule"]
+            : $newModule;
+        $objectID = isset($_POST["object"]) ? $_POST["object"] : $objectID;
+
+        global $wpdb;
+        $modules = $wpdb->get_results(
+            "UPDATE $wpdb->postmeta SET meta_value='$newModule' WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$oldModule'"
+        );
+    endif;
+}
+
+// Change single Module Type
+
+add_action(
+    "wp_ajax_gdymc_action_changesinglemoduletype",
+    "gdymc_action_changesinglemoduletype"
+);
+
+/**
+ * Handles the GDYMC action changesinglemoduletype action request.
+ *
+ * @param mixed $moduleid Moduleid value.
+ *
+ * @param mixed $moduletype Moduletype value.
+ *
+ * @param mixed $objectID Object id value.
+ *
+ * @param mixed $objectType Object type value.
+ */
+function gdymc_action_changesinglemoduletype(
+    $moduleid = null,
+    $moduletype = null,
+    $objectID = null,
+    $objectType = null
+) {
+    if (gdymc_logged()):
+        // Get IDs
+
+        $moduleid = isset($_POST["moduleid"]) ? $_POST["moduleid"] : $moduleid;
+        $moduletype = isset($_POST["moduletype"])
+            ? $_POST["moduletype"]
+            : $moduletype;
+        $objectID = isset($_POST["object_id"])
+            ? $_POST["object_id"]
+            : $objectID;
+        $objectType = isset($_POST["object_type"])
+            ? $_POST["object_type"]
+            : $objectType;
+
+        update_metadata(
+            $objectType,
+            $objectID,
+            "_gdymc_" . $moduleid . "_type",
+            $moduletype
+        );
+    endif;
+}
+
+// Add Module
+
+add_action("wp_ajax_gdymc_action_addmodule", "gdymc_action_addmodule");
+
+/**
+ * Handles the GDYMC action addmodule action request.
+ */
+function gdymc_action_addmodule()
+{
+    if (gdymc_logged()):
+        // Get Information
+        $moduleType = $_POST["type"];
+        $objectID = $_POST["object_id"];
+        $objectType = $_POST["object_type"];
+
+        // Create a unique module id
+
+        $insertID = uniqid();
+
+        // Insert module into postmeta
+
+        update_metadata(
+            $objectType,
+            $objectID,
+            "_gdymc_" . $insertID . "_type",
+            $moduleType
+        );
+        update_metadata(
+            $objectType,
+            $objectID,
+            "_gdymc_" . $insertID . "_content",
+            "[]"
+        );
+        update_metadata(
+            $objectType,
+            $objectID,
+            "_gdymc_" . $insertID . "_option_visibility",
+            apply_filters("gdymc_default_module_visibility", 1)
+        );
+
+        // Get module List
+
+        $moduleArray = gdymc_module_array($objectID, $objectType);
+
+        // Push module into list
+
+        array_push($moduleArray, $insertID);
+
+        // Save module list
+
+        update_metadata(
+            $objectType,
+            $objectID,
+            "_gdymc_modulelist",
+            json_encode(array_values($moduleArray))
+        );
+
+        // Return module ID
+
+        die($insertID);
+    endif;
+}
+
+// Saving contents
+
+add_action("wp_ajax_gdymc_action_save", "gdymc_action_save");
+
+/**
+ * Handles the GDYMC action save action request.
+ */
+function gdymc_action_save()
+{
+    if (
+        isset($_POST["contents"]) &&
+        isset($_POST["object_id"]) &&
+        isset($_POST["object_type"]) &&
+        isset($_POST["modules"]) &&
+        isset($_POST["options"]) &&
+        gdymc_logged()
+    ) {
+        $object_id = $_POST["object_id"];
+        $object_type = $_POST["object_type"];
+        $contents = json_decode(stripslashes($_POST["contents"]));
+        $options = json_decode(stripslashes($_POST["options"]));
+        $modules = stripslashes($_POST["modules"]);
+
+        update_metadata(
+            $object_type,
+            $object_id,
+            "_gdymc_modulelist",
+            $modules
+        );
+
+        foreach ($contents as $key => $value):
+            // Prevent the wp_unslash function from destroying the contents
+            $value[1] = str_replace("\\", "\\\\", $value[1]);
+
+            update_metadata(
+                $object_type,
+                $object_id,
+                "_gdymc_singlecontent_" . $value[0],
+                $value[1]
+            );
+        endforeach;
+
+        foreach ($options as $key => $value):
+            optionSave(
+                $value[0],
+                $value[1],
+                $value[2],
+                $object_id,
+                $object_type
+            );
+        endforeach;
+
+        die();
+    }
+}
+
+// Link window
+
+add_action("wp_ajax_gdymc_action_insertlink", "gdymc_action_insertlink");
+
+/**
+ * Handles the GDYMC action insertlink action request.
+ */
+function gdymc_action_insertlink()
+{
+    if (gdymc_logged()):
+        echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
+
+        echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
+        echo '<div class="gdymc_overlay_title">' .
+            __("Insert Link", "gdy-modular-content") .
+            "</div>";
+
+        echo '<div class="gdymc_tabs_navigation">';
+
+        echo '<button class="gdymc_tabs_button gdymc_active" data-tab="link">' .
+            __("Link", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="file">' .
+            __("File", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="page">' .
+            __("Page", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="post">' .
+            __("Post", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="category">' .
+            __("Category", "gdy-modular-content") .
+            "</button>";
+
+        do_action("gdymc_linktabbuttons");
+
+        echo "</div>";
+
+        echo "</div></div>";
+
+        echo '<div class="gdymc_overlay_foot">';
+        echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
+
+        echo '<div class="gdymc_left">';
+
+        echo '<button id="gdymc_insertlink_button" class="gdymc_button">' .
+            __("Insert Link", "gdy-modular-content") .
+            "</button>";
+
+        echo '<input type="checkbox" id="gdymc_insertlink_target" /> <label for="gdymc_insertlink_target">' .
+            __("Open in new tab or window", "gdy-modular-content") .
+            "</label>";
+
+        echo "</div>";
+
+        echo "</div>";
+        echo "</div>";
+
+        echo '<div class="gdymc_overlay_content">';
+        echo '<div class="gdymc_overlay_content_inner">';
+
+        echo '<div id="gdymc_tabs_content_linkadress" class="gdymc_tabs_content gdymc_active" data-tab="link">';
+
+        echo '<input id="gdymc_insertlink_input" type="text" placeholder="' .
+            __("Link adress", "gdy-modular-content") .
+            '">';
+
+        echo '<input id="gdymc_insertlink_classes" type="text" placeholder="' .
+            __("Additional classes", "gdy-modular-content") .
+            '">';
+
+        echo "</div><!-- gdymc_tabs_content -->";
+
+        echo '<div id="gdymc_tabs_content_files" class="gdymc_tabs_content" data-tab="file">';
+
+        gdymc_action_filelist();
+
+        echo "</div><!-- gdymc_tabs_content -->";
+
+        echo '<div id="gdymc_tabs_content_pages" class="gdymc_tabs_content" data-tab="page">';
+
+        gdymc_action_pagelist();
+
+        echo "</div><!-- gdymc_tabs_content -->";
+
+        echo '<div id="gdymc_tabs_content_posts" class="gdymc_tabs_content" data-tab="post">';
+
+        gdymc_action_postlist();
+
+        echo "</div><!-- gdymc_tabs_content -->";
+
+        echo '<div id="gdymc_tabs_content_categories" class="gdymc_tabs_content" data-tab="category">';
+
+        gdymc_action_categorylist();
+
+        echo "</div><!-- gdymc_tabs_content -->";
+
+        echo "</div><!-- .gdymc_overlayInner -->";
+        echo "</div><!-- .gdymc_overlayContent -->";
+
+        die();
+    endif;
+}
+
+// Edit button
+
+add_action("wp_ajax_gdymc_action_editbutton", "gdymc_action_editbutton");
+
+/**
+ * Handles the GDYMC action editbutton action request.
+ */
+function gdymc_action_editbutton()
+{
+    $button_text = json_decode(stripslashes($_POST["text"]));
+    $button_url = json_decode(stripslashes($_POST["url"]));
+    $button_target = json_decode(stripslashes($_POST["target"]));
+    $button_type = json_decode(stripslashes($_POST["type"]));
+
+    $button_target = $button_target == "true" ? "checked" : "";
+    $button_type = $button_type == "true" ? "checked" : "";
+
+    if (gdymc_logged()):
+        echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
+
+        echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
+        echo '<div class="gdymc_overlay_title">' .
+            __("Edit button", "gdy-modular-content") .
+            "</div>";
+
+        echo '<div class="gdymc_tabs_navigation">';
+
+        echo '<button class="gdymc_tabs_button gdymc_active" data-tab="link">' .
+            __("Link", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="file">' .
+            __("File", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="page">' .
+            __("Page", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="post">' .
+            __("Post", "gdy-modular-content") .
+            "</button>";
+        echo '<button class="gdymc_tabs_button" data-tab="category">' .
+            __("Category", "gdy-modular-content") .
+            "</button>";
+
+        do_action("gdymc_linktabbuttons");
+
+        echo "</div></div>";
+
+        echo "</div>";
+
+        echo '<div class="gdymc_overlay_foot">';
+        echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
+
+        echo '<div class="gdymc_left">';
+        echo '<button id="gdymc_saveedit_button" class="gdymc_button">' .
+            __("Done", "gdy-modular-content") .
+            "</button>";
+        echo "</div>";
 
-	// Delete Module
-	
-	add_action( 'wp_ajax_gdymc_action_deletemodule', 'gdymc_action_deletemodule' );
-	
-	function gdymc_action_deletemodule( $moduleIDs = null, $objectID = null, $objectType = null ) {
-		
-		if( gdymc_logged() ):
+        echo "</div>";
+        echo "</div>";
 
-			// Get info
+        echo '<div class="gdymc_overlay_content">';
+        echo '<div class="gdymc_overlay_content_inner">';
 
-			$moduleIDs = isset( $_POST[ 'id' ] ) ? $_POST[ 'id' ] : $moduleIDs;
-			$objectID = isset( $_POST[ 'object_id' ] ) ? $_POST[ 'object_id' ] : $objectID;
-			$objectType = isset( $_POST[ 'object_type' ] ) ? $_POST[ 'object_type' ] : $objectType;
-			
-			// Delete modules
-			
-			$moduleIDs = explode( ',', $moduleIDs );
+        echo '<div id="gdymc_tabs_content_linkadress" class="gdymc_tabs_content gdymc_active" data-tab="link">';
 
-			foreach( $moduleIDs as $moduleID ):
+        echo '<input id="gdymc_editbutton_text" type="text" placeholder="' .
+            __("Button Text", "gdy-modular-content") .
+            '" value="' .
+            $button_text .
+            '">';
 
-				$module = gdymc_module( $moduleID, $objectID, $objectType );
+        echo '<input id="gdymc_insertlink_input" class="gdymc_mt" type="text" placeholder="' .
+            __("Button Link", "gdy-modular-content") .
+            '" value="' .
+            $button_url .
+            '">';
 
-				if( $module ) $module->delete();
+        echo '<div class="gdymc_checkbox-group gdymc_mth">';
 
-			endforeach;
+        echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_type" class="gdymc_mth" type="checkbox" ' .
+            $button_type .
+            '/> <label for="gdymc_insertlink_target">' .
+            __("Primary Button", "gdy-modular-content") .
+            "</label></div>";
 
-		endif;
-		
-	}
+        echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_target" class="gdymc_mth" type="checkbox"  ' .
+            $button_target .
+            ' /> <label for="gdymc_insertlink_target">' .
+            __("Open in new tab or window", "gdy-modular-content") .
+            "</label></div>";
 
+        echo "</div>";
 
+        echo "</div><!-- gdymc_tabs_content -->";
 
-	// DELETES ALL MODULES OF AN TYPE
-	
-	add_action( 'wp_ajax_gdymc_action_deletemoduletype', 'gdymc_action_deletemoduletype' );
-	
-	function gdymc_action_deletemoduletype( $moduleType = '' ) {
-		
-		if( gdymc_logged() ):
-		
+        echo '<div id="gdymc_tabs_content_files" class="gdymc_tabs_content" data-tab="file">';
 
-			$moduleType = isset( $_POST[ 'type' ] ) ? $_POST[ 'type' ] : $moduleType;
-			
-			global $wpdb;
+        gdymc_action_filelist();
 
+        echo "</div><!-- gdymc_tabs_content -->";
 
-			$modules = $wpdb->get_results("SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$moduleType'");
-			
-			foreach( $modules as $module ):
+        echo '<div id="gdymc_tabs_content_pages" class="gdymc_tabs_content" data-tab="page">';
 
-				$moduleKey = $module->meta_key;
-				$moduleID = str_replace( '_gdymc_', '', $moduleKey );
-				$moduleID = str_replace( '_type', '', $moduleID );
+        gdymc_action_pagelist();
 
-				$module = gdymc_module( $moduleID, $module->post_id, 'post' );
+        echo "</div><!-- gdymc_tabs_content -->";
 
-				if( $module ) $module->delete();
+        echo '<div id="gdymc_tabs_content_posts" class="gdymc_tabs_content" data-tab="post">';
 
-			endforeach;
+        gdymc_action_postlist();
 
+        echo "</div><!-- gdymc_tabs_content -->";
 
-			$modules = $wpdb->get_results("SELECT term_id, meta_key FROM $wpdb->termmeta WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$moduleType'");
-			
-			foreach( $modules as $module ):
+        echo '<div id="gdymc_tabs_content_categories" class="gdymc_tabs_content" data-tab="category">';
 
-				$moduleKey = $module->meta_key;
-				$moduleID = str_replace( '_gdymc_', '', $moduleKey );
-				$moduleID = str_replace( '_type', '', $moduleID );
+        gdymc_action_categorylist();
 
-				$module = gdymc_module( $moduleID, $module->term_id, 'term' );
+        echo "</div><!-- gdymc_tabs_content -->";
 
-				if( $module ) $module->delete();
+        echo "</div><!-- .gdymc_overlayInner -->";
+        echo "</div><!-- .gdymc_overlayContent -->";
 
-			endforeach;
+        die();
+    endif;
+}
 
+// Batch window
 
-		endif;
-		
-	}
+// add_action( 'wp_ajax_gdymc_action_modulebatch', 'gdymc_action_modulebatch' );
 
+// function gdymc_action_modulebatch() {
 
+// 	if( gdymc_logged() ):
 
-	// Change Module Type
-	
-	add_action( 'wp_ajax_gdymc_action_changemoduletype', 'gdymc_action_changemoduletype' );
-	
-	function gdymc_action_changemoduletype( $oldModule = '', $newModule = '', $objectID = '' ) {
-		
-		if( gdymc_logged() ):
+// 		echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
 
-			// Get IDs
+// 			echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
+// 			echo '<div class="gdymc_overlay_title">' . __('Batch editing', 'gdy-modular-content') . '</div>';
 
-			$oldModule = isset( $_POST[ 'oldModule' ] ) ? $_POST[ 'oldModule' ] : $oldModule;
-			$newModule = isset( $_POST[ 'newModule' ] ) ? $_POST[ 'newModule' ] : $newModule;
-			$objectID = isset( $_POST[ 'object' ] ) ? $_POST[ 'object' ] : $objectID;
-			
-			global $wpdb;
-			$modules = $wpdb->get_results( "UPDATE $wpdb->postmeta SET meta_value='$newModule' WHERE meta_key LIKE '_gdymc_%_type' AND meta_value='$oldModule'" );
+// 			echo '<div class="gdymc_tabs_navigation">';
 
-		endif;
-		
-	}
-
-
-	// Change single Module Type
-	
-	add_action( 'wp_ajax_gdymc_action_changesinglemoduletype', 'gdymc_action_changesinglemoduletype' );
-	
-	function gdymc_action_changesinglemoduletype( $moduleid = null, $moduletype = null, $objectID = null, $objectType = null ) {
-		
-		if( gdymc_logged() ):
-
-			// Get IDs
-
-			$moduleid = isset( $_POST[ 'moduleid' ] ) ? $_POST[ 'moduleid' ] : $moduleid;
-			$moduletype = isset( $_POST[ 'moduletype' ] ) ? $_POST[ 'moduletype' ] : $moduletype;
-			$objectID = isset( $_POST[ 'object_id' ] ) ? $_POST[ 'object_id' ] : $objectID;
-			$objectType = isset( $_POST[ 'object_type' ] ) ? $_POST[ 'object_type' ] : $objectType;
-			
-			update_metadata( $objectType, $objectID, '_gdymc_'.$moduleid.'_type', $moduletype );
-
-		endif;
-		
-	}
-	
-	
-	
-	
-	// Add Module
-	
-	add_action( 'wp_ajax_gdymc_action_addmodule', 'gdymc_action_addmodule' );
-	
-	function gdymc_action_addmodule() {
+// 				echo '<div class="gdymc_tabs_button gdymc_active" data-tab="selection">' . __('Selection', 'gdy-modular-content') . '</div>';
+// 				echo '<div class="gdymc_tabs_button" data-tab="actions">' . __('Actions', 'gdy-modular-content') . '</div>';
 
-		if( gdymc_logged() ):
-		
-			// Get Information
-			$moduleType = $_POST[ 'type' ];
-			$objectID = $_POST[ 'object_id' ];
-			$objectType = $_POST[ 'object_type' ];
-			
-			// Create a unique module id
-
-			$insertID = uniqid();
-			
-
-			// Insert module into postmeta
-
-			update_metadata( $objectType, $objectID, '_gdymc_' . $insertID . '_type', $moduleType );
-			update_metadata( $objectType, $objectID, '_gdymc_' . $insertID . '_content', '[]' );
-			update_metadata( $objectType, $objectID, '_gdymc_' . $insertID . '_option_visibility', apply_filters( 'gdymc_default_module_visibility', 1 ) );
-			
-
-			// Get module List
-
-			$moduleArray = gdymc_module_array( $objectID, $objectType );
-			
-
-			// Push module into list
-
-			array_push( $moduleArray, $insertID );
-			
-
-			// Save module list
-
-			update_metadata( $objectType, $objectID, '_gdymc_modulelist', json_encode( array_values( $moduleArray ) ) );
-
-
-			// Return module ID
-
-			die( $insertID );
-
-		endif;
-		
-	}
-	
-	
-	
-	
-	// Saving contents
-	
-	add_action( 'wp_ajax_gdymc_action_save', 'gdymc_action_save' );
-	
-	function gdymc_action_save() {
-
-		if( isset( $_POST['contents'] ) && isset( $_POST['object_id'] ) && isset( $_POST['object_type'] ) && isset( $_POST['modules'] ) && isset( $_POST['options'] ) && gdymc_logged() ) {
-
-			$object_id = $_POST['object_id'];
-			$object_type = $_POST['object_type'];
-			$contents = json_decode( stripslashes( $_POST['contents'] ) );
-			$options = json_decode( stripslashes( $_POST['options'] ) );
-			$modules = stripslashes( $_POST['modules'] );
-
-			update_metadata( $object_type, $object_id, '_gdymc_modulelist', $modules);
-
-
-			
-			foreach( $contents as $key => $value ):
-				
-				// Prevent the wp_unslash function from destroying the contents
-				$value[1] = str_replace( "\\", "\\\\", $value[1] );
-
-				update_metadata( $object_type, $object_id, '_gdymc_singlecontent_' . $value[0], $value[1] );
-			
-			endforeach;
-			
-			foreach( $options as $key => $value ):
-			
-				optionSave( $value[0], $value[1], $value[2], $object_id, $object_type );
-			
-			endforeach;
-
-			die();
-		
-		}
-		
-	}
-	
-
-
-	// Link window
-
-	add_action( 'wp_ajax_gdymc_action_insertlink', 'gdymc_action_insertlink' );
-
-	function gdymc_action_insertlink() {
-
-		if( gdymc_logged() ):
-
-
-			echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
-
-				echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
-				echo '<div class="gdymc_overlay_title">' . __('Insert Link', 'gdy-modular-content') . '</div>';
-				
-				echo '<div class="gdymc_tabs_navigation">';
-
-					echo '<button class="gdymc_tabs_button gdymc_active" data-tab="link">'.__('Link', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="file">'.__('File', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="page">'.__('Page', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="post">'.__('Post', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="category">'.__('Category', 'gdy-modular-content').'</button>';
-					
-					do_action( 'gdymc_linktabbuttons' );
-				
-				echo '</div>';
-				
-			
-			echo '</div></div>';
-			
-			
-			
-			echo '<div class="gdymc_overlay_foot">';
-			echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
-			
-			echo '<div class="gdymc_left">';
-				
-				echo '<button id="gdymc_insertlink_button" class="gdymc_button">' . __( 'Insert Link', 'gdy-modular-content' ) . '</button>';
-				
-				echo '<input type="checkbox" id="gdymc_insertlink_target" /> <label for="gdymc_insertlink_target">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
-			
-			echo '</div>';
-			
-			
-			echo '</div>';
-			echo '</div>';
-			
-			
-			
-			echo '<div class="gdymc_overlay_content">';
-				echo '<div class="gdymc_overlay_content_inner">';
-
-					echo '<div id="gdymc_tabs_content_linkadress" class="gdymc_tabs_content gdymc_active" data-tab="link">';
-						
-						echo '<input id="gdymc_insertlink_input" type="text" placeholder="' . __('Link adress', 'gdy-modular-content') . '">';
-
-						echo '<input id="gdymc_insertlink_classes" type="text" placeholder="' . __('Additional classes', 'gdy-modular-content') . '">';
-
-					echo '</div><!-- gdymc_tabs_content -->';
-					
-					echo '<div id="gdymc_tabs_content_files" class="gdymc_tabs_content" data-tab="file">';
-						
-						gdymc_action_filelist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_pages" class="gdymc_tabs_content" data-tab="page">';
-						
-						gdymc_action_pagelist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_posts" class="gdymc_tabs_content" data-tab="post">';
-						
-						gdymc_action_postlist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_categories" class="gdymc_tabs_content" data-tab="category">';
-						
-						gdymc_action_categorylist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					
-				echo '</div><!-- .gdymc_overlayInner -->';
-				echo '</div><!-- .gdymc_overlayContent -->';
-			
-			
-			die();
-
-		endif;
-
-	}
-
-
-	// Edit button
-
-	add_action( 'wp_ajax_gdymc_action_editbutton', 'gdymc_action_editbutton' );
-
-	function gdymc_action_editbutton() {
-
-		$button_text = json_decode( stripslashes( $_POST['text'] ) );
-		$button_url = json_decode( stripslashes( $_POST['url'] ) );
-		$button_target = json_decode( stripslashes( $_POST['target'] ) );
-		$button_type = json_decode( stripslashes( $_POST['type'] ) );
-
-		$button_target = $button_target == "true" ? "checked" : "";
-		$button_type = $button_type == "true" ? "checked" : "";
-		
-
-		if( gdymc_logged() ):
-
-			echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
-
-				echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
-				echo '<div class="gdymc_overlay_title">' . __('Edit button', 'gdy-modular-content') . '</div>';
-
-				echo '<div class="gdymc_tabs_navigation">';
-
-					echo '<button class="gdymc_tabs_button gdymc_active" data-tab="link">'.__('Link', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="file">'.__('File', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="page">'.__('Page', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="post">'.__('Post', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-tab="category">'.__('Category', 'gdy-modular-content').'</button>';
-					
-					do_action( 'gdymc_linktabbuttons' );
-				
-				echo '</div></div>';
-
-			echo '</div>';
-
-			echo '<div class="gdymc_overlay_foot">';
-			echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
-
-			echo '<div class="gdymc_left">';
-				echo '<button id="gdymc_saveedit_button" class="gdymc_button">' . __( 'Done', 'gdy-modular-content' ) . '</button>';
-			echo '</div>';
-
-			echo '</div>';
-			echo '</div>';
-
-			echo '<div class="gdymc_overlay_content">';
-				echo '<div class="gdymc_overlay_content_inner">';
-
-					echo '<div id="gdymc_tabs_content_linkadress" class="gdymc_tabs_content gdymc_active" data-tab="link">';
-						
-						echo '<input id="gdymc_editbutton_text" type="text" placeholder="' . __('Button Text', 'gdy-modular-content') . '" value="' . $button_text . '">';
-
-						echo '<input id="gdymc_insertlink_input" class="gdymc_mt" type="text" placeholder="' . __('Button Link', 'gdy-modular-content') . '" value="' . $button_url . '">';
-
-						echo '<div class="gdymc_checkbox-group gdymc_mth">';
-
-							echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_type" class="gdymc_mth" type="checkbox" ' . $button_type . '/> <label for="gdymc_insertlink_target">' . __( 'Primary Button', 'gdy-modular-content' ) . '</label></div>';
-
-							echo '<div class="gdymc_checkbox-container"><input id="gdymc_editbutton_target" class="gdymc_mth" type="checkbox"  ' . $button_target . ' /> <label for="gdymc_insertlink_target">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label></div>';
-
-						echo '</div>';
-
-					echo '</div><!-- gdymc_tabs_content -->';
-					
-					echo '<div id="gdymc_tabs_content_files" class="gdymc_tabs_content" data-tab="file">';
-						
-						gdymc_action_filelist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_pages" class="gdymc_tabs_content" data-tab="page">';
-						
-						gdymc_action_pagelist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_posts" class="gdymc_tabs_content" data-tab="post">';
-						
-						gdymc_action_postlist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					echo '<div id="gdymc_tabs_content_categories" class="gdymc_tabs_content" data-tab="category">';
-						
-						gdymc_action_categorylist();
-					
-					echo '</div><!-- gdymc_tabs_content -->';
-
-					
-				echo '</div><!-- .gdymc_overlayInner -->';
-				echo '</div><!-- .gdymc_overlayContent -->';
-			
-			
-			die();
-
-		endif;
-
-	}
+// 				do_action( 'gdymc_batchtabbuttons' );
 
+// 			echo '</div>';
 
-	// Batch window
+// 		echo '</div></div>';
 
-	// add_action( 'wp_ajax_gdymc_action_modulebatch', 'gdymc_action_modulebatch' );
+// 		echo '<div class="gdymc_overlay_foot">';
+// 		echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
 
-	// function gdymc_action_modulebatch() {
+// 			echo '<div class="gdymc_button gdymc_overlay_close_trigger">' . __( 'Done', 'gdy-modular-content' ) . '</div>';
 
-	// 	if( gdymc_logged() ):
+// 		echo '</div>';
+// 		echo '</div>';
 
+// 		echo '<div class="gdymc_overlay_content">';
+// 			echo '<div class="gdymc_overlay_content_inner">';
 
-	// 		echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
+// 				echo '<div class="gdymc_tabs_content gdymc_active" data-tab="selection">';
 
-	// 			echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
-	// 			echo '<div class="gdymc_overlay_title">' . __('Batch editing', 'gdy-modular-content') . '</div>';
-				
-	// 			echo '<div class="gdymc_tabs_navigation">';
+// 					optionSection( __( 'Selection', 'gdy-modular-content' ) );
 
-	// 				echo '<div class="gdymc_tabs_button gdymc_active" data-tab="selection">' . __('Selection', 'gdy-modular-content') . '</div>';
-	// 				echo '<div class="gdymc_tabs_button" data-tab="actions">' . __('Actions', 'gdy-modular-content') . '</div>';
-					
-	// 				do_action( 'gdymc_batchtabbuttons' );
-				
-	// 			echo '</div>';
-				
-			
-	// 		echo '</div></div>';
-			
-			
-			
-	// 		echo '<div class="gdymc_overlay_foot">';
-	// 		echo '<div class="gdymc_overlay_foot_inner gdymc_fix">';
-				
-	// 			echo '<div class="gdymc_button gdymc_overlay_close_trigger">' . __( 'Done', 'gdy-modular-content' ) . '</div>';
+// 					echo '<button id="gdymc_batch_action_select_all" class="gdymc_button">' . __( 'Select all modules', 'gdy-modular-content' ) . '</button>';
+// 					echo '<br /><br /><button id="gdymc_batch_action_select_nothing" class="gdymc_button">' . __( 'Unselect all modules', 'gdy-modular-content' ) . '</button>';
+// 					echo '<br /><br /><button id="gdymc_batch_action_select_visible" class="gdymc_button">' . __( 'Add visible modules to selection', 'gdy-modular-content' ) . '</button>';
+// 					echo '<br /><br /><button id="gdymc_batch_action_select_invisible" class="gdymc_button">' . __( 'Add invisible modules to selection', 'gdy-modular-content' ) . '</button>';
 
-	// 		echo '</div>';
-	// 		echo '</div>';
-			
-			
-			
-	// 		echo '<div class="gdymc_overlay_content">';
-	// 			echo '<div class="gdymc_overlay_content_inner">';
+// 				echo '</div><!-- gdymc_tabs_content -->';
 
+// 				echo '<div class="gdymc_tabs_content" data-tab="actions">';
 
-	// 				echo '<div class="gdymc_tabs_content gdymc_active" data-tab="selection">';
-						
-	// 					optionSection( __( 'Selection', 'gdy-modular-content' ) );
+// 					optionSection( __( 'Delete', 'gdy-modular-content' ) );
 
-	// 					echo '<button id="gdymc_batch_action_select_all" class="gdymc_button">' . __( 'Select all modules', 'gdy-modular-content' ) . '</button>';
-	// 					echo '<br /><br /><button id="gdymc_batch_action_select_nothing" class="gdymc_button">' . __( 'Unselect all modules', 'gdy-modular-content' ) . '</button>';
-	// 					echo '<br /><br /><button id="gdymc_batch_action_select_visible" class="gdymc_button">' . __( 'Add visible modules to selection', 'gdy-modular-content' ) . '</button>';
-	// 					echo '<br /><br /><button id="gdymc_batch_action_select_invisible" class="gdymc_button">' . __( 'Add invisible modules to selection', 'gdy-modular-content' ) . '</button>';
-						
+// 					echo '<button id="gdymc_batch_action_delete" class="gdymc_button">' . __( 'Delete selected modules', 'gdy-modular-content' ) . '</button>';
 
-	// 				echo '</div><!-- gdymc_tabs_content -->';
+// 					optionSection( __( 'Move or copy', 'gdy-modular-content' ) );
 
+// 					echo '<div>';
 
-	// 				echo '<div class="gdymc_tabs_content" data-tab="actions">';
-						
+// 						echo '<div class="gdymc_optioncontainer">';
 
-	// 					optionSection( __( 'Delete', 'gdy-modular-content' ) );
+// 							echo '<div class="gdymc_optionlabel">' . __( 'Target ID', 'gdy-modular-content' ) . '</div>';
 
-	// 					echo '<button id="gdymc_batch_action_delete" class="gdymc_button">' . __( 'Delete selected modules', 'gdy-modular-content' ) . '</button>';
-						
+// 							echo '<input id="gdymc_batch_action_target_input" class="gdymc_option_nosave gdymc_option-text" />';
 
-	// 					optionSection( __( 'Move or copy', 'gdy-modular-content' ) );
+// 						echo '</div>';
 
-	// 					echo '<div>';
+// 						echo '<div class="gdymc_optioncontainer gdymc_fix">';
 
-	// 						echo '<div class="gdymc_optioncontainer">';
+// 							echo '<button id="gdymc_batch_action_move" class="gdymc_button" style="margin-right: 20px;">' . __( 'Move selected modules', 'gdy-modular-content' ) . '</button>';
 
-	// 							echo '<div class="gdymc_optionlabel">' . __( 'Target ID', 'gdy-modular-content' ) . '</div>';
+// 							echo '<button id="gdymc_batch_action_copy" class="gdymc_button">' . __( 'Copy selected modules', 'gdy-modular-content' ) . '</button>';
 
-	// 							echo '<input id="gdymc_batch_action_target_input" class="gdymc_option_nosave gdymc_option-text" />';
-								
-	// 						echo '</div>';
+// 						echo '</div>';
 
-	// 						echo '<div class="gdymc_optioncontainer gdymc_fix">';
+// 					echo '</div>';
 
-	// 							echo '<button id="gdymc_batch_action_move" class="gdymc_button" style="margin-right: 20px;">' . __( 'Move selected modules', 'gdy-modular-content' ) . '</button>';
-								
-	// 							echo '<button id="gdymc_batch_action_copy" class="gdymc_button">' . __( 'Copy selected modules', 'gdy-modular-content' ) . '</button>';
+// 				echo '</div><!-- gdymc_tabs_content -->';
 
-	// 						echo '</div>';
+// 			echo '</div><!-- .gdymc_overlayInner -->';
+// 		echo '</div><!-- .gdymc_overlayContent -->';
 
-	// 					echo '</div>';
-						
-						
-	// 				echo '</div><!-- gdymc_tabs_content -->';
-					
+// 		die();
 
-	// 			echo '</div><!-- .gdymc_overlayInner -->';
-	// 		echo '</div><!-- .gdymc_overlayContent -->';
+// 	endif;
 
-			
-	// 		die();
+// }
 
-	// 	endif;
+// Move multiple modules
 
-	// }
+// add_action( 'wp_ajax_gdymc_action_movemodules', 'gdymc_action_movemodules' );
 
+// function gdymc_action_movemodules() {
 
+// 	if( gdymc_logged() ):
 
-	// Move multiple modules
+// 		// Get database object
 
-	// add_action( 'wp_ajax_gdymc_action_movemodules', 'gdymc_action_movemodules' );
+// 		global $wpdb;
 
-	// function gdymc_action_movemodules() {
+// 		// Get informations
 
-	// 	if( gdymc_logged() ):
+// 		$objectID = $_POST[ 'object_id' ];
+// 		$objectType = $_POST[ 'object_type' ];
+// 		$targetID = $_POST[ 'target' ];
+// 		$modules = explode( ',', ltrim( $_POST[ 'modules' ], ',' ) );
+// 		$postStatus = get_post_status( $targetID );
 
+// 		if( empty( $postStatus ) ):
 
+// 			die( '_e:Target doesnt exist' );
 
-	// 		// Get database object
+// 		else:
 
-	// 		global $wpdb;
+// 			// Catch module lists
 
+// 			$currentModuleArray = gdymc_module_array( $objectID );
+// 			$targetModuleArray = gdymc_module_array( $targetID );
 
+// 			// Iterate through modules to move
 
-	// 		// Get informations
+// 			foreach( $modules as $moduleID ): if( !empty( $moduleID ) ):
 
-	// 		$objectID = $_POST[ 'object_id' ];
-	// 		$objectType = $_POST[ 'object_type' ];
-	// 		$targetID = $_POST[ 'target' ];
-	// 		$modules = explode( ',', ltrim( $_POST[ 'modules' ], ',' ) );
-	// 		$postStatus = get_post_status( $targetID );
+// 				// Delete module from current objects list
 
-	// 		if( empty( $postStatus ) ):
+// 				if( ( $key = array_search( $moduleID, $currentModuleArray ) ) !== false ) {
 
-	// 			die( '_e:Target doesnt exist' );
+// 					unset( $currentModuleArray[ $key ] );
 
-	// 		else:
+// 				}
 
+// 				// Insert module in new objects list
 
-	// 			// Catch module lists
+// 				array_push( $targetModuleArray, $moduleID );
 
-	// 			$currentModuleArray = gdymc_module_array( $objectID );
-	// 			$targetModuleArray = gdymc_module_array( $targetID );
+// 				// Move contents
 
+// 				$currentContents = get_metadata( $objectType, $objectID, '_gdymc_' . $moduleID . '_content', true );
+// 				$contents = explode( ',', trim( trim( $currentContents, '[' ), ']' ) );
 
+// 				foreach( $contents as $contentID ): if( !empty( $contentID ) ):
 
-	// 			// Iterate through modules to move
+// 					$wpdb->query( 'UPDATE ' . $wpdb->postmeta . ' SET post_id="' . $targetID . '" WHERE post_id=' . $objectID . ' AND meta_key LIKE "_gdymc_singlecontent_' . $contentID . '"' );
 
-	// 			foreach( $modules as $moduleID ): if( !empty( $moduleID ) ):
+// 				endif; endforeach;
 
+// 				// Move module
 
+// 				$wpdb->query( 'UPDATE ' . $wpdb->postmeta . ' SET post_id="' . $targetID . '" WHERE post_id=' . $objectID . ' AND meta_key LIKE "_gdymc_' . $moduleID . '_%"' );
 
-	// 				// Delete module from current objects list
+// 			endif; endforeach;
 
-	// 				if( ( $key = array_search( $moduleID, $currentModuleArray ) ) !== false ) {
+// 			// Save module lists
+// 			update_metadata( $objectType, $objectID, '_gdymc_modulelist', json_encode( array_values( $currentModuleArray ) ) );
+// 			update_metadata( $objectType, $targetID, '_gdymc_modulelist', json_encode( array_values( $targetModuleArray ) ) );
 
-	// 					unset( $currentModuleArray[ $key ] );
+// 			// Return target permalink
 
-	// 				}
-					
+// 			die( get_the_permalink( $targetID ) );
 
-	// 				// Insert module in new objects list
+// 		endif;
 
-	// 				array_push( $targetModuleArray, $moduleID );
+// 	endif;
 
+// }
 
+// Copy multiple modules
 
-	// 				// Move contents
+// add_action( 'wp_ajax_gdymc_action_copymodules', 'gdymc_action_copymodules' );
 
-	// 				$currentContents = get_metadata( $objectType, $objectID, '_gdymc_' . $moduleID . '_content', true );
-	// 				$contents = explode( ',', trim( trim( $currentContents, '[' ), ']' ) );
+// function gdymc_action_copymodules() {
 
-	// 				foreach( $contents as $contentID ): if( !empty( $contentID ) ):
+// 	if( gdymc_logged() ):
 
-	// 					$wpdb->query( 'UPDATE ' . $wpdb->postmeta . ' SET post_id="' . $targetID . '" WHERE post_id=' . $objectID . ' AND meta_key LIKE "_gdymc_singlecontent_' . $contentID . '"' );
+// 		// Get database object
 
-	// 				endif; endforeach;
+// 		global $wpdb;
 
+// 		// Get informations
 
+// 		$objectID = $_POST[ 'object_id' ];
+// 		$objectType = $_POST[ 'object_type' ];
+// 		$targetID = $_POST[ 'target' ];
+// 		$modules = explode( ',', ltrim( $_POST[ 'modules' ], ',' ) );
+// 		$postStatus = get_post_status( $targetID );
 
-	// 				// Move module
-					
-	// 				$wpdb->query( 'UPDATE ' . $wpdb->postmeta . ' SET post_id="' . $targetID . '" WHERE post_id=' . $objectID . ' AND meta_key LIKE "_gdymc_' . $moduleID . '_%"' );
+// 		if( empty( $postStatus ) ):
 
+// 			die( '_e:Target doesnt exist' );
 
+// 		else:
 
-	// 			endif; endforeach;
+// 			// Catch module lists
 
+// 			$currentModuleArray = gdymc_module_array( $objectID );
+// 			$targetModuleArray = gdymc_module_array( $targetID );
 
-	// 			// Save module lists
-	// 			update_metadata( $objectType, $objectID, '_gdymc_modulelist', json_encode( array_values( $currentModuleArray ) ) );
-	// 			update_metadata( $objectType, $targetID, '_gdymc_modulelist', json_encode( array_values( $targetModuleArray ) ) );
+// 			// Iterate through modules to move
 
+// 			foreach( $modules as $oldModuleID ): if( !empty( $oldModuleID ) ):
 
-	// 			// Return target permalink
+// 				// Create a new module id
 
-	// 			die( get_the_permalink( $targetID ) );
+// 				$newModuleID = uniqid();
 
-	// 		endif;
+// 				// Insert new module in new objects list
 
+// 				array_push( $targetModuleArray, $newModuleID );
 
-	// 	endif;
+// 				// Copy contents
 
-	// }
+// 				$newContents = array();
+// 				$currentContents = get_metadata( $objectType, $objectID, '_gdymc_' . $oldModuleID . '_content', true );
+// 				$contents = explode( ',', trim( trim( $currentContents, '[' ), ']' ) );
 
+// 				foreach( $contents as $oldContentID ):
 
+// 					$newContentID = uniqid();
 
-	// Copy multiple modules
+// 					array_push( $newContents, $newContentID );
 
-	// add_action( 'wp_ajax_gdymc_action_copymodules', 'gdymc_action_copymodules' );
+// 					$currentContent = get_metadata( $objectType, $objectID, '_gdymc_singlecontent_' . $oldContentID, true );
+// 					$result = update_metadata( $objectType, $targetID, '_gdymc_singlecontent_' . $newContentID, $currentContent );
 
-	// function gdymc_action_copymodules() {
+// 				endforeach;
 
-	// 	if( gdymc_logged() ):
+// 				// Copy options and stuff
 
+// 				$contents = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE post_id=$objectID AND meta_key LIKE '_gdymc_$oldModuleID%'" );
 
-	// 		// Get database object
+// 				foreach( $contents as $content ):
 
-	// 		global $wpdb;
+// 					$result = update_metadata( $objectType, $targetID, str_replace( $oldModuleID, $newModuleID, $content->meta_key ), $content->meta_value );
 
+// 				endforeach;
 
-	// 		// Get informations
+// 				// Save module contents
 
-	// 		$objectID = $_POST[ 'object_id' ];
-	// 		$objectType = $_POST[ 'object_type' ];
-	// 		$targetID = $_POST[ 'target' ];
-	// 		$modules = explode( ',', ltrim( $_POST[ 'modules' ], ',' ) );
-	// 		$postStatus = get_post_status( $targetID );
+// 				$result = update_metadata( $objectType, $targetID, '_gdymc_'.$newModuleID.'_content', '[' . implode( ',', $newContents ) . ']' );
 
-	// 		if( empty( $postStatus ) ):
+// 			endif; endforeach;
 
-	// 			die( '_e:Target doesnt exist' );
+// 			// Save module list
 
-	// 		else:
+// 			update_metadata( $objectType, $objectID, '_gdymc_modulelist', json_encode( array_values( $targetModuleArray ) ) );
 
+// 			// Return target permalink
 
-	// 			// Catch module lists
+// 			die( get_the_permalink( $targetID ) );
 
-	// 			$currentModuleArray = gdymc_module_array( $objectID );
-	// 			$targetModuleArray = gdymc_module_array( $targetID );
+// 		endif;
 
+// 	endif;
 
+// }
 
-	// 			// Iterate through modules to move
+// Image window
 
-	// 			foreach( $modules as $oldModuleID ): if( !empty( $oldModuleID ) ):
+add_action("wp_ajax_gdymc_action_imageoverlay", "gdymc_action_imageoverlay");
 
+/**
+ * Handles the GDYMC action imageoverlay action request.
+ */
+function gdymc_action_imageoverlay()
+{
+    if (gdymc_logged()):
 
-	// 				// Create a new module id
+        // Settings
 
-	// 				$newModuleID = uniqid();
+        if (isset($_POST["w"])) {
+            $targetWidth = $_POST["w"];
+        }
+        if (isset($_POST["h"])) {
+            $targetHeight = $_POST["h"];
+        }
+        $currentImages =
+            (isset($_POST["i"]) and
+            json_decode(stripcslashes($_POST["i"])) != null)
+                ? json_decode(stripcslashes($_POST["i"]))
+                : null;
+        if (isset($_POST["multiple"])) {
+            $allowMultiple = $_POST["multiple"];
+        } else {
+            $allowMultiple = false;
+        }
+        if (isset($_POST["m"])) {
+            $currentMode = $_POST["m"];
+        } else {
+            $currentMode = "exact";
+        }
 
-
-
-	// 				// Insert new module in new objects list
-
-	// 				array_push( $targetModuleArray, $newModuleID );
-
-
-
-	// 				// Copy contents
-					
-	// 				$newContents = array();
-	// 				$currentContents = get_metadata( $objectType, $objectID, '_gdymc_' . $oldModuleID . '_content', true );
-	// 				$contents = explode( ',', trim( trim( $currentContents, '[' ), ']' ) );
-
-
-	// 				foreach( $contents as $oldContentID ):
-
-	// 					$newContentID = uniqid();
-
-	// 					array_push( $newContents, $newContentID );
-
-	// 					$currentContent = get_metadata( $objectType, $objectID, '_gdymc_singlecontent_' . $oldContentID, true );
-	// 					$result = update_metadata( $objectType, $targetID, '_gdymc_singlecontent_' . $newContentID, $currentContent );
-
-	// 				endforeach;
-					
-
-					
-	// 				// Copy options and stuff
-
-	// 				$contents = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE post_id=$objectID AND meta_key LIKE '_gdymc_$oldModuleID%'" );
-
-
-	// 				foreach( $contents as $content ):
-
-	// 					$result = update_metadata( $objectType, $targetID, str_replace( $oldModuleID, $newModuleID, $content->meta_key ), $content->meta_value );
-
-	// 				endforeach;
-
-					
-	// 				// Save module contents
-
-	// 				$result = update_metadata( $objectType, $targetID, '_gdymc_'.$newModuleID.'_content', '[' . implode( ',', $newContents ) . ']' );
-					
-
-
-
-	// 			endif; endforeach;
-
-
-
-	// 			// Save module list
-
-	// 			update_metadata( $objectType, $objectID, '_gdymc_modulelist', json_encode( array_values( $targetModuleArray ) ) );
-
-
-	// 			// Return target permalink
-
-	// 			die( get_the_permalink( $targetID ) );
-
-	// 		endif;
-
-
-	// 	endif;
-
-	// }
-
-
-
-
-	// Image window
-
-	add_action( 'wp_ajax_gdymc_action_imageoverlay', 'gdymc_action_imageoverlay' );
-
-	function gdymc_action_imageoverlay() {
-
-
-		if( gdymc_logged() ):
-			
-
-			// Settings
-			
-			if(isset($_POST['w'])) $targetWidth = $_POST['w'];
-			if(isset($_POST['h'])) $targetHeight = $_POST['h'];
-			$currentImages = ( isset( $_POST['i'] ) AND json_decode( stripcslashes( $_POST['i'] ) ) != NULL ) ? json_decode( stripcslashes( $_POST['i'] ) ) : NULL;
-			if(isset($_POST['multiple'])) $allowMultiple = $_POST['multiple']; else $allowMultiple = false;
-			if(isset($_POST['m'])) $currentMode = $_POST['m']; else $currentMode = 'exact';
-			
-			
-			$targetNumericWidth = is_numeric($targetWidth) ? $targetWidth : 0;
-			$targetNumericHeight = is_numeric($targetHeight) ? $targetHeight : 0;
-
-			?>
+        $targetNumericWidth = is_numeric($targetWidth) ? $targetWidth : 0;
+        $targetNumericHeight = is_numeric($targetHeight) ? $targetHeight : 0;
+        ?>
 
 			<script type="text/javascript">
 			
@@ -787,917 +856,1075 @@
 
 
 			<?php
-
-			echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
-
-				echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
-
-				if( $allowMultiple ):
-					echo '<div class="gdymc_overlay_title">' . __('Insert Images', 'gdy-modular-content') . ': ' . $targetWidth . ' x ' . $targetHeight . '</div>';
-				else:
-					echo '<div class="gdymc_overlay_title">' . __('Insert Image', 'gdy-modular-content') . ': ' . $targetWidth . ' x ' . $targetHeight . '</div>';
-				endif;
-
-				echo '<div class="gdymc_tabs_navigation">';
-
-					echo '<button class="gdymc_tabs_button gdymc_active" data-mode="exact">'.__('Matching images', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-mode="bigger">'.__('Bigger images', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-mode="all">'.__('All images', 'gdy-modular-content').'</button>';
-					echo '<button class="gdymc_tabs_button" data-mode="video">'.__('Videos', 'gdy-modular-content').'</button>';
-					
-					do_action( 'gdymc_imagetabbuttons' );
-				
-				echo '</div>';
-				
-			
-			echo '</div></div>';
-
-
-
-			
-
-
-
-
-			echo '<div class="gdymc_overlay_search">';
-			echo '<div class="gdymc_overlay_search_inner gdymc_fix">';
-			
-			echo '<input type="search" id="gdymc_search_images" placeholder="'.__('Search', 'gdy-modular-content').'" />';
-
-			echo '</div>';
-			echo '</div>';
-			
-
-			
-			echo '<div id="gdymc_overlay_content_images" class="gdymc_overlay_content">';
-				echo '<div class="gdymc_overlay_content_inner">';
-
-					echo '<div id="gdymc_imagelist_holder" class="gdymc_imagelist_mode_exact gdymc_overlay_content_padding gdymc_fix" data-multiple="'.$allowMultiple.'" data-ci=\''.json_encode( $currentImages, JSON_UNESCAPED_SLASHES ).'\' data-tw="'.$targetWidth.'" data-th="'.$targetHeight.'"  data-tnw="'.$targetNumericWidth.'"  data-tnh="'.$targetNumericHeight.'" data-p="1">';
-						
-						gdymc_action_imagelist( $_POST['i'], $targetWidth, $targetHeight, $targetNumericWidth, $targetNumericHeight, 1 );
-					
-					echo '</div>';
-
-				echo '</div>';
-			echo '</div>';
-
-
-			echo '<div id="gdymc_overlay_content_imageinfo"></div>';
-
-
-
-			echo '<div class="gdymc_overlay_foot"><div class="gdymc_overlay_foot_inner gdymc_fix">';
-
-			if( is_array( $currentImages ) AND count( $currentImages ) == 1 ):
-
-				$buttonTitle = __( 'Use image and save', 'gdy-modular-content' );
-
-			elseif( is_array( $currentImages ) AND count( $currentImages ) > 1 ):
-
-				$buttonTitle = str_replace( '%s', count( $currentImages ), __( 'Use %s images and save', 'gdy-modular-content' ) );
-
-			else:
-
-				$buttonTitle = __('Use void image and save', 'gdy-modular-content');
-
-			endif;
-
-			echo '<div class="gdymc_left">';
-
-				echo '<button id="gdymc_imageinsert" class="gdymc_button">'.$buttonTitle.'</button>';
-
-				echo '<ul class="gdymc_image_selection gdymc_fix">';
-
-					if( $currentImages ): foreach( $currentImages as $currentImage ):
-
-						$currentMime = get_post_mime_type( $currentImage[0] );
-						$isVideo = ( strpos( (string) $currentMime, 'video/' ) === 0 );
-
-						echo '<li class="gdymc_imagethumb" data-image=\'' . json_encode( $currentImage ) . '\' data-id="' . $currentImage[0] . '">';
-						echo '<div class="gdymc_imagethumb_holder">';
-
-						if( $isVideo ):
-							$videoURL = wp_get_attachment_url( $currentImage[0] );
-							echo '<video class="gdymc_mediathumb_' . $currentImage[0] . ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $currentMime ) . '" /></video>';
-						else:
-							echo wp_get_attachment_image( $currentImage[0], 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentImage[0] ) );
-						endif;
-
-						echo '</div>';
-						echo '</li>';
-
-					endforeach; endif;
-
-				echo '</ul>';
-
-			echo '</div>';
-
-
-			echo '</div></div>';
-			
-		
-
-		endif;
-
-		die();
-
-	}
-
-
-
-	add_action( 'wp_ajax_gdymc_action_imageinfo', 'gdymc_action_imageinfo' );
-
-	function gdymc_action_imageinfo() {
-
-		$imageID = $_POST[ 'image' ];
-
-		if( !$post = get_post( $imageID ) ):
-
-			status_header( 404 ); die( "Image doesn't exist" );
-
-		else:
-
-			$meta = wp_get_attachment_metadata( $imageID );
-			$alt = get_metadata( 'post', $imageID, '_wp_attachment_image_alt', true );
-			$mimeType = get_post_mime_type( $imageID );
-			$isVideo = ( $mimeType && strpos( $mimeType, 'video/' ) === 0 );
-
-			echo '<div id="gdymc_overlay_content_imageinfoinner" data-id="' . $imageID . '"' . ( $isVideo ? ' data-mime="video"' : '' ) . '>';
-
-				if( $isVideo ):
-
-					$videoURL = wp_get_attachment_url( $imageID );
-					$widthLabel = isset( $meta[ 'width' ] ) ? $meta[ 'width' ] : '?';
-					$heightLabel = isset( $meta[ 'height' ] ) ? $meta[ 'height' ] : '?';
-
-					echo '<a id="gdymc_overlay_content_imageinfothumb" href="' . esc_url( $post->guid ) . '" target="_blank">';
-						echo '<video class="gdymc_videoinfo_preview" preload="metadata" muted playsinline controls><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $mimeType ) . '" /></video>';
-						echo '<div>' . $widthLabel . ' x ' . $heightLabel . ', ' . size_format( filesize( get_attached_file( $imageID ) ) ) . '</div>';
-					echo '</a>';
-
-				else:
-
-					$image = wp_get_attachment_image_src( $imageID, 'medium' );
-					echo '<a id="gdymc_overlay_content_imageinfothumb" href="' . $post->guid . '" target="_blank" style="background-image: url(' . $image[ 0 ] . ');">';
-						echo '<div>' . $meta[ 'width' ] . ' x ' . $meta[ 'height' ] . ', ' . size_format( filesize( get_attached_file( $imageID ) ) ) . '</div>';
-					echo '</a>';
-
-				endif;
-
-
-				echo '<div id="gdymc_overlay_content_imageinfotext">';
-
-
-					echo '<div id="gdymc_overlay_content_imageinfo_local" style="display: none;">';
-
-						if( $isVideo ):
-
-							optionSection( __( 'Local video settings', 'gdy-modular-content' ) );
-
-							echo '<input type="checkbox" id="gdymc_videoinfo_controls" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_controls">' . __( 'Show full video controls', 'gdy-modular-content' ) . '</label>';
-
-							echo '<br />';
-
-							echo '<input type="checkbox" id="gdymc_videoinfo_autoplay" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_autoplay">' . __( 'Autoplay', 'gdy-modular-content' ) . '</label>';
-
-							echo '<br />';
-
-							echo '<input type="checkbox" id="gdymc_videoinfo_muted" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_muted">' . __( 'Muted', 'gdy-modular-content' ) . '</label>';
-
-						else:
-
-							optionSection( __( 'Local image settings', 'gdy-modular-content' ) );
-
-							echo '<label for="gdymc_imageinfo_linkurl">' . __( 'Image link', 'gdy-modular-content' ) . '</label><input id="gdymc_imageinfo_linkurl" type="text" value=""  class="gdymc_imageinfo_local_input" />';
-
-							echo '<br />';
-
-							echo '<input type="checkbox" id="gdymc_imageinfo_linktarget" class="gdymc_imageinfo_local_input" /> <label for="gdymc_imageinfo_linktarget">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
-
-						endif;
-					
-					echo '</div>';
-
-
-
-					echo '<div id="gdymc_overlay_content_imageinfo_global">';
-
-						optionSection( __( 'Global image settings', 'gdy-modular-content' ) );
-
-						echo '<label for="gdymc_imageinfo_title">' . __( 'Title', 'gdy-modular-content' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_title" type="text" value="' . $post->post_title . '" />';
-
-						echo '<br />';
-
-						echo '<label for="gdymc_imageinfo_caption">' . __( 'Caption', 'gdy-modular-content' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_caption">' . $post->post_excerpt . '</textarea>';
-
-						echo '<br />';
-
-						echo '<label for="gdymc_imageinfo_alt">' . __( 'Alt Text', 'gdy-modular-content' ) . '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_alt" type="text" value="' . $alt . '" />';
-
-						echo '<br />';
-
-						echo '<label for="gdymc_imageinfo_description">' . __( 'Description', 'gdy-modular-content' ) . '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_description">' . $post->post_content . '</textarea>';
-
-					echo '</div>';
-
-
-					//echo edit_post_link( __( 'Edit Image' ), null, null, $imageID );
-					//echo '<button class="gdymc_delete_link">' . __( 'Delete Permanently', 'gdy-modular-content' ) . '</button>';
-					echo '<br /><button class="gdymc_close_imageinfo gdymc_delete_link">' . __( 'Cancel', 'gdy-modular-content' ) . '</button>';
-
-
-				echo '</div>';
-
-			echo '</div>';
-
-		endif;
-		
-		die();
-
-	}
-
-
-
-	add_action( 'wp_ajax_gdymc_update_attachment_image', 'gdymc_update_attachment_image' );
-
-	function gdymc_update_attachment_image( $imageID = '', $title = '', $caption = '', $alt = '', $description = '' ) {
-
-		$imageID = $_POST[ 'imageID' ] ? $_POST[ 'imageID' ] : $imageID;
-		$title = $_POST[ 'title' ] ? $_POST[ 'title' ] : $title;
-		$caption = $_POST[ 'caption' ] ? $_POST[ 'caption' ] : $caption;
-		$alt = $_POST[ 'alt' ] ? $_POST[ 'alt' ] : $alt;
-		$description = $_POST[ 'description' ] ? $_POST[ 'description' ] : $description;
-
-		$my_post = array(
-			'ID' => $imageID,
-			'post_title' => $title,
-			'post_content' => $description,
-			'post_excerpt' => $caption,
-		);
-
-		update_metadata( 'post', $imageID, '_wp_attachment_image_alt', $alt );
-
-		wp_update_post( $my_post );
-
-	}
-
-
-
-
-
-
-	// List images
-
-	add_action( 'wp_ajax_gdymc_action_imagelist', 'gdymc_action_imagelist' );
-
-	function gdymc_action_imagelist( $currentImages = '', $targetWidth = '', $targetHeight = '', $targetNumericWidth = '', $targetNumericHeight = '', $page = '' ) {
-
-
-		// Transfers the image meta size to postmeta for the query
-		do_action( 'gdymc_transfer_attachment_image_size' );
-
-
-
-		$currentImages = (isset($_POST['ci'])) ? json_decode( stripcslashes( $_POST['ci'] ) ) : json_decode( stripcslashes( $currentImages ) );
-		$targetWidth = (isset($_POST['tw'])) ? $_POST['tw'] : $targetWidth;
-		$targetHeight = (isset($_POST['th'])) ? $_POST['th'] : $targetHeight;
-		$targetNumericWidth = (isset($_POST['tnw'])) ? $_POST['tnw'] : $targetNumericWidth;
-		$targetNumericHeight = (isset($_POST['tnh'])) ? $_POST['tnh'] : $targetNumericHeight;
-		$ajax = ( isset( $_POST[ 'ajax' ] ) ) ? true : false;
-		$mode = ( isset( $_POST[ 'mode' ] ) ) ? $_POST[ 'mode' ] : 'exact';
-		$page = ( isset( $_POST[ 'p' ] ) ) ? $_POST[ 'p' ] : 1;
-		$posts_per_page = 50;
-		$offset = $posts_per_page * ( $page - 1 );
-
-
-
-
-		// Main query
-		
-		$args = array(
-
-			'orderby' => 'date',
-			'order' => 'DESC',
-		    'post_type' => 'attachment',
-		    'post_mime_type' => ( $mode == 'video' ) ? 'video' : 'image',
-		    'post_status' => 'any',
-		    'posts_per_page' => $posts_per_page
-
-		);
-
-
-
-		
-
-
-
-		
-		if( $mode == 'exact' ):
-
-
-			// Exact
-
-			$meta_query = array( 'relation' => 'AND' );
-
-
-
-
-			$meta_query_handler = array( 'relation' => 'AND' );
-
-			if( is_numeric( $targetWidth ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_width',
-		            'value'   => $targetWidth,
-		            'type'    => 'numeric',
-		            'compare' => '=',
-		        ) );
-
-			endif;
-
-			if( is_numeric( $targetHeight ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_height',
-		            'value'   => $targetHeight,
-		            'type'    => 'numeric',
-		            'compare' => '=',
-		        ) );
-
-			endif;
-
-			array_push( $meta_query, $meta_query_handler );
-
-
-		elseif( $mode == 'bigger' ):
-
-
-			// Bigger
-
-			$meta_query = array( 'relation' => 'AND' );
-
-
-
-			$meta_query_handler = array( 'relation' => 'AND' );
-
-			if( is_numeric( $targetWidth ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_width',
-		            'value'   => $targetWidth,
-		            'type'    => 'numeric',
-		            'compare' => '>=',
-		        ) );
-
-			endif;
-
-			if( is_numeric( $targetHeight ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_height',
-		            'value'   => $targetHeight,
-		            'type'    => 'numeric',
-		            'compare' => '>=',
-		        ) );
-
-			endif;
-
-			array_push( $meta_query, $meta_query_handler );
-
-
-
-			$meta_query_handler = array( 'relation' => 'OR' );
-
-			if( is_numeric( $targetWidth ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_width',
-		            'value'   => $targetWidth,
-		            'type'    => 'numeric',
-		            'compare' => '>',
-		        ) );
-
-			endif;
-
-			if( is_numeric( $targetHeight ) ):
-
-				array_push( $meta_query_handler, array(
-		            'key'     => '_gdymc_image_height',
-		            'value'   => $targetHeight,
-		            'type'    => 'numeric',
-		            'compare' => '>',
-		        ) );
-
-			endif;
-
-			array_push( $meta_query, $meta_query_handler );
-
-
-		endif;
-		
-
-		
-
-
-		if( $mode != 'all' AND $mode != 'video' AND ( is_numeric( $targetWidth ) OR is_numeric( $targetHeight ) ) ):
-
-			$args['meta_query'] = $meta_query;
-
-		endif;
-
-
-
-
-
-		// Extend query for search
-
-		if( !empty( $_POST['s'] ) ):
-
-			$args['s'] = $_POST['s'];
-
-		endif;
-
-
-		// Extend query for paging
-
-		if( $page > 1 ):
-
-			$args[ 'offset' ] = $offset;
-			$pageNumber = $page;
-
-		endif;
-
-
-
-		
-		// Fire the query
-
-		$the_query = new WP_Query( $args );
-
-
-
-		if( $the_query->have_posts() ): 
-
-			while( $the_query->have_posts() ): $the_query->the_post();
-				
-
-
-				// IDs
-			
-				$currentID = get_the_ID();
-				$imageGUIDHandler = wp_get_attachment_image_src( $currentID, 'fullsize' );
-				$currentGUID = $imageGUIDHandler[0];
-
-
-				// Get image dimensions
-
-				$attachmentMeta = wp_get_attachment_metadata( $currentID );
-
-
-				if( $mode == 'video' ):
-
-
-					$currentWidth = isset( $attachmentMeta[ 'width' ] ) ? $attachmentMeta[ 'width' ] : 0;
-					$currentHeight = isset( $attachmentMeta[ 'height' ] ) ? $attachmentMeta[ 'height' ] : 0;
-
-					$videoURL = wp_get_attachment_url( $currentID );
-					$videoMime = get_post_mime_type( $currentID );
-
-					$currentClass = 'gdymc_imagethumb gdymc_videothumb';
-					$currentMeta = 'data-id="' . $currentID . '"';
-					$currentMeta .= ' data-guid="' . esc_attr( $videoURL ) . '"';
-					$currentMeta .= ' data-width="' . $currentWidth . '"';
-					$currentMeta .= ' data-height="' . $currentHeight . '"';
-					$currentMeta .= ' data-admin="' . admin_url('post.php?post=' . $currentID . '&action=edit') . '"';
-					$currentMeta .= ' data-type="exact"';
-					$currentMeta .= ' data-mime="video"';
-
-
-					// If selected
-
-					$results = array();
-
-					if( $currentImages ): foreach( $currentImages as $currentImage ):
-
-						if( $currentImage[0] == $currentID ) array_push( $results, 1 );
-
-					endforeach; endif;
-
-					if( $results ) {
-						$currentClass .= ' gdymc_selected';	
-					}
-
-
-					echo '<div class="gdymc_imagethumb_container">';
-					echo '<button class="' . $currentClass . '" ' . $currentMeta . '>';
-
-						echo '<div class="gdymc_imagethumb_edit"></div>';
-
-						echo '<video class="gdymc_mediathumb_' . $currentID . ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $videoMime ) . '" /></video>';
-
-						if( $currentWidth AND $currentHeight ):
-							echo '<div class="gdymc_imagethumb_size">' . $currentWidth . ' x ' . $currentHeight . '</div>';
-						endif;
-
-					echo '</button>';
-					echo '</div>';
-
-
-				elseif( !empty( $attachmentMeta ) ):
-
-
-					$currentWidth = $attachmentMeta[ 'width' ];
-					$currentHeight = $attachmentMeta[ 'height' ];
-
-
-					// Attributes
-					
-					$currentClass = 'gdymc_imagethumb';
-					$currentMeta = 'data-id="' . $currentID . '"';
-					$currentMeta .= ' data-guid="' . $currentGUID . '"';
-					$currentMeta .= ' data-width="' . $currentWidth . '"';
-					$currentMeta .= ' data-height="' . $currentHeight . '"';
-					$currentMeta .= ' data-admin="' . admin_url('post.php?post=' . $currentID . '&action=edit') . '"';
-					
-
-
-
-					// Check size
-
-					if( ( $targetWidth == 'auto' OR $targetNumericWidth == $currentWidth) AND ( $targetHeight == 'auto' OR $targetNumericHeight == $currentHeight ) ):
-
-						$currentType = 'exact';
-						$currentMeta .= ' data-type="exact"';
-						$currentTip = __( 'Insert image', 'gdy-modular-content' );
-					
-					elseif( ( $targetWidth == 'auto' OR $targetNumericWidth <= $currentWidth) AND ( $targetHeight == 'auto' OR $targetNumericHeight <= $currentHeight ) ):
-						
-						if( current_user_can( 'upload_files', gdymc_object_id() ) ):
-
-							$currentType = 'crop';
-							$currentMeta .= ' data-type="crop"';
-
-						else:
-
-							$currentType = 'bigger';
-							$currentMeta .= ' data-type="bigger"';
-
-						endif;
-					
-					else:
-						
-						$currentType = 'smaller';
-						$currentMeta .= ' data-type="smaller"';
-					
-					endif;
-					
-
-
-					// If selected
-
-					$results = array();
-
-					if( $currentImages ): foreach( $currentImages as $currentImage ):
-
-						if( $currentImage[0] == $currentID ) array_push( $results, 1 );
-
-					endforeach; endif;
-
-					if( $results ) {
-						$currentClass .= ' gdymc_selected';	
-					}
-					
-
-					
-					// Show image
-					
-					echo '<div class="gdymc_imagethumb_container">';
-					echo '<button class="' . $currentClass . '" ' . $currentMeta . '>';
-
-						echo '<div class="gdymc_imagethumb_edit"></div>';
-
-						echo wp_get_attachment_image( $currentID, 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentID ) );
-						
-						echo '<div class="gdymc_imagethumb_size">' . $currentWidth . ' x ' . $currentHeight . '</div>';
-
-					echo '</button>';
-					echo '</div>';
-
-			
-				endif;
-
-		
-			endwhile; 
-			
-
-			$visible_posts = $offset + $the_query->post_count;
-			$available_posts = $the_query->found_posts;
-
-
-			if( $available_posts > $visible_posts ):
-
-				echo '<div id="gdymc_loadmore_images" class="gdymc_loadmore">' . str_replace( '%s', $available_posts-$visible_posts, __( 'More images (%s)', 'gdy-modular-content' ) ) . '</div>';
-
-			endif;
-
-
-		else: 
-
-			if( $page == 1 ):
-
-				echo '<div class="gdymc_noentries">' . __( 'No contents', 'gdy-modular-content' ) . '</div>'; 
-
-			endif;
-
-		endif; 
-
-		if( $ajax ) die();
-
-		
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	add_action( 'wp_ajax_gdyModularContentUploadAction', 'gdyModularContentUploadAction' );
-
-	function gdyModularContentUploadAction() {
-
-		if( gdymc_logged() ):
-			
-			$result = media_handle_upload( 'gdymc_upload', $_POST[ 'object' ] );
-
-			if( is_wp_error( $result ) ):
-
-				var_dump( $result );
-
-			else:
-
-				echo get_edit_post_link( $result, '' );
-
-			endif;
-			
-			die();	
-			
-		endif;
-
-	}
-	
-	
-
-	
-	
-	
-
-	
-	// List pages
-
-	add_action( 'wp_ajax_gdymc_action_pagelist', 'gdymc_action_pagelist' );
-
-	function gdymc_action_pagelist() {
-		
-		$size = 20;
-		
-		$args = array(
-			'orderby' => 'date',
-			'order' => 'DESC',
-			'posts_per_page' => $size,
-			'post_type' => 'page',
-		);
-		
-		if(isset($_POST['s'])) {
-			array_push($args, $_POST['s']);
-		}
-		if(isset($_POST['p']) && is_numeric($_POST['p'])) {
-			$args['offset'] = $size*$_POST['p'];
-			$pageNumber = $_POST['p'];	
-			$external = true;
-		} else {
-			$external = false;
-			$pageNumber = 0;	
-		}
-		
-		$the_query = new WP_Query($args);
-		
-		
-		
-		if($the_query->have_posts()): while($the_query->have_posts()): $the_query->the_post();
-			
-			echo '<div class="gdymc_insertlink_source">';
-			echo '<div class="gdymc_insertlink_source-title">' . get_the_title() . ' <span>' . get_the_date() . '</span></div>';
-			
-			echo '<div class="gdymc_insertlink_source-meta">';
-			echo '<a class="gdymc_insertlink_source-use" data-guid="'.get_permalink().'" href="#">' . __( 'Use as link', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . get_permalink() . '" target="_blank">' . __( 'View', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . get_edit_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Edit', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a class="gdymc_delete_link" href="' . get_delete_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Trash', 'gdy-modular-content' ) . '</a>';
-			echo '</div>';
-
-			echo '</div>'; 
-	
-		endwhile; 
-			
-			$additionalContents = $the_query->found_posts - ( ( $pageNumber + 1 ) * $size );
-
-			if( $additionalContents > 0 ):
-
-				echo '<div id="gdymc_loadmore_pages" class="gdymc_loadmore" data-page="' . $pageNumber . '">' . __( 'Show more', 'gdy-modular-content' ) . ' (' . $additionalContents . ')</div>';
-			
-			endif;
-			
-		else: if(!$external) echo '<div class="gdymc_noentries">'.__('No contents', 'gdy-modular-content').'</div>'; endif; if($external) die();	
-		
-		
-		
-	}
-	
-	
-
-	// List posts
-
-	add_action( 'wp_ajax_gdymc_action_postlist', 'gdymc_action_postlist' );
-
-	function gdymc_action_postlist() {
-		
-		$size = 20;
-
-		$args = array(
-			'orderby' => 'date',
-			'order' => 'DESC',
-			'posts_per_page' => $size,
-			'post_type' => 'post',
-		);
-		
-		if(isset($_POST['s'])) {
-			array_push($args, $_POST['s']);
-		}
-		if(isset($_POST['p']) && is_numeric($_POST['p'])) {
-			$args['offset'] = $size*$_POST['p'];
-			$pageNumber = $_POST['p'];	
-			$external = true;
-		} else {
-			$external = false;
-			$pageNumber = 0;	
-		}
-		
-		$the_query = new WP_Query($args);
-		
-		if($the_query->have_posts()): while($the_query->have_posts()): $the_query->the_post();
-			
-			echo '<div class="gdymc_insertlink_source">';
-			echo '<div class="gdymc_insertlink_source-title">'.get_the_title().' <span>' . get_the_date() . '</span></div>';
-			
-			echo '<div class="gdymc_insertlink_source-meta">';
-			echo '<a class="gdymc_insertlink_source-use" data-guid="'.get_permalink().'" href="#">' . __( 'Use as link', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . get_permalink() . '" target="_blank">' . __( 'View', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . get_edit_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Edit', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a class="gdymc_delete_link" href="' . get_delete_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Trash', 'gdy-modular-content' ) . '</a>';
-			echo '</div>';
-
-			echo '</div>'; 
-	
-		endwhile; 
-			
-			$additionalContents = $the_query->found_posts - ( ( $pageNumber + 1 ) * $size );
-
-			if( $additionalContents > 0 ):
-
-				echo '<div id="gdymc_loadmore_posts" class="gdymc_loadmore" data-page="' . $pageNumber . '">' . __( 'Show more', 'gdy-modular-content' ) . ' (' . $additionalContents . ')</div>';
-			
-			endif;
-			
-		else: if(!$external) echo '<div class="gdymc_noentries">'.__('No contents', 'gdy-modular-content').'</div>'; endif; if($external) die();
-		
-	}
-	
-
-
-	// List files
-	
-	add_action( 'wp_ajax_gdymc_action_filelist', 'gdymc_action_filelist' );
-
-	function gdymc_action_filelist() {
-		
-		$size = 20;
-
-		$args = array(
-			'orderby' => 'date',
-			'order' => 'DESC',
-			'posts_per_page' => $size,
-			'post_status' => 'any',
-			'post_type' => 'attachment',
-			'post_mime_type' => 'application',
-		);
-		
-		if(isset($_POST['s'])) {
-			$args['s'] = $_POST['s'];
-		}
-		if(isset($_POST['p']) && is_numeric($_POST['p'])) {
-			$args['offset'] = $size*$_POST['p'];
-			$pageNumber = $_POST['p'];	
-			$external = true;
-		} else {
-			$external = false;
-			$pageNumber = 0;	
-		}
-		
-		$the_query = new WP_Query($args);
-		
-		if($the_query->have_posts()): while($the_query->have_posts()): $the_query->the_post();
-			
-			echo '<div class="gdymc_insertlink_source">';
-			echo '<div class="gdymc_insertlink_source-title">'.get_the_title().' <span>' . get_the_date() . '</span></div>';
-
-			echo '<div class="gdymc_insertlink_source-meta">';
-			echo '<a class="gdymc_insertlink_source-use" data-guid="' . wp_get_attachment_url( get_the_ID() ) . '" href="#">' . __( 'Use as link', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . wp_get_attachment_url( get_the_ID() ) . '" target="_blank">' . __( 'View', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a href="' . get_edit_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Edit', 'gdy-modular-content' ) . '</a> | ';
-			echo '<a class="gdymc_delete_link" href="' . get_delete_post_link( get_the_ID() ) . '" target="_blank">' . __( 'Delete Permanently', 'gdy-modular-content' ) . '</a>';
-			echo '</div>';
-
-			echo '</div>'; 
-	
-		endwhile; 
-		
-			$additionalContents = $the_query->found_posts - ( ( $pageNumber + 1 ) * $size );
-
-			if( $additionalContents > 0 ):
-
-				echo '<div id="gdymc_loadmore_files" class="gdymc_loadmore" data-page="' . $pageNumber . '">' . __( 'Show more', 'gdy-modular-content' ) . ' (' . $additionalContents . ')</div>';
-			
-			endif;
-			
-		else: if(!$external) echo '<div class="gdymc_noentries">'.__('No contents', 'gdy-modular-content').'</div>'; endif; if($external) die();
-		
-	}
-
-
-	// List categories
-
-	add_action( 'wp_ajax_gdymc_action_categorylist', 'gdymc_action_categorylist' );
-
-	function gdymc_action_categorylist() {
-		
-		$size = 20;
-
-
-
-		$args = array(
-			'number' => $size,
-			'hide_empty' => false,
-		);
-		
-		if(isset($_POST['s'])) {
-			array_push($args, $_POST['s']);
-		}
-		if(isset($_POST['p']) && is_numeric($_POST['p'])) {
-			$args['offset'] = $size*$_POST['p'];
-			$pageNumber = $_POST['p'];	
-			$external = true;
-		} else {
-			$external = false;
-			$pageNumber = 0;	
-		}
-		
-		$cats = get_categories($args);
-
-		if( count( $cats ) > 0 ):
-
-			foreach( $cats as $cat ):
-				
-				echo '<div class="gdymc_insertlink_source">';
-				echo '<div class="gdymc_insertlink_source-title">'.$cat->name.'</div>';
-				
-				echo '<div class="gdymc_insertlink_source-meta">';
-				echo '<a class="gdymc_insertlink_source-use" data-guid="'.get_category_link( $cat->term_id ).'" href="#">' . __( 'Use as link', 'gdy-modular-content' ) . '</a> | ';
-				echo '<a href="' . get_category_link( $cat->term_id ) . '" target="_blank">' . __( 'View', 'gdy-modular-content' ) . '</a> | ';
-				echo '<a href="' . get_edit_term_link( $cat->term_id, 'category', 'post' ) . '" target="_blank">' . __( 'Edit', 'gdy-modular-content' ) . '</a>';
-				echo '</div>';
-
-				echo '</div>';
-
-			endforeach;
-			
-		endif;
-		
-	}
-
-
-	
-	
-	// Can be removed?
-
-	/*
+   echo '<div class="gdymc_overlay_head"><div class="gdymc_overlay_head_inner">';
+
+   echo '<button class="gdymc_overlay_close gdymc_overlay_close_trigger"></button>';
+
+   if ($allowMultiple):
+       echo '<div class="gdymc_overlay_title">' .
+           __("Insert Images", "gdy-modular-content") .
+           ": " .
+           $targetWidth .
+           " x " .
+           $targetHeight .
+           "</div>";
+   else:
+       echo '<div class="gdymc_overlay_title">' .
+           __("Insert Image", "gdy-modular-content") .
+           ": " .
+           $targetWidth .
+           " x " .
+           $targetHeight .
+           "</div>";
+   endif;
+
+   echo '<div class="gdymc_tabs_navigation">';
+
+   echo '<button class="gdymc_tabs_button gdymc_active" data-mode="exact">' .
+       __("Matching images", "gdy-modular-content") .
+       "</button>";
+   echo '<button class="gdymc_tabs_button" data-mode="bigger">' .
+       __("Bigger images", "gdy-modular-content") .
+       "</button>";
+   echo '<button class="gdymc_tabs_button" data-mode="all">' .
+       __("All images", "gdy-modular-content") .
+       "</button>";
+   echo '<button class="gdymc_tabs_button" data-mode="video">' .
+       __("Videos", "gdy-modular-content") .
+       "</button>";
+
+   do_action("gdymc_imagetabbuttons");
+
+   echo "</div>";
+
+   echo "</div></div>";
+
+   echo '<div class="gdymc_overlay_search">';
+   echo '<div class="gdymc_overlay_search_inner gdymc_fix">';
+
+   echo '<input type="search" id="gdymc_search_images" placeholder="' .
+       __("Search", "gdy-modular-content") .
+       '" />';
+
+   echo "</div>";
+   echo "</div>";
+
+   echo '<div id="gdymc_overlay_content_images" class="gdymc_overlay_content">';
+   echo '<div class="gdymc_overlay_content_inner">';
+
+   echo '<div id="gdymc_imagelist_holder" class="gdymc_imagelist_mode_exact gdymc_overlay_content_padding gdymc_fix" data-multiple="' .
+       $allowMultiple .
+       '" data-ci=\'' .
+       json_encode($currentImages, JSON_UNESCAPED_SLASHES) .
+       '\' data-tw="' .
+       $targetWidth .
+       '" data-th="' .
+       $targetHeight .
+       '"  data-tnw="' .
+       $targetNumericWidth .
+       '"  data-tnh="' .
+       $targetNumericHeight .
+       '" data-p="1">';
+
+   gdymc_action_imagelist(
+       $_POST["i"],
+       $targetWidth,
+       $targetHeight,
+       $targetNumericWidth,
+       $targetNumericHeight,
+       1
+   );
+
+   echo "</div>";
+
+   echo "</div>";
+   echo "</div>";
+
+   echo '<div id="gdymc_overlay_content_imageinfo"></div>';
+
+   echo '<div class="gdymc_overlay_foot"><div class="gdymc_overlay_foot_inner gdymc_fix">';
+
+   if (is_array($currentImages) and count($currentImages) == 1):
+       $buttonTitle = __("Use image and save", "gdy-modular-content");
+   elseif (is_array($currentImages) and count($currentImages) > 1):
+       $buttonTitle = str_replace(
+           "%s",
+           count($currentImages),
+           __("Use %s images and save", "gdy-modular-content")
+       );
+   else:
+       $buttonTitle = __("Use void image and save", "gdy-modular-content");
+   endif;
+
+   echo '<div class="gdymc_left">';
+
+   echo '<button id="gdymc_imageinsert" class="gdymc_button">' .
+       $buttonTitle .
+       "</button>";
+
+   echo '<ul class="gdymc_image_selection gdymc_fix">';
+
+   if ($currentImages):
+       foreach ($currentImages as $currentImage):
+           $currentMime = get_post_mime_type($currentImage[0]);
+           $isVideo = strpos((string) $currentMime, "video/") === 0;
+
+           echo '<li class="gdymc_imagethumb" data-image=\'' .
+               json_encode($currentImage) .
+               '\' data-id="' .
+               $currentImage[0] .
+               '">';
+           echo '<div class="gdymc_imagethumb_holder">';
+
+           if ($isVideo):
+               $videoURL = wp_get_attachment_url($currentImage[0]);
+               echo '<video class="gdymc_mediathumb_' .
+                   $currentImage[0] .
+                   ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' .
+                   esc_url($videoURL) .
+                   '" type="' .
+                   esc_attr($currentMime) .
+                   '" /></video>';
+           else:
+               echo wp_get_attachment_image(
+                   $currentImage[0],
+                   "thumbnail",
+                   true,
+                   ["class" => "gdymc_mediathumb_" . $currentImage[0]]
+               );
+           endif;
+
+           echo "</div>";
+           echo "</li>";
+       endforeach;
+   endif;
+
+   echo "</ul>";
+
+   echo "</div>";
+
+   echo "</div></div>";
+
+    endif;
+
+    die();
+}
+
+add_action("wp_ajax_gdymc_action_imageinfo", "gdymc_action_imageinfo");
+
+/**
+ * Handles the GDYMC action imageinfo action request.
+ */
+function gdymc_action_imageinfo()
+{
+    $imageID = $_POST["image"];
+
+    if (!($post = get_post($imageID))):
+        status_header(404);
+        die("Image doesn't exist");
+
+        //echo edit_post_link( __( 'Edit Image' ), null, null, $imageID );
+        //echo '<button class="gdymc_delete_link">' . __( 'Delete Permanently', 'gdy-modular-content' ) . '</button>';
+    else:
+        $meta = wp_get_attachment_metadata($imageID);
+        $alt = get_metadata("post", $imageID, "_wp_attachment_image_alt", true);
+        $mimeType = get_post_mime_type($imageID);
+        $isVideo = $mimeType && strpos($mimeType, "video/") === 0;
+
+        echo '<div id="gdymc_overlay_content_imageinfoinner" data-id="' .
+            $imageID .
+            '"' .
+            ($isVideo ? ' data-mime="video"' : "") .
+            ">";
+
+        if ($isVideo):
+            $videoURL = wp_get_attachment_url($imageID);
+            $widthLabel = isset($meta["width"]) ? $meta["width"] : "?";
+            $heightLabel = isset($meta["height"]) ? $meta["height"] : "?";
+
+            echo '<a id="gdymc_overlay_content_imageinfothumb" href="' .
+                esc_url($post->guid) .
+                '" target="_blank">';
+            echo '<video class="gdymc_videoinfo_preview" preload="metadata" muted playsinline controls><source src="' .
+                esc_url($videoURL) .
+                '" type="' .
+                esc_attr($mimeType) .
+                '" /></video>';
+            echo "<div>" .
+                $widthLabel .
+                " x " .
+                $heightLabel .
+                ", " .
+                size_format(filesize(get_attached_file($imageID))) .
+                "</div>";
+            echo "</a>";
+        else:
+            $image = wp_get_attachment_image_src($imageID, "medium");
+            echo '<a id="gdymc_overlay_content_imageinfothumb" href="' .
+                $post->guid .
+                '" target="_blank" style="background-image: url(' .
+                $image[0] .
+                ');">';
+            echo "<div>" .
+                $meta["width"] .
+                " x " .
+                $meta["height"] .
+                ", " .
+                size_format(filesize(get_attached_file($imageID))) .
+                "</div>";
+            echo "</a>";
+        endif;
+
+        echo '<div id="gdymc_overlay_content_imageinfotext">';
+
+        echo '<div id="gdymc_overlay_content_imageinfo_local" style="display: none;">';
+
+        if ($isVideo):
+            optionSection(__("Local video settings", "gdy-modular-content"));
+
+            echo '<input type="checkbox" id="gdymc_videoinfo_controls" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_controls">' .
+                __("Show full video controls", "gdy-modular-content") .
+                "</label>";
+
+            echo "<br />";
+
+            echo '<input type="checkbox" id="gdymc_videoinfo_autoplay" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_autoplay">' .
+                __("Autoplay", "gdy-modular-content") .
+                "</label>";
+
+            echo "<br />";
+
+            echo '<input type="checkbox" id="gdymc_videoinfo_muted" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_muted">' .
+                __("Muted", "gdy-modular-content") .
+                "</label>";
+        else:
+            optionSection(__("Local image settings", "gdy-modular-content"));
+
+            echo '<label for="gdymc_imageinfo_linkurl">' .
+                __("Image link", "gdy-modular-content") .
+                '</label><input id="gdymc_imageinfo_linkurl" type="text" value=""  class="gdymc_imageinfo_local_input" />';
+
+            echo "<br />";
+
+            echo '<input type="checkbox" id="gdymc_imageinfo_linktarget" class="gdymc_imageinfo_local_input" /> <label for="gdymc_imageinfo_linktarget">' .
+                __("Open in new tab or window", "gdy-modular-content") .
+                "</label>";
+        endif;
+
+        echo "</div>";
+
+        echo '<div id="gdymc_overlay_content_imageinfo_global">';
+
+        optionSection(__("Global image settings", "gdy-modular-content"));
+
+        echo '<label for="gdymc_imageinfo_title">' .
+            __("Title", "gdy-modular-content") .
+            '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_title" type="text" value="' .
+            $post->post_title .
+            '" />';
+
+        echo "<br />";
+
+        echo '<label for="gdymc_imageinfo_caption">' .
+            __("Caption", "gdy-modular-content") .
+            '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_caption">' .
+            $post->post_excerpt .
+            "</textarea>";
+
+        echo "<br />";
+
+        echo '<label for="gdymc_imageinfo_alt">' .
+            __("Alt Text", "gdy-modular-content") .
+            '</label><input class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_alt" type="text" value="' .
+            $alt .
+            '" />';
+
+        echo "<br />";
+
+        echo '<label for="gdymc_imageinfo_description">' .
+            __("Description", "gdy-modular-content") .
+            '</label><textarea class="gdymc_imageinfo_global_input" id="gdymc_imageinfo_description">' .
+            $post->post_content .
+            "</textarea>";
+
+        echo "</div>";
+
+        echo '<br /><button class="gdymc_close_imageinfo gdymc_delete_link">' .
+            __("Cancel", "gdy-modular-content") .
+            "</button>";
+
+        echo "</div>";
+
+        echo "</div>";
+    endif;
+
+    die();
+}
+
+add_action(
+    "wp_ajax_gdymc_update_attachment_image",
+    "gdymc_update_attachment_image"
+);
+
+/**
+ * Handles GDYMC update attachment image behavior.
+ *
+ * @param mixed $imageID Image id value.
+ *
+ * @param mixed $title Title value.
+ *
+ * @param mixed $caption Caption value.
+ *
+ * @param mixed $alt Alt value.
+ *
+ * @param mixed $description Description value.
+ */
+function gdymc_update_attachment_image(
+    $imageID = "",
+    $title = "",
+    $caption = "",
+    $alt = "",
+    $description = ""
+) {
+    $imageID = $_POST["imageID"] ? $_POST["imageID"] : $imageID;
+    $title = $_POST["title"] ? $_POST["title"] : $title;
+    $caption = $_POST["caption"] ? $_POST["caption"] : $caption;
+    $alt = $_POST["alt"] ? $_POST["alt"] : $alt;
+    $description = $_POST["description"] ? $_POST["description"] : $description;
+
+    $my_post = [
+        "ID" => $imageID,
+        "post_title" => $title,
+        "post_content" => $description,
+        "post_excerpt" => $caption,
+    ];
+
+    update_metadata("post", $imageID, "_wp_attachment_image_alt", $alt);
+
+    wp_update_post($my_post);
+}
+
+// List images
+
+add_action("wp_ajax_gdymc_action_imagelist", "gdymc_action_imagelist");
+
+/**
+ * Handles the GDYMC action imagelist action request.
+ *
+ * @param mixed $currentImages Current images value.
+ *
+ * @param mixed $targetWidth Target width value.
+ *
+ * @param mixed $targetHeight Target height value.
+ *
+ * @param mixed $targetNumericWidth Target numeric width value.
+ *
+ * @param mixed $targetNumericHeight Target numeric height value.
+ *
+ * @param mixed $page Page value.
+ */
+function gdymc_action_imagelist(
+    $currentImages = "",
+    $targetWidth = "",
+    $targetHeight = "",
+    $targetNumericWidth = "",
+    $targetNumericHeight = "",
+    $page = ""
+) {
+    // Transfers the image meta size to postmeta for the query
+    do_action("gdymc_transfer_attachment_image_size");
+
+    $currentImages = isset($_POST["ci"])
+        ? json_decode(stripcslashes($_POST["ci"]))
+        : json_decode(stripcslashes($currentImages));
+    $targetWidth = isset($_POST["tw"]) ? $_POST["tw"] : $targetWidth;
+    $targetHeight = isset($_POST["th"]) ? $_POST["th"] : $targetHeight;
+    $targetNumericWidth = isset($_POST["tnw"])
+        ? $_POST["tnw"]
+        : $targetNumericWidth;
+    $targetNumericHeight = isset($_POST["tnh"])
+        ? $_POST["tnh"]
+        : $targetNumericHeight;
+    $ajax = isset($_POST["ajax"]) ? true : false;
+    $mode = isset($_POST["mode"]) ? $_POST["mode"] : "exact";
+    $page = isset($_POST["p"]) ? $_POST["p"] : 1;
+    $posts_per_page = 50;
+    $offset = $posts_per_page * ($page - 1);
+
+    // Main query
+
+    $args = [
+        "orderby" => "date",
+        "order" => "DESC",
+        "post_type" => "attachment",
+        "post_mime_type" => $mode == "video" ? "video" : "image",
+        "post_status" => "any",
+        "posts_per_page" => $posts_per_page,
+    ];
+
+    if ($mode == "exact"):
+        // Exact
+
+        $meta_query = ["relation" => "AND"];
+
+        $meta_query_handler = ["relation" => "AND"];
+
+        if (is_numeric($targetWidth)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_width",
+                "value" => $targetWidth,
+                "type" => "numeric",
+                "compare" => "=",
+            ]);
+        endif;
+
+        if (is_numeric($targetHeight)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_height",
+                "value" => $targetHeight,
+                "type" => "numeric",
+                "compare" => "=",
+            ]);
+        endif;
+
+        array_push($meta_query, $meta_query_handler);
+
+        // Bigger
+    elseif ($mode == "bigger"):
+        $meta_query = ["relation" => "AND"];
+
+        $meta_query_handler = ["relation" => "AND"];
+
+        if (is_numeric($targetWidth)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_width",
+                "value" => $targetWidth,
+                "type" => "numeric",
+                "compare" => ">=",
+            ]);
+        endif;
+
+        if (is_numeric($targetHeight)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_height",
+                "value" => $targetHeight,
+                "type" => "numeric",
+                "compare" => ">=",
+            ]);
+        endif;
+
+        array_push($meta_query, $meta_query_handler);
+
+        $meta_query_handler = ["relation" => "OR"];
+
+        if (is_numeric($targetWidth)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_width",
+                "value" => $targetWidth,
+                "type" => "numeric",
+                "compare" => ">",
+            ]);
+        endif;
+
+        if (is_numeric($targetHeight)):
+            array_push($meta_query_handler, [
+                "key" => "_gdymc_image_height",
+                "value" => $targetHeight,
+                "type" => "numeric",
+                "compare" => ">",
+            ]);
+        endif;
+
+        array_push($meta_query, $meta_query_handler);
+    endif;
+
+    if (
+        $mode != "all" and
+        $mode != "video" and
+        (is_numeric($targetWidth) or is_numeric($targetHeight))
+    ):
+        $args["meta_query"] = $meta_query;
+    endif;
+
+    // Extend query for search
+
+    if (!empty($_POST["s"])):
+        $args["s"] = $_POST["s"];
+    endif;
+
+    // Extend query for paging
+
+    if ($page > 1):
+        $args["offset"] = $offset;
+        $pageNumber = $page;
+    endif;
+
+    // Fire the query
+
+    $the_query = new WP_Query($args);
+
+    if ($the_query->have_posts()):
+        while ($the_query->have_posts()):
+            $the_query->the_post();
+
+            // IDs
+
+            $currentID = get_the_ID();
+            $imageGUIDHandler = wp_get_attachment_image_src(
+                $currentID,
+                "fullsize"
+            );
+            $currentGUID = $imageGUIDHandler[0];
+
+            // Get image dimensions
+
+            $attachmentMeta = wp_get_attachment_metadata($currentID);
+
+            if ($mode == "video"):
+                $currentWidth = isset($attachmentMeta["width"])
+                    ? $attachmentMeta["width"]
+                    : 0;
+                $currentHeight = isset($attachmentMeta["height"])
+                    ? $attachmentMeta["height"]
+                    : 0;
+
+                $videoURL = wp_get_attachment_url($currentID);
+                $videoMime = get_post_mime_type($currentID);
+
+                $currentClass = "gdymc_imagethumb gdymc_videothumb";
+                $currentMeta = 'data-id="' . $currentID . '"';
+                $currentMeta .= ' data-guid="' . esc_attr($videoURL) . '"';
+                $currentMeta .= ' data-width="' . $currentWidth . '"';
+                $currentMeta .= ' data-height="' . $currentHeight . '"';
+                $currentMeta .=
+                    ' data-admin="' .
+                    admin_url("post.php?post=" . $currentID . "&action=edit") .
+                    '"';
+                $currentMeta .= ' data-type="exact"';
+                $currentMeta .= ' data-mime="video"';
+
+                // If selected
+
+                $results = [];
+
+                if ($currentImages):
+                    foreach ($currentImages as $currentImage):
+                        if ($currentImage[0] == $currentID) {
+                            array_push($results, 1);
+                        }
+                    endforeach;
+                endif;
+
+                if ($results) {
+                    $currentClass .= " gdymc_selected";
+                }
+
+                echo '<div class="gdymc_imagethumb_container">';
+                echo '<button class="' .
+                    $currentClass .
+                    '" ' .
+                    $currentMeta .
+                    ">";
+
+                echo '<div class="gdymc_imagethumb_edit"></div>';
+
+                echo '<video class="gdymc_mediathumb_' .
+                    $currentID .
+                    ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' .
+                    esc_url($videoURL) .
+                    '" type="' .
+                    esc_attr($videoMime) .
+                    '" /></video>';
+
+                if ($currentWidth and $currentHeight):
+                    echo '<div class="gdymc_imagethumb_size">' .
+                        $currentWidth .
+                        " x " .
+                        $currentHeight .
+                        "</div>";
+                endif;
+
+                echo "</button>";
+                echo "</div>";
+
+                // Attributes
+
+                // Check size
+
+                // If selected
+
+                // Show image
+            elseif (!empty($attachmentMeta)):
+                $currentWidth = $attachmentMeta["width"];
+                $currentHeight = $attachmentMeta["height"];
+
+                $currentClass = "gdymc_imagethumb";
+                $currentMeta = 'data-id="' . $currentID . '"';
+                $currentMeta .= ' data-guid="' . $currentGUID . '"';
+                $currentMeta .= ' data-width="' . $currentWidth . '"';
+                $currentMeta .= ' data-height="' . $currentHeight . '"';
+                $currentMeta .=
+                    ' data-admin="' .
+                    admin_url("post.php?post=" . $currentID . "&action=edit") .
+                    '"';
+
+                if (
+                    ($targetWidth == "auto" or
+                        $targetNumericWidth == $currentWidth) and
+                    ($targetHeight == "auto" or
+                        $targetNumericHeight == $currentHeight)
+                ):
+                    $currentType = "exact";
+                    $currentMeta .= ' data-type="exact"';
+                    $currentTip = __("Insert image", "gdy-modular-content");
+                elseif (
+                    ($targetWidth == "auto" or
+                        $targetNumericWidth <= $currentWidth) and
+                    ($targetHeight == "auto" or
+                        $targetNumericHeight <= $currentHeight)
+                ):
+                    if (current_user_can("upload_files", gdymc_object_id())):
+                        $currentType = "crop";
+                        $currentMeta .= ' data-type="crop"';
+                    else:
+                        $currentType = "bigger";
+                        $currentMeta .= ' data-type="bigger"';
+                    endif;
+                else:
+                    $currentType = "smaller";
+                    $currentMeta .= ' data-type="smaller"';
+                endif;
+
+                $results = [];
+
+                if ($currentImages):
+                    foreach ($currentImages as $currentImage):
+                        if ($currentImage[0] == $currentID) {
+                            array_push($results, 1);
+                        }
+                    endforeach;
+                endif;
+
+                if ($results) {
+                    $currentClass .= " gdymc_selected";
+                }
+
+                echo '<div class="gdymc_imagethumb_container">';
+                echo '<button class="' .
+                    $currentClass .
+                    '" ' .
+                    $currentMeta .
+                    ">";
+
+                echo '<div class="gdymc_imagethumb_edit"></div>';
+
+                echo wp_get_attachment_image($currentID, "thumbnail", true, [
+                    "class" => "gdymc_mediathumb_" . $currentID,
+                ]);
+
+                echo '<div class="gdymc_imagethumb_size">' .
+                    $currentWidth .
+                    " x " .
+                    $currentHeight .
+                    "</div>";
+
+                echo "</button>";
+                echo "</div>";
+            endif;
+        endwhile;
+
+        $visible_posts = $offset + $the_query->post_count;
+        $available_posts = $the_query->found_posts;
+
+        if ($available_posts > $visible_posts):
+            echo '<div id="gdymc_loadmore_images" class="gdymc_loadmore">' .
+                str_replace(
+                    "%s",
+                    $available_posts - $visible_posts,
+                    __("More images (%s)", "gdy-modular-content")
+                ) .
+                "</div>";
+        endif;
+    else:
+        if ($page == 1):
+            echo '<div class="gdymc_noentries">' .
+                __("No contents", "gdy-modular-content") .
+                "</div>";
+        endif;
+    endif;
+
+    if ($ajax) {
+        die();
+    }
+}
+
+add_action(
+    "wp_ajax_gdyModularContentUploadAction",
+    "gdyModularContentUploadAction"
+);
+
+/**
+ * Handles upload action behavior.
+ */
+function gdyModularContentUploadAction()
+{
+    if (gdymc_logged()):
+        $result = media_handle_upload("gdymc_upload", $_POST["object"]);
+
+        if (is_wp_error($result)):
+            var_dump($result);
+        else:
+            echo get_edit_post_link($result, "");
+        endif;
+
+        die();
+    endif;
+}
+
+// List pages
+
+add_action("wp_ajax_gdymc_action_pagelist", "gdymc_action_pagelist");
+
+/**
+ * Handles the GDYMC action pagelist action request.
+ */
+function gdymc_action_pagelist()
+{
+    $size = 20;
+
+    $args = [
+        "orderby" => "date",
+        "order" => "DESC",
+        "posts_per_page" => $size,
+        "post_type" => "page",
+    ];
+
+    if (isset($_POST["s"])) {
+        array_push($args, $_POST["s"]);
+    }
+    if (isset($_POST["p"]) && is_numeric($_POST["p"])) {
+        $args["offset"] = $size * $_POST["p"];
+        $pageNumber = $_POST["p"];
+        $external = true;
+    } else {
+        $external = false;
+        $pageNumber = 0;
+    }
+
+    $the_query = new WP_Query($args);
+
+    if ($the_query->have_posts()):
+        while ($the_query->have_posts()):
+            $the_query->the_post();
+
+            echo '<div class="gdymc_insertlink_source">';
+            echo '<div class="gdymc_insertlink_source-title">' .
+                get_the_title() .
+                " <span>" .
+                get_the_date() .
+                "</span></div>";
+
+            echo '<div class="gdymc_insertlink_source-meta">';
+            echo '<a class="gdymc_insertlink_source-use" data-guid="' .
+                get_permalink() .
+                '" href="#">' .
+                __("Use as link", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_permalink() .
+                '" target="_blank">' .
+                __("View", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_edit_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Edit", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a class="gdymc_delete_link" href="' .
+                get_delete_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Trash", "gdy-modular-content") .
+                "</a>";
+            echo "</div>";
+
+            echo "</div>";
+        endwhile;
+
+        $additionalContents =
+            $the_query->found_posts - ($pageNumber + 1) * $size;
+
+        if ($additionalContents > 0):
+            echo '<div id="gdymc_loadmore_pages" class="gdymc_loadmore" data-page="' .
+                $pageNumber .
+                '">' .
+                __("Show more", "gdy-modular-content") .
+                " (" .
+                $additionalContents .
+                ")</div>";
+        endif;
+    else:
+        if (!$external) {
+            echo '<div class="gdymc_noentries">' .
+                __("No contents", "gdy-modular-content") .
+                "</div>";
+        }
+    endif;
+    if ($external) {
+        die();
+    }
+}
+
+// List posts
+
+add_action("wp_ajax_gdymc_action_postlist", "gdymc_action_postlist");
+
+/**
+ * Handles the GDYMC action postlist action request.
+ */
+function gdymc_action_postlist()
+{
+    $size = 20;
+
+    $args = [
+        "orderby" => "date",
+        "order" => "DESC",
+        "posts_per_page" => $size,
+        "post_type" => "post",
+    ];
+
+    if (isset($_POST["s"])) {
+        array_push($args, $_POST["s"]);
+    }
+    if (isset($_POST["p"]) && is_numeric($_POST["p"])) {
+        $args["offset"] = $size * $_POST["p"];
+        $pageNumber = $_POST["p"];
+        $external = true;
+    } else {
+        $external = false;
+        $pageNumber = 0;
+    }
+
+    $the_query = new WP_Query($args);
+
+    if ($the_query->have_posts()):
+        while ($the_query->have_posts()):
+            $the_query->the_post();
+
+            echo '<div class="gdymc_insertlink_source">';
+            echo '<div class="gdymc_insertlink_source-title">' .
+                get_the_title() .
+                " <span>" .
+                get_the_date() .
+                "</span></div>";
+
+            echo '<div class="gdymc_insertlink_source-meta">';
+            echo '<a class="gdymc_insertlink_source-use" data-guid="' .
+                get_permalink() .
+                '" href="#">' .
+                __("Use as link", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_permalink() .
+                '" target="_blank">' .
+                __("View", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_edit_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Edit", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a class="gdymc_delete_link" href="' .
+                get_delete_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Trash", "gdy-modular-content") .
+                "</a>";
+            echo "</div>";
+
+            echo "</div>";
+        endwhile;
+
+        $additionalContents =
+            $the_query->found_posts - ($pageNumber + 1) * $size;
+
+        if ($additionalContents > 0):
+            echo '<div id="gdymc_loadmore_posts" class="gdymc_loadmore" data-page="' .
+                $pageNumber .
+                '">' .
+                __("Show more", "gdy-modular-content") .
+                " (" .
+                $additionalContents .
+                ")</div>";
+        endif;
+    else:
+        if (!$external) {
+            echo '<div class="gdymc_noentries">' .
+                __("No contents", "gdy-modular-content") .
+                "</div>";
+        }
+    endif;
+    if ($external) {
+        die();
+    }
+}
+
+// List files
+
+add_action("wp_ajax_gdymc_action_filelist", "gdymc_action_filelist");
+
+/**
+ * Handles the GDYMC action filelist action request.
+ */
+function gdymc_action_filelist()
+{
+    $size = 20;
+
+    $args = [
+        "orderby" => "date",
+        "order" => "DESC",
+        "posts_per_page" => $size,
+        "post_status" => "any",
+        "post_type" => "attachment",
+        "post_mime_type" => "application",
+    ];
+
+    if (isset($_POST["s"])) {
+        $args["s"] = $_POST["s"];
+    }
+    if (isset($_POST["p"]) && is_numeric($_POST["p"])) {
+        $args["offset"] = $size * $_POST["p"];
+        $pageNumber = $_POST["p"];
+        $external = true;
+    } else {
+        $external = false;
+        $pageNumber = 0;
+    }
+
+    $the_query = new WP_Query($args);
+
+    if ($the_query->have_posts()):
+        while ($the_query->have_posts()):
+            $the_query->the_post();
+
+            echo '<div class="gdymc_insertlink_source">';
+            echo '<div class="gdymc_insertlink_source-title">' .
+                get_the_title() .
+                " <span>" .
+                get_the_date() .
+                "</span></div>";
+
+            echo '<div class="gdymc_insertlink_source-meta">';
+            echo '<a class="gdymc_insertlink_source-use" data-guid="' .
+                wp_get_attachment_url(get_the_ID()) .
+                '" href="#">' .
+                __("Use as link", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                wp_get_attachment_url(get_the_ID()) .
+                '" target="_blank">' .
+                __("View", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_edit_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Edit", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a class="gdymc_delete_link" href="' .
+                get_delete_post_link(get_the_ID()) .
+                '" target="_blank">' .
+                __("Delete Permanently", "gdy-modular-content") .
+                "</a>";
+            echo "</div>";
+
+            echo "</div>";
+        endwhile;
+
+        $additionalContents =
+            $the_query->found_posts - ($pageNumber + 1) * $size;
+
+        if ($additionalContents > 0):
+            echo '<div id="gdymc_loadmore_files" class="gdymc_loadmore" data-page="' .
+                $pageNumber .
+                '">' .
+                __("Show more", "gdy-modular-content") .
+                " (" .
+                $additionalContents .
+                ")</div>";
+        endif;
+    else:
+        if (!$external) {
+            echo '<div class="gdymc_noentries">' .
+                __("No contents", "gdy-modular-content") .
+                "</div>";
+        }
+    endif;
+    if ($external) {
+        die();
+    }
+}
+
+// List categories
+
+add_action("wp_ajax_gdymc_action_categorylist", "gdymc_action_categorylist");
+
+/**
+ * Handles the GDYMC action categorylist action request.
+ */
+function gdymc_action_categorylist()
+{
+    $size = 20;
+
+    $args = [
+        "number" => $size,
+        "hide_empty" => false,
+    ];
+
+    if (isset($_POST["s"])) {
+        array_push($args, $_POST["s"]);
+    }
+    if (isset($_POST["p"]) && is_numeric($_POST["p"])) {
+        $args["offset"] = $size * $_POST["p"];
+        $pageNumber = $_POST["p"];
+        $external = true;
+    } else {
+        $external = false;
+        $pageNumber = 0;
+    }
+
+    $cats = get_categories($args);
+
+    if (count($cats) > 0):
+        foreach ($cats as $cat):
+            echo '<div class="gdymc_insertlink_source">';
+            echo '<div class="gdymc_insertlink_source-title">' .
+                $cat->name .
+                "</div>";
+
+            echo '<div class="gdymc_insertlink_source-meta">';
+            echo '<a class="gdymc_insertlink_source-use" data-guid="' .
+                get_category_link($cat->term_id) .
+                '" href="#">' .
+                __("Use as link", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_category_link($cat->term_id) .
+                '" target="_blank">' .
+                __("View", "gdy-modular-content") .
+                "</a> | ";
+            echo '<a href="' .
+                get_edit_term_link($cat->term_id, "category", "post") .
+                '" target="_blank">' .
+                __("Edit", "gdy-modular-content") .
+                "</a>";
+            echo "</div>";
+
+            echo "</div>";
+        endforeach;
+    endif;
+}
+
+// Can be removed?
+
+/*
 
 	add_action('wp_ajax_gdyModularContentImageDetail', 'gdyModularContentImageDetail');
 	function gdyModularContentImageDetail() {
@@ -1732,136 +1959,120 @@
 	}
 
 	*/
-	
-	
 
-	
-	add_action('wp_ajax_gdyModularContentDeleteAction', 'gdyModularContentDeleteAction');
+add_action(
+    "wp_ajax_gdyModularContentDeleteAction",
+    "gdyModularContentDeleteAction"
+);
 
-	function gdyModularContentDeleteAction() {
+/**
+ * Handles delete action behavior.
+ */
+function gdyModularContentDeleteAction()
+{
+    if (gdymc_logged()) {
+        wp_delete_attachment($_POST["i"]);
 
-		if(gdymc_logged()) {
+        die();
+    }
+}
 
-			wp_delete_attachment($_POST['i']);
-			
-			die();
+// Cropping
 
-		}
+add_action("wp_ajax_gdymc_action_cropimage", "gdymc_action_cropimage");
 
-	}
-	
-	
+/**
+ * Handles the GDYMC action cropimage action request.
+ */
+function gdymc_action_cropimage()
+{
+    if (gdymc_logged()):
+        // Get the image data
 
+        $sourceID = $_POST["source_id"];
+        $sourcePath = get_attached_file($sourceID);
 
-	// Cropping
+        $targetWidth = trim($_POST["target_w"]);
+        $targetHeight = trim($_POST["target_h"]);
 
-	add_action('wp_ajax_gdymc_action_cropimage', 'gdymc_action_cropimage');
+        $cropX = $_POST["crop_x"];
+        $cropY = $_POST["crop_y"];
+        $cropWidth = $_POST["crop_w"];
+        $cropHeight = $_POST["crop_h"];
 
-	function gdymc_action_cropimage() {
+        // Set sizes for auto
 
-		if( gdymc_logged() ):
-			
+        if ($targetWidth == "auto" && $targetHeight == "auto"):
+            $targetWidth = $cropWidth;
+            $targetHeight = $cropHeight;
+        else:
+            if ($targetWidth == "auto"):
+                $sizeHandler = $cropHeight / $targetHeight;
+                $targetWidth = round($cropWidth / $sizeHandler);
+            endif;
 
-			// Get the image data
+            if ($targetHeight == "auto"):
+                $sizeHandler = $cropWidth / $targetWidth;
+                $targetHeight = round($cropHeight / $sizeHandler);
+            endif;
+        endif;
 
-			$sourceID = $_POST['source_id'];
-			$sourcePath = get_attached_file( $sourceID );
+        // Crop and save
 
-			$targetWidth = trim($_POST['target_w']);
-			$targetHeight = trim($_POST['target_h']);
+        $upload_directory = wp_upload_dir();
 
-			$cropX = $_POST['crop_x'];
-			$cropY = $_POST['crop_y'];
-			$cropWidth = $_POST['crop_w'];
-			$cropHeight = $_POST['crop_h'];
+        $new_name = wp_unique_filename(
+            $upload_directory["path"],
+            basename($sourcePath)
+        );
+        $new_path = wp_crop_image(
+            $sourceID,
+            $cropX,
+            $cropY,
+            $cropWidth,
+            $cropHeight,
+            $targetWidth,
+            $targetHeight,
+            false,
+            $upload_directory["path"] . "/" . $new_name
+        );
 
-			
+        if (is_wp_error($new_path)):
+            http_response_code(400);
+            die($new_path->get_error_message());
+        endif;
 
-			// Set sizes for auto
+        // Get mime type
 
-			if( $targetWidth == 'auto' && $targetHeight == 'auto' ):
+        $mime_type = wp_check_filetype($new_path);
 
-				$targetWidth = $cropWidth;
-				$targetHeight = $cropHeight;
+        // Create attachment in WordPress
 
-			else:
+        $attachment = [
+            "guid" => $upload_directory["url"] . "/" . $new_name,
+            "post_mime_type" => $mime_type["type"],
+            "post_title" => $new_name,
+            "post_content" => "",
+            "post_status" => "inherit",
+        ];
 
-				if( $targetWidth == 'auto' ):
+        $attach_id = wp_insert_attachment($attachment, $new_path);
+        $attach_data = wp_generate_attachment_metadata($attach_id, $new_path);
+        wp_update_attachment_metadata($attach_id, $attach_data);
 
-					$sizeHandler = $cropHeight / $targetHeight;
-					$targetWidth = round( $cropWidth / $sizeHandler );
+        // Response
 
-				endif;
+        $output = [
+            "id" => $attach_id,
+            "width" => $attach_data["width"],
+            "height" => $attach_data["height"],
+            "url" => $uploadDirectory["url"] . "/" . $new_name,
+        ];
 
-				if( $targetHeight == 'auto' ):
+        echo json_encode($output);
+    endif;
 
-					$sizeHandler = $cropWidth / $targetWidth;
-					$targetHeight = round( $cropHeight / $sizeHandler );
-
-				endif;
-
-			endif;
-
-
-
-			// Crop and save
-			
-			$upload_directory = wp_upload_dir();
-
-			$new_name = wp_unique_filename( $upload_directory[ 'path' ], basename( $sourcePath ) );
-			$new_path = wp_crop_image( $sourceID, $cropX, $cropY, $cropWidth, $cropHeight, $targetWidth, $targetHeight, false, $upload_directory[ 'path' ] . '/' . $new_name );
-
-
-			if( is_wp_error( $new_path ) ):
-
-				http_response_code( 400 ); die( $new_path->get_error_message() );
-
-			endif;
-
-
-			// Get mime type
-
-			$mime_type = wp_check_filetype( $new_path );
-
-
-			// Create attachment in WordPress
-
-			$attachment = array(
-				'guid' => $upload_directory[ 'url' ] . '/' . $new_name,
-				'post_mime_type' => $mime_type[ 'type' ],
-				'post_title' => $new_name,
-				'post_content' => '',
-				'post_status' => 'inherit'
-			);
-	
-			$attach_id = wp_insert_attachment( $attachment, $new_path );
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $new_path );
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-			
-
-			// Response
-
-			$output = array(
-				'id' => $attach_id,
-				'width' => $attach_data['width'],
-				'height' => $attach_data['height'],
-				'url' => $uploadDirectory['url'] . '/' . $new_name,
-			);
-			
-			echo json_encode( $output );
-		
-
-
-		endif;
-
-		die();
-
-	}
-	
-	
-	
-	
-	
-	
+    die();
+}
 
 ?>
