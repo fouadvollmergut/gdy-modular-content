@@ -1,442 +1,427 @@
 <?php
-	
-	
-	/**************************** RETURN OBJECT INFORMATION ****************************/
 
+/**************************** RETURN OBJECT INFORMATION ****************************/
+
+// Returns the object ID
+
+/**
+ * Returns the object ID.
+ */
+function gdymc_object_id()
+{
+    return get_queried_object_id();
+}
+
+// Returns the object type
+
+/**
+ * Returns the object type.
+ */
+function gdymc_object_type()
+{
+    if (is_singular()):
+        return "post";
+    elseif (is_tax() or is_tag() or is_category()):
+        return "term";
+    else:
+        return false;
+    endif;
+}
+
+/**************************** HELPER AND UTILITY FUNCTIONS ****************************/
+
+// Sets a cookie
+
+/**
+ * Sets a cookie.
+ *
+ * @param mixed $key Key value.
+ *
+ * @param mixed $value Value value.
+ */
+function gdymc_set_cookie($key, $value)
+{
+    setcookie($key, $value, 0, COOKIEPATH, COOKIE_DOMAIN);
+    $_COOKIE[$key] = $value;
+}
+
+// Removes a cookie
+
+/**
+ * Removes a cookie.
+ *
+ * @param mixed $key Key value.
+ */
+function gdymc_remove_cookie($key)
+{
+    setcookie($key, null, -1, COOKIEPATH, COOKIE_DOMAIN);
+    unset($_COOKIE[$key]);
+}
+
+// Returns current URL
+
+/**
+ * Returns current URL.
+ */
+function gdymc_current_url()
+{
+    return (isset($_SERVER["HTTPS"]) ? "https" : "http") .
+        "://" .
+        $_SERVER["HTTP_HOST"] .
+        $_SERVER["REQUEST_URI"];
+}
+
+/**************************** RETURN DIRECTORY INFORMATION ****************************/
+
+// Returns the url to the modules folder
+
+/**
+ * Returns the url to the modules folder.
+ *
+ * @param mixed $location Location value.
+ *
+ * @param mixed $path Path value.
+ */
+function gdymc_module_url($location, $path = "")
+{
+    try {
+        $location = str_replace(WP_CONTENT_DIR, "", $location);
+
+        global $gdymc_module_types;
+
+        foreach ($gdymc_module_types as $module_path):
+            $module_path = str_replace(WP_CONTENT_DIR, "", $module_path);
+
+            if (str_contains($location, $module_path)):
+                // Ensure the module name is fully matched
+                $file_path = str_replace($module_path, "", $location);
+                if (!str_starts_with($file_path, "/") and !empty($file_path)) {
+                    continue;
+                }
+
+                return get_site_url() .
+                    "/wp-content/" .
+                    trim($module_path, "/") .
+                    $path;
+                break;
+            endif;
+        endforeach;
+    } catch (Exception $e) {
+        error_log("Error in gdymc_module_url: Could not find matching module");
+        return "";
+    }
+}
+
+// Extract the module type
+
+/**
+ * Extract the module type.
+ *
+ * @param mixed $location Location value.
+ */
+function gdymc_module_type($location)
+{
+    global $gdymc_module_types;
+
+    foreach ($gdymc_module_types as $module_path):
+        if (
+            str_contains($module_path, $location) ||
+            str_contains($location, $module_path)
+        ):
+            // Ensure the module name is fully matched
+            $file_path = str_replace($module_path, "", $location);
+            if (!str_starts_with($file_path, "/") and !empty($file_path)) {
+                continue;
+            }
+
+            return substr($module_path, strlen(WP_CONTENT_DIR) + 1);
+        endif;
+    endforeach;
+}
+
+// DEPRECATED: Extract the module name
+
+/**
+ * DEPRECATED: Extract the module name.
+ *
+ * @param mixed $location Location value.
+ */
+function gdymc_module_name($location)
+{
+    return gdymc_module_type($location);
+}
+
+/**************************** RETURN SINGLE MODULE INFORMATION ****************************/
+
+// Checks if a module is placed on a specific object
+
+/**
+ * Checks if a module is placed on a specific object.
+ *
+ * @param mixed $module Module value.
+ *
+ * @param mixed $objectID Object id value.
+ */
+function gdymc_module_is_placed($module, $objectID = null)
+{
+    $objectID = $objectID ? $objectID : gdymc_object_id();
+
+    $modules = gdymc_get_placed_modules($objectID);
+
+    return array_key_exists($module, $modules) ? true : false;
+}
+
+// Check if a module is installed on the site
+
+/**
+ * Check if a module is installed on the site.
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_module_is_installed($module)
+{
+    $modules = gdymc_get_modules();
+
+    return array_key_exists($module, $modules) ? true : false;
+}
+
+// Synonym for gdymc_module_is_installed()
+
+/**
+ * Synonym for gdymc_module_is_installed().
+ *
+ * @param mixed $module Module value.
+ */
+function gdymc_module_exists($module)
+{
+    return gdymc_module_is_installed($module);
+}
+
+/**************************** RETURN MODULE LIST INFORMATION ****************************/
+
+/**
+ * Handles GDYMC register module types behavior.
+ */
+function gdymc_register_module_types()
+{
+    global $gdymc_module_folders;
+    global $gdymc_module_types;
+
+    $gdymc_module_folders = apply_filters("gdymc_modules_folder", [
+        get_template_directory() . "/modules",
+    ]);
+
+    if (!is_array($gdymc_module_folders)):
+        $gdymc_module_folders = [$gdymc_module_folders];
+    endif;
+
+    $gdymc_module_folders = array_unique($gdymc_module_folders);
+
+    foreach ($gdymc_module_folders as $module_folder):
+        if (file_exists($module_folder)):
+            $modules = array_filter(glob($module_folder . "/*"), "is_dir");
+            $modules = apply_filters("gdymc_modules", $modules);
+
+            $gdymc_module_types = array_merge($gdymc_module_types, $modules);
+        endif;
+    endforeach;
+}
+
+// Returns the number of placed modules / False if the modules folder doesn't exists
+
+function gdymc_has_modules()
+{
+    global $gdymc_module_types;
+    return count($gdymc_module_types);
+}
+
+// Returns an array of installed modules
+
+function gdymc_get_modules()
+{
+    if (!gdymc_has_modules()):
+        return false;
+
+        // Module holder
+
+        // Setup the modules
+
+        // Handler
 
-	// Returns the object ID
+        // Extract folder name (type)
 
-	function gdymc_object_id() {
+        // Set info
 
-		return get_queried_object_id();
+        // Push handler into modules
+    else:
+        global $gdymc_module_types;
+        global $gdymc_modules;
 
-	}
+        foreach ($gdymc_module_types as $module_path):
+            $module = new stdClass();
 
+            $module_type = substr($module_path, strlen(WP_CONTENT_DIR) + 1);
 
-	// Returns the object type
+            $module_title = end(explode("/", $module_type));
 
-	function gdymc_object_type() {
+            $module->folder = $module_type;
+
+            $module->type = $module_type;
 
-		if( is_singular() ):
+            $module->status = get_option(
+                "gdymc_module_" . $module_type . "_status",
+                "ACTIVE"
+            );
 
-			return 'post';
+            $module->title = apply_filters(
+                "gdymc_module_title",
+                strtolower(str_replace("_", " ", $module_title)),
+                $module_type
+            );
+
+            $module->name = get_option(
+                "gdymc_module_" . $module_type . "_name",
+                $module->title
+            );
 
-		elseif( is_tax() OR is_tag() OR is_category() ):
+            $module->thumbPath = $module_path . "/thumb.svg";
 
-			return 'term';
+            $module->thumbURL = gdymc_module_url($module_path, "/thumb.svg");
 
-		else:
+            $gdymc_modules[$module_type] = $module;
+        endforeach;
+
+        return $gdymc_modules;
+    endif;
+}
 
-			return false;
-
-		endif;
-
-	}
-
-
-
-
-	/**************************** HELPER AND UTILITY FUNCTIONS ****************************/
-
-
-	// Sets a cookie
-
-	function gdymc_set_cookie( $key, $value ) {
-
-		setcookie( $key, $value, 0, COOKIEPATH, COOKIE_DOMAIN );
-		$_COOKIE[ $key ] = $value;
-
-	}
-
-
-	// Removes a cookie
-
-	function gdymc_remove_cookie( $key ) {
-
-		setcookie( $key, null, -1, COOKIEPATH, COOKIE_DOMAIN );
-		unset( $_COOKIE[ $key ] );
-
-	}
-
-
-	// Returns current URL
-
-	function gdymc_current_url() {
-
-		return ( isset( $_SERVER['HTTPS'] ) ? "https" : "http" ) . '://' . $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
-
-	}
-	
-
-
-	/**************************** RETURN DIRECTORY INFORMATION ****************************/
-
-
-	// Returns the url to the modules folder
-
-	function gdymc_module_url($location, $path = '') {
-		try {
-			$location = str_replace( WP_CONTENT_DIR, '', $location );
-
-			global $gdymc_module_types;
-
-			foreach( $gdymc_module_types as $module_path ):
-				$module_path = str_replace( WP_CONTENT_DIR, '', $module_path );
-
-				if ( str_contains($location, $module_path) ):
-
-					// Ensure the module name is fully matched
-					$file_path = str_replace( $module_path, '', $location );
-					if ( !str_starts_with($file_path, '/') AND !empty($file_path) ) {
-						continue; 
-					}
-
-					return get_site_url() . '/wp-content/' .  trim($module_path, '/') . $path;
-					break;
-				endif;
-			endforeach;
-		} catch (Exception $e) {
-			error_log('Error in gdymc_module_url: Could not find matching module');
-			return '';
-		}
-	}
-
-
-	// Extract the module type
-
-	function gdymc_module_type( $location ) {
-
-		global $gdymc_module_types;
-
-		foreach( $gdymc_module_types as $module_path ):
-
-			if ( str_contains($module_path, $location ) || str_contains($location, $module_path) ):
-
-				// Ensure the module name is fully matched
-				$file_path = str_replace( $module_path, '', $location );
-				if ( !str_starts_with($file_path, '/') AND !empty($file_path) ) {
-					continue; 
-				}
-
-				return substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
-			endif;
-		endforeach;
-
-	}
-
-
-	// DEPRECATED: Extract the module name
-
-	function gdymc_module_name( $location ) {
-
-		return gdymc_module_type( $location );
-
-	}
-
-
-	/**************************** RETURN SINGLE MODULE INFORMATION ****************************/
-
-
-	// Checks if a module is placed on a specific object
-
-	function gdymc_module_is_placed( $module, $objectID = null ) {
-
-		$objectID = $objectID ? $objectID : gdymc_object_id();
-
-		$modules = gdymc_get_placed_modules( $objectID );
-
-		return array_key_exists( $module, $modules ) ? true : false;
-
-	}
-
-
-	// Check if a module is installed on the site
-
-	function gdymc_module_is_installed( $module ) {
-
-		$modules = gdymc_get_modules();
-
-		return array_key_exists( $module, $modules ) ? true : false;
-
-	}
-
-
-	// Synonym for gdymc_module_is_installed()
-
-	function gdymc_module_exists( $module ) {
-
-		return gdymc_module_is_installed( $module );
-
-	}
-
-
-	/**************************** RETURN MODULE LIST INFORMATION ****************************/
-
-	function gdymc_register_module_types() {
-
-		global $gdymc_module_folders;
-		global $gdymc_module_types;
-
-		$gdymc_module_folders = apply_filters( 'gdymc_modules_folder', [ get_template_directory() . '/modules' ] );;
-
-		if ( !is_array( $gdymc_module_folders ) ):
-
-			$gdymc_module_folders = array( $gdymc_module_folders );
-
-		endif;
-
-		$gdymc_module_folders = array_unique( $gdymc_module_folders );
-
-		foreach ($gdymc_module_folders as $module_folder):
-
-			if (file_exists( $module_folder )):
-				$modules = array_filter( glob( $module_folder . '/*' ), 'is_dir' );
-				$modules = apply_filters( 'gdymc_modules', $modules );
-
-				$gdymc_module_types = array_merge( $gdymc_module_types, $modules );
-			endif;
-
-		endforeach;
-
-	}
-
-	// Returns the number of placed modules / False if the modules folder doesn't exists
-
-	function gdymc_has_modules() {
-
-		global $gdymc_module_types;
-		return count( $gdymc_module_types );
-
-	}
-
-
-	// Returns an array of installed modules
-
-	function gdymc_get_modules() {
-
-		if( !gdymc_has_modules() ):
-
-			return false;
-
-		else:
-
-			// Module holder
-			global $gdymc_module_types;
-			global $gdymc_modules;
-
-
-			// Setup the modules
-			foreach( $gdymc_module_types as $module_path ):
-
-				// Handler
-				$module = new stdClass;
-
-				// Extract folder name (type)
-				$module_type = substr( $module_path, strlen(WP_CONTENT_DIR) + 1 );
-
-				$module_title = end( explode('/', $module_type) );
-
-
-				// Set info
-
-				$module->folder = $module_type;
-
-				$module->type = $module_type;
-
-				$module->status = get_option( 'gdymc_module_'. $module_type . '_status', 'ACTIVE' );
-
-				$module->title = apply_filters( 'gdymc_module_title', strtolower( str_replace( '_', ' ', $module_title) ), $module_type );
-
-				$module->name = get_option( 'gdymc_module_' . $module_type . '_name', $module->title );
-
-				$module->thumbPath = $module_path . '/thumb.svg';
-				
-				$module->thumbURL = gdymc_module_url($module_path, '/thumb.svg');
-
-
-				// Push handler into modules
-
-				$gdymc_modules[ $module_type ] = $module;
-
-
-			endforeach;
-
-			return $gdymc_modules;
-
-		endif;
-
-	}
-
-	function gdymc_get_module( $module_type ) {
-
-		$gdymc_modules = gdymc_get_modules();
-
-		return array_key_exists( $module_type, $gdymc_modules ) ? $gdymc_modules[ $module_type ] : false;
-
-	}
-
-
-
-	// Retreives a an array of placed modules from the WPDB
-	
-	function gdymc_module_array( $objectID = false, $objectType = false ) {
-		
-
-		// Get information
-
-		$object_id = $objectID ? $objectID : gdymc_object_id();
-		$object_type = $objectType ? $objectType : gdymc_object_type();
-
-
-		// Fetch meta
-
-		$moduleList = get_metadata( $object_type, $object_id, '_gdymc_modulelist', true );
-
-
-		// Convert meta into array
-
-		if( !is_array( $moduleArray = json_decode( $moduleList, true ) ) ) $moduleArray = array();
-
-		
-		// Return
-
-		return $moduleArray;
-		
-
-	}
-
-
-
-
-
-
-
-
-
-
-	// Returns the modules placed on a specific object
-
-	function gdymc_get_placed_modules( $objectID = false, $objectType = false ) {
-
-
-		// Fetch object information
-
-		$object_id = $objectID ? $objectID : gdymc_object_id();
-		$object_type = $objectType ? $objectType : gdymc_object_type();
-
-
-		
-		// Get objects modules
-		
-		$moduleArray = gdymc_module_array( $objectID, $objectType );
-		
-
-
-		// Holder array
-
-		$moduleTypes = array();
-		
-
-
-		// Iterate through modules and push each type once into the holder
-
-		foreach( $moduleArray as $key => $value ):
-			
-			$moduleType = get_metadata( $object_type, $object_id, '_gdymc_' . $value . '_type', true );
-
-			if( isset( $moduleTypes[ $moduleType ] ) ):
-				
-				$moduleTypes[ $moduleType ] = $moduleTypes[ $moduleType ]+1;
-
-			else:
-
-				$moduleTypes[ $moduleType ] = 1;
-
-			endif;
-			
-		endforeach;
-
-
-
-		
-		// Filter array
-
-		$filteredTypes = gdymc_get_modules();
-
-
-		if( $filteredTypes ) foreach( $filteredTypes as $key => $module ):
-
-			if( !array_key_exists( $module->type, $moduleTypes ) ):
-
-				unset( $filteredTypes[ $key ] );
-
-			endif;
-
-		endforeach;
-
-
-
-		return $filteredTypes;
-
-
-	}
-
-
-
-
-	
-	/**************************** VIEW MODE INFORMATION ****************************/
-	
-	// Checks if hard preview is active
-
-	function gdymc_hardpreview() {
-
-		return ( isset( $_COOKIE[ 'gdymc_hardpreview' ] ) AND $_COOKIE[ 'gdymc_hardpreview' ] == 1 ) ? true : false;
-		
-	}
-
-
-	// Checks if soft preview is active
-
-	function gdymc_softpreview() {
-		
-		return ( isset( $_COOKIE[ 'gdymc_softpreview' ] ) AND $_COOKIE[ 'gdymc_softpreview' ] == 1 ) ? true : false;
-		
-	}
-
-
-	// Checks if any preview is active
-
-	function gdymc_preview() {
-
-		return ( gdymc_hardpreview() OR gdymc_softpreview() ) ? true : false;
-
-	}
-
-
-	// Checks if user is logged and not in customizer
-	
-	function gdymc_logged() {
-		
-
-		global $wp_customize;
-
-		// Check if not in customizer and logged
-
-		if ( !isset( $wp_customize ) AND current_user_can( 'edit_pages' ) ):
-
-			return true;
-
-		else:
-
-			return false;
-
-		endif;
-		
-
-	}
-
-
-	
+function gdymc_get_module($module_type)
+{
+    $gdymc_modules = gdymc_get_modules();
+
+    return array_key_exists($module_type, $gdymc_modules)
+        ? $gdymc_modules[$module_type]
+        : false;
+}
+
+// Retreives a an array of placed modules from the WPDB
+
+function gdymc_module_array($objectID = false, $objectType = false)
+{
+    // Get information
+
+    $object_id = $objectID ? $objectID : gdymc_object_id();
+    $object_type = $objectType ? $objectType : gdymc_object_type();
+
+    // Fetch meta
+
+    $moduleList = get_metadata(
+        $object_type,
+        $object_id,
+        "_gdymc_modulelist",
+        true
+    );
+
+    // Convert meta into array
+
+    if (!is_array($moduleArray = json_decode($moduleList, true))) {
+        $moduleArray = [];
+    }
+
+    // Return
+
+    return $moduleArray;
+}
+
+// Returns the modules placed on a specific object
+
+function gdymc_get_placed_modules($objectID = false, $objectType = false)
+{
+    // Fetch object information
+
+    $object_id = $objectID ? $objectID : gdymc_object_id();
+    $object_type = $objectType ? $objectType : gdymc_object_type();
+
+    // Get objects modules
+
+    $moduleArray = gdymc_module_array($objectID, $objectType);
+
+    // Holder array
+
+    $moduleTypes = [];
+
+    // Iterate through modules and push each type once into the holder
+
+    foreach ($moduleArray as $key => $value):
+        $moduleType = get_metadata(
+            $object_type,
+            $object_id,
+            "_gdymc_" . $value . "_type",
+            true
+        );
+
+        if (isset($moduleTypes[$moduleType])):
+            $moduleTypes[$moduleType] = $moduleTypes[$moduleType] + 1;
+        else:
+            $moduleTypes[$moduleType] = 1;
+        endif;
+    endforeach;
+
+    // Filter array
+
+    $filteredTypes = gdymc_get_modules();
+
+    if ($filteredTypes) {
+        foreach ($filteredTypes as $key => $module):
+            if (!array_key_exists($module->type, $moduleTypes)):
+                unset($filteredTypes[$key]);
+            endif;
+        endforeach;
+    }
+
+    return $filteredTypes;
+}
+
+// Checks if hard preview is active
+
+function gdymc_hardpreview()
+{
+    return (isset($_COOKIE["gdymc_hardpreview"]) and
+        $_COOKIE["gdymc_hardpreview"] == 1)
+        ? true
+        : false;
+}
+
+// Checks if soft preview is active
+
+function gdymc_softpreview()
+{
+    return (isset($_COOKIE["gdymc_softpreview"]) and
+        $_COOKIE["gdymc_softpreview"] == 1)
+        ? true
+        : false;
+}
+
+// Checks if any preview is active
+
+function gdymc_preview()
+{
+    return (gdymc_hardpreview() or gdymc_softpreview()) ? true : false;
+}
+
+// Checks if user is logged and not in customizer
+
+function gdymc_logged()
+{
+    global $wp_customize;
+
+    // Check if not in customizer and logged
+
+    if (!isset($wp_customize) and current_user_can("edit_pages")):
+        return true;
+    else:
+        return false;
+    endif;
+}
 
 ?>

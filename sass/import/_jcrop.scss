@@ -65,12 +65,12 @@ input.jcrop-keymgr {
   height: 36px;
   margin-top: -18px;
   margin-left: -25px;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 3px;
   cursor: pointer;
 }
 #gdymc_cropbutton::before {
-  font-family: 'Dashicons';
+  font-family: "Dashicons";
   content: "\f165";
   font-size: 16px;
   color: #fff;
@@ -92,27 +92,27 @@ input.jcrop-keymgr {
   display: none;
 }
 #gdymc_cropbutton.gdymc_active::after {
-    content: '';
-    display: block;
-    position: absolute;
-    border-radius: 20px;
-    width: 12px;  
-    height: 12px;
-    left: 50%;
-    top: 50%;
-    margin-top: -9px;
-    margin-left: -9px;
-    border: solid 3px transparent;
-    border-left: solid 3px #fff;
-    border-top: solid 3px #fff;
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 20px;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 50%;
+  margin-top: -9px;
+  margin-left: -9px;
+  border: solid 3px transparent;
+  border-left: solid 3px #fff;
+  border-top: solid 3px #fff;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 
-    -webkit-animation: gdymcspin 1s linear infinite;
-    -moz-animation: gdymcspin 1s linear infinite;
-    animation: gdymcspin 1s linear infinite;
-  }
+  -webkit-animation: gdymcspin 1s linear infinite;
+  -moz-animation: gdymcspin 1s linear infinite;
+  animation: gdymcspin 1s linear infinite;
+}
 /* Selection Handles */
 .jcrop-handle {
   background-color: #333333;
@@ -199,7 +199,7 @@ input.jcrop-keymgr {
 .jcrop-light .jcrop-hline {
   background: #ffffff;
   filter: alpha(opacity=70) !important;
-  opacity: .70!important;
+  opacity: 0.7 !important;
 }
 .jcrop-light .jcrop-handle {
   -moz-border-radius: 3px;

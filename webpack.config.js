@@ -1,45 +1,49 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const config = {
   entry: {
-    'style': './sass/style.scss', 
-    'hardpreview': './sass/visitor/hardpreview.scss'
+    style: "./sass/style.scss",
+    hardpreview: "./sass/visitor/hardpreview.scss",
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-    new FixStyleOnlyEntriesPlugin()
-  ],
+  plugins: [new MiniCssExtractPlugin(), new FixStyleOnlyEntriesPlugin()],
   module: {
     rules: [
       {
         test: /\.(scss|css)$/,
         use: [
-          MiniCssExtractPlugin.loader, 
+          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader', 
+            loader: "css-loader",
             options: {
               sourceMap: true,
               url: false,
-            }
-          }, 
-          'sass-loader'
+            },
+          },
+          "sass-loader",
         ],
-      }
-    ]
+      },
+    ],
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   devServer: {
-    static: path.join(__dirname, "/")
-  }
-}
+    static: path.join(__dirname, "/"),
+  },
+};
 
+/**
+ * Builds the Webpack configuration for the selected mode.
+ *
+ * @param {*} env Env value.
+ *
+ * @param {*} argv Argv value.
+ */
 module.exports = (env, argv) => {
-  if (argv.mode === 'production') {
+  if (argv.mode === "production") {
     config.output = {
-      path: path.resolve(__dirname, './_dist/_styles'),
+      path: path.resolve(__dirname, "./_dist/_styles"),
     };
 
     config.plugins.push(
@@ -51,20 +55,23 @@ module.exports = (env, argv) => {
           { from: "hooks", to: path.resolve(__dirname, "./_dist/hooks") },
           { from: "images", to: path.resolve(__dirname, "./_dist/images") },
           { from: "includes", to: path.resolve(__dirname, "./_dist/includes") },
-          { from: "languages", to: path.resolve(__dirname, "./_dist/languages") },
+          {
+            from: "languages",
+            to: path.resolve(__dirname, "./_dist/languages"),
+          },
           { from: "scripts", to: path.resolve(__dirname, "./_dist/scripts") },
           { from: "views", to: path.resolve(__dirname, "./_dist/views") },
           { from: "actions", to: path.resolve(__dirname, "./_dist/actions") },
         ],
-      })
+      }),
     );
   }
 
-  if (argv.mode === 'development') {
+  if (argv.mode === "development") {
     config.output = {
-      path: path.resolve(__dirname, './_styles'),
+      path: path.resolve(__dirname, "./_styles"),
     };
   }
 
   return config;
-}
+};

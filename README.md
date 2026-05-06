@@ -11,33 +11,36 @@ This plugin allows you to create modular content and to edit it with a intuitive
 
 #### Install Plugin
 
-Download and install the plugin or install it directly in the Plugins tab in your Wordpress Dashboard via *Add new plugin*.
+Download and install the plugin or install it directly in the Plugins tab in your Wordpress Dashboard via _Add new plugin_.
 
 #### Add modules folder
 
-Create a folder called *modules* in the root directory of your theme and add your modules there. You can get some example modules from this repository: [GDY Modular Content – Example Modules](https://github.com/fouadvollmergut/gdymc-example-modules).
+Create a folder called _modules_ in the root directory of your theme and add your modules there. You can get some example modules from this repository: [GDY Modular Content – Example Modules](https://github.com/fouadvollmergut/gdymc-example-modules).
 
 Place following snippet within your `functions.php`:
 
 ```php
 // functions.php
 
-add_filter( 'gdymc_modules_folder', 'gdymc_folder' );
+add_filter("gdymc_modules_folder", "gdymc_folder");
 
-function gdymc_folder($module_folders) {
-  array_push($module_folders, get_template_directory() . '/modules');
+function gdymc_folder($module_folders)
+{
+  array_push($module_folders, get_template_directory() . "/modules");
   return $module_folders;
 }
 ```
 
 #### Create module area
 
-Now create a *module area*, in the templates you want to contain modules.
+Now create a _module area_, in the templates you want to contain modules.
 
 ```php
 // single.php
 
-<?php if( function_exists( 'areaCreate' ) ) areaCreate(); ?>
+<?php if (function_exists("areaCreate")) {
+  areaCreate();
+} ?>
 ```
 
 To enable modules for pages and posts by default add the snippet to your `index.php` like so:
@@ -46,17 +49,23 @@ To enable modules for pages and posts by default add the snippet to your `index.
 // index.php
 
 <?php get_header(); ?>
-  <?php if( have_posts() ): while( have_posts() ): the_post(); ?>
-    <?php if( function_exists( 'areaCreate' ) ) areaCreate(); ?>
-  <?php endwhile; endif; ?>
+  <?php if (have_posts()):
+    while (have_posts()):
+      the_post(); ?>
+    <?php if (function_exists("areaCreate")) {
+      areaCreate();
+    } ?>
+  <?php
+    endwhile;
+  endif; ?>
 <?php get_footer(); ?>
 ```
 
-Alternativly you can add a shortcode `[gdymc_area]` to the pages that should contain a *module area*.
+Alternativly you can add a shortcode `[gdymc_area]` to the pages that should contain a _module area_.
 
 #### Add modules
 
-Now navigate to a page containing a module area and add some module from the top right of the *gdymc admin bar*.
+Now navigate to a page containing a module area and add some module from the top right of the _gdymc admin bar_.
 
 ---
 
@@ -64,8 +73,7 @@ Now navigate to a page containing a module area and add some module from the top
 
 The repository uses a Webpack build configuration.
 
-*Available commands:*
-
+_Available commands:_
 
 Start local development server to compile scss files. Built files will be located in `_styles` folder.
 
@@ -73,18 +81,15 @@ Start local development server to compile scss files. Built files will be locate
   npm run start
 ```
 
-
 Output a clean plugin folder for testing purposes. Built files will be located in `_dist` folder.
 
 ```sh
   npm run build
 ```
 
-
 ## Contribution Workflow
 
 Fork this repository and open a pull request to contribute changes.
-
 
 ## Release Workflow
 
@@ -98,7 +103,7 @@ Make sure to push the version changes within the mandatory plugin files to main 
 
 To publish a release to Wordpress Plugin Store, upload the built file from the Github release to the SVN Repository.
 
-*Undo a release*
+_Undo a release_
 
 Remove the remote and local tag and also delete the release on Github
 
