@@ -63,18 +63,9 @@ class GDYMC_MODULE
 
         if (!$check):
             $this->exists = 0;
-
+        else:
             // Set general properties
 
-            // Visibility switch
-
-            // Paths
-
-            // Create module class
-            // deprecated since 0.8.1
-
-            // Get content
-        else:
             $this->exists = 1;
             $this->id = $moduleID;
             $this->object_id = $objectID;
@@ -90,6 +81,8 @@ class GDYMC_MODULE
             $this->timer_switch = strtotime(
                 optionGet("visibility_switch", $this->id)
             );
+
+            // Visibility switch
 
             if (
                 $this->timer_status and
@@ -119,11 +112,15 @@ class GDYMC_MODULE
                 endif;
             endif;
 
+            // Paths
+
             $this->path = WP_CONTENT_DIR . "/" . $this->type;
             $this->file = WP_CONTENT_DIR . "/" . $this->type . "/index.php";
             $this->functions =
                 WP_CONTENT_DIR . "/" . $this->type . "/functions.php";
             $this->thumb = WP_CONTENT_DIR . "/" . $this->type . "/thumb.svg";
+
+            // Create module class
 
             $this->classes[] = "gdymc_module";
 
@@ -138,13 +135,15 @@ class GDYMC_MODULE
             }
 
             $this->classes[] = "gdymc_module_" . end(explode("/", $this->type));
-            $this->classes[] = "gdymc_module-" . end(explode("/", $this->type));
+            $this->classes[] = "gdymc_module-" . end(explode("/", $this->type)); // deprecated since 0.8.1
 
             $this->classes = apply_filters(
                 "gdymc_module_class",
                 $this->classes,
                 $this
             );
+
+            // Get content
 
             $this->content = $this->content_get();
         endif;
