@@ -1,8 +1,7 @@
 <?php
 
-// Returns module object or false if the module doesn't exists
 /**
- * Handles GDYMC module behavior.
+ * Returns module object or false if the module doesn't exists.
  *
  * @param mixed $moduleID Module id value.
  *
@@ -151,10 +150,8 @@ class GDYMC_MODULE
 
     /************************* GENERAL FUNCTIONS *************************/
 
-    // Show class array as string
-
     /**
-     * Handles get class behavior.
+     * Show class array as string.
      */
     public function get_class()
     {
@@ -200,30 +197,24 @@ class GDYMC_MODULE
 
     /************************* VISIBILITY FUNCTIONS *************************/
 
-    // Check if current module is visible
-
     /**
-     * Handles is visible behavior.
+     * Check if current module is visible.
      */
     public function is_visible()
     {
         return $this->visibility == 1 ? true : false;
     }
 
-    // Check if current module is invisible
-
     /**
-     * Handles is invisible behavior.
+     * Check if current module is invisible.
      */
     public function is_invisible()
     {
         return $this->visibility == 0 ? true : false;
     }
 
-    // Check if current module has a active visibility timer
-
     /**
-     * Handles is timed behavior.
+     * Check if current module has a active visibility timer.
      */
     public function is_timed()
     {
@@ -236,10 +227,8 @@ class GDYMC_MODULE
 
     /************************* CONTENT FUNCTIONS *************************/
 
-    // Get current module contents out of DB
-
     /**
-     * Handles GDYMC content content get behavior.
+     * Get current module contents out of DB.
      */
     public function content_get()
     {
@@ -253,10 +242,8 @@ class GDYMC_MODULE
         return $content == "[]" ? [] : $this->content_decode($content);
     }
 
-    // Creates a DB string out of an array of content IDs
-
     /**
-     * Handles GDYMC content content encode behavior.
+     * Creates a DB string out of an array of content IDs.
      *
      * @param mixed $content Content value.
      */
@@ -266,10 +253,8 @@ class GDYMC_MODULE
         return json_encode($content);
     }
 
-    // Creates a array of content IDs out of a DB string
-
     /**
-     * Handles GDYMC content content decode behavior.
+     * Creates a array of content IDs out of a DB string.
      *
      * @param mixed $content Content value.
      */
@@ -279,20 +264,16 @@ class GDYMC_MODULE
         return json_decode($content, true);
     }
 
-    // Returns the content DB string
-
     /**
-     * Handles GDYMC content content string behavior.
+     * Returns the content DB string.
      */
     public function content_string()
     {
         return $this->content_encode($this->content);
     }
 
-    //	Check if a content ID exists in this module
-
     /**
-     * Handles GDYMC content content exists behavior.
+     * Check if a content ID exists in this module.
      *
      * @param mixed $contentID Content id value.
      */

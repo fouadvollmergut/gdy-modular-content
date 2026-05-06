@@ -665,10 +665,8 @@ function contentCheck($contentKey)
 
 /**************************** CREATES A EDITABLE CONTENT ****************************/
 
-// Options with wp_parse_args
-
 /**
- * Handles GDYMC content content create behavior.
+ * Options with wp_parse_args.
  *
  * @param mixed $contentKey Content key value.
  *

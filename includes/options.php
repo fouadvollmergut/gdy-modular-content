@@ -10,10 +10,8 @@ function optionSection($label)
     echo '<div class="gdymc_options_section"><span>' . $label . "</span></div>";
 }
 
-// Shows an error message if the user is logged
-
 /**
- * Handles GDYMC module option option error behavior.
+ * Shows an error message if the user is logged.
  *
  * @param mixed $errorMessage Error message value.
  */
@@ -26,10 +24,8 @@ function optionError($errorMessage)
     endif;
 }
 
-// Checks if a gdymc-option exists or not
-
 /**
- * Handles GDYMC module option option exists behavior.
+ * Checks if a gdymc-option exists or not.
  *
  * @param mixed $optionName Option name value.
  *
@@ -63,10 +59,8 @@ function optionExists(
     endif;
 }
 
-// Returns a gdymc-option if its exists
-
 /**
- * Handles GDYMC module option option get behavior.
+ * Returns a gdymc-option if its exists.
  *
  * @param mixed $optionName Option name value.
  *
@@ -99,10 +93,8 @@ function optionGet(
     endif;
 }
 
-// Shows a gdymc-option
-
 /**
- * Handles GDYMC module option option show behavior.
+ * Shows a gdymc-option.
  *
  * @param mixed $optionName Option name value.
  *
@@ -121,10 +113,8 @@ function optionShow(
     echo optionGet($optionName, $moduleIDP, $objectIDP, $objectTypeP);
 }
 
-// Saves a gdymc-option
-
 /**
- * Handles GDYMC module option option save behavior.
+ * Saves a gdymc-option.
  *
  * @param mixed $optionName Option name value.
  *
@@ -156,10 +146,8 @@ function optionSave(
     );
 }
 
-// Generates the input for changing gdymc-options
-
 /**
- * Handles GDYMC module option option input behavior.
+ * Generates the input for changing gdymc-options.
  *
  * @param mixed $optionName Option name value.
  *

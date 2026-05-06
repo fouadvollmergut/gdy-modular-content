@@ -95,9 +95,8 @@ class ButtonGroup {
     jQuery(this.buttonGroup).disableSelection();
   }
 
-  // Event Listeners
   /**
-   * Adds GDYMC add button listener data or controls.
+   * Event Listeners.
    *
    * @param {*} button Button value.
    */
@@ -430,10 +429,8 @@ jQuery(document).ready(function () {
     sortable.init();
   });
 
-  // Warn on leave if unsaved
-
   /**
-   * Handles GDYMC onbeforeunload behavior.
+   * Warn on leave if unsaved.
    */
   window.onbeforeunload = function () {
     // Maintain current preview
@@ -473,10 +470,8 @@ jQuery(document).ready(function () {
     }
   };
 
-  // Window resize
-
   /**
-   * Handles GDYMC formatbuttons resize behavior.
+   * Window resize.
    */
   function gdymc_formatbuttons_resize() {
     var windowWidth = jQuery(document.body).width();
@@ -1134,10 +1129,8 @@ jQuery(document).ready(function () {
     }
   });
 
-  // Image overlay
-
   /**
-   * Handles GDYMC get selected images behavior.
+   * Image overlay.
    */
   function gdymc_get_selected_images() {
     var ci = jQuery.parseJSON(
@@ -1622,10 +1615,8 @@ jQuery(document).ready(function () {
     });
   });
 
-  // Image search
-
   /**
-   * Handles GDYMC refresh image list behavior.
+   * Image search.
    *
    * @param {*} responsemode Responsemode value.
    *
@@ -2357,9 +2348,8 @@ jQuery(document).ready(function () {
     }
   });
 
-  // Scroll to the Center of an Element
   /**
-   * Handles GDYMC center scroll behavior.
+   * Scroll to the Center of an Element.
    *
    * @param {*} element Element value.
    */

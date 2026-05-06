@@ -41,10 +41,8 @@ gdymc.lang = function (id) {
 
 /******************************* FUNCTIONS *******************************/
 
-// Error notification
-
 /**
- * Handles GDYMC error behavior.
+ * Error notification.
  *
  * @param {*} options Options value.
  */
@@ -259,10 +257,8 @@ gdymc.ajax = function (action, data, callback) {
 
 /******************************* ACTIONS *******************************/
 
-// delete module
-
 /**
- * Removes GDYMC deletemodule data or controls.
+ * delete module.
  *
  * @param {*} moduleID Module id value.
  *
@@ -300,10 +296,8 @@ gdymc.actions.deletemodule = function (moduleID, reload, callback) {
   });
 };
 
-// delete module type
-
 /**
- * Removes GDYMC deletemoduletype data or controls.
+ * delete module type.
  *
  * @param {*} moduleType Module type value.
  *
@@ -339,10 +333,8 @@ gdymc.actions.deletemoduletype = function (moduleType, reload, callback) {
   });
 };
 
-// change module type
-
 /**
- * Handles GDYMC changemoduletype behavior.
+ * change module type.
  *
  * @param {*} oldModule Old module value.
  *
@@ -386,10 +378,8 @@ gdymc.actions.changemoduletype = function (
   });
 };
 
-// change single module type
-
 /**
- * Handles GDYMC changesinglemoduletype behavior.
+ * change single module type.
  *
  * @param {*} moduleid Moduleid value.
  *
@@ -435,10 +425,8 @@ gdymc.actions.changesinglemoduletype = function (
 
 /******************************* EDITOR *******************************/
 
-// Link window
-
 /**
- * Handles GDYMC link behavior.
+ * Link window.
  *
  * @param {*} options Options value.
  */
@@ -457,10 +445,8 @@ gdymc.editor.link = function (options) {
   settings.set(link);
 };
 
-// Format
-
 /**
- * Handles GDYMC format behavior.
+ * Format.
  *
  * @param {*} command Command value.
  *
@@ -552,10 +538,8 @@ gdymc.editor.addclass = function (classname, attributes) {
   });
 };
 
-// Selection
-
 /**
- * Saves GDYMC save data.
+ * Selection.
  */
 gdymc.selection.save = function () {
   if (gdymc.info.selectionRange) {

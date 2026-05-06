@@ -2,20 +2,16 @@
 
 /**************************** RETURN OBJECT INFORMATION ****************************/
 
-// Returns the object ID
-
 /**
- * Handles GDYMC object id behavior.
+ * Returns the object ID.
  */
 function gdymc_object_id()
 {
     return get_queried_object_id();
 }
 
-// Returns the object type
-
 /**
- * Handles GDYMC object type behavior.
+ * Returns the object type.
  */
 function gdymc_object_type()
 {
@@ -30,10 +26,8 @@ function gdymc_object_type()
 
 /**************************** HELPER AND UTILITY FUNCTIONS ****************************/
 
-// Sets a cookie
-
 /**
- * Handles GDYMC set cookie behavior.
+ * Sets a cookie.
  *
  * @param mixed $key Key value.
  *
@@ -45,10 +39,8 @@ function gdymc_set_cookie($key, $value)
     $_COOKIE[$key] = $value;
 }
 
-// Removes a cookie
-
 /**
- * Handles GDYMC remove cookie behavior.
+ * Removes a cookie.
  *
  * @param mixed $key Key value.
  */
@@ -58,10 +50,8 @@ function gdymc_remove_cookie($key)
     unset($_COOKIE[$key]);
 }
 
-// Returns current URL
-
 /**
- * Handles GDYMC current url behavior.
+ * Returns current URL.
  */
 function gdymc_current_url()
 {
@@ -73,10 +63,8 @@ function gdymc_current_url()
 
 /**************************** RETURN DIRECTORY INFORMATION ****************************/
 
-// Returns the url to the modules folder
-
 /**
- * Handles GDYMC module url behavior.
+ * Returns the url to the modules folder.
  *
  * @param mixed $location Location value.
  *
@@ -112,10 +100,8 @@ function gdymc_module_url($location, $path = "")
     }
 }
 
-// Extract the module type
-
 /**
- * Handles GDYMC module type behavior.
+ * Extract the module type.
  *
  * @param mixed $location Location value.
  */
@@ -139,10 +125,8 @@ function gdymc_module_type($location)
     endforeach;
 }
 
-// DEPRECATED: Extract the module name
-
 /**
- * Handles GDYMC module name behavior.
+ * DEPRECATED: Extract the module name.
  *
  * @param mixed $location Location value.
  */
@@ -153,10 +137,8 @@ function gdymc_module_name($location)
 
 /**************************** RETURN SINGLE MODULE INFORMATION ****************************/
 
-// Checks if a module is placed on a specific object
-
 /**
- * Handles GDYMC module is placed behavior.
+ * Checks if a module is placed on a specific object.
  *
  * @param mixed $module Module value.
  *
@@ -171,10 +153,8 @@ function gdymc_module_is_placed($module, $objectID = null)
     return array_key_exists($module, $modules) ? true : false;
 }
 
-// Check if a module is installed on the site
-
 /**
- * Handles GDYMC module is installed behavior.
+ * Check if a module is installed on the site.
  *
  * @param mixed $module Module value.
  */
@@ -185,10 +165,8 @@ function gdymc_module_is_installed($module)
     return array_key_exists($module, $modules) ? true : false;
 }
 
-// Synonym for gdymc_module_is_installed()
-
 /**
- * Handles GDYMC module exists behavior.
+ * Synonym for gdymc_module_is_installed().
  *
  * @param mixed $module Module value.
  */

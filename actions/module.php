@@ -1,9 +1,7 @@
 <?php
 
-// Activate Module
-
 /**
- * Handles GDYMC activate module behavior.
+ * Activate Module.
  *
  * @param mixed $module_type Module type value.
  *
@@ -50,10 +48,8 @@ function gdymc_activate_module_action()
     exit();
 }
 
-// Deactivate Module
-
 /**
- * Handles GDYMC deactivate module behavior.
+ * Deactivate Module.
  *
  * @param mixed $module_type Module type value.
  *
@@ -103,10 +99,8 @@ function gdymc_deactivate_module_action()
     exit();
 }
 
-// Rename Module
-
 /**
- * Handles GDYMC rename module behavior.
+ * Rename Module.
  *
  * @param mixed $module_type Module type value.
  *
