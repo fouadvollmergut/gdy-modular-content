@@ -2,6 +2,8 @@
 
 /**************************** RETURN OBJECT INFORMATION ****************************/
 
+// Returns the object ID
+
 /**
  * Returns the object ID.
  */
@@ -9,6 +11,8 @@ function gdymc_object_id()
 {
     return get_queried_object_id();
 }
+
+// Returns the object type
 
 /**
  * Returns the object type.
@@ -26,6 +30,8 @@ function gdymc_object_type()
 
 /**************************** HELPER AND UTILITY FUNCTIONS ****************************/
 
+// Sets a cookie
+
 /**
  * Sets a cookie.
  *
@@ -39,6 +45,8 @@ function gdymc_set_cookie($key, $value)
     $_COOKIE[$key] = $value;
 }
 
+// Removes a cookie
+
 /**
  * Removes a cookie.
  *
@@ -49,6 +57,8 @@ function gdymc_remove_cookie($key)
     setcookie($key, null, -1, COOKIEPATH, COOKIE_DOMAIN);
     unset($_COOKIE[$key]);
 }
+
+// Returns current URL
 
 /**
  * Returns current URL.
@@ -62,6 +72,8 @@ function gdymc_current_url()
 }
 
 /**************************** RETURN DIRECTORY INFORMATION ****************************/
+
+// Returns the url to the modules folder
 
 /**
  * Returns the url to the modules folder.
@@ -100,6 +112,8 @@ function gdymc_module_url($location, $path = "")
     }
 }
 
+// Extract the module type
+
 /**
  * Extract the module type.
  *
@@ -125,6 +139,8 @@ function gdymc_module_type($location)
     endforeach;
 }
 
+// DEPRECATED: Extract the module name
+
 /**
  * DEPRECATED: Extract the module name.
  *
@@ -136,6 +152,8 @@ function gdymc_module_name($location)
 }
 
 /**************************** RETURN SINGLE MODULE INFORMATION ****************************/
+
+// Checks if a module is placed on a specific object
 
 /**
  * Checks if a module is placed on a specific object.
@@ -153,6 +171,8 @@ function gdymc_module_is_placed($module, $objectID = null)
     return array_key_exists($module, $modules) ? true : false;
 }
 
+// Check if a module is installed on the site
+
 /**
  * Check if a module is installed on the site.
  *
@@ -164,6 +184,8 @@ function gdymc_module_is_installed($module)
 
     return array_key_exists($module, $modules) ? true : false;
 }
+
+// Synonym for gdymc_module_is_installed()
 
 /**
  * Synonym for gdymc_module_is_installed().
@@ -359,6 +381,8 @@ function gdymc_get_placed_modules($objectID = false, $objectType = false)
 
     return $filteredTypes;
 }
+
+// Checks if hard preview is active
 
 function gdymc_hardpreview()
 {

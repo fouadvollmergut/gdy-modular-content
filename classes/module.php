@@ -1,5 +1,7 @@
 <?php
 
+// Returns module object or false if the module doesn't exists
+
 /**
  * Returns module object or false if the module doesn't exists.
  *
@@ -150,6 +152,8 @@ class GDYMC_MODULE
 
     /************************* GENERAL FUNCTIONS *************************/
 
+    // Show class array as string
+
     /**
      * Show class array as string.
      */
@@ -197,6 +201,8 @@ class GDYMC_MODULE
 
     /************************* VISIBILITY FUNCTIONS *************************/
 
+    // Check if current module is visible
+
     /**
      * Check if current module is visible.
      */
@@ -205,6 +211,8 @@ class GDYMC_MODULE
         return $this->visibility == 1 ? true : false;
     }
 
+    // Check if current module is invisible
+
     /**
      * Check if current module is invisible.
      */
@@ -212,6 +220,8 @@ class GDYMC_MODULE
     {
         return $this->visibility == 0 ? true : false;
     }
+
+    // Check if current module has a active visibility timer
 
     /**
      * Check if current module has a active visibility timer.
@@ -226,6 +236,8 @@ class GDYMC_MODULE
     }
 
     /************************* CONTENT FUNCTIONS *************************/
+
+    // Get current module contents out of DB
 
     /**
      * Get current module contents out of DB.
@@ -242,6 +254,8 @@ class GDYMC_MODULE
         return $content == "[]" ? [] : $this->content_decode($content);
     }
 
+    // Creates a DB string out of an array of content IDs
+
     /**
      * Creates a DB string out of an array of content IDs.
      *
@@ -252,6 +266,8 @@ class GDYMC_MODULE
         // Deprecated as of 0.9: return '[' . implode( ',', $content ) . ']';
         return json_encode($content);
     }
+
+    // Creates a array of content IDs out of a DB string
 
     /**
      * Creates a array of content IDs out of a DB string.
@@ -264,6 +280,8 @@ class GDYMC_MODULE
         return json_decode($content, true);
     }
 
+    // Returns the content DB string
+
     /**
      * Returns the content DB string.
      */
@@ -271,6 +289,8 @@ class GDYMC_MODULE
     {
         return $this->content_encode($this->content);
     }
+
+    //	Check if a content ID exists in this module
 
     /**
      * Check if a content ID exists in this module.

@@ -41,6 +41,8 @@ gdymc.lang = function (id) {
 
 /******************************* FUNCTIONS *******************************/
 
+// Error notification
+
 /**
  * Displays a GDYMC error notification with configurable options.
  *
@@ -257,6 +259,8 @@ gdymc.ajax = function (action, data, callback) {
 
 /******************************* ACTIONS *******************************/
 
+// delete module
+
 /**
  * Deletes a GDYMC module and optionally reloads or runs a callback.
  *
@@ -296,6 +300,8 @@ gdymc.actions.deletemodule = function (moduleID, reload, callback) {
   });
 };
 
+// delete module type
+
 /**
  * Deletes a GDYMC module type and optionally reloads or runs a callback.
  *
@@ -332,6 +338,8 @@ gdymc.actions.deletemoduletype = function (moduleType, reload, callback) {
     }
   });
 };
+
+// change module type
 
 /**
  * Changes all modules from one GDYMC module type to another.
@@ -377,6 +385,8 @@ gdymc.actions.changemoduletype = function (
     }
   });
 };
+
+// change single module type
 
 /**
  * Changes a single GDYMC module to another module type.
@@ -425,6 +435,8 @@ gdymc.actions.changesinglemoduletype = function (
 
 /******************************* EDITOR *******************************/
 
+// Link window
+
 /**
  * Opens and configures the editor link window.
  *
@@ -444,6 +456,8 @@ gdymc.editor.link = function (options) {
 
   settings.set(link);
 };
+
+// Format
 
 /**
  * Applies a formatting command to the current editor selection.
@@ -537,6 +551,8 @@ gdymc.editor.addclass = function (classname, attributes) {
     elementProperties: attributes,
   });
 };
+
+// Selection
 
 /**
  * Saves the current editor selection.

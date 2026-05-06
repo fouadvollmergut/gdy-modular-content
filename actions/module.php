@@ -1,5 +1,7 @@
 <?php
 
+// Activate Module
+
 /**
  * Activate Module.
  *
@@ -47,6 +49,8 @@ function gdymc_activate_module_action()
     wp_redirect($redirect_url . "&status=activated");
     exit();
 }
+
+// Deactivate Module
 
 /**
  * Deactivate Module.
@@ -98,6 +102,8 @@ function gdymc_deactivate_module_action()
     wp_redirect($redirect_url . "&status=deactivated");
     exit();
 }
+
+// Rename Module
 
 /**
  * Rename Module.

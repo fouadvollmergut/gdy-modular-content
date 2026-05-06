@@ -95,6 +95,8 @@ class ButtonGroup {
     jQuery(this.buttonGroup).disableSelection();
   }
 
+  // Event Listeners
+
   /**
    * Adds the click event listener for creating a GDYMC button.
    *
@@ -429,6 +431,8 @@ jQuery(document).ready(function () {
     sortable.init();
   });
 
+  // Warn on leave if unsaved
+
   /**
    * Warn on leave if unsaved.
    */
@@ -469,6 +473,8 @@ jQuery(document).ready(function () {
       return void 0;
     }
   };
+
+  // Window resize
 
   /**
    * Resizes the GDYMC format button bar for the current window width.
@@ -1129,6 +1135,8 @@ jQuery(document).ready(function () {
     }
   });
 
+  // Image overlay
+
   /**
    * Returns the images currently selected in the image overlay.
    */
@@ -1615,6 +1623,8 @@ jQuery(document).ready(function () {
     });
   });
 
+  // Image search
+
   /**
    * Refreshes the image search result list in the image overlay.
    *
@@ -1700,6 +1710,8 @@ jQuery(document).ready(function () {
     );
 
     jQuery("#gdymc_imagelist_holder").attr("data-p", currentPage + 1);
+
+    // Image search
 
     /**
      * Handles GDYMC refresh image list behavior.
@@ -2347,6 +2359,8 @@ jQuery(document).ready(function () {
       jQuery("#gdymc_save").click();
     }
   });
+
+  // Scroll to the Center of an Element
 
   /**
    * Scroll to the Center of an Element.

@@ -10,6 +10,8 @@ function optionSection($label)
     echo '<div class="gdymc_options_section"><span>' . $label . "</span></div>";
 }
 
+// Shows an error message if the user is logged
+
 /**
  * Shows an error message if the user is logged.
  *
@@ -23,6 +25,8 @@ function optionError($errorMessage)
             "</div>";
     endif;
 }
+
+// Checks if a gdymc-option exists or not
 
 /**
  * Checks if a gdymc-option exists or not.
@@ -59,6 +63,8 @@ function optionExists(
     endif;
 }
 
+// Returns a gdymc-option if its exists
+
 /**
  * Returns a gdymc-option if its exists.
  *
@@ -93,6 +99,8 @@ function optionGet(
     endif;
 }
 
+// Shows a gdymc-option
+
 /**
  * Shows a gdymc-option.
  *
@@ -112,6 +120,8 @@ function optionShow(
 ) {
     echo optionGet($optionName, $moduleIDP, $objectIDP, $objectTypeP);
 }
+
+// Saves a gdymc-option
 
 /**
  * Saves a gdymc-option.
@@ -145,6 +155,8 @@ function optionSave(
         $optionValue
     );
 }
+
+// Generates the input for changing gdymc-options
 
 /**
  * Generates the input for changing gdymc-options.
