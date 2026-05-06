@@ -1320,7 +1320,7 @@
 	.gdymc_overlay_foot {
 		display: block;
 		position: absolute;
-		height: 100px;
+		height: auto;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
@@ -1648,7 +1648,7 @@
 	.gdymc_overlay_foot .gdymc_left {
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		align-items: flex-start;
 		gap: 20px;
 		flex-wrap: wrap;
 		min-width: 0;
@@ -2281,7 +2281,6 @@
 		position: relative;
 		cursor: pointer;
 		display: block;
-		width: 100%;
 		padding: 0;
 		border: 0;
 		background: transparent;
