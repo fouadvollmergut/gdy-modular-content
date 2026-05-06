@@ -803,6 +803,7 @@
 					echo '<button class="gdymc_tabs_button gdymc_active" data-mode="exact">'.__('Matching images', 'gdy-modular-content').'</button>';
 					echo '<button class="gdymc_tabs_button" data-mode="bigger">'.__('Bigger images', 'gdy-modular-content').'</button>';
 					echo '<button class="gdymc_tabs_button" data-mode="all">'.__('All images', 'gdy-modular-content').'</button>';
+					echo '<button class="gdymc_tabs_button" data-mode="video">'.__('Videos', 'gdy-modular-content').'</button>';
 					
 					do_action( 'gdymc_imagetabbuttons' );
 				
@@ -869,9 +870,20 @@
 
 					if( $currentImages ): foreach( $currentImages as $currentImage ):
 
+						$currentMime = get_post_mime_type( $currentImage[0] );
+						$isVideo = ( strpos( (string) $currentMime, 'video/' ) === 0 );
+
 						echo '<li class="gdymc_imagethumb" data-image=\'' . json_encode( $currentImage ) . '\' data-id="' . $currentImage[0] . '">';
-						echo '<div class="gdymc_imagethumb_edit"></div>';
-						echo '<div class="gdymc_imagethumb_holder">' . wp_get_attachment_image( $currentImage[0], 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentImage[0] ) ) . '</div>';
+						echo '<div class="gdymc_imagethumb_holder">';
+
+						if( $isVideo ):
+							$videoURL = wp_get_attachment_url( $currentImage[0] );
+							echo '<video class="gdymc_mediathumb_' . $currentImage[0] . ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $currentMime ) . '" /></video>';
+						else:
+							echo wp_get_attachment_image( $currentImage[0], 'thumbnail', true, array( 'class' => 'gdymc_mediathumb_' . $currentImage[0] ) );
+						endif;
+
+						echo '</div>';
 						echo '</li>';
 
 					endforeach; endif;
@@ -907,13 +919,30 @@
 
 			$meta = wp_get_attachment_metadata( $imageID );
 			$alt = get_metadata( 'post', $imageID, '_wp_attachment_image_alt', true );
+			$mimeType = get_post_mime_type( $imageID );
+			$isVideo = ( $mimeType && strpos( $mimeType, 'video/' ) === 0 );
 
-			echo '<div id="gdymc_overlay_content_imageinfoinner" data-id="' . $imageID . '">';
+			echo '<div id="gdymc_overlay_content_imageinfoinner" data-id="' . $imageID . '"' . ( $isVideo ? ' data-mime="video"' : '' ) . '>';
 
-				$image = wp_get_attachment_image_src( $imageID, 'medium' );
-				echo '<a id="gdymc_overlay_content_imageinfothumb" href="' . $post->guid . '" target="_blank" style="background-image: url(' . $image[ 0 ] . ');">';
-					echo '<div>' . $meta[ 'width' ] . ' x ' . $meta[ 'height' ] . ', ' . size_format( filesize( get_attached_file( $imageID ) ) ) . '</div>';
-				echo '</a>';
+				if( $isVideo ):
+
+					$videoURL = wp_get_attachment_url( $imageID );
+					$widthLabel = isset( $meta[ 'width' ] ) ? $meta[ 'width' ] : '?';
+					$heightLabel = isset( $meta[ 'height' ] ) ? $meta[ 'height' ] : '?';
+
+					echo '<a id="gdymc_overlay_content_imageinfothumb" href="' . esc_url( $post->guid ) . '" target="_blank">';
+						echo '<video class="gdymc_videoinfo_preview" preload="metadata" muted playsinline controls><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $mimeType ) . '" /></video>';
+						echo '<div>' . $widthLabel . ' x ' . $heightLabel . ', ' . size_format( filesize( get_attached_file( $imageID ) ) ) . '</div>';
+					echo '</a>';
+
+				else:
+
+					$image = wp_get_attachment_image_src( $imageID, 'medium' );
+					echo '<a id="gdymc_overlay_content_imageinfothumb" href="' . $post->guid . '" target="_blank" style="background-image: url(' . $image[ 0 ] . ');">';
+						echo '<div>' . $meta[ 'width' ] . ' x ' . $meta[ 'height' ] . ', ' . size_format( filesize( get_attached_file( $imageID ) ) ) . '</div>';
+					echo '</a>';
+
+				endif;
 
 
 				echo '<div id="gdymc_overlay_content_imageinfotext">';
@@ -921,13 +950,31 @@
 
 					echo '<div id="gdymc_overlay_content_imageinfo_local" style="display: none;">';
 
-						optionSection( __( 'Local image settings', 'gdy-modular-content' ) );
+						if( $isVideo ):
 
-						echo '<label for="gdymc_imageinfo_linkurl">' . __( 'Image link', 'gdy-modular-content' ) . '</label><input id="gdymc_imageinfo_linkurl" type="text" value=""  class="gdymc_imageinfo_local_input" />';
+							optionSection( __( 'Local video settings', 'gdy-modular-content' ) );
 
-						echo '<br />';
+							echo '<input type="checkbox" id="gdymc_videoinfo_controls" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" /> <label for="gdymc_videoinfo_controls">' . __( 'Show full video controls', 'gdy-modular-content' ) . '</label>';
 
-						echo '<input type="checkbox" id="gdymc_imageinfo_linktarget" class="gdymc_imageinfo_local_input" /> <label for="gdymc_imageinfo_linktarget">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
+							echo '<br />';
+
+							echo '<input type="checkbox" id="gdymc_videoinfo_autoplay" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_autoplay">' . __( 'Autoplay', 'gdy-modular-content' ) . '</label>';
+
+							echo '<br />';
+
+							echo '<input type="checkbox" id="gdymc_videoinfo_muted" class="gdymc_imageinfo_local_input gdymc_videoinfo_local_input" checked /> <label for="gdymc_videoinfo_muted">' . __( 'Muted', 'gdy-modular-content' ) . '</label>';
+
+						else:
+
+							optionSection( __( 'Local image settings', 'gdy-modular-content' ) );
+
+							echo '<label for="gdymc_imageinfo_linkurl">' . __( 'Image link', 'gdy-modular-content' ) . '</label><input id="gdymc_imageinfo_linkurl" type="text" value=""  class="gdymc_imageinfo_local_input" />';
+
+							echo '<br />';
+
+							echo '<input type="checkbox" id="gdymc_imageinfo_linktarget" class="gdymc_imageinfo_local_input" /> <label for="gdymc_imageinfo_linktarget">' . __( 'Open in new tab or window', 'gdy-modular-content' ) . '</label>';
+
+						endif;
 					
 					echo '</div>';
 
@@ -1032,7 +1079,7 @@
 			'orderby' => 'date',
 			'order' => 'DESC',
 		    'post_type' => 'attachment',
-		    'post_mime_type' => 'image',
+		    'post_mime_type' => ( $mode == 'video' ) ? 'video' : 'image',
 		    'post_status' => 'any',
 		    'posts_per_page' => $posts_per_page
 
@@ -1152,7 +1199,7 @@
 		
 
 
-		if( $mode != 'all' AND ( is_numeric( $targetWidth ) OR is_numeric( $targetHeight ) ) ):
+		if( $mode != 'all' AND $mode != 'video' AND ( is_numeric( $targetWidth ) OR is_numeric( $targetHeight ) ) ):
 
 			$args['meta_query'] = $meta_query;
 
@@ -1207,7 +1254,56 @@
 				$attachmentMeta = wp_get_attachment_metadata( $currentID );
 
 
-				if( !empty( $attachmentMeta ) ):
+				if( $mode == 'video' ):
+
+
+					$currentWidth = isset( $attachmentMeta[ 'width' ] ) ? $attachmentMeta[ 'width' ] : 0;
+					$currentHeight = isset( $attachmentMeta[ 'height' ] ) ? $attachmentMeta[ 'height' ] : 0;
+
+					$videoURL = wp_get_attachment_url( $currentID );
+					$videoMime = get_post_mime_type( $currentID );
+
+					$currentClass = 'gdymc_imagethumb gdymc_videothumb';
+					$currentMeta = 'data-id="' . $currentID . '"';
+					$currentMeta .= ' data-guid="' . esc_attr( $videoURL ) . '"';
+					$currentMeta .= ' data-width="' . $currentWidth . '"';
+					$currentMeta .= ' data-height="' . $currentHeight . '"';
+					$currentMeta .= ' data-admin="' . admin_url('post.php?post=' . $currentID . '&action=edit') . '"';
+					$currentMeta .= ' data-type="exact"';
+					$currentMeta .= ' data-mime="video"';
+
+
+					// If selected
+
+					$results = array();
+
+					if( $currentImages ): foreach( $currentImages as $currentImage ):
+
+						if( $currentImage[0] == $currentID ) array_push( $results, 1 );
+
+					endforeach; endif;
+
+					if( $results ) {
+						$currentClass .= ' gdymc_selected';	
+					}
+
+
+					echo '<div class="gdymc_imagethumb_container">';
+					echo '<button class="' . $currentClass . '" ' . $currentMeta . '>';
+
+						echo '<div class="gdymc_imagethumb_edit"></div>';
+
+						echo '<video class="gdymc_mediathumb_' . $currentID . ' gdymc_videothumb_preview" preload="metadata" muted playsinline><source src="' . esc_url( $videoURL ) . '" type="' . esc_attr( $videoMime ) . '" /></video>';
+
+						if( $currentWidth AND $currentHeight ):
+							echo '<div class="gdymc_imagethumb_size">' . $currentWidth . ' x ' . $currentHeight . '</div>';
+						endif;
+
+					echo '</button>';
+					echo '</div>';
+
+
+				elseif( !empty( $attachmentMeta ) ):
 
 
 					$currentWidth = $attachmentMeta[ 'width' ];
