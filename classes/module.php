@@ -290,7 +290,7 @@ class GDYMC_MODULE
         return $this->content_encode($this->content);
     }
 
-    //	Check if a content ID exists in this module
+    // Check if a content ID exists in this module
 
     /**
      * Check if a content ID exists in this module.

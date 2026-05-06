@@ -1711,8 +1711,6 @@ jQuery(document).ready(function () {
 
     jQuery("#gdymc_imagelist_holder").attr("data-p", currentPage + 1);
 
-    // Image search
-
     /**
      * Handles GDYMC refresh image list behavior.
      *
