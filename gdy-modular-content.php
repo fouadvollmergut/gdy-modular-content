@@ -70,6 +70,8 @@ Version: 0.11.0
 	require_once( GDYMC_BASE_PATH . 'includes/content.php' );
 	require_once( GDYMC_BASE_PATH . 'includes/area.php' );
 	require_once( GDYMC_BASE_PATH . 'includes/ajax.php' );
+	require_once( GDYMC_BASE_PATH . 'includes/settings.php' );
+	require_once( GDYMC_BASE_PATH . 'includes/openai.php' );
 
 
 	/************************************ HOOKS ***************************************/
